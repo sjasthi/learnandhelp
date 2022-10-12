@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="icon" href="logo.png" type="image/icon type">
+    <link rel="icon" href="images/logo.png" type="image/icon type">
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
-    <link href="main.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
       <?php include 'show-button.php'; ?>
@@ -35,7 +35,7 @@
         <label id="sponsors-number-label">Sponsor's Phone Number</label>
         <input type="tel" id="sponsers-phone" name="sponsers-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <br>
-        <br> 
+        <br>
         <br>
         <!---Spouse Section -->
         <label id="spouses-name-label">Spouse's Name</label>
@@ -45,12 +45,12 @@
         <label id="spouses-number-label">Spouse's Phone Number</label>
         <input type="tel" id="spouses-phone" name="spouses-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <br>
-        <br> 
         <br>
-        <!---Student Section -->  
+        <br>
+        <!---Student Section -->
         <label id="students-name-label">Student's Name</label>
         <input type="text" id="students-name" name="students-name" class="form" required placeholder="Enter Student's name"><br>
-        <label id="students-email-label"> Student's Email</label> 
+        <label id="students-email-label"> Student's Email</label>
         <input type="email" id="students-email" name="students-email" class="form" required placeholder="Enter Student's email"><br
         <label id="students-number-label">Student's Phone Number</label>
         <input type="tel" id="students-phone" name="students-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
