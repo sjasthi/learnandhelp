@@ -1,0 +1,198 @@
+body {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 21px;
+    font-weight: 300;
+    margin: 0;
+}
+
+.container {
+    width: 570px;
+    margin: 0 auto;
+}
+
+h1,
+h2 {
+    font-weight: 300; 
+}
+
+h1 {
+    font-size: 60px;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 42px;
+    margin-top: 0;
+    border-top: solid 1px #c4c4c4;
+    border-bottom: solid 1px #c4c4c4;
+    
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 0;
+}
+
+.accent-text {
+    display: block;
+}
+
+h1 .accent-text {
+    font-size: 80px;
+}
+
+h2 .accent-text {
+    font-size: 60px;
+}
+
+.accent-text,
+.name,
+time {
+    font-weight: 900;
+    color: #99D930;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+a {
+    color: #99D930;
+    font-weight: 900;
+}
+
+a:hover,
+a:focus {
+    color: #131313;
+}
+
+.small-text {
+    font-size: 16px;
+    margin-top: 5px;
+} 
+
+header,
+section {
+    padding: 100px 0;
+}
+
+.inverse {
+    color: #fff;
+    background: #252525;
+}
+
+.inverse .btn:hover,
+.inverse .btn:focus {
+    background: #fff;
+    color: #252525;
+}
+
+.btn {
+    display: inline-block;
+    color: #252525;
+    text-decoration: none;
+    background: #99D930;
+    padding: 10px 25px;
+    margin-top: 25px;
+}
+
+.btn:hover,
+.btn:focus {
+    background: #252525;
+    color: #fff;
+}
+
+.login-button {
+	display: inline-block;
+    background-color: #99D930;
+    color: #252525;
+    float: right;
+    width: 10%;
+    border-radius: 4px;
+    padding: 5px 7px;
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: #666666;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .navbar a {
+    float: left;
+    display: block;
+    color: #eeeeee;
+    text-align: center;
+    padding: 15px 18px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .navbar a:hover {
+    color:#99D930;
+  }
+  
+  #login{
+    background-color: #99D930;
+    color: #252525;
+    float: right;
+    border-radius: 4px;
+
+  }
+  .logo{
+    padding-bottom: 60px;
+  }
+  #login:hover,
+  #login:focus {
+    background: #fff;
+    color: #252525;
+}
+.container_2{
+    text-align: left;
+}
+input[type=text],input[type=email], input[type=tel],input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 100%;
+    background-color: #99D930;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  div .container_2{
+    border-radius: 50px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  label{
+    text-align: left;
+  }
+#register{
+    color: #99D930;
+}
+#register:hover, 
+#register:focus{
+    color: black;
+
+}
