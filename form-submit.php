@@ -58,36 +58,36 @@ if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0)
 }
 
 if($action == "edit") {
-	$sql = "UPDATE Registrations SET 
-			Sponsor_Name = '$sponsor_name', 
-			Sponsor_Email = '$sponsor_email', 
-			Sponsor_Phone_Number = '$sponsor_phone', 
-			Spouse_Name = '$spouse_name', 
-			Spouse_Email = '$spouse_email', 
-			Spouse_Phone_Number = '$spouse_phone', 
-			Student_Email = '$student_email', 
-			Student_Phone_Number = '$student_phone', 
-			Class = '$class', 
-			Cause = '$cause', 
-			Modified_Time = '$timestamp' 
-			WHERE Student_Email = '$student_email';";	
-	
+	$sql = "UPDATE Registrations SET
+			Sponsor_Name = '$sponsor_name',
+			Sponsor_Email = '$sponsor_email',
+			Sponsor_Phone_Number = '$sponsor_phone',
+			Spouse_Name = '$spouse_name',
+			Spouse_Email = '$spouse_email',
+			Spouse_Phone_Number = '$spouse_phone',
+			Student_Email = '$student_email',
+			Student_Phone_Number = '$student_phone',
+			Class = '$class',
+			Cause = '$cause',
+			Modified_Time = '$timestamp'
+			WHERE Student_Email = '$student_email';";
+
 }
 else
 	$sql = "INSERT INTO Registrations VALUES (
-		NULL, 
+		NULL,
 		'$sponsor_name',
-		'$sponsor_email', 
-		'$sponsor_phone', 
-		'$spouse_name', 
-		'$spouse_email', 
-		'$spouse_phone', 
-		'$student_name', 
-		'$student_email', 
-		'$student_phone', 
-		'$class', 
-		'$cause', 
-		'$timestamp', 
+		'$sponsor_email',
+		'$sponsor_phone',
+		'$spouse_name',
+		'$spouse_email',
+		'$spouse_phone',
+		'$student_name',
+		'$student_email',
+		'$student_phone',
+		'$class',
+		'$cause',
+		'$timestamp',
 		'$timestamp');";
 
 if (!mysqli_query($connection, $sql)) {
@@ -97,10 +97,10 @@ mysqli_close($connection);
 echo "<!DOCTYPE html>
 <html>
   <head>
-    <link rel=\"icon\" href=\"logo.png\" type=\"image/icon type\">
+    <link rel=\"icon\" href=\"images/logo.png\" type=\"image/icon type\">
     <title>Learn and Help</title>
     <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap\" rel=\"stylesheet\">
-    <link href=\"main.css\" rel=\"stylesheet\">
+    <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
   <body>
     <?php include 'show-button.php'; ?>
@@ -114,7 +114,7 @@ echo "<!DOCTYPE html>
         <a href=\"#\">Instructors and Volunteers Sign Up</a>
         <a href=\"#\">Classes</a>
         <a href=\"#\">Testimonials</a>
-        <a href=\"#\">Causes</a> 
+        <a href=\"#\">Causes</a>
         <a href=\"meet_our_instructors.phtml\">Meet our Instructors</a>
         <a href=\"contact_us.phtml\">Contact Us</a>
         <a href=\"registration_form.phtml\" id=\"register\">Register Now</a>
@@ -132,24 +132,24 @@ echo "<!DOCTYPE html>
 		<input type=\"hidden\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\"><br><!---email-->
         <input type=\"hidden\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\">
 
-        
+
         <br>
-        <br> 
+        <br>
         <br>
         <!---Spouse Section -->
         <label id=\"spouses-name-label\">Spouse's Name: $spouse_name</label><br>
-        
+
         <label id=\"spouses-email-label\"> Spouse's Email: $spouse_email</label><br>
 
         <label id=\"spouses-number-label\">Spouse's Phone Number: $spouse_phone</label><br>
 		<input type=\"hidden\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" value=\"$spouse_name\"><!--name--->
 		<input type=\"hidden\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\"><br><!---email-->
         <input type=\"hidden\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\">
-        
+
         <br>
-        <br> 
         <br>
-        <!---Student Section -->  
+        <br>
+        <!---Student Section -->
         <label id=\"students-name-label\">Student's Name: $student_name</label><br>
 
         <label id=\"students-email-label\"> Student's Email: $student_email</label><br>

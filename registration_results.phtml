@@ -1,10 +1,10 @@
 '<!DOCTYPE html>
 <html>
   <head>
-    <link rel="icon" href="logo.png" type="image/icon type">
+    <link rel="icon" href="images/logo.png" type="image/icon type">
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
-    <link href="main.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
     <?php include 'show-button.php'; ?>
@@ -18,7 +18,7 @@
         <a href="#">Instructors and Volunteers Sign Up</a>
         <a href="#">Classes</a>
         <a href="#">Testimonials</a>
-        <a href="#">Causes</a> 
+        <a href="#">Causes</a>
         <a href="meet_our_instructors.phtml">Meet our Instructors</a>
         <a href="contact_us.phtml">Contact Us</a>
         <a href="registration_form.html" id="register">Register Now</a>
@@ -28,13 +28,13 @@
     <div id="container_2">
         <!---Sponsors Section -->
         <label id="name-label">Sponsor's Name: ' . $sponsor_name . '</label>
-        
+
         <label id="sponsers-email-label"> Sponsor's Email: ' . $sponsor_email . '</label>
         <input type="email" id="sponsers-email" name="sponsers-email" class="form" required placeholder="Enter Sponsor's email"><br><!---email-->
         <label id="sponsors-number-label">Sponsor's Phone Number: ' . $sponsor_phone . '</label>
         <input type="tel" id="sponsers-phone" name="sponsers-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <br>
-        <br> 
+        <br>
         <br>
         <!---Spouse Section -->
         <label id="spouses-name-label">Spouse's Name: ' . $spouse_name . '</label>
@@ -44,9 +44,9 @@
         <label id="spouses-number-label">Spouse's Phone Number: ' . $spouse_phone . '</label>
         <input type="tel" id="spouses-phone" name="spouses-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <br>
-        <br> 
         <br>
-        <!---Student Section -->  
+        <br>
+        <!---Student Section -->
         <label id="students-name-label">Student's Name: ' . $student_name . '</label>
         <input type="text" id="students-name" name="students-name" class="form" required placeholder="Enter Student's name"><br>
         <label id="students-email-label"> Student's Email: ' . $student_email . '</label>
