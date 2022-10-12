@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" href="logo.png" type="image/icon type">
+    <link rel="icon" href="images/logo.png" type="image/icon type">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
-    <link href="main.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
   <?php include 'show-button.php'; ?>
   <header class="inverse">
       <div class="container">
-          <img class ="logo" src="logo.png" alt="Logo">
+          <img class ="logo" src="images/logo.png" alt="Logo">
           <h1> Welcome to <span class="accent-text">Learn and Help</span></h1>
       </div>
       <div class="navbar">
