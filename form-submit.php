@@ -50,7 +50,7 @@ switch ($cause){
 }
 
 $sql = "SELECT * FROM Registrations WHERE Student_Email = '$student_email'";
-if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0)
+if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0 && $action != "edit")
 {
 	header('Location: registration_form.phtml');
 	echo "That student email has already been registered.";
