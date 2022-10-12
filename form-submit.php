@@ -50,7 +50,7 @@ switch ($cause){
 }
 
 $sql = "SELECT * FROM Registrations WHERE Student_Email = '$student_email'";
-if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0)
+if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0 && $action != "edit")
 {
 	header('Location: registration_form.php');
 	echo "That student email has already been registered.";
@@ -106,7 +106,7 @@ echo "<!DOCTYPE html>
     <?php include 'show-button.php'; ?>
     <header class=\"inverse\">
       <div class=\"container\">
-        <img class =\"logo\" src=\"logo.png\" alt=\"Logo\">
+        <img class =\"logo\" src=\"images/logo.png\" alt=\"Logo\">
         <h1> <span class=\"accent-text\">Registration Form</span></h1>
       </div>
       <div class=\"navbar\">
