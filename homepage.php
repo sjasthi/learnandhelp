@@ -9,21 +9,22 @@
     <link href="main.css" rel="stylesheet">
   </head>
   <body>
+  <?php include 'show-button.php'; ?>
     <header class="inverse">
       <div class="container">
         <img class ="logo" src="logo.png" alt="Logo">
         <h1> Welcome to <span class="accent-text">Learn and Help</span></h1>
       </div>
       <div class="navbar">
-        <a href="homepage.html">Home</a>
+        <a href="homepage.php">Home</a>
         <a href="#">Instructors and Volunteers Sign Up</a>
         <a href="#">Classes</a>
         <a href="#">Testimonials</a>
         <a href="#">Causes</a> 
-        <a href="meet_our_instructors.phtml">Meet our Instructors</a>
-        <a href="contact_us.phtml">Contact Us</a>
-        <a href="registration_form.phtml" id="register">Register Now</a>
-		<div><?php echo 'hello'; ?></div>
+        <a href="meet_our_instructors.php">Meet our Instructors</a>
+        <a href="contact_us.php">Contact Us</a>
+        <a href="registration_form.php" id="register">Register Now</a>
+		<div><?php getButton(); ?></div>
       </div>
     </header>
     <section class="about">
@@ -45,7 +46,7 @@
         <h2>Interested in <span class="accent-text">Learn and Help</span></h2>
         <article>
           <h3>Learn Programming Today!</h3>
-          <a href="registration_form.phtml" class="btn">Register Now</a>
+          <a href="registration_form.php" class="btn">Register Now</a>
         </article>
       </div>
     </section>
