@@ -106,7 +106,7 @@ echo "<!DOCTYPE html>
     <?php include 'show-button.php'; ?>
     <header class=\"inverse\">
       <div class=\"container\">
-        <img class =\"logo\" src=\"logo.png\" alt=\"Logo\">
+        <img class =\"logo\" src=\"images/logo.png\" alt=\"Logo\">
         <h1> <span class=\"accent-text\">Registration Form</span></h1>
       </div>
       <div class=\"navbar\">
