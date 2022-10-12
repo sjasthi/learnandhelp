@@ -1,5 +1,5 @@
 <?php
-    setcookie('username', '', time() - 3600, "/");
-    header('Location:homepage.phtml');
+    setcookie('username', '', time() - 3600);
+    header('Location:homepage.php');
 ?>
 
