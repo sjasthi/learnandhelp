@@ -51,25 +51,25 @@ function fill_form() {
             Select your class
           </option>
           <option value=\"py1\" ";
-            if ($class == "py1")
+            if ($class == "Python 101")
                 echo "selected";
         echo  ">
             Python 101
           </option>
           <option value=\"java1\" ";
-          if ($class == "java1")
+          if ($class == "Java 101")
               echo "selected";
         echo ">
             Java 101
           </option>
           <option value=\"py2\" ";
-          if ($class == "py2")
+          if ($class == "Python 201")
               echo "selected";
         echo ">
             Python 201
           </option>
 		  <option value=\"java2\" ";
-          if ($class == "java2")
+          if ($class == "Java 201")
               echo "selected";
         echo ">
 			Java 201

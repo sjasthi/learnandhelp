@@ -50,7 +50,7 @@ switch ($cause){
 		$cause = "No Preference";
 }
 
-$sql = "SELECT * FROM Registrations WHERE Student_Email = '$student_email'";
+$sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
 if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0 && $action != "edit")
 {
 	header('Location: registration_form.php');
@@ -59,7 +59,7 @@ if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0 && $action != "edit")
 }
 
 if($action == "edit") {
-	$sql = "UPDATE Registrations SET
+	$sql = "UPDATE registrations SET
 			Sponsor_Name = '$sponsor_name',
 			Sponsor_Email = '$sponsor_email',
 			Sponsor_Phone_Number = '$sponsor_phone',
@@ -75,7 +75,7 @@ if($action == "edit") {
 
 }
 else
-	$sql = "INSERT INTO Registrations VALUES (
+	$sql = "INSERT INTO registrations VALUES (
 		NULL,
 		'$sponsor_name',
 		'$sponsor_email',
