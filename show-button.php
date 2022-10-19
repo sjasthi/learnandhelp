@@ -7,7 +7,7 @@ function getButton() {
         $action = 'logoff.php';
     } else {
         $label = 'Log On';
-        $action = 'login.php';
+        $action = 'loginAction.php';
     }
     echo '<form action="' . $action . '" method="post">
           <input class="login-button" type="submit" value="' . $label . '"/>

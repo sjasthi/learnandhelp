@@ -12,7 +12,8 @@ function fill_form() {
     $class = $_POST['class'];
     $cause = $_POST['cause'];
 
-    echo "<form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
+    echo "<div id= \"container_2\">
+      <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
         <!---Sponsors Section -->
         <label id=\"name-label\">Sponsor's Name</label>
         <input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\" required><br><!--name--->
@@ -33,6 +34,8 @@ function fill_form() {
         <br>
         <br> 
         <br>
+        </div>
+        <div id=\"right\">
         <!---Student Section -->  
         <label id=\"students-name-label\">Student's Name</label>
         <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required value=\"$student_name\"><br>
@@ -48,25 +51,25 @@ function fill_form() {
             Select your class
           </option>
           <option value=\"py1\" ";
-            if ($class == "py1")
+            if ($class == "Python 101")
                 echo "selected";
         echo  ">
             Python 101
           </option>
           <option value=\"java1\" ";
-          if ($class == "java1")
+          if ($class == "Java 101")
               echo "selected";
         echo ">
             Java 101
           </option>
           <option value=\"py2\" ";
-          if ($class == "py2")
+          if ($class == "Python 201")
               echo "selected";
         echo ">
             Python 201
           </option>
 		  <option value=\"java2\" ";
-          if ($class == "java2")
+          if ($class == "Java 201")
               echo "selected";
         echo ">
 			Java 201
@@ -92,6 +95,8 @@ function fill_form() {
           if ($cause == "No Preference")
               echo "checked=\"checked\"";
         echo "> No Preference
-		</label><!---radioButtons--->";
+		</label><!---radioButtons--->
+    </div>
+    ";
 }
 ?>

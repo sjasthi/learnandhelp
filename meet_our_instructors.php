@@ -8,23 +8,23 @@
   </head>
   <body>
   <?php include 'show-button.php'; ?>
-    <header class="inverse">
+  <header class="inverse">
       <div class="container">
         <img class ="logo" src="images/logo.png" alt="Logo">
         <h1>Meet our<span class="accent-text">Instructors</span></h1>
       </div>
       <div class="navbar">
-        <a href="homepage.phtml">Home</a>
-        <a href="#">Instructors and Volunteers Sign Up</a>
-        <a href="#">Classes</a>
-        <a href="#">Testimonials</a>
-        <a href="#">Causes</a>
-        <a href="meet_our_instructors.phtml">Meet our Instructors</a>
-        <a href="contact_us.phtml">Contact Us</a>
-        <a href="registration_form.phtml" id="register">Register Now</a>
-		<div><?php getButton(); ?></div>
+          <a href="homepage.php">Home</a>
+          <a href="#">Instructors and Volunteers Sign Up</a>
+          <a href="#">Classes</a>
+          <a href="#">Testimonials</a>
+          <a href="#">Causes</a>
+          <a href="meet_our_instructors.php">Meet our Instructors</a>
+          <a href="contact_us.php">Contact Us</a>
+          <a href="registration_form.php" id="register">Register Now</a>
+          <div><?php getButton(); ?></div>
       </div>
-    </header>
+  </header>
     <section class="about-me">
       <div class="container">
         <h2>Hello, my name is<span class="accent-text">Dr. Siva Jasthi</span>

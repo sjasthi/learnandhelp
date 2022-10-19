@@ -1,4 +1,5 @@
 <?php
+include 'show-button.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -49,16 +50,16 @@ switch ($cause){
 		$cause = "No Preference";
 }
 
-$sql = "SELECT * FROM Registrations WHERE Student_Email = '$student_email'";
-if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0)
+$sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0 && $action != "edit")
 {
-	header('Location: registration_form.phtml');
+	header('Location: registration_form.php');
 	echo "That student email has already been registered.";
 	die();
 }
 
 if($action == "edit") {
-	$sql = "UPDATE Registrations SET
+	$sql = "UPDATE registrations SET
 			Sponsor_Name = '$sponsor_name',
 			Sponsor_Email = '$sponsor_email',
 			Sponsor_Phone_Number = '$sponsor_phone',
@@ -74,7 +75,7 @@ if($action == "edit") {
 
 }
 else
-	$sql = "INSERT INTO Registrations VALUES (
+	$sql = "INSERT INTO registrations VALUES (
 		NULL,
 		'$sponsor_name',
 		'$sponsor_email',
@@ -103,22 +104,23 @@ echo "<!DOCTYPE html>
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
   <body>
-    <?php include 'show-button.php'; ?>
-    <header class=\"inverse\">
+  <header class=\"inverse\">
       <div class=\"container\">
-        <img class =\"logo\" src=\"logo.png\" alt=\"Logo\">
+        <img class =\"logo\" src=\"images/logo.png\" alt=\"Logo\">
         <h1> <span class=\"accent-text\">Registration Form</span></h1>
       </div>
       <div class=\"navbar\">
-        <a href=\"homepage.phtml\">Home</a>
+        <a href=\"homepage.php\">Home</a>
         <a href=\"#\">Instructors and Volunteers Sign Up</a>
         <a href=\"#\">Classes</a>
         <a href=\"#\">Testimonials</a>
         <a href=\"#\">Causes</a>
-        <a href=\"meet_our_instructors.phtml\">Meet our Instructors</a>
-        <a href=\"contact_us.phtml\">Contact Us</a>
-        <a href=\"registration_form.phtml\" id=\"register\">Register Now</a>
-		<div><?php getButton(); ?></div>
+        <a href=\"meet_our_instructors.php\">Meet our Instructors</a>
+        <a href=\"contact_us.php\">Contact Us</a>
+        <a href=\"registration_form.php\" id=\"register\">Register Now</a>
+		<div>";
+		 getButton();
+echo	"</div>
       </div>
     </header>
     <div id=\"container_2\">

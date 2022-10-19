@@ -2,7 +2,7 @@ CREATE DATABASE learn_and_help_db;
 
 USE learn_and_help_db;
 
-CREATE TABLE Registrations 
+CREATE TABLE registrations
 	(Reg_Id int NOT NULL AUTO_INCREMENT,
 	Sponsor_Name varchar(50),
 	Sponsor_Email varchar(50),
@@ -19,8 +19,8 @@ CREATE TABLE Registrations
 	Created_Time date,
 	PRIMARY KEY (Reg_Id));
 
- 
-INSERT INTO Registrations
+
+INSERT INTO registrations
 	values
 	(NULL, "Al", "Coholic", "1234567890", "Seymour", "Butz", "2345678901", "Mike", "Rotch", "3456789012", "Python", "Library", SYSDATE(), SYSDATE()),
 	(NULL, "Hugh", "Jass", "1234567890", "Ivana", "Tinkle", "2345678901", "Anita", "Bath", "3456789012", "Python", "Digital Classroom", SYSDATE(), SYSDATE()),
@@ -28,7 +28,7 @@ INSERT INTO Registrations
 
 
 
-CREATE TABLE Users (
+CREATE TABLE users (
 	User_Id int NOT NULL AUTO_INCREMENT,
 	First_Name varchar(30),
 	Last_Name varchar(30),
@@ -42,7 +42,7 @@ CREATE TABLE Users (
 
 
 
-INSERT INTO Users
+INSERT INTO users
 	values
 	(NULL, 'Siva', 'Jasthi', 'siva@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE()),
     	(NULL, 'NotSiva', 'Jasthi', 'siva@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE());
