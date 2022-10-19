@@ -24,7 +24,7 @@
         <a href="meet_our_instructors.php">Meet our Instructors</a>
         <a href="contact_us.php">Contact Us</a>
         <a href="registration_form.php" id="register">Register Now</a>
-		<div><?php getButton(); ?></div>
+		    <div><?php getButton(); ?></div>
       </div>
     </header>
     <div id="container_2">
