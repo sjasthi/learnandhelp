@@ -25,38 +25,40 @@
               <div><?php getButton(); ?></div>
           </div>
       </header>
+      <h3> Registration Form</h3>
     <div id="container_2">
+      <br>
       <form id="survey-form" action="form-submit.php" method = "post">
         <!---Sponsors Section -->
-        <label id="name-label">Sponsor's Name</label>
+        <label id="name-label">Sponsor's Name: </label>
         <input type="text" id="sponsers-name" name="sponsers-name" class="form" required placeholder="Enter Sponsor's name"><br><!--name--->
-        <label id="sponsers-email-label"> Sponsor's Email</label>
+        <label id="sponsers-email-label"> Sponsor's Email: </label>
         <input type="email" id="sponsers-email" name="sponsers-email" class="form" required placeholder="Enter Sponsor's email"><br><!---email-->
-        <label id="sponsors-number-label">Sponsor's Phone Number</label>
+        <label id="sponsors-number-label">Sponsor's Number: </label>
         <input type="tel" id="sponsers-phone" name="sponsers-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <br>
         <br>
-        <br>
+        
         <!---Spouse Section -->
-        <label id="spouses-name-label">Spouse's Name</label>
+        <label id="spouses-name-label">Spouse's Name: </label>
         <input type="text" id="spouses-name" name="spouses-name" class="form" required placeholder="Enter Spouse's name"><br>
-        <label id="spouses-email-label"> Spouse's Email</label>
+        <label id="spouses-email-label"> Spouse's Email: </label>
         <input type="email" id="spouses-email" name="spouses-email" class="form" required placeholder="Enter Spouse's email"><br>
-        <label id="spouses-number-label">Spouse's Phone Number</label>
+        <label id="spouses-number-label">Spouse's Number: </label>
         <input type="tel" id="spouses-phone" name="spouses-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-        <br>
-        <br>
-        <br>
+        
+      </div>
+<div id= "right">
         <!---Student Section -->
-        <label id="students-name-label">Student's Name</label>
+        <label id="students-name-label">Student's Name: </label>
         <input type="text" id="students-name" name="students-name" class="form" required placeholder="Enter Student's name"><br>
-        <label id="students-email-label"> Student's Email</label>
-        <input type="email" id="students-email" name="students-email" class="form" required placeholder="Enter Student's email"><br
-        <label id="students-number-label">Student's Phone Number</label>
+        <label id="students-email-label"> Student's Email: </label>
+        <input type="email" id="students-email" name="students-email" class="form" required placeholder="Enter Student's email"><br>
+        <label id="students-number-label">Student's Number: </label>
         <input type="tel" id="students-phone" name="students-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <br>
         <br>
-        <label id="class">Select Class</label>
+        <label id="class">Select Class: </label>
         <select id="dropdown" name="role" required>
           <option disabled selected value>
             Select your class
@@ -87,9 +89,11 @@
 		  <input type="radio" name="cause" value="Other"> No Preference
 		</label><!---radioButtons--->
 		<br>
+    </div>
+<br>
 		<input type="submit" id="submit" name="submit" value="Submit">
     <input type="hidden" id="action" name="action" value="add">
 	  </form><!---survey-form--->
-	</div>
+
   </body>
 </html>
