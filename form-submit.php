@@ -1,4 +1,5 @@
 <?php
+include 'show-button.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -103,8 +104,7 @@ echo "<!DOCTYPE html>
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
   <body>
-    <?php include 'show-button.php'; ?>
-    <header class=\"inverse\">
+  <header class=\"inverse\">
       <div class=\"container\">
         <img class =\"logo\" src=\"images/logo.png\" alt=\"Logo\">
         <h1> <span class=\"accent-text\">Registration Form</span></h1>
@@ -118,7 +118,9 @@ echo "<!DOCTYPE html>
         <a href=\"meet_our_instructors.php\">Meet our Instructors</a>
         <a href=\"contact_us.php\">Contact Us</a>
         <a href=\"registration_form.php\" id=\"register\">Register Now</a>
-		<div><?php getButton(); ?></div>
+		<div>";
+		 getButton();
+echo	"</div>
       </div>
     </header>
     <div id=\"container_2\">
