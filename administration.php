@@ -37,7 +37,7 @@
     </header>
     <!-- Jquery Data Table -->
     <h1 style="margin:auto; padding-top: 30px">Registrations</h1>
-    <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto;">
+    <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="registration_table" class="display compact">
         <thead>
           <tr>
