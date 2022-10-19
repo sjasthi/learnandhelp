@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <link rel="icon" href="images/logo.png" type="image/icon type">
-    <title>Login</title>
+    <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
   </head>
@@ -10,8 +10,8 @@
   <?php include 'show-button.php'; ?>
   <header class="inverse">
       <div class="container">
-          <img class ="logo" src="images/logo.png" alt="Logo">
-          <h1> Welcome to <span class="accent-text">Learn and Help</span></h1>
+        <img class ="logo" src="images/logo.png" alt="Logo">
+        <h1> <span class="accent-text">Contact Us</span></h1>
       </div>
       <div class="navbar">
           <a href="homepage.php">Home</a>
@@ -25,13 +25,13 @@
           <div><?php getButton(); ?></div>
       </div>
   </header>
-  <form action="validate-login.php" method="post">
-      <label for="usermail">Email</label>
-      <input id="usermail" type="email" name="usermail" placeholder="Yourname@email.com" required>
-      <label for="password">Password</label>
-      <input id="password" type="password" name="password" placeholder="Password" required>
-      <input type="submit" value="Login"/>
-	</form>
-
+    <section class="about-me">
+      <div class="container">
+        <h2><span class="accent-text">Any Questions?</span></h2>
+        <p>Please contact <strong>Siva Jasthi</strong></p>
+        <a href="mailto: Siva.Jasthi@gmail.com"> Siva.Jasthi@gmail.com</a>
+        <p>651.276.4671</p>
+      </div>
+    </section>
   </body>
 </html>

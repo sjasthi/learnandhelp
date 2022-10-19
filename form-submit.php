@@ -52,7 +52,7 @@ switch ($cause){
 $sql = "SELECT * FROM Registrations WHERE Student_Email = '$student_email'";
 if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0 && $action != "edit")
 {
-	header('Location: registration_form.phtml');
+	header('Location: registration_form.php');
 	echo "That student email has already been registered.";
 	die();
 }
@@ -110,14 +110,14 @@ echo "<!DOCTYPE html>
         <h1> <span class=\"accent-text\">Registration Form</span></h1>
       </div>
       <div class=\"navbar\">
-        <a href=\"homepage.phtml\">Home</a>
+        <a href=\"homepage.php\">Home</a>
         <a href=\"#\">Instructors and Volunteers Sign Up</a>
         <a href=\"#\">Classes</a>
         <a href=\"#\">Testimonials</a>
         <a href=\"#\">Causes</a>
-        <a href=\"meet_our_instructors.phtml\">Meet our Instructors</a>
-        <a href=\"contact_us.phtml\">Contact Us</a>
-        <a href=\"registration_form.phtml\" id=\"register\">Register Now</a>
+        <a href=\"meet_our_instructors.php\">Meet our Instructors</a>
+        <a href=\"contact_us.php\">Contact Us</a>
+        <a href=\"registration_form.php\" id=\"register\">Register Now</a>
 		<div><?php getButton(); ?></div>
       </div>
     </header>
