@@ -107,7 +107,7 @@ echo "<!DOCTYPE html>
   <header class=\"inverse\">
       <div class=\"container\">
         <img class =\"logo\" src=\"images/logo.png\" alt=\"Logo\">
-        <h1> <span class=\"accent-text\">Registration Form</span></h1>
+        <h1> <span class=\"accent-text\">Registration Submitted</span></h1>
       </div>
       <div class=\"navbar\">
         <a href=\"homepage.php\">Home</a>
@@ -123,53 +123,48 @@ echo "<!DOCTYPE html>
 echo	"</div>
       </div>
     </header>
+		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
         <!---Sponsors Section -->
-        <label id=\"name-label\">Sponsor's Name: $sponsor_name</label><br>
+        <label id=\"name-label\"><b>Sponsor's Name:</b> $sponsor_name</label><br>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
-        <label id=\"sponsers-email-label\"> Sponsor's Email: $sponsor_email</label><br>
-		<label id=\"sponsors-number-label\">Sponsor's Phone Number: $sponsor_phone</label><br>
+        <label id=\"sponsers-email-label\"> <b>Sponsor's Email:</b> $sponsor_email</label><br>
+		<label id=\"sponsors-number-label\"><b>Sponsor's Phone Number:</b> $sponsor_phone</label><br>
         <input type=\"hidden\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
 		<input type=\"hidden\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\"><br><!---email-->
         <input type=\"hidden\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\">
 
-
-        <br>
-        <br>
         <br>
         <!---Spouse Section -->
-        <label id=\"spouses-name-label\">Spouse's Name: $spouse_name</label><br>
+        <label id=\"spouses-name-label\"><b>Spouse's Name:</b> $spouse_name</label><br>
 
-        <label id=\"spouses-email-label\"> Spouse's Email: $spouse_email</label><br>
+        <label id=\"spouses-email-label\"> <b>Spouse's Email:</b> $spouse_email</label><br>
 
-        <label id=\"spouses-number-label\">Spouse's Phone Number: $spouse_phone</label><br>
+        <label id=\"spouses-number-label\"><b>Spouse's Phone Number:</b> $spouse_phone</label><br>
 		<input type=\"hidden\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" value=\"$spouse_name\"><!--name--->
 		<input type=\"hidden\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\"><br><!---email-->
         <input type=\"hidden\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\">
 
         <br>
-        <br>
-        <br>
         <!---Student Section -->
-        <label id=\"students-name-label\">Student's Name: $student_name</label><br>
+        <label id=\"students-name-label\"><b>Student's Name:</b> $student_name</label><br>
 
-        <label id=\"students-email-label\"> Student's Email: $student_email</label><br>
+        <label id=\"students-email-label\"><b>Student's Email:</b> $student_email</label><br>
 
-        <label id=\"students-number-label\">Student's Phone Number: $student_phone</label><br>
+        <label id=\"students-number-label\"><b>Student's Phone Number:</b> $student_phone</label><br>
 		<input type=\"hidden\" id=\"students-name\" name=\"students-name\" class=\"form\" value=\"$student_name\"><!--name--->
 		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$student_email\"><br><!---email-->
         <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\">
 
         <br>
-        <br>
-        <label id=\"class\">Selected Class: $class</label><br>
+        <label id=\"class\"><b>Selected Class:</b> $class</label><br>
 		<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
 		<!--dropdown--->
-		<p><strong>Cause: $cause</strong></p><br>
+		<p><b>Cause:</b> $cause</p><br>
 		<input type=\"hidden\" id=\"cause\" name=\"cause\" value=\"$cause\">
 		<br>
-			<input type=\"submit\" id=\"submit\" name=\"submit\" value=\"Edit\"></a>
+			<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
 		<br><br>
 	</div>
   </body>
