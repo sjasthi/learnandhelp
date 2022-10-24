@@ -21,8 +21,7 @@ function fill_form() {
         <input type=\"email\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\" required><br><!---email-->
         <label id=\"sponsors-number-label\">Sponsor's Phone Number</label>
         <input type=\"tel\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\" required>
-        <br>
-        <br> 
+
         <br>
         <!---Spouse Section -->
         <label id=\"spouses-name-label\">Spouse's Name</label>
@@ -31,19 +30,18 @@ function fill_form() {
         <input type=\"email\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\" required ><br>
         <label id=\"spouses-number-label\">Spouse's Phone Number</label>
         <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\" required>
-        <br>
-        <br> 
+
         <br>
         </div>
         <div id=\"right\">
-        <!---Student Section -->  
+        <!---Student Section -->
         <label id=\"students-name-label\">Student's Name</label>
         <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required value=\"$student_name\"><br>
-        <label id=\"students-email-label\"> Student's Email</label> 
+        <label id=\"students-email-label\"> Student's Email</label>
         <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br
         <label id=\"students-number-label\">Student's Phone Number</label>
         <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required>
-        <br>
+
         <br>
         <label id=\"class\">Select Class</label>
         <select id=\"dropdown\" name=\"role\" required>
@@ -76,7 +74,7 @@ function fill_form() {
 		  </option>
 		</select>
 		<!--dropdown--->
-		<p><strong>Cause</strong></p>   
+		<p><strong>Cause</strong></p>
 		<label>
 		  <input type=\"radio\" name=\"cause\" value=\"lib\" ";
           if ($cause == "Library")

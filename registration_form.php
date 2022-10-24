@@ -11,7 +11,7 @@
       <header class="inverse">
           <div class="container">
               <img class ="logo" src="images/logo.png" alt="Logo">
-              <h1> Welcome to <span class="accent-text">Learn and Help</span></h1>
+              <h1><span class="accent-text">Register Now</span></h1>
           </div>
           <div class="navbar">
               <a href="homepage.php">Home</a>
@@ -27,7 +27,6 @@
       </header>
       <h3> Registration Form</h3>
     <div id="container_2">
-      <br>
       <form id="survey-form" action="form-submit.php" method = "post">
         <!---Sponsors Section -->
         <label id="name-label">Sponsor's Name: </label>
