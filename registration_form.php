@@ -38,7 +38,7 @@
         <input type="tel" id="sponsers-phone" name="sponsers-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         <br>
         <br>
-        
+
         <!---Spouse Section -->
         <label id="spouses-name-label">Spouse's Name: </label>
         <input type="text" id="spouses-name" name="spouses-name" class="form" required placeholder="Enter Spouse's name"><br>
@@ -46,7 +46,7 @@
         <input type="email" id="spouses-email" name="spouses-email" class="form" required placeholder="Enter Spouse's email"><br>
         <label id="spouses-number-label">Spouse's Number: </label>
         <input type="tel" id="spouses-phone" name="spouses-phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-        
+
       </div>
 <div id= "right">
         <!---Student Section -->
@@ -91,7 +91,7 @@
 		<br>
     </div>
 <br>
-		<input type="submit" id="submit" name="submit" value="Submit">
+		<input type="submit" id="submit-registration" name="submit" value="Submit">
     <input type="hidden" id="action" name="action" value="add">
 	  </form><!---survey-form--->
 
