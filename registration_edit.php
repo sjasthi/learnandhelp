@@ -20,20 +20,21 @@
         <a href="#">Instructors and Volunteers Sign Up</a>
         <a href="#">Classes</a>
         <a href="#">Testimonials</a>
-        <a href="#">Causes</a> 
+        <a href="#">Causes</a>
         <a href="meet_our_instructors.php">Meet our Instructors</a>
         <a href="contact_us.php">Contact Us</a>
         <a href="registration_form.php" id="register">Register Now</a>
 		    <div><?php getButton(); ?></div>
       </div>
     </header>
+    <h3> Edit Registration </h3>
     <div id="container_2">
     <?php
       fill_form();
     ?>
     <input type="hidden" id="action" name="action" value="edit">
 		<br>
-		<input type="submit" id="submit" name="submit" value="Submit">
+		<input type="submit" id="submit-registration" name="submit" value="Submit">
 	  </form><!---survey-form--->
 	</div>
   </body>

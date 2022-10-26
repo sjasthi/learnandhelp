@@ -1,5 +1,35 @@
 <?php
 function fill_form() {
+  
+  if (isset($_COOKIE['email'])){
+    $student_email = $_COOKIE['email'];
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "learn_and_help_db";
+    $connection = new mysqli($servername, $username, $password, $dbname);
+
+    if ($connection === false) {
+  	  die("Failed to connect to database: " . mysqli_connect_error());
+    }
+    $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+  
+    $db_id = $row[0];
+    $sponsor_name = $row[1];
+    $sponsor_email = $row[2];
+    $sponsor_phone = $row[3];
+    $spouse_name = $row[4];
+    $spouse_email = $row[5];
+    $spouse_phone = $row[6];
+    $student_name = $row[7];
+    $student_phone = $row[9];
+    $class = $row[10];
+    $cause = $row[11];
+    
+  } else {
+    $student_email = $_POST['students-email'];
+  
     $sponsor_name = $_POST['sponsers-name'];
     $sponsor_email = $_POST['sponsers-email'];
     $sponsor_phone = $_POST['sponsers-phone'];
@@ -7,11 +37,11 @@ function fill_form() {
     $spouse_email = $_POST['spouses-email'];
     $spouse_phone = $_POST['spouses-phone'];
     $student_name = $_POST['students-name'];
-    $student_email = $_POST['students-email'];
+    
     $student_phone = $_POST['students-phone'];
     $class = $_POST['class'];
     $cause = $_POST['cause'];
-
+  }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
         <!---Sponsors Section -->
@@ -21,8 +51,7 @@ function fill_form() {
         <input type=\"email\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\" required><br><!---email-->
         <label id=\"sponsors-number-label\">Sponsor's Phone Number</label>
         <input type=\"tel\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\" required>
-        <br>
-        <br> 
+
         <br>
         <!---Spouse Section -->
         <label id=\"spouses-name-label\">Spouse's Name</label>
@@ -31,19 +60,18 @@ function fill_form() {
         <input type=\"email\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\" required ><br>
         <label id=\"spouses-number-label\">Spouse's Phone Number</label>
         <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\" required>
-        <br>
-        <br> 
+
         <br>
         </div>
         <div id=\"right\">
-        <!---Student Section -->  
+        <!---Student Section -->
         <label id=\"students-name-label\">Student's Name</label>
         <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required value=\"$student_name\"><br>
-        <label id=\"students-email-label\"> Student's Email</label> 
+        <label id=\"students-email-label\"> Student's Email</label>
         <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br
         <label id=\"students-number-label\">Student's Phone Number</label>
         <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required>
-        <br>
+
         <br>
         <label id=\"class\">Select Class</label>
         <select id=\"dropdown\" name=\"role\" required>
@@ -76,7 +104,7 @@ function fill_form() {
 		  </option>
 		</select>
 		<!--dropdown--->
-		<p><strong>Cause</strong></p>   
+		<p><strong>Cause</strong></p>
 		<label>
 		  <input type=\"radio\" name=\"cause\" value=\"lib\" ";
           if ($cause == "Library")
