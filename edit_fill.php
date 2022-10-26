@@ -1,5 +1,35 @@
 <?php
 function fill_form() {
+  
+  if (isset($_COOKIE['email'])){
+    $student_email = $_COOKIE['email'];
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "learn_and_help_db";
+    $connection = new mysqli($servername, $username, $password, $dbname);
+
+    if ($connection === false) {
+  	  die("Failed to connect to database: " . mysqli_connect_error());
+    }
+    $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+  
+    $db_id = $row[0];
+    $sponsor_name = $row[1];
+    $sponsor_email = $row[2];
+    $sponsor_phone = $row[3];
+    $spouse_name = $row[4];
+    $spouse_email = $row[5];
+    $spouse_phone = $row[6];
+    $student_name = $row[7];
+    $student_phone = $row[9];
+    $class = $row[10];
+    $cause = $row[11];
+    
+  } else {
+    $student_email = $_POST['students-email'];
+  
     $sponsor_name = $_POST['sponsers-name'];
     $sponsor_email = $_POST['sponsers-email'];
     $sponsor_phone = $_POST['sponsers-phone'];
@@ -7,11 +37,11 @@ function fill_form() {
     $spouse_email = $_POST['spouses-email'];
     $spouse_phone = $_POST['spouses-phone'];
     $student_name = $_POST['students-name'];
-    $student_email = $_POST['students-email'];
+    
     $student_phone = $_POST['students-phone'];
     $class = $_POST['class'];
     $cause = $_POST['cause'];
-
+  }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
         <!---Sponsors Section -->
