@@ -146,8 +146,11 @@ section {
     border-radius: 4px;
 
   }
-  .logo{
-    padding-bottom: 60px;
+  .new_logo{
+    padding: 60px;
+    height: 180px;
+    width: 295px;
+    border-radius: 85px;
   }
   #login:hover,
   #login:focus {
@@ -209,4 +212,10 @@ input[type=text],input[type=email], input[type=tel],input[type=password], select
     display: inline-block;
     padding: 50px;
 
+}
+
+.nav_new_logo{
+    height: 60px;
+    width: 105px;
+    border-radius: 5px;
 }
