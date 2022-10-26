@@ -17,7 +17,7 @@ echo "<!DOCTYPE html>
       <header class=\"inverse\">
           <div class=\"container\">
               <img class =\"logo\" src=\"images/logo.png\" alt=\"Logo\">
-              <h1> Welcome to <span class=\"accent-text\">Learn and Help</span></h1>
+              <h1><span class=\"accent-text\">Register Now</span></h1>
           </div>
           <div class=\"navbar\">
               <a href=\"homepage.php\">Home</a>
@@ -33,7 +33,6 @@ echo "<!DOCTYPE html>
       </header>
       <h3> Registration Form</h3>
     <div id=\"container_2\">
-      <br>
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
         <!---Sponsors Section -->
         <label id=\"name-label\">Sponsor's Name: </label>
@@ -54,7 +53,7 @@ echo "<!DOCTYPE html>
         <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
 
       </div>
-<div id= \"right\">
+      <div id= \"right\">
         <!---Student Section -->
         <label id=\"students-name-label\">Student's Name: </label>
         <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required placeholder=\"Enter Student's name\"><br>
@@ -97,7 +96,7 @@ echo "<!DOCTYPE html>
 		<br>
     </div>
 <br>
-		<input type=\"submit\" id=\"submit\" name=\"submit\" value=\"Submit\">
+		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Submit\">
     <input type=\"hidden\" id=\"action\" name=\"action\" value=\"add\">
 	  </form><!---survey-form--->
 
