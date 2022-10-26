@@ -75,7 +75,10 @@ a:focus {
     margin-top: 5px;
 }
 
-header,
+header  {
+    padding: 100px 0 25px;
+}
+
 section {
     padding: 100px 0;
 }
@@ -123,37 +126,43 @@ section {
     position: fixed;
     top: 0;
     width: 100%;
-  }
+}
 
-  .navbar a {
+#logo {
+    height: 50px;
+    width: 100px;
+    border-radius: 5px;
+}
+
+#nav-logo {
     float: left;
-    display: block;
+    padding: 5px 5px 0px;
+}
+
+.navbar a {
+    float: center;
+    display: inline-block;
     color: #eeeeee;
     text-align: center;
     padding: 15px 18px;
     text-decoration: none;
     font-size: 18px;
-  }
+}
 
-  .navbar a:hover {
+.navbar a:hover {
     color:#99D930;
-  }
+}
 
-  #login{
+#login{
     background-color: #99D930;
     color: #252525;
     float: right;
     border-radius: 4px;
 
-  }
-  .new_logo{
-    padding: 60px;
-    height: 180px;
-    width: 295px;
-    border-radius: 85px;
-  }
-  #login:hover,
-  #login:focus {
+}
+
+#login:hover,
+#login:focus {
     background: #fff;
     color: #252525;
 }
@@ -212,10 +221,4 @@ input[type=text],input[type=email], input[type=tel],input[type=password], select
     display: inline-block;
     padding: 50px;
 
-}
-
-.nav_new_logo{
-    height: 60px;
-    width: 105px;
-    border-radius: 5px;
 }

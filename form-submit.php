@@ -1,5 +1,5 @@
 <?php
-include 'show-button.php';
+include 'show-navbar.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -25,6 +25,7 @@ if (isset($_COOKIE['email'])){
     $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
+		$action = '';
     $db_id = $row[0];
     $sponsor_name = $row[1];
     $sponsor_email = $row[2];
@@ -118,32 +119,18 @@ mysqli_close($connection);
 echo "<!DOCTYPE html>
 <html>
   <head>
-    <link rel=\"icon\" href=\"images/new_logo.png\" type=\"image/icon type\">
     <title>Learn and Help</title>
+		<link rel=\"icon\" href=\"images/icon_logo.png\" type=\"image/icon type\">
     <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap\" rel=\"stylesheet\">
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
   <body>
   <header class=\"inverse\">
       <div class=\"container\">
-        <img class =\"new_logo\" src=\"images/new_logo.png\" alt=\"Logo\">
         <h1> <span class=\"accent-text\">Registration Submitted</span></h1>
-      </div>
-      <div class=\"navbar\">
-	  <a href=\"homepage.php\"><img class=\"nav_new_logo\" src=\"images/new_logo.png\"></a>
-        <a href=\"homepage.php\">Home</a>
-        <a href=\"#\">Instructors and Volunteers Sign Up</a>
-        <a href=\"#\">Classes</a>
-        <a href=\"#\">Testimonials</a>
-        <a href=\"#\">Causes</a>
-        <a href=\"meet_our_instructors.php\">Meet our Instructors</a>
-        <a href=\"contact_us.php\">Contact Us</a>
-        <a href=\"registration_form.php\" id=\"register\">Register Now</a>
-		<div>";
-		 getButton();
-echo	"</div>
-      </div>
-    </header>
+      </div>";
+      show_navbar();
+echo    "</header>
 		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
