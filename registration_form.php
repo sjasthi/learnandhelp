@@ -1,4 +1,6 @@
 <?php
+include 'show-button.php';
+
 if (isset($_COOKIE['email'])){
   header("Location: form-submit.php");
 }
@@ -12,7 +14,6 @@ echo "<!DOCTYPE html>
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
   <body>
-      <?php include 'show-button.php'; ?>
       <header class=\"inverse\">
           <div class=\"container\">
               <img class =\"logo\" src=\"images/logo.png\" alt=\"Logo\">
@@ -27,7 +28,7 @@ echo "<!DOCTYPE html>
               <a href=\"meet_our_instructors.php\">Meet our Instructors</a>
               <a href=\"contact_us.php\">Contact Us</a>
               <a href=\"registration_form.php\" id=\"register\">Register Now</a>
-              <div><?php getButton(); ?></div>
+              <div>"; getButton(); echo"</div>
           </div>
       </header>
       <h3> Registration Form</h3>
@@ -51,7 +52,7 @@ echo "<!DOCTYPE html>
         <input type=\"email\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" required placeholder=\"Enter Spouse's email\"><br>
         <label id=\"spouses-number-label\">Spouse's Number: </label>
         <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
-        
+
       </div>
 <div id= \"right\">
         <!---Student Section -->

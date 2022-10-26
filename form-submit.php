@@ -24,7 +24,7 @@ if (isset($_COOKIE['email'])){
     }
     $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
-  
+
     $db_id = $row[0];
     $sponsor_name = $row[1];
     $sponsor_email = $row[2];
@@ -67,8 +67,8 @@ if (isset($_COOKIE['email'])){
 		'$cause',
 		'$timestamp',
 		'$timestamp');";
-	
-	
+
+
 }
 switch ($class){
 	case "py1":
