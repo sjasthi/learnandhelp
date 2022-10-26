@@ -1,6 +1,6 @@
 <?php
 if (isset($_COOKIE['email'])){
-  header("Location: registration_edit.php");
+  header("Location: form-submit.php");
 }
 
 echo "<!DOCTYPE html>

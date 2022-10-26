@@ -11,20 +11,65 @@ if ($connection === false) {
 	die("Failed to connect to database: " . mysqli_connect_error());
 }
 
-$action = $_POST['action'];
-$sponsor_name = $_POST['sponsers-name'];
-$sponsor_email = $_POST['sponsers-email'];
-$sponsor_phone = $_POST['sponsers-phone'];
-$spouse_name = $_POST['spouses-name'];
-$spouse_email = $_POST['spouses-email'];
-$spouse_phone = $_POST['spouses-phone'];
-$student_name = $_POST['students-name'];
-$student_email = $_POST['students-email'];
-$student_phone = $_POST['students-phone'];
-$class = $_POST['role'];
-$cause = $_POST['cause'];
-$timestamp = date("Y-m-d");
-$_COOKIE['email'] = $student_email;
+if (isset($_COOKIE['email'])){
+    $student_email = $_COOKIE['email'];
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "learn_and_help_db";
+    $connection = new mysqli($servername, $username, $password, $dbname);
+
+    if ($connection === false) {
+  	  die("Failed to connect to database: " . mysqli_connect_error());
+    }
+    $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+  
+    $db_id = $row[0];
+    $sponsor_name = $row[1];
+    $sponsor_email = $row[2];
+    $sponsor_phone = $row[3];
+    $spouse_name = $row[4];
+    $spouse_email = $row[5];
+    $spouse_phone = $row[6];
+    $student_name = $row[7];
+    $student_phone = $row[9];
+    $class = $row[10];
+    $cause = $row[11];
+
+} else {
+	$action = $_POST['action'];
+	$sponsor_name = $_POST['sponsers-name'];
+	$sponsor_email = $_POST['sponsers-email'];
+	$sponsor_phone = $_POST['sponsers-phone'];
+	$spouse_name = $_POST['spouses-name'];
+	$spouse_email = $_POST['spouses-email'];
+	$spouse_phone = $_POST['spouses-phone'];
+	$student_name = $_POST['students-name'];
+	$student_email = $_POST['students-email'];
+	$student_phone = $_POST['students-phone'];
+	$class = $_POST['role'];
+	$cause = $_POST['cause'];
+	$timestamp = date("Y-m-d");
+	setcookie('email', $student_email);
+	$sql = "INSERT INTO registrations VALUES (
+		NULL,
+		'$sponsor_name',
+		'$sponsor_email',
+		'$sponsor_phone',
+		'$spouse_name',
+		'$spouse_email',
+		'$spouse_phone',
+		'$student_name',
+		'$student_email',
+		'$student_phone',
+		'$class',
+		'$cause',
+		'$timestamp',
+		'$timestamp');";
+	
+	
+}
 switch ($class){
 	case "py1":
 		$class = "Python 101";
@@ -49,15 +94,6 @@ switch ($cause){
 	case "Other":
 		$cause = "No Preference";
 }
-
-$sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
-if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0 && $action != "edit")
-{
-	header('Location: registration_form.php');
-	echo "That student email has already been registered.";
-	die();
-}
-
 if($action == "edit") {
 	$sql = "UPDATE registrations SET
 			Sponsor_Name = '$sponsor_name',
@@ -74,27 +110,11 @@ if($action == "edit") {
 			WHERE Student_Email = '$student_email';";
 
 }
-else
-	$sql = "INSERT INTO registrations VALUES (
-		NULL,
-		'$sponsor_name',
-		'$sponsor_email',
-		'$sponsor_phone',
-		'$spouse_name',
-		'$spouse_email',
-		'$spouse_phone',
-		'$student_name',
-		'$student_email',
-		'$student_phone',
-		'$class',
-		'$cause',
-		'$timestamp',
-		'$timestamp');";
-
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
 mysqli_close($connection);
+
 echo "<!DOCTYPE html>
 <html>
   <head>
