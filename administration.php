@@ -17,24 +17,12 @@
     </script>
   </head>
   <body>
-  <?php include 'show-button.php'; ?>
+  <?php include 'show-navbar.php'; ?>
     <header class="inverse">
       <div class="container">
-        <img class ="new_logo" src="images/new_logo.png" alt="Logo">
         <h1><span class="accent-text">Administration</span></h1>
       </div>
-      <div class="navbar">
-      <a href="homepage.php"><img class="nav_new_logo" src="images/new_logo.png"></a>
-        <a href="homepage.php">Home</a>
-        <a href="#">Instructors and Volunteers Sign Up</a>
-        <a href="#">Classes</a>
-        <a href="#">Testimonials</a>
-        <a href="#">Causes</a>
-        <a href="meet_our_instructors.php">Meet our Instructors</a>
-        <a href="contact_us.php">Contact Us</a>
-        <a href="registration_form.php" id="register">Register Now</a>
-		    <!-- <?php getButton(); ?> Commented out until login is implemented-->
-      </div>
+      <?php show_navbar(); ?>
     </header>
     <!-- Jquery Data Table -->
     <h1 style="margin:auto; padding-top: 30px">Registrations</h1>

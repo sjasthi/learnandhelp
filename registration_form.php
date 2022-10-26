@@ -1,5 +1,5 @@
 <?php
-include 'show-button.php';
+include 'show-navbar.php';
 
 if (isset($_COOKIE['email'])){
   header("Location: form-submit.php");
@@ -16,22 +16,10 @@ echo "<!DOCTYPE html>
   <body>
       <header class=\"inverse\">
           <div class=\"container\">
-              <img class =\"new_logo\" src=\"images/new_logo.png\" alt=\"Logo\">
               <h1><span class=\"accent-text\">Register Now</span></h1>
-          </div>
-          <div class=\"navbar\">
-          <a href=\"homepage.php\"><img class=\"nav_new_logo\" src=\"images/new_logo.png\"></a>
-              <a href=\"homepage.php\">Home</a>
-              <a href=\"#\">Instructors and Volunteers Sign Up</a>
-              <a href=\"#\">Classes</a>
-              <a href=\"#\">Testimonials</a>
-              <a href=\"#\">Causes</a>
-              <a href=\"meet_our_instructors.php\">Meet our Instructors</a>
-              <a href=\"contact_us.php\">Contact Us</a>
-              <a href=\"registration_form.php\" id=\"register\">Register Now</a>
-              <div>"; getButton(); echo"</div>
-          </div>
-      </header>
+          </div>";
+          show_navbar();
+      echo "</header>
       <h3> Registration Form</h3>
     <div id=\"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
