@@ -169,7 +169,7 @@ section {
 .container_2{
     text-align: left;
 }
-input[type=text],input[type=email], input[type=tel],input[type=password], select {
+input[type=text],input[type=email], input[type=tel],input[type=password], input[type=file], select {
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -217,8 +217,14 @@ input[type=text],input[type=email], input[type=tel],input[type=password], select
 
 }
 
-#container_2, #right{
+#container_2, #blog_creation_left, #blog_creation_right, #right{
     display: inline-block;
     padding: 50px;
+    vertical-align: top;
+}
 
+#blog_creation_left, #blog_creation_right {
+    width: 25%;
+    padding-right: 0px;
+    padding-left: 0px;
 }
