@@ -7,12 +7,16 @@ $dbname = "learn_and_help_db";
 
 $connection = new mysqli($servername, $username, $password, $dbname);
 
+if ($connection->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
 if (isset($_POST['create_post'])) {
-  $title = $_POST['title'];
-  $author = $_POST['author'];
-  $description = $_POST['description'];
+  $title = addslashes($_POST['title']);
+  $author = addslashes($_POST['author']);
+  $description = addslashes($_POST['description']);
   $video_link = $_POST['video_link'];
-  $timestamp = date("Y-m-d");
+  $timestamp = date("Y-m-d H:i:s");
   $fileNameArray = [];
   for($i = 0; $i < count($_FILES['file']['name']); $i++) {
     $fileName = $_FILES['file']['name'][$i];

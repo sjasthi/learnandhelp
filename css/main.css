@@ -23,7 +23,7 @@ h1 {
 
 h2 {
     font-size: 42px;
-    margin-top: 0;
+    margin-top: 10px;
     border-top: solid 1px #c4c4c4;
     border-bottom: solid 1px #c4c4c4;
 
@@ -182,7 +182,7 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
     width: 30%;
 }
 
-  input[type=submit] {
+  input[type=submit], button {
     background-color: #99D930;
     color: black;
     padding: 14px 20px;
@@ -192,6 +192,10 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
     border-radius: 4px;
     cursor: pointer;
   }
+
+#form_show_button {
+  margin-top: 20px;
+}
 
 #submit-registration, #submit-login {
   width: 30%;
@@ -227,4 +231,23 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
     width: 25%;
     padding-right: 0px;
     padding-left: 0px;
+}
+
+.blog_post {
+  width: 50%;
+  display: block;
+  margin: auto;
+}
+
+.blog_link {
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.blog_picture {
+  width: 80%;
+  height: auto;
+  margin: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
 }

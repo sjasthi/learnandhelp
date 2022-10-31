@@ -10,13 +10,23 @@
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
+  <?php include 'blog_fill.php'; ?>
     <header class="inverse">
       <div class="container">
         <h1><span class="accent-text">Causes</span></h1>
       </div>
       <?php show_navbar(); ?>
     </header>
-      <form action="create_post.php" method="POST" enctype="multipart/form-data">
+    <script>
+      let show_form = () => {
+        let form = document.getElementById("blog_creation_form");
+        let show_button = document.getElementById("form_show_button");
+        form.removeAttribute("hidden");
+        show_button.setAttribute("hidden", "hidden");
+      }
+    </script>
+      <button id="form_show_button" onclick="show_form();">Create Post</button>
+      <form id="blog_creation_form" action="create_post.php" method="POST" enctype="multipart/form-data" hidden="hidden">
         <div id=blog_creation_left>
           <label>Blog Title</label>
           <br>
@@ -37,10 +47,11 @@
           <br>
           <label>Video Link</label>
           <br>
-          <input type="text" name="video_link" maxlength=100>
+          <input type="text" name="video_link" maxlength=100 placeholder="Optional">
         </div>
         <br>
-        <input type="submit" name="create_post" value="Create Post">
+        <input type="submit" name="create_post" value="Publish">
       </form>
+      <?php fill_blog(); ?>
   </body>
 </html>

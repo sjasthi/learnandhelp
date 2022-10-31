@@ -53,8 +53,8 @@ CREATE TABLE blogs (
 	Author varchar(50),
 	Description TEXT,
 	Video_Link varchar(200),
-	Modified_Time date,
-	Created_Time date,
+	Modified_Time DATETIME,
+	Created_Time DATETIME,
 	PRIMARY KEY (Blog_Id));
 
 CREATE TABLE blog_pictures (
@@ -63,4 +63,3 @@ CREATE TABLE blog_pictures (
 	Location varchar(100),
 	PRIMARY KEY (Picture_Id),
 	FOREIGN KEY (Blog_Id) REFERENCES blogs(Blog_Id));
-)
