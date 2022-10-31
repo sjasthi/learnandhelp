@@ -20,7 +20,7 @@
         <div id=blog_creation_left>
           <label>Blog Title</label>
           <br>
-          <input type="text" name="title" required>
+          <input type="text" name="title" maxlength=100 required>
           <br>
           <label for="description">Description</label>
           <br>
@@ -29,15 +29,15 @@
         <div id=blog_creation_right>
           <label for="author">Author</label>
           <br>
-          <input type="text" name="author" required>
+          <input type="text" name="author" maxlength=50 required>
           <br>
           <label>Image(s)</label>
           <br>
-          <input type="file" name="file[]" accept="image/*" multiple>
+          <input type="file" name="file[]" accept="image/*" multiple="multiple">
           <br>
           <label>Video Link</label>
           <br>
-          <input type="text" name="video_link">
+          <input type="text" name="video_link" maxlength=100>
         </div>
         <br>
         <input type="submit" name="create_post" value="Create Post">

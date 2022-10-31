@@ -14,25 +14,24 @@ if (isset($_POST['create_post'])) {
   $video_link = $_POST['video_link'];
   $timestamp = date("Y-m-d");
   $fileNameArray = [];
-
-  foreach($_FILES['file'] as $file) {
-    $fileName = $file['name'];
-    $fileTMP = $file['tmp_name'];
-    $fileError = $file['error'];
+  for($i = 0; $i < count($_FILES['file']['name']); $i++) {
+    $fileName = $_FILES['file']['name'][$i];
+    $fileTMP = $_FILES['file']['tmp_name'][$i];
+    $fileError = $_FILES['file']['error'][$i];
     $fileExt = explode('.', $fileName);
-    $fileActualExt = strtolower(end($fileExt))
+    $fileActualExt = strtolower(end($fileExt));
 
     if ($fileError === 0) {
       $fileNewName = uniqid('', true).".".$fileActualExt;
       $fileDestination = 'images/blog_pictures/'.$fileNewName;
       move_uploaded_file($fileTMP, $fileDestination);
-      array_push($fileNameArray, $fileDestination)
+      array_push($fileNameArray, $fileDestination);
     } else {
       echo "There was an error uploading your file.";
     }
   }
 
-  $sql = "INSERT INTO blog VALUES (
+  $sql = "INSERT INTO blogs VALUES (
 		NULL,
 		'$title',
     '$author',
@@ -46,7 +45,7 @@ if (isset($_POST['create_post'])) {
   } else {
     $last_id = mysqli_insert_id($connection);
     foreach($fileNameArray as $location){
-      $sql = "INSERT INTO blog_picture VALUES (
+      $sql = "INSERT INTO blog_pictures VALUES (
         NULL,
         '$last_id',
         '$location');";
@@ -59,4 +58,6 @@ if (isset($_POST['create_post'])) {
 }
 
 mysqli_close($connection);
+
+header('Location: causes.php');
 ?>

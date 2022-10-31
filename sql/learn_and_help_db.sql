@@ -37,7 +37,7 @@ CREATE TABLE users (
 	Active varchar(10),
 	Role varchar(20),
 	Modified_Time date,
-  	Created_Time date,
+  Created_Time date,
 	PRIMARY KEY (User_Id));
 
 
@@ -45,4 +45,22 @@ CREATE TABLE users (
 INSERT INTO users
 	values
 	(NULL, 'Siva', 'Jasthi', 'siva@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE()),
-    	(NULL, 'NotSiva', 'Jasthi', 'siva@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE());
+  (NULL, 'NotSiva', 'Jasthi', 'siva@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE());
+
+CREATE TABLE blogs (
+	Blog_Id int NOT NULL AUTO_INCREMENT,
+	Title varchar(100),
+	Author varchar(50),
+	Description TEXT,
+	Video_Link varchar(200),
+	Modified_Time date,
+	Created_Time date,
+	PRIMARY KEY (Blog_Id));
+
+CREATE TABLE blog_pictures (
+	Picture_Id int NOT NULL AUTO_INCREMENT,
+	Blog_Id int,
+	Location varchar(100),
+	PRIMARY KEY (Picture_Id),
+	FOREIGN KEY (Blog_Id) REFERENCES blogs(Blog_Id));
+)
