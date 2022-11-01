@@ -1,5 +1,5 @@
 <?php
-include 'show-button.php';
+include 'show-navbar.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -10,35 +10,13 @@ $connection = new mysqli($servername, $username, $password, $dbname);
 if ($connection === false) {
 	die("Failed to connect to database: " . mysqli_connect_error());
 }
-
-if (isset($_COOKIE['email'])){
-    $student_email = $_COOKIE['email'];
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "learn_and_help_db";
-    $connection = new mysqli($servername, $username, $password, $dbname);
-
-    if ($connection === false) {
-  	  die("Failed to connect to database: " . mysqli_connect_error());
-    }
-    $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
-    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
-
-    $db_id = $row[0];
-    $sponsor_name = $row[1];
-    $sponsor_email = $row[2];
-    $sponsor_phone = $row[3];
-    $spouse_name = $row[4];
-    $spouse_email = $row[5];
-    $spouse_phone = $row[6];
-    $student_name = $row[7];
-    $student_phone = $row[9];
-    $class = $row[10];
-    $cause = $row[11];
-
-} else {
+if (isset($_POST['action'])) {
 	$action = $_POST['action'];
+} else {
+	$action = '';
+}
+
+if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
 	$sponsor_name = $_POST['sponsers-name'];
 	$sponsor_email = $_POST['sponsers-email'];
 	$sponsor_phone = $_POST['sponsers-phone'];
@@ -51,25 +29,27 @@ if (isset($_COOKIE['email'])){
 	$class = $_POST['role'];
 	$cause = $_POST['cause'];
 	$timestamp = date("Y-m-d");
-	setcookie('email', $student_email);
-	$sql = "INSERT INTO registrations VALUES (
-		NULL,
-		'$sponsor_name',
-		'$sponsor_email',
-		'$sponsor_phone',
-		'$spouse_name',
-		'$spouse_email',
-		'$spouse_phone',
-		'$student_name',
-		'$student_email',
-		'$student_phone',
-		'$class',
-		'$cause',
-		'$timestamp',
-		'$timestamp');";
 
+} elseif (isset($_COOKIE['email'])){
+		$student_email = $_COOKIE['email'];
+    $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+
+		$action = '';
+    $db_id = $row[0];
+    $sponsor_name = $row[1];
+    $sponsor_email = $row[2];
+    $sponsor_phone = $row[3];
+    $spouse_name = $row[4];
+    $spouse_email = $row[5];
+    $spouse_phone = $row[6];
+    $student_name = $row[7];
+    $student_phone = $row[9];
+    $class = $row[10];
+    $cause = $row[11];
 
 }
+
 switch ($class){
 	case "py1":
 		$class = "Python 101";
@@ -94,7 +74,26 @@ switch ($cause){
 	case "Other":
 		$cause = "No Preference";
 }
-if($action == "edit") {
+
+if ($action == 'add') {
+	setcookie('email', $student_email);
+	$sql = "INSERT INTO registrations VALUES (
+		NULL,
+		'$sponsor_name',
+		'$sponsor_email',
+		'$sponsor_phone',
+		'$spouse_name',
+		'$spouse_email',
+		'$spouse_phone',
+		'$student_name',
+		'$student_email',
+		'$student_phone',
+		'$class',
+		'$cause',
+		'$timestamp',
+		'$timestamp');";
+
+} elseif($action == "edit") {
 	$sql = "UPDATE registrations SET
 			Sponsor_Name = '$sponsor_name',
 			Sponsor_Email = '$sponsor_email',
@@ -109,7 +108,24 @@ if($action == "edit") {
 			Modified_Time = '$timestamp'
 			WHERE Student_Email = '$student_email';";
 
+} elseif($action == "admin_edit") {
+	$Reg_Id = $_POST['Reg_Id'];
+	$sql = "UPDATE registrations SET
+			Sponsor_Name = '$sponsor_name',
+			Sponsor_Email = '$sponsor_email',
+			Sponsor_Phone_Number = '$sponsor_phone',
+			Spouse_Name = '$spouse_name',
+			Spouse_Email = '$spouse_email',
+			Spouse_Phone_Number = '$spouse_phone',
+			Student_Email = '$student_email',
+			Student_Phone_Number = '$student_phone',
+			Class = '$class',
+			Cause = '$cause',
+			Modified_Time = '$timestamp'
+			WHERE Reg_Id = '$Reg_Id';";
+
 }
+
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
@@ -118,31 +134,18 @@ mysqli_close($connection);
 echo "<!DOCTYPE html>
 <html>
   <head>
-    <link rel=\"icon\" href=\"images/logo.png\" type=\"image/icon type\">
     <title>Learn and Help</title>
+		<link rel=\"icon\" href=\"images/icon_logo.png\" type=\"image/icon type\">
     <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap\" rel=\"stylesheet\">
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
   <body>
   <header class=\"inverse\">
       <div class=\"container\">
-        <img class =\"logo\" src=\"images/logo.png\" alt=\"Logo\">
         <h1> <span class=\"accent-text\">Registration Submitted</span></h1>
-      </div>
-      <div class=\"navbar\">
-        <a href=\"homepage.php\">Home</a>
-        <a href=\"#\">Instructors and Volunteers Sign Up</a>
-        <a href=\"#\">Classes</a>
-        <a href=\"#\">Testimonials</a>
-        <a href=\"#\">Causes</a>
-        <a href=\"meet_our_instructors.php\">Meet our Instructors</a>
-        <a href=\"contact_us.php\">Contact Us</a>
-        <a href=\"registration_form.php\" id=\"register\">Register Now</a>
-		<div>";
-		 getButton();
-echo	"</div>
-      </div>
-    </header>
+      </div>";
+      show_navbar();
+echo    "</header>
 		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
@@ -184,7 +187,8 @@ echo	"</div>
 		<p><b>Cause:</b> $cause</p><br>
 		<input type=\"hidden\" id=\"cause\" name=\"cause\" value=\"$cause\">
 		<br>
-			<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
+		<input type='hidden' name='action' value='edit'>
+		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
 		<br><br>
 	</div>
   </body>

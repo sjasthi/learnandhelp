@@ -1,3 +1,4 @@
+<?php $Reg_Id = $_POST['Reg_Id']?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,7 +9,7 @@
   </head>
   <body>
     <?php include 'show-navbar.php';
-          include 'edit_fill.php';
+          include 'admin_fill.php';
           ?>
     <header class="inverse">
       <div class="container">
@@ -19,9 +20,9 @@
     <h3> Edit Registration </h3>
     <div id="container_2">
     <?php
-      fill_form();
+      admin_fill_form($Reg_Id);
     ?>
-    <input type="hidden" id="action" name="action" value="edit">
+    <input type="hidden" id="action" name="action" value="admin_edit">
 		<br>
 		<input type="submit" id="submit-registration" name="submit" value="Submit">
 	  </form><!---survey-form--->

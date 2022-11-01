@@ -3,8 +3,8 @@
 </script>
 <html>
   <head>
-    <link rel="icon" href="images/logo.png" type="image/icon type">
-    <title>Learn and Help</title>
+    <link rel="icon" href="images/icon_logo.png" type="image/icon type">
+    <title>Administration</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -17,23 +17,12 @@
     </script>
   </head>
   <body>
-  <?php include 'show-button.php'; ?>
+  <?php include 'show-navbar.php'; ?>
     <header class="inverse">
       <div class="container">
-        <img class ="logo" src="images/logo.png" alt="Logo">
         <h1><span class="accent-text">Administration</span></h1>
       </div>
-      <div class="navbar">
-        <a href="homepage.php">Home</a>
-        <a href="#">Instructors and Volunteers Sign Up</a>
-        <a href="#">Classes</a>
-        <a href="#">Testimonials</a>
-        <a href="#">Causes</a>
-        <a href="meet_our_instructors.php">Meet our Instructors</a>
-        <a href="contact_us.php">Contact Us</a>
-        <a href="registration_form.php" id="register">Register Now</a>
-		    <!-- <?php getButton(); ?> Commented out until login is implemented-->
-      </div>
+      <?php show_navbar(); ?>
     </header>
     <!-- Jquery Data Table -->
     <h1 style="margin:auto; padding-top: 30px">Registrations</h1>
@@ -55,6 +44,7 @@
             <th>Cause</th>
             <th>Date Modified</th>
             <th>Date Created</th>
+            <th>Options</th>
           </tr>
         </thead>
         <tbody>
@@ -87,7 +77,18 @@
                 $row["Student_Phone_Number"]. "</td><td>" . $row["Class"].
                 "</td><td>" . $row["Cause"]. "</td><td>" .
                 $row["Modified_Time"]. "</td><td>" . $row["Created_Time"].
-                "</td></tr>";
+                "</td>
+                <td>
+                  <form action='admin_edit.php' method='POST'>
+                    <input type='hidden' name='Reg_Id' value='". $row["Reg_Id"] . "'>
+                    <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
+                  </form>
+                  <form action='admin_delete.php' method='POST'>
+                    <input type='hidden' name='Reg_Id' value='". $row["Reg_Id"] . "'>
+                    <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
+                  </form>
+                </td>
+                </tr>";
               }
             } else {
               echo "0 results";

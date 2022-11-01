@@ -10,17 +10,40 @@
   <?php include 'show-navbar.php'; ?>
   <header class="inverse">
       <div class="container">
-        <h1> <span class="accent-text">Contact Us</span></h1>
+        <h1><span class="accent-text">Classes</span></h1>
       </div>
       <?php show_navbar(); ?>
   </header>
     <section class="about-me">
       <div class="container">
-        <h2><span class="accent-text">Any Questions?</span></h2>
-        <p>Please contact <strong>Siva Jasthi</strong></p>
-        <a href="mailto: Siva.Jasthi@gmail.com"> Siva.Jasthi@gmail.com</a>
-        <p>651.276.4671</p>
-      </div>
-    </section>
+        <h2>Python<span class="accent-text">101</span></h2>
+        <h3>Course Description:</h3>
+            <p>
+
+
+
+
+
+            
+            </p>
+	  </div>
+	</section>
+	<section class="articles inverse">
+	  <div class="container">
+		<h2>Java<span class="accent-text">101</span></h2>
+        <h3>Course Description:</h3>
+		    <p>
+
+
+
+
+
+
+
+            </p>
+		<br>
+
+	  </div>
+	</section>
   </body>
 </html>
