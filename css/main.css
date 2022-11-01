@@ -197,6 +197,10 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   margin-top: 20px;
 }
 
+#admin_buttons {
+  width: 90%;
+}
+
 #submit-registration, #submit-login {
   width: 30%;
   }
