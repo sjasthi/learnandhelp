@@ -26,7 +26,8 @@
       </div>
   </header>
   <br>
-  <form action="process-new-account.php" method="post">
+  <div><?php showIfExists(); ?></div>
+  <form action="process_new_account.php" method="post">
       <label for="firstname">First Name</label>
       <br>
       <input id="firstname" type="text" name="firstname" placeholder="First Name" required>
