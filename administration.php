@@ -80,11 +80,11 @@
                 "</td>
                 <td>
                   <form action='admin_edit.php' method='POST'>
-                    <input type='text' name='Reg_Id' value='". $row["Reg_Id"] . "' hidden='hidden'>
+                    <input type='hidden' name='Reg_Id' value='". $row["Reg_Id"] . "'>
                     <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
                   </form>
                   <form action='admin_delete.php' method='POST'>
-                    <input type='text' name='Reg_Id' value='". $row["Reg_Id"] . "' hidden='hidden'>
+                    <input type='hidden' name='Reg_Id' value='". $row["Reg_Id"] . "'>
                     <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
                   </form>
                 </td>
