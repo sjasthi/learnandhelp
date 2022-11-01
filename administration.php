@@ -44,6 +44,7 @@
             <th>Cause</th>
             <th>Date Modified</th>
             <th>Date Created</th>
+            <th>Options</th>
           </tr>
         </thead>
         <tbody>
@@ -76,7 +77,18 @@
                 $row["Student_Phone_Number"]. "</td><td>" . $row["Class"].
                 "</td><td>" . $row["Cause"]. "</td><td>" .
                 $row["Modified_Time"]. "</td><td>" . $row["Created_Time"].
-                "</td></tr>";
+                "</td>
+                <td>
+                  <form action='admin_edit.php' method='POST'>
+                    <input type='hidden' name='Reg_Id' value='". $row["Reg_Id"] . "'>
+                    <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
+                  </form>
+                  <form action='admin_delete.php' method='POST'>
+                    <input type='hidden' name='Reg_Id' value='". $row["Reg_Id"] . "'>
+                    <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
+                  </form>
+                </td>
+                </tr>";
               }
             } else {
               echo "0 results";
