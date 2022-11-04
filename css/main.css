@@ -23,7 +23,7 @@ h1 {
 
 h2 {
     font-size: 42px;
-    margin-top: 0;
+    margin-top: 10px;
     border-top: solid 1px #c4c4c4;
     border-bottom: solid 1px #c4c4c4;
 
@@ -75,7 +75,10 @@ a:focus {
     margin-top: 5px;
 }
 
-header,
+header  {
+    padding: 100px 0 25px;
+}
+
 section {
     padding: 100px 0;
 }
@@ -123,41 +126,50 @@ section {
     position: fixed;
     top: 0;
     width: 100%;
-  }
+}
 
-  .navbar a {
+#logo {
+    height: 80px;
+    width: 90px;
+ 
+} 
+
+ #nav-logo {
     float: left;
-    display: block;
+    padding: 5px 5px 0px;
+} 
+
+.navbar a {
+    float: center;
+    display: inline-block;
     color: #eeeeee;
     text-align: center;
     padding: 15px 18px;
     text-decoration: none;
     font-size: 18px;
-  }
+}
 
-  .navbar a:hover {
+.navbar a:hover {
     color:#99D930;
-  }
+}
 
-  #login{
+#login{
     background-color: #99D930;
     color: #252525;
     float: right;
     border-radius: 4px;
 
-  }
-  .logo{
-    padding-bottom: 60px;
-  }
-  #login:hover,
-  #login:focus {
+}
+
+#login:hover,
+#login:focus {
     background: #fff;
     color: #252525;
 }
 .container_2{
     text-align: left;
 }
-input[type=text],input[type=email], input[type=tel],input[type=password], select {
+input[type=text],input[type=email], input[type=tel],input[type=password], input[type=file], select {
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -170,7 +182,7 @@ input[type=text],input[type=email], input[type=tel],input[type=password], select
     width: 30%;
 }
 
-  input[type=submit] {
+  input[type=submit], button {
     background-color: #99D930;
     color: black;
     padding: 14px 20px;
@@ -180,6 +192,14 @@ input[type=text],input[type=email], input[type=tel],input[type=password], select
     border-radius: 4px;
     cursor: pointer;
   }
+
+#form_show_button {
+  margin-top: 20px;
+}
+
+#admin_buttons {
+  width: 90%;
+}
 
 #submit-registration, #submit-login {
   width: 30%;
@@ -205,8 +225,33 @@ input[type=text],input[type=email], input[type=tel],input[type=password], select
 
 }
 
-#container_2, #right{
+#container_2, #blog_creation_left, #blog_creation_right, #right{
     display: inline-block;
     padding: 50px;
+    vertical-align: top;
+}
 
+#blog_creation_left, #blog_creation_right {
+    width: 25%;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.blog_post {
+  width: 50%;
+  display: block;
+  margin: auto;
+}
+
+.blog_link {
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.blog_picture {
+  width: 80%;
+  height: auto;
+  margin: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
 }

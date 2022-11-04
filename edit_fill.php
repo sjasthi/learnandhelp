@@ -1,7 +1,7 @@
 <?php
 function fill_form() {
-  
-  if (isset($_COOKIE['email'])){
+
+  if (isset($_COOKIE['email']) and !isset($_POST['action'])){
     $student_email = $_COOKIE['email'];
     $servername = "localhost";
     $username = "root";
@@ -14,7 +14,7 @@ function fill_form() {
     }
     $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
-  
+
     $db_id = $row[0];
     $sponsor_name = $row[1];
     $sponsor_email = $row[2];
@@ -26,10 +26,10 @@ function fill_form() {
     $student_phone = $row[9];
     $class = $row[10];
     $cause = $row[11];
-    
+
   } else {
     $student_email = $_POST['students-email'];
-  
+
     $sponsor_name = $_POST['sponsers-name'];
     $sponsor_email = $_POST['sponsers-email'];
     $sponsor_phone = $_POST['sponsers-phone'];
@@ -37,7 +37,7 @@ function fill_form() {
     $spouse_email = $_POST['spouses-email'];
     $spouse_phone = $_POST['spouses-phone'];
     $student_name = $_POST['students-name'];
-    
+
     $student_phone = $_POST['students-phone'];
     $class = $_POST['class'];
     $cause = $_POST['cause'];
