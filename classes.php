@@ -16,19 +16,25 @@
   </header>
     <section class="about-me">
       <div class="container">
-        <h2>Python<span class="accent-text">101</span></h2>
-        <h3>Course Description:</h3>
-            <p>
-
-
-
-
-
-            
-            </p>
+        <h2><strong>Python 101</strong> <span class="accent-text">Introduction to Computers and Programming</span></h2>
+        <h3>Course Topics:</h3>
+          <ul>
+          <li>Input, Processing, and Output</li>
+          <li>Decision Structures and Boolean Logic</li>
+          <li>Repetition Structures</li>
+          <li>Functions</li>
+          <li>Files and Exceptions</li>
+          <li>Lists and Tuples</li>
+          <li>More About Strings</li>
+          <li>Dictionaries and Sets</li>
+          <li>Classes and Object-Oriented Programming</li>
+          <li>Inheritance</li>
+          <li>Recursion</li>
+          <li>GUI Programming</li>
+          </ul>
 	  </div>
 	</section>
-	<section class="articles inverse">
+<!-- 	<section class="articles inverse">
 	  <div class="container">
 		<h2>Java<span class="accent-text">101</span></h2>
         <h3>Course Description:</h3>
@@ -44,6 +50,6 @@
 		<br>
 
 	  </div>
-	</section>
+	</section> -->
   </body>
 </html>
