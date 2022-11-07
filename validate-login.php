@@ -14,12 +14,18 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM Users WHERE Email='$usermail';";
+$sql = "SELECT Role FROM users WHERE Email='$usermail' AND Hash=sha1('$password');";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
+    $role = $result -> fetch_assoc()["Role"];
     setcookie("username", $usermail, strtotime('+30 days'));
-    header('Location:homepage.php');
+    setcookie("role", $role, strtotime('+30 days'));
+    if ($role == 'admin') {
+        header('Location:administration.php');
+    } else {
+        header('Location:registration_form.php');
+    }
 } else {
     header('Location:create_account.php');
 }

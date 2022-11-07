@@ -10,10 +10,8 @@ CREATE TABLE registrations
 	Spouse_Name varchar(50),
 	Spouse_Email varchar(50),
 	Spouse_Phone_Number varchar(15),
-	Student_Name varchar(50),
-	Student_Email varchar(50),
-	Student_Phone_Number varchar(15),
-	Class varchar(20),
+	Student_ID int,
+	Class int,
 	Cause varchar(20),
 	Modified_Time date,
 	Created_Time date,
@@ -22,30 +20,30 @@ CREATE TABLE registrations
 
 INSERT INTO registrations
 	values
-	(NULL, "Al", "Coholic", "1234567890", "Seymour", "Butz", "2345678901", "Mike", "Rotch", "3456789012", "Python", "Library", SYSDATE(), SYSDATE()),
-	(NULL, "Hugh", "Jass", "1234567890", "Ivana", "Tinkle", "2345678901", "Anita", "Bath", "3456789012", "Python", "Digital Classroom", SYSDATE(), SYSDATE()),
-	(NULL, "Yuri", "Nator", "1234567890", "Moe", "Ron", "2345678901", "Pierre", "Pants", "3456789012", "Java", "Library", SYSDATE(), SYSDATE());
-
-
+	(NULL, 'Al', 'Coholic', '1234567890', 'Seymour', 'Butz', '2345678901', 3, 0, 'Library', SYSDATE(), SYSDATE()),
+	(NULL, 'Hugh', 'Jass', '1234567890', 'Ivana', 'Tinkle', '2345678901', 4, 0, 'Digital Classroom', SYSDATE(), SYSDATE()),
+	(NULL, 'Yuri', 'Nator', '1234567890', 'Moe', 'Ron', '2345678901', 5, 1, 'Library', SYSDATE(), SYSDATE());
 
 CREATE TABLE users (
 	User_Id int NOT NULL AUTO_INCREMENT,
 	First_Name varchar(30),
 	Last_Name varchar(30),
 	Email varchar(75),
+	Phone varchar(15),
 	Hash varchar(200),
 	Active varchar(10),
 	Role varchar(20),
 	Modified_Time date,
-  Created_Time date,
+    Created_Time date,
 	PRIMARY KEY (User_Id));
-
-
 
 INSERT INTO users
 	values
-	(NULL, 'Siva', 'Jasthi', 'siva@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE()),
-  (NULL, 'NotSiva', 'Jasthi', 'siva@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE());
+	(NULL, 'Siva', 'Jasthi', 'siva@silcmn.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE()),
+    (NULL, 'NotSiva', 'Jasthi', 'siva@silcmn.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE()),
+    (NULL, 'Mike', 'Rotch', 'mikerotch@school.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'student', SYSDATE(), SYSDATE()),
+    (NULL, 'Anita', 'Bath', 'anitabath@school.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'student', SYSDATE(), SYSDATE()),
+    (NULL, 'Pierre', 'Pants', 'pierrepants@school.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'student', SYSDATE(), SYSDATE());
 
 CREATE TABLE blogs (
 	Blog_Id int NOT NULL AUTO_INCREMENT,
@@ -63,3 +61,14 @@ CREATE TABLE blog_pictures (
 	Location varchar(100),
 	PRIMARY KEY (Picture_Id),
 	FOREIGN KEY (Blog_Id) REFERENCES blogs(Blog_Id));
+
+CREATE TABLE classes (
+     Class_Id int NOT NULL AUTO_INCREMENT,
+     Class_Name varchar(30),
+     Teacher_Id int,
+     PRIMARY KEY (Class_Id));
+
+INSERT INTO classes
+values
+    (NULL, 'Java', 0),
+    (NULL, 'Python', 0);

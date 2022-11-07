@@ -1,13 +1,12 @@
-<!DOCTYPE html>
 <script>
 </script>
-<html>
+<html lang="en-us">
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Administration</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
@@ -62,7 +61,9 @@
               die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT * FROM registrations";
+            // If we want to put the teacher's name in the table...
+            // $sql = "select u.First_Name, Sponsor_Name, Class_Name, u2.First_Name from registrations r left join classes c on r.Class = c.Class_Id left join users u on u.User_Id = r.Student_ID left join users u2 on u2.User_Id = c.Teacher_Id";
+            $sql = "SELECT * FROM registrations LEFT JOIN users ON registrations.Student_Id = users.User_Id LEFT JOIN classes ON registrations.Class = classes.Class_ID ";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -72,9 +73,9 @@
                 "</td><td>". $row["Sponsor_Email"]. "</td><td>" .
                 $row["Sponsor_Phone_Number"]. "</td><td>" . $row["Spouse_Name"].
                 "</td><td>" . $row["Spouse_Email"]. "</td><td>" .
-                $row["Spouse_Phone_Number"]. "</td><td>" . $row["Student_Name"].
-                "</td><td>" . $row["Student_Email"]. "</td><td>" .
-                $row["Student_Phone_Number"]. "</td><td>" . $row["Class"].
+                $row["Spouse_Phone_Number"]. "</td><td>" . $row["First_Name"].
+                "</td><td>" . $row["Email"]. "</td><td>" .
+                $row["Phone"]. "</td><td>" . $row["Class_Name"].
                 "</td><td>" . $row["Cause"]. "</td><td>" .
                 $row["Modified_Time"]. "</td><td>" . $row["Created_Time"].
                 "</td>

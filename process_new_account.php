@@ -13,13 +13,15 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 // Check to see if this email is already in the database.
-$sql = "SELECT * FROM Users WHERE Email = '$usermail';";
+$sql = "SELECT * FROM users WHERE Email = '$usermail';";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
+    // I am empty body for error messages...
     // Put failure message out there.
+    $failure = true;
 } else {
     // Add the new user to the database
-    $sql = "INSERT INTO Users (First_Name, Last_Name, Email, Hash, Active, Role, Modified_Time, Created_Time) 
+    $sql = "INSERT INTO users (First_Name, Last_Name, Email, Hash, Active, Role, Modified_Time, Created_Time) 
         VALUES ('".$firstname."','".$lastname."','".$usermail."',SHA1('".$password."'),'yes','student',SYSDATE(),SYSDATE())";
     $conn->query($sql);
     setcookie("username", $firstname, strtotime('+30 days'));
