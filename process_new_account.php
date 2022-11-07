@@ -24,7 +24,9 @@ if ($result->num_rows > 0) {
     $sql = "INSERT INTO users (First_Name, Last_Name, Email, Hash, Active, Role, Modified_Time, Created_Time) 
         VALUES ('".$firstname."','".$lastname."','".$usermail."',SHA1('".$password."'),'yes','student',SYSDATE(),SYSDATE())";
     $conn->query($sql);
+    // Set a cookie for the user
     setcookie("username", $firstname, strtotime('+30 days'));
-    header('Location:homepage.php');
+    // Send the user to the registration page.
+    header('Location:registration_form.php');
 }
 ?>

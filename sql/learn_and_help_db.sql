@@ -20,9 +20,9 @@ CREATE TABLE registrations
 
 INSERT INTO registrations
 	values
-	(NULL, 'Al', 'Coholic', '1234567890', 'Seymour', 'Butz', '2345678901', 3, 0, 'Library', SYSDATE(), SYSDATE()),
-	(NULL, 'Hugh', 'Jass', '1234567890', 'Ivana', 'Tinkle', '2345678901', 4, 0, 'Digital Classroom', SYSDATE(), SYSDATE()),
-	(NULL, 'Yuri', 'Nator', '1234567890', 'Moe', 'Ron', '2345678901', 5, 1, 'Library', SYSDATE(), SYSDATE());
+	(1, 'Al', 'Coholic', '1234567890', 'Seymour', 'Butz', '2345678901', 3, 1, 'Library', SYSDATE(), SYSDATE()),
+	(2, 'Hugh', 'Jass', '1234567890', 'Ivana', 'Tinkle', '2345678901', 4, 1, 'Digital Classroom', SYSDATE(), SYSDATE()),
+	(3, 'Yuri', 'Nator', '1234567890', 'Moe', 'Ron', '2345678901', 5, 2, 'Library', SYSDATE(), SYSDATE());
 
 CREATE TABLE users (
 	User_Id int NOT NULL AUTO_INCREMENT,
@@ -39,11 +39,11 @@ CREATE TABLE users (
 
 INSERT INTO users
 	values
-	(NULL, 'Siva', 'Jasthi', 'siva@silcmn.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE()),
-    (NULL, 'NotSiva', 'Jasthi', 'siva@silcmn.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', SYSDATE(), SYSDATE()),
-    (NULL, 'Mike', 'Rotch', 'mikerotch@school.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'student', SYSDATE(), SYSDATE()),
-    (NULL, 'Anita', 'Bath', 'anitabath@school.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'student', SYSDATE(), SYSDATE()),
-    (NULL, 'Pierre', 'Pants', 'pierrepants@school.com', '123-456-7890', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'student', SYSDATE(), SYSDATE());
+	(1, 'Siva', 'Jasthi', 'siva@silcmn.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'admin', SYSDATE(), SYSDATE()),
+    (2, 'Ishana', 'Didwania', 'ishana@silcmn.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'admin', SYSDATE(), SYSDATE()),
+    (3, 'Mike', 'Rotch', 'mikerotch@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', SYSDATE(), SYSDATE()),
+    (4, 'Anita', 'Bath', 'anitabath@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', SYSDATE(), SYSDATE()),
+    (5, 'Pierre', 'Pants', 'pierrepants@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', SYSDATE(), SYSDATE());
 
 CREATE TABLE blogs (
 	Blog_Id int NOT NULL AUTO_INCREMENT,
@@ -70,5 +70,7 @@ CREATE TABLE classes (
 
 INSERT INTO classes
 values
-    (NULL, 'Java', 0),
-    (NULL, 'Python', 0);
+    (1, 'Java 101', 1),
+    (2, 'Python 101', 1),
+    (3, 'Java 201', 2),
+    (4, 'Python 201', 2);

@@ -14,15 +14,15 @@ function getButton() {
           </form>';
         $label = 'Log On';
         $action = 'loginAction.php';
-        if ($role == 'admin') {
-            echo '<a href="administration.php">Admin</a>';
-        } else {
-            echo 'Role -'.$role;
-        }
     }
 
+    if ($role == 'admin') {
+        echo '<form action="administration.php" method="post"> 
+        <input class="login-button"  type="submit" value = "Administration"/>
+        </form>';
+    }
     echo '<form action="'.$action.'" method="post">
-          <input class="login-button" type="submit" value="' . $label . '"/>
+          <input class="login-button"  type="submit" value="' . $label . '"/>
       </form>';
 }
 

@@ -50,22 +50,26 @@ if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
 
 }
 
+// FIXME: Hardcoded in relation to database
+// Correct method should pull the available classes from the database,
+// Allow the user to select one using the interface, and then POST from there.
+
 switch ($class){
 	case "py1":
 		$class = "Python 101";
-		$class_id = 1;
+		$class_id = 2;
 		break;
-	case "py2": // FIXME: does not exist
+	case "py2":
 		$class = "Python 201";
-		$class_id = 3;
+		$class_id = 4;
 		break;
 	case "java1":
 		$class = "Java 101";
-		$class_id = 2;
+		$class_id = 1;
 		break;
-	case "java2": // FIXME: does not exist
+	case "java2":
 		$class = "Java 201";
-		$class_id = 4;
+		$class_id = 3;
 }
 
 switch ($cause){ // FIXME: Hardcoded in.
