@@ -18,11 +18,11 @@
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
+  <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
         <h1><span class="accent-text">Administration</span></h1>
       </div>
-      <?php show_navbar(); ?>
     </header>
     <!-- Jquery Data Table -->
     <h1 style="margin:auto; padding-top: 30px">Registrations</h1>

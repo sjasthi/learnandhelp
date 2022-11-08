@@ -8,11 +8,11 @@
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
+  <?php show_navbar(); ?>
   <header class="inverse">
       <div class="container">
           <h1><span class="accent-text">Login</span></h1>
       </div>
-      <?php show_navbar(); ?>
   </header>
   <br>
   <form action="validate-login.php" method="post">

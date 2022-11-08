@@ -11,11 +11,11 @@
   <body>
   <?php include 'show-navbar.php'; ?>
   <?php include 'blog_fill.php'; ?>
+    <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
         <h1><span class="accent-text">Blog</span></h1>
       </div>
-      <?php show_navbar(); ?>
     </header>
     <script>
       let show_form = () => {
@@ -52,6 +52,14 @@
         <br>
         <input type="submit" name="create_post" value="Publish">
       </form>
-      <?php fill_blog(); ?>
+      <div>
+        <div id="blog_TOC">
+          <h3 id="TOC_title">Table of Contents</h3>
+          <ul>
+            <?php fill_TOC(); ?>
+          </ul>
+        </div>
+          <?php fill_blog(); ?>
+      </div>
   </body>
 </html>

@@ -10,11 +10,11 @@
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
+  <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
         <h1> Welcome to <span class="accent-text">Learn and Help</span></h1>
       </div>
-      <?php show_navbar(); ?>
     </header>
     <section class="about">
       <div class="container">
