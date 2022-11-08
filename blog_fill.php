@@ -28,6 +28,7 @@
             </div>
             <div class="blog_page" id="page'. $number_of_pages . '" hidden="hidden">
             ';
+          $number_of_posts = 0;
         }
         if ($row["Video_Link"] != NULL) {
           $blog_link = '<a class="blog_link" href=' . $row["Video_Link"] . '> Video </a> </div>';
