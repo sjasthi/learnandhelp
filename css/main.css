@@ -241,6 +241,22 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   display: block;
   margin-right: 25%;
   margin-left: auto;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  box-shadow: 5px 5px 5px #888888;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: thin;
+}
+
+.blog_post p, .blog_post h3{
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.blog_post h2 {
+  border-top: none;
 }
 
 .blog_link {
@@ -270,4 +286,24 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 
 #TOC_title {
   text-align: center;
+}
+
+#blog_TOC a {
+  cursor: pointer;
+}
+
+#blog_buttons {
+  width: 40%;
+  margin: auto;
+  padding-top: 10px;
+}
+
+#blog_next {
+  float: right;
+  min-width: 200px;
+}
+
+#blog_previous {
+  float: left;
+  min-width: 200px;
 }

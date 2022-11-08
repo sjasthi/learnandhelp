@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<script>
-</script>
 <html>
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    <script type="text/javascript" src="js/blog_functions.js"></script>
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
@@ -59,7 +58,10 @@
             <?php fill_TOC(); ?>
           </ul>
         </div>
-          <?php fill_blog(); ?>
+        <?php fill_blog(); ?>
+        <div id="blog_buttons">
+          <button id="blog_previous" onclick="handlePageButton('previous')" hidden="hidden">Previous</button>
+          <button id="blog_next" onclick="handlePageButton('next')">Next</button>
       </div>
   </body>
 </html>

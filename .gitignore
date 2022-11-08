@@ -1,8 +1,6 @@
 
-images/blog_pictures/63604f2d72e134.54573854.jpg
-images/blog_pictures/63604efcd9aa06.36509440.jpg
-images/blog_pictures/63604b2139f470.60217683.jpg
-images/blog_pictures/63604b2139dcb7.95589911.jpeg
-images/blog_pictures/63604b2139c917.43559718.jpg
-images/blog_pictures/63604af5cbf8a9.32123382.jpg
-images/blog_pictures/63604af5cbe134.35813808.jpg
+images/blog_pictures/*.jpg
+images/blog_pictures/*.jpeg
+images/blog_pictures/*.png
+
+!images/blog_pictures/placeholder.jpg
