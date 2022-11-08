@@ -23,16 +23,16 @@ if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
 	$spouse_name = $_POST['spouses-name'];
 	$spouse_email = $_POST['spouses-email'];
 	$spouse_phone = $_POST['spouses-phone'];
-	$student_name = $_POST['students-name'];
-	$student_email = $_POST['students-email'];
-	$student_phone = $_POST['students-phone'];
+	$student_id = 1; // FIXME: Grab this from the Login.
 	$class = $_POST['role'];
+	$class_id = 1; // FIXME: Grab this from the chosen class...
 	$cause = $_POST['cause'];
 	$timestamp = date("Y-m-d");
 
 } elseif (isset($_COOKIE['email'])){
 		$student_email = $_COOKIE['email'];
-    $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+	$sql = "select r.Sponsor_Name, r.Sponsor_Email, r.Sponsor_Phone_Number, r.Spouse_Name, r.Spouse_Email, r.Spouse_Phone_Number, u.First_Name, u.Phone, c.Class_Name, r.Cause from registrations r left join users u on u.User_Id = r.Student_ID LEFT join classes c on c.Class_Id = r.Class";
+    // $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
@@ -45,26 +45,34 @@ if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
     $spouse_phone = $row[6];
     $student_name = $row[7];
     $student_phone = $row[9];
-    $class = $row[10];
+    $class_name = $row[10];
     $cause = $row[11];
 
 }
 
+// FIXME: Hardcoded in relation to database
+// Correct method should pull the available classes from the database,
+// Allow the user to select one using the interface, and then POST from there.
+
 switch ($class){
 	case "py1":
 		$class = "Python 101";
+		$class_id = 2;
 		break;
 	case "py2":
 		$class = "Python 201";
+		$class_id = 4;
 		break;
 	case "java1":
 		$class = "Java 101";
+		$class_id = 1;
 		break;
 	case "java2":
 		$class = "Java 201";
+		$class_id = 3;
 }
 
-switch ($cause){
+switch ($cause){ // FIXME: Hardcoded in.
 	case "lib":
 		$cause = "Library";
 		break;
@@ -85,15 +93,14 @@ if ($action == 'add') {
 		'$spouse_name',
 		'$spouse_email',
 		'$spouse_phone',
-		'$student_name',
-		'$student_email',
-		'$student_phone',
-		'$class',
+		'$student_id',
+		'$class_id',
 		'$cause',
 		'$timestamp',
 		'$timestamp');";
 
 } elseif($action == "edit") {
+	$Reg_Id = $_POST['Reg_Id'];
 	$sql = "UPDATE registrations SET
 			Sponsor_Name = '$sponsor_name',
 			Sponsor_Email = '$sponsor_email',
@@ -101,12 +108,11 @@ if ($action == 'add') {
 			Spouse_Name = '$spouse_name',
 			Spouse_Email = '$spouse_email',
 			Spouse_Phone_Number = '$spouse_phone',
-			Student_Email = '$student_email',
-			Student_Phone_Number = '$student_phone',
-			Class = '$class',
+			Student_ID = '$student_id',
+			Class = '$class_id',
 			Cause = '$cause',
 			Modified_Time = '$timestamp'
-			WHERE Student_Email = '$student_email';";
+			WHERE Reg_Id = '$Reg_Id';";
 
 } elseif($action == "admin_edit") {
 	$Reg_Id = $_POST['Reg_Id'];
@@ -117,9 +123,8 @@ if ($action == 'add') {
 			Spouse_Name = '$spouse_name',
 			Spouse_Email = '$spouse_email',
 			Spouse_Phone_Number = '$spouse_phone',
-			Student_Email = '$student_email',
-			Student_Phone_Number = '$student_phone',
-			Class = '$class',
+			Student_ID = '$student_id',
+			Class = '$class_id',
 			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
@@ -132,7 +137,7 @@ if (!mysqli_query($connection, $sql)) {
 mysqli_close($connection);
 
 echo "<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
   <head>
     <title>Learn and Help</title>
 		<link rel=\"icon\" href=\"images/icon_logo.png\" type=\"image/icon type\">

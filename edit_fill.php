@@ -12,7 +12,8 @@ function fill_form() {
     if ($connection === false) {
   	  die("Failed to connect to database: " . mysqli_connect_error());
     }
-    $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+    $sql = "select r.Sponsor_Name, r.Sponsor_Email, r.Sponsor_Phone_Number, r.Spouse_Name, r.Spouse_Email, r.Spouse_Phone_Number, u.First_Name, u.Phone, c.Class_Name, r.Cause from registrations r left join users u on u.User_Id = r.Student_ID LEFT join classes c on c.Class_Id = r.Class";
+    //$sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
     $db_id = $row[0];
