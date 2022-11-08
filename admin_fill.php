@@ -10,20 +10,19 @@ function admin_fill_form($Reg_Id) {
   if ($connection === false) {
     die("Failed to connect to database: " . mysqli_connect_error());
   }
-  $sql = "SELECT * FROM registrations WHERE Reg_Id = '$Reg_Id'";
+  $sql = "SELECT * FROM registrations LEFT JOIN users ON registrations.Student_Id = users.User_Id LEFT JOIN classes ON registrations.Class = classes.Class_ID WHERE Reg_ID = '$Reg_Id'";
   $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
-  $db_id = $row[0];
   $sponsor_name = $row[1];
   $sponsor_email = $row[2];
   $sponsor_phone = $row[3];
   $spouse_name = $row[4];
   $spouse_email = $row[5];
   $spouse_phone = $row[6];
-  $student_name = $row[7];
-  $student_email = $row[8];
-  $student_phone = $row[9];
-  $class = $row[10];
+  $student_name = $row[13];
+  $student_email = $row[14];
+  $student_phone = $row[15];
+  $class = $row[23];
   $cause = $row[11];
 
   echo "<div id= \"container_2\">

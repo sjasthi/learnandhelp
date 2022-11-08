@@ -109,6 +109,13 @@ section {
     color: #fff;
 }
 
+.admin_button {
+    background: #131313;
+    padding: 0;
+    float: right;
+    margin-bottom: 0;
+}
+
 .login-button {
 	display: inline-block;
     background-color: #99D930;
@@ -116,7 +123,6 @@ section {
     float: right;
     width: 10%;
     border-radius: 4px;
-    padding: 5px 7px;
     margin-right: 10px;
 }
 
@@ -255,8 +261,8 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 
 #blog_creation_left, #blog_creation_right {
     width: 25%;
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .blog_post {
