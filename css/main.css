@@ -76,7 +76,7 @@ a:focus {
 }
 
 header  {
-    padding: 100px 0 25px;
+    padding: 50px 0 25px;
 }
 
 section {
@@ -129,23 +129,23 @@ section {
 .navbar {
     overflow: hidden;
     background-color: #666666;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     width: 100%;
 }
 
 #logo {
-    height: 80px;
-    width: 90px;
- 
-} 
+    height: 50px;
+
+}
 
  #nav-logo {
     float: left;
-    padding: 5px 5px 0;
-} 
+    padding: 5px 5px 0px;
+}
 
 .navbar a {
+    float: left;
     display: inline-block;
     color: #eeeeee;
     text-align: center;
@@ -206,6 +206,29 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   width: 90%;
 }
 
+#admin_icons {
+  display: inline-block;
+}
+
+#admin_icons img{
+  width: 200px;
+  height: auto;
+}
+
+.admin_icon {
+  display: inline-block;
+  padding:50px;
+  padding-bottom: 0px;
+}
+
+.admin_icon label {
+  font-weight: bold;
+}
+
+#icon_attribution {
+  margin-top: 100px;
+}
+
 #submit-registration, #submit-login {
   width: 30%;
   }
@@ -245,7 +268,24 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 .blog_post {
   width: 50%;
   display: block;
-  margin: auto;
+  margin-right: 25%;
+  margin-left: auto;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  box-shadow: 5px 5px 5px #888888;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: thin;
+}
+
+.blog_post p, .blog_post h3{
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.blog_post h2 {
+  border-top: none;
 }
 
 .blog_link {
@@ -259,4 +299,40 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   margin: 10px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
+}
+
+#blog_TOC {
+  display: inline-block;
+  float: left;
+  text-align: left;
+  width: 15%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: thin;
+}
+
+#TOC_title {
+  text-align: center;
+}
+
+#blog_TOC a {
+  cursor: pointer;
+}
+
+#blog_buttons {
+  width: 40%;
+  margin: auto;
+  padding-top: 10px;
+}
+
+#blog_next {
+  float: right;
+  min-width: 200px;
+}
+
+#blog_previous {
+  float: left;
+  min-width: 200px;
 }

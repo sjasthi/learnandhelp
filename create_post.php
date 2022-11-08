@@ -63,5 +63,5 @@ if (isset($_POST['create_post'])) {
 
 mysqli_close($connection);
 
-header('Location: causes.php');
+header('Location: blog.php');
 ?>

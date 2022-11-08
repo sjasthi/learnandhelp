@@ -13,13 +13,13 @@ echo "<!DOCTYPE html>
     <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap\" rel=\"stylesheet\">
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
-  <body>
-      <header class=\"inverse\">
+  <body>";
+    show_navbar();
+echo      "<header class=\"inverse\">
           <div class=\"container\">
               <h1><span class=\"accent-text\">Register Now</span></h1>
-          </div>";
-          show_navbar();
-      echo "</header>
+          </div>
+          </header>
       <h3> Registration Form</h3>
     <div id=\"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">

@@ -10,11 +10,11 @@
     <?php include 'show-navbar.php';
           include 'edit_fill.php';
           ?>
+    <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
         <h1> <span class="accent-text">Registration Form</span></h1>
       </div>
-      <?php show_navbar(); ?>
     </header>
     <h3> Edit Registration </h3>
     <div id="container_2">
