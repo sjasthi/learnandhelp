@@ -200,6 +200,29 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   width: 90%;
 }
 
+#admin_icons {
+  display: inline-block;
+}
+
+#admin_icons img{
+  width: 200px;
+  height: auto;
+}
+
+.admin_icon {
+  display: inline-block;
+  padding:50px;
+  padding-bottom: 0px;
+}
+
+.admin_icon label {
+  font-weight: bold;
+}
+
+#icon_attribution {
+  margin-top: 100px;
+}
+
 #submit-registration, #submit-login {
   width: 30%;
   }
