@@ -21,12 +21,12 @@ if ($result->num_rows > 0) {
     $failure = true;
 } else {
     // Add the new user to the database
-    $sql = "INSERT INTO users (First_Name, Last_Name, Email, Hash, Active, Role, Modified_Time, Created_Time) 
+    $sql = "INSERT INTO users (First_Name, Last_Name, Email, Hash, Active, Role, Modified_Time, Created_Time)
         VALUES ('".$firstname."','".$lastname."','".$usermail."',SHA1('".$password."'),'yes','student',SYSDATE(),SYSDATE())";
     $conn->query($sql);
     // Set a cookie for the user
     setcookie("username", $firstname, strtotime('+30 days'));
     // Send the user to the registration page.
-    header('Location:registration_form.php');
+    header('Location:hompeage.php');
 }
 ?>

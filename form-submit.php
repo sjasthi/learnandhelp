@@ -23,30 +23,32 @@ if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
 	$spouse_name = $_POST['spouses-name'];
 	$spouse_email = $_POST['spouses-email'];
 	$spouse_phone = $_POST['spouses-phone'];
-	$student_id = 1; // FIXME: Grab this from the Login.
-	$class = $_POST['role'];
-	$class_id = 1; // FIXME: Grab this from the chosen class...
+	$student_name = $_POST['students-name'];
+	$student_email = $_POST['students-email'];
+	$student_phone = $_POST['students-phone'];
+	$class_id = $_POST['role'];
 	$cause = $_POST['cause'];
 	$timestamp = date("Y-m-d");
 
 } elseif (isset($_COOKIE['email'])){
 		$student_email = $_COOKIE['email'];
-	$sql = "select r.Sponsor_Name, r.Sponsor_Email, r.Sponsor_Phone_Number, r.Spouse_Name, r.Spouse_Email, r.Spouse_Phone_Number, u.First_Name, u.Phone, c.Class_Name, r.Cause from registrations r left join users u on u.User_Id = r.Student_ID LEFT join classes c on c.Class_Id = r.Class";
-    // $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+		// $sql = "select r.Sponsor_Name, r.Sponsor_Email, r.Sponsor_Phone_Number, r.Spouse_Name, r.Spouse_Email, r.Spouse_Phone_Number, u.First_Name, u.Phone, c.Class_Name, r.Cause from registrations r left join users u on u.User_Id = r.Student_ID LEFT join classes c on c.Class_Id = r.Class";
+    $sql = "SELECT * FROM registrations NATURAL JOIN classes WHERE Student_Email = '$student_email'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
-    $db_id = $row[0];
-    $sponsor_name = $row[1];
-    $sponsor_email = $row[2];
-    $sponsor_phone = $row[3];
-    $spouse_name = $row[4];
-    $spouse_email = $row[5];
-    $spouse_phone = $row[6];
-    $student_name = $row[7];
-    $student_phone = $row[9];
-    $class_name = $row[10];
-    $cause = $row[11];
+    $Reg_Id = $row['Reg_Id'];
+		$sponsor_name = $row['Sponsor_Name'];
+		$sponsor_email = $row['Sponsor_Email'];
+		$sponsor_phone = $row['Sponsor_Phone_Number'];
+		$spouse_name = $row['Spouse_Name'];
+		$spouse_email = $row['Spouse_Email'];
+		$spouse_phone = $row['Spouse_Phone_Number'];
+		$student_name = $row['Student_Name'];
+		$student_email = $row['Student_Email'];
+		$student_phone = $row['Student_Phone_Number'];
+		$class_id = $row['Class_Id'];
+		$cause = $row['Cause'];
 
 }
 
@@ -54,22 +56,18 @@ if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
 // Correct method should pull the available classes from the database,
 // Allow the user to select one using the interface, and then POST from there.
 
-switch ($class){
-	case "py1":
+switch ($class_id){
+	case 2:
 		$class = "Python 101";
-		$class_id = 2;
 		break;
-	case "py2":
+	case 4:
 		$class = "Python 201";
-		$class_id = 4;
 		break;
-	case "java1":
+	case 1:
 		$class = "Java 101";
-		$class_id = 1;
 		break;
-	case "java2":
+	case 3:
 		$class = "Java 201";
-		$class_id = 3;
 }
 
 switch ($cause){ // FIXME: Hardcoded in.
@@ -93,7 +91,9 @@ if ($action == 'add') {
 		'$spouse_name',
 		'$spouse_email',
 		'$spouse_phone',
-		'$student_id',
+		'$student_name',
+		'$student_email',
+		'$student_phone',
 		'$class_id',
 		'$cause',
 		'$timestamp',
@@ -108,8 +108,10 @@ if ($action == 'add') {
 			Spouse_Name = '$spouse_name',
 			Spouse_Email = '$spouse_email',
 			Spouse_Phone_Number = '$spouse_phone',
-			Student_ID = '$student_id',
-			Class = '$class_id',
+			Student_Name = '$student_name',
+			Student_Email = '$student_email',
+			Student_Phone_Number = '$student_phone',
+			Class_Id = '$class_id',
 			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
@@ -123,8 +125,10 @@ if ($action == 'add') {
 			Spouse_Name = '$spouse_name',
 			Spouse_Email = '$spouse_email',
 			Spouse_Phone_Number = '$spouse_phone',
-			Student_ID = '$student_id',
-			Class = '$class_id',
+			Student_Name = '$student_name',
+			Student_Email = '$student_email',
+			Student_Phone_Number = '$student_phone',
+			Class_Id = '$class_id',
 			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
@@ -134,6 +138,9 @@ if ($action == 'add') {
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
+if ($action == 'add') {
+	$Reg_Id = $connection->insert_id;
+}
 mysqli_close($connection);
 
 echo "<!DOCTYPE html>
@@ -154,6 +161,7 @@ echo "<!DOCTYPE html>
 		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
+				<input type='hidden' name='Reg_Id' value=$Reg_Id>
         <!---Sponsors Section -->
         <label id=\"name-label\"><b>Sponsor's Name:</b> $sponsor_name</label><br>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">

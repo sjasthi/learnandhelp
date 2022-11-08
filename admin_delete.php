@@ -15,5 +15,5 @@ $sql = "DELETE FROM registrations WHERE Reg_Id = " . $_POST['Reg_Id'];
 $result = $conn->query($sql);
 
 $conn->close();
-header("Location: administration.php");
+header("Location: admin_registrations.php");
 ?>

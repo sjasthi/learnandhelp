@@ -57,16 +57,16 @@ echo      "<header class=\"inverse\">
           <option disabled selected value>
             Select your class
           </option>
-          <option value=\"py1\">
+          <option value=2>
             Python 101
           </option>
-          <option value=\"java1\">
+          <option value=1>
             Java 101
           </option>
-          <option value=\"py2\">
+          <option value=4>
             Python 201
           </option>
-		  <option value=\"java2\">
+		  <option value=3>
 			Java 201
 		  </option>
 		</select>

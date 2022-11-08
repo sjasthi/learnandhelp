@@ -183,7 +183,7 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
     box-sizing: border-box;
   }
 
-#usermail, #password {
+#usermail, #password, #firstname, #lastname {
     width: 30%;
 }
 
@@ -232,6 +232,10 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 #submit-registration, #submit-login {
   width: 30%;
   }
+
+#create_account_button {
+  width: 30%
+}
 
   div .container_2{
     border-radius: 50px;

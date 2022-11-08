@@ -12,25 +12,26 @@ function fill_form() {
     if ($connection === false) {
   	  die("Failed to connect to database: " . mysqli_connect_error());
     }
-    $sql = "select r.Sponsor_Name, r.Sponsor_Email, r.Sponsor_Phone_Number, r.Spouse_Name, r.Spouse_Email, r.Spouse_Phone_Number, u.First_Name, u.Phone, c.Class_Name, r.Cause from registrations r left join users u on u.User_Id = r.Student_ID LEFT join classes c on c.Class_Id = r.Class";
-    //$sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+
+    $sql = "SELECT * FROM registrations Natural Join classes WHERE Student_Email = '$student_email'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
-    $db_id = $row[0];
-    $sponsor_name = $row[1];
-    $sponsor_email = $row[2];
-    $sponsor_phone = $row[3];
-    $spouse_name = $row[4];
-    $spouse_email = $row[5];
-    $spouse_phone = $row[6];
-    $student_name = $row[7];
-    $student_phone = $row[9];
-    $class = $row[10];
-    $cause = $row[11];
+    $db_id = $row['Reg_Id'];
+    $sponsor_name = $row['Sponsor_Name'];
+    $sponsor_email = $row['Sponsor_Email'];
+    $sponsor_phone = $row['Sponsor_Phone_Number'];
+    $spouse_name = $row['Spouse_Name'];
+    $spouse_email = $row['Spouse_Email'];
+    $spouse_phone = $row['Spouse_Phone_Number'];
+    $student_name = $row['Student_Name'];
+    $student_email = $row['Student_Email'];
+    $student_phone = $row['Student_Phone_Number'];
+    $class = $row['Class_Name'];
+    $cause = $row['Cause'];
 
   } else {
+    $db_id = $_POST['Reg_Id'];
     $student_email = $_POST['students-email'];
-
     $sponsor_name = $_POST['sponsers-name'];
     $sponsor_email = $_POST['sponsers-email'];
     $sponsor_phone = $_POST['sponsers-phone'];
@@ -45,6 +46,7 @@ function fill_form() {
   }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
+        <input type='hidden' name='Reg_Id' value=$db_id>
         <!---Sponsors Section -->
         <label id=\"name-label\">Sponsor's Name</label>
         <input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\" required><br><!--name--->
@@ -79,25 +81,25 @@ function fill_form() {
           <option disabled value>
             Select your class
           </option>
-          <option value=\"py1\" ";
+          <option value=2";
             if ($class == "Python 101")
                 echo "selected";
         echo  ">
             Python 101
           </option>
-          <option value=\"java1\" ";
+          <option value=1 ";
           if ($class == "Java 101")
               echo "selected";
         echo ">
             Java 101
           </option>
-          <option value=\"py2\" ";
+          <option value=4 ";
           if ($class == "Python 201")
               echo "selected";
         echo ">
             Python 201
           </option>
-		  <option value=\"java2\" ";
+		  <option value=3 ";
           if ($class == "Java 201")
               echo "selected";
         echo ">

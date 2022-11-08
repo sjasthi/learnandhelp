@@ -62,7 +62,7 @@
               die("Connection failed: " . $conn->connect_error);
             }
 
-            $sql = "SELECT * FROM registrations";
+            $sql = "SELECT * FROM registrations Natural Join classes";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -74,7 +74,7 @@
                 "</td><td>" . $row["Spouse_Email"]. "</td><td>" .
                 $row["Spouse_Phone_Number"]. "</td><td>" . $row["Student_Name"].
                 "</td><td>" . $row["Student_Email"]. "</td><td>" .
-                $row["Student_Phone_Number"]. "</td><td>" . $row["Class"].
+                $row["Student_Phone_Number"]. "</td><td>" . $row["Class_Name"].
                 "</td><td>" . $row["Cause"]. "</td><td>" .
                 $row["Modified_Time"]. "</td><td>" . $row["Created_Time"].
                 "</td>
