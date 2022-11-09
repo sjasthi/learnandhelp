@@ -1,5 +1,9 @@
-<script>
-</script>
+<?php
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+ ?>
 <html lang="en-us">
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">

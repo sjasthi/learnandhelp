@@ -1,14 +1,9 @@
 <?php
-
 function getButton() {
-    if (isset($_COOKIE['username'])) {
-        global $role;
-        $username = $_COOKIE['username'];
-        $label = 'Log Off ' . $username;
-        $role = $_COOKIE['role'];
+    if (isset($_SESSION['first_name'])) {
+        $label = 'Log Off ' . $_SESSION['first_name'];
         $action = 'logoff.php';
     } else {
-        global $role;
         $label = 'Log On';
         $action = 'loginAction.php';
     }

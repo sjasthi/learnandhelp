@@ -1,9 +1,38 @@
 <?php
-include 'show-navbar.php';
-
-if (isset($_COOKIE['email'])){
-  header("Location: form-submit.php");
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
 }
+
+// TODO convert this so a user can choose to create a new registration from the registration details page
+// Check to see if the logged in user has a registration on file
+if (isset($_SESSION['User_Id'])) {
+  $User_Id = $_SESSION['User_Id'];
+  $sql = 'SELECT * FROM user_registrations WHERE User_Id = '.$User_Id.';';
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "learn_and_help_db";
+
+  $connection = new mysqli($servername, $username, $password, $dbname);
+
+  if ($connection === false) {
+  	die("Failed to connect to database: " . mysqli_connect_error());
+  }
+
+  $result = $connection->query($sql);
+
+  $num_rows = $result->num_rows;
+  echo '<script>console.log("'.$result->num_rows.'")</script>';
+
+  if ($result->num_rows > 0) {
+    header("Location: form-submit.php");
+  }
+} else {
+  header("Location: login.php");
+}
+
+include 'show-navbar.php';
 
 echo "<!DOCTYPE html>
 <html>

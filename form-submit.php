@@ -1,4 +1,15 @@
 <?php
+
+
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
+}
+
+if (!(isset($_SESSION['email']))) {
+	header('Location: login.php');
+}
+
 include 'show-navbar.php';
 $servername = "localhost";
 $username = "root";
@@ -30,10 +41,9 @@ if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
 	$cause = $_POST['cause'];
 	$timestamp = date("Y-m-d");
 
-} elseif (isset($_COOKIE['email'])){
-		$student_email = $_COOKIE['email'];
-		// $sql = "select r.Sponsor_Name, r.Sponsor_Email, r.Sponsor_Phone_Number, r.Spouse_Name, r.Spouse_Email, r.Spouse_Phone_Number, u.First_Name, u.Phone, c.Class_Name, r.Cause from registrations r left join users u on u.User_Id = r.Student_ID LEFT join classes c on c.Class_Id = r.Class";
-    $sql = "SELECT * FROM registrations NATURAL JOIN classes WHERE Student_Email = '$student_email'";
+} else {
+		$User_Id = $_SESSION['User_Id'];
+    $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations WHERE User_Id = $User_Id";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
@@ -82,7 +92,6 @@ switch ($cause){ // FIXME: Hardcoded in.
 }
 
 if ($action == 'add') {
-	setcookie('email', $student_email);
 	$sql = "INSERT INTO registrations VALUES (
 		NULL,
 		'$sponsor_name',
@@ -139,7 +148,12 @@ if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
 if ($action == 'add') {
-	$Reg_Id = $connection->insert_id;
+	$Reg_Id = mysqli_insert_id($connection);
+	$User_Id = $_SESSION['User_Id'];
+	$sql = 'INSERT INTO user_registrations VALUES (' . $User_Id . ', ' . $Reg_Id .');';
+	if (!mysqli_query($connection, $sql)) {
+		echo("Error description: " . mysqli_error($connection));
+	 }
 }
 mysqli_close($connection);
 

@@ -1,8 +1,14 @@
 <?PHP
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
+}
+
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $usermail = $_POST['usermail'];
 $password = $_POST['password'];
+$hash = sha1($password);
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -22,11 +28,13 @@ if ($result->num_rows > 0) {
 } else {
     // Add the new user to the database
     $sql = "INSERT INTO users (First_Name, Last_Name, Email, Hash, Active, Role, Modified_Time, Created_Time)
-        VALUES ('".$firstname."','".$lastname."','".$usermail."',SHA1('".$password."'),'yes','student',SYSDATE(),SYSDATE())";
+        VALUES ('$firstname' , '$lastname', '$usermail', '$hash', 'yes', 'student', SYSDATE(), SYSDATE());";
     $conn->query($sql);
-    // Set a cookie for the user
-    setcookie("username", $firstname, strtotime('+30 days'));
+    // Set session variables for the user
+    $_SESSION['email'] = $usermail;
+    $_SESSION['first_name'] = $firstname;
+    $_SESSION['role'] = $role;
     // Send the user to the registration page.
-    header('Location:hompeage.php');
+    header('Location: homepage.php');
 }
 ?>

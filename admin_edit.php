@@ -1,3 +1,10 @@
+<?php
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+ ?>
+
 <?php $Reg_Id = $_POST['Reg_Id']?>
 <!DOCTYPE html>
 <html>
