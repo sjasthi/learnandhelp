@@ -9,10 +9,15 @@ function show_navbar() {
       <a href="#">Causes</a>
       <a href="blog.php">Blog</a>
       <a href="meet_our_instructors.php">Meet our Instructors</a>
-      <a href="contact_us.php">Contact Us</a>
-      <a href="administration.php">Administration</a>
-      <a href="registration_form.php" id="register">Register Now</a>
-      </div>';
+      <a href="contact_us.php">Contact Us</a>';
+      if (isset($_SESSION['email'])) {
+        if ($_SESSION['role'] == 'admin') {
+          echo '<a href="administration.php">Administration</a>';
+        }
+        echo '<a href="registration_form.php" id="register">Register Now</a>';
+      }
+       echo '</div>';
+
 }
 
 ?>

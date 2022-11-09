@@ -1,4 +1,11 @@
 <?php
+
+
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+
 function admin_fill_form($Reg_Id) {
 
   $servername = "localhost";

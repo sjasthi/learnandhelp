@@ -1,4 +1,11 @@
-'<!DOCTYPE html>
+<?php
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+ ?>
+
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">

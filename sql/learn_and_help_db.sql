@@ -31,7 +31,7 @@ CREATE TABLE registrations
 	Modified_Time date,
 	Created_Time date,
 	PRIMARY KEY (Reg_Id),
-	FOREIGN KEY (Class_Id) REFERENCES classes(Class_Id));
+	FOREIGN KEY (Class_Id) REFERENCES classes(Class_Id) ON DELETE CASCADE);
 
 
 INSERT INTO registrations
@@ -76,4 +76,12 @@ CREATE TABLE blog_pictures (
 	Blog_Id int,
 	Location varchar(100),
 	PRIMARY KEY (Picture_Id),
-	FOREIGN KEY (Blog_Id) REFERENCES blogs(Blog_Id));
+	FOREIGN KEY (Blog_Id) REFERENCES blogs(Blog_Id) ON DELETE CASCADE);
+
+CREATE TABLE user_registrations (
+	User_Id int,
+	Reg_Id int,
+	PRIMARY KEY (User_Id, Reg_Id),
+	FOREIGN KEY (User_Id) REFERENCES users(User_Id) ON DELETE CASCADE,
+	FOREIGN KEY (Reg_Id) REFERENCES registrations(Reg_Id) ON DELETE CASCADE
+);

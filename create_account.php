@@ -1,3 +1,10 @@
+<?php
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +39,7 @@
       <br>
       <input id="password" type="password" name="password" placeholder="Password" required>
       <br>
-      <input type="submit" id="submit-login" value="Login"/>
+      <input type="submit" id="submit-login" value="Create Account"/>
 	</form>
   </body>
 </html>
