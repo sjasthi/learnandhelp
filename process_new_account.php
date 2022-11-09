@@ -33,7 +33,8 @@ if ($result->num_rows > 0) {
     // Set session variables for the user
     $_SESSION['email'] = $usermail;
     $_SESSION['first_name'] = $firstname;
-    $_SESSION['role'] = $role;
+    $_SESSION['role'] = 'student';
+    $_SESSION['User_Id'] = mysqli_insert_id($conn);
     // Send the user to the registration page.
     header('Location: homepage.php');
 }

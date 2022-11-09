@@ -22,9 +22,6 @@ if (isset($_SESSION['User_Id'])) {
 
   $result = $connection->query($sql);
 
-  $num_rows = $result->num_rows;
-  echo '<script>console.log("'.$result->num_rows.'")</script>';
-
   if ($result->num_rows > 0) {
     header("Location: form-submit.php");
   }
