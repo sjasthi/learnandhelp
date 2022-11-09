@@ -20,7 +20,8 @@
   <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
-        <h1> Welcome to <span class="accent-text">Learn and Help</span></h1>
+
+        <h1> Welcome to <div><img id="big_logo" src="images/learn_n_help_big_logo.jpg"></div></h1>
       </div>
     </header>
     <section class="about">

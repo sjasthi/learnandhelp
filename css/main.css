@@ -139,6 +139,11 @@ section {
 
 }
 
+#big_logo {
+  max-width: 500px;
+  height: auto;
+}
+
  #nav-logo {
     float: left;
     padding: 5px 5px 0px;
