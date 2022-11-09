@@ -31,7 +31,13 @@
         show_button.setAttribute("hidden", "hidden");
       }
     </script>
-      <button id="form_show_button" onclick="show_form();">Create Post</button>
+      <?php
+        if (isset($_SESSION['role'])) {
+          if ($_SESSION['role'] == 'admin') {
+            echo '<button id="form_show_button" onclick="show_form();">Create Post</button>';
+          }
+        }
+      ?>
       <form id="blog_creation_form" action="create_post.php" method="POST" enctype="multipart/form-data" hidden="hidden">
         <div id=blog_creation_left>
           <label>Blog Title</label>
