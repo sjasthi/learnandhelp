@@ -32,6 +32,28 @@
          <h1><span class="accent-text">Books</span></h1>
        </div>
      </header>
+     <!-- Book list -->
+     <form id="booklist" action="create_booklist.php" method="post" hidden="hidden">
+       <h1>Book list</h1>
+       <div id="booklist_labels">
+         <div class="list_labels">
+           <label>Id</label>
+         </div>
+         <div class="list_labels">
+           <label>Title</label>
+         </div>
+         <div class="list_labels">
+           <label>Publisher</label>
+         </div>
+         <div class="list_labels">
+            <label>Price</label>
+         </div>
+         <div class="list_labels">
+           <label>Quantity</label>
+         </div>
+       </div>
+       <input id="booklist_submit" type="submit" name="submit" value= "submit">
+     </form>
      <!-- Jquery Data Table -->
      <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
        <table id="books_table" class="display compact">

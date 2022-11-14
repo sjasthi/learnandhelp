@@ -179,7 +179,7 @@ section {
 .container_2{
     text-align: left;
 }
-input[type=text],input[type=email], input[type=tel],input[type=password], input[type=file], select {
+input[type=text],input[type=email], input[type=tel],input[type=password], input[type=file], input[type=number], select {
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -344,4 +344,31 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 #blog_previous {
   float: left;
   min-width: 200px;
+}
+
+#booklist {
+  width: 80%;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: thin;
+  padding: 25px;
+}
+
+#booklist input[type="text"], #booklist input[type="number"] {
+  width: 15%;
+  margin: 15px;
+}
+
+.list_labels {
+  width: 15%;
+  margin: 15px;
+  display: inline-block;
+  text-align: center;
+}
+
+.list_labels label {
+  font-weight: bold;
 }
