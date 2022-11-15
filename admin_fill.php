@@ -1,4 +1,11 @@
 <?php
+
+
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+
 function admin_fill_form($Reg_Id) {
 
   $servername = "localhost";
@@ -10,24 +17,24 @@ function admin_fill_form($Reg_Id) {
   if ($connection === false) {
     die("Failed to connect to database: " . mysqli_connect_error());
   }
-  $sql = "SELECT * FROM registrations WHERE Reg_Id = '$Reg_Id'";
+  $sql = "SELECT * FROM registrations NATURAL JOIN classes WHERE Reg_ID = '$Reg_Id'";
   $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
-  $db_id = $row[0];
-  $sponsor_name = $row[1];
-  $sponsor_email = $row[2];
-  $sponsor_phone = $row[3];
-  $spouse_name = $row[4];
-  $spouse_email = $row[5];
-  $spouse_phone = $row[6];
-  $student_name = $row[7];
-  $student_email = $row[8];
-  $student_phone = $row[9];
-  $class = $row[10];
-  $cause = $row[11];
+  $sponsor_name = $row['Sponsor_Name'];
+  $sponsor_email = $row['Sponsor_Email'];
+  $sponsor_phone = $row['Sponsor_Phone_Number'];
+  $spouse_name = $row['Spouse_Name'];
+  $spouse_email = $row['Spouse_Email'];
+  $spouse_phone = $row['Spouse_Phone_Number'];
+  $student_name = $row['Student_Name'];
+  $student_email = $row['Student_Email'];
+  $student_phone = $row['Student_Phone_Number'];
+  $class = $row['Class_Name'];
+  $cause = $row['Cause'];
 
   echo "<div id= \"container_2\">
     <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
+      <input type='hidden' name='Reg_Id' value=$Reg_Id>
       <!---Sponsors Section -->
       <label id=\"name-label\">Sponsor's Name</label>
       <input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\" required><br><!--name--->
@@ -62,25 +69,25 @@ function admin_fill_form($Reg_Id) {
         <option disabled value>
           Select your class
         </option>
-        <option value=\"py1\" ";
+        <option value=2 ";
           if ($class == "Python 101")
               echo "selected";
       echo  ">
           Python 101
         </option>
-        <option value=\"java1\" ";
+        <option value=1 ";
         if ($class == "Java 101")
             echo "selected";
       echo ">
           Java 101
         </option>
-        <option value=\"py2\" ";
+        <option value=4 ";
         if ($class == "Python 201")
             echo "selected";
       echo ">
           Python 201
         </option>
-	  <option value=\"java2\" ";
+	  <option value=3 ";
         if ($class == "Java 201")
             echo "selected";
       echo ">

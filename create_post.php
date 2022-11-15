@@ -1,5 +1,11 @@
 <?php
 
+
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
+}
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -63,5 +69,5 @@ if (isset($_POST['create_post'])) {
 
 mysqli_close($connection);
 
-header('Location: causes.php');
+header('Location: blog.php');
 ?>

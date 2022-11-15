@@ -1,3 +1,10 @@
+<?php
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+ ?>
+
 <!DOCTYPE html>
 <script>
 </script>
@@ -10,11 +17,12 @@
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
+  <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
-        <h1> Welcome to <span class="accent-text">Learn and Help</span></h1>
+
+        <h1> Welcome to <div><img id="big_logo" src="images/learn_n_help_big_logo.jpg"></div></h1>
       </div>
-      <?php show_navbar(); ?>
     </header>
     <section class="about">
       <div class="container">

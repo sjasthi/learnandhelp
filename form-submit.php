@@ -1,4 +1,15 @@
 <?php
+
+
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
+}
+
+if (!(isset($_SESSION['email']))) {
+	header('Location: login.php');
+}
+
 include 'show-navbar.php';
 $servername = "localhost";
 $username = "root";
@@ -26,45 +37,50 @@ if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
 	$student_name = $_POST['students-name'];
 	$student_email = $_POST['students-email'];
 	$student_phone = $_POST['students-phone'];
-	$class = $_POST['role'];
+	$class_id = $_POST['role'];
 	$cause = $_POST['cause'];
 	$timestamp = date("Y-m-d");
 
-} elseif (isset($_COOKIE['email'])){
-		$student_email = $_COOKIE['email'];
-    $sql = "SELECT * FROM registrations WHERE Student_Email = '$student_email'";
+} else {
+		$User_Id = $_SESSION['User_Id'];
+    $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations WHERE User_Id = $User_Id";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
-    $db_id = $row[0];
-    $sponsor_name = $row[1];
-    $sponsor_email = $row[2];
-    $sponsor_phone = $row[3];
-    $spouse_name = $row[4];
-    $spouse_email = $row[5];
-    $spouse_phone = $row[6];
-    $student_name = $row[7];
-    $student_phone = $row[9];
-    $class = $row[10];
-    $cause = $row[11];
+    $Reg_Id = $row['Reg_Id'];
+		$sponsor_name = $row['Sponsor_Name'];
+		$sponsor_email = $row['Sponsor_Email'];
+		$sponsor_phone = $row['Sponsor_Phone_Number'];
+		$spouse_name = $row['Spouse_Name'];
+		$spouse_email = $row['Spouse_Email'];
+		$spouse_phone = $row['Spouse_Phone_Number'];
+		$student_name = $row['Student_Name'];
+		$student_email = $row['Student_Email'];
+		$student_phone = $row['Student_Phone_Number'];
+		$class_id = $row['Class_Id'];
+		$cause = $row['Cause'];
 
 }
 
-switch ($class){
-	case "py1":
+// FIXME: Hardcoded in relation to database
+// Correct method should pull the available classes from the database,
+// Allow the user to select one using the interface, and then POST from there.
+
+switch ($class_id){
+	case 2:
 		$class = "Python 101";
 		break;
-	case "py2":
+	case 4:
 		$class = "Python 201";
 		break;
-	case "java1":
+	case 1:
 		$class = "Java 101";
 		break;
-	case "java2":
+	case 3:
 		$class = "Java 201";
 }
 
-switch ($cause){
+switch ($cause){ // FIXME: Hardcoded in.
 	case "lib":
 		$cause = "Library";
 		break;
@@ -76,7 +92,6 @@ switch ($cause){
 }
 
 if ($action == 'add') {
-	setcookie('email', $student_email);
 	$sql = "INSERT INTO registrations VALUES (
 		NULL,
 		'$sponsor_name',
@@ -88,12 +103,13 @@ if ($action == 'add') {
 		'$student_name',
 		'$student_email',
 		'$student_phone',
-		'$class',
+		'$class_id',
 		'$cause',
 		'$timestamp',
 		'$timestamp');";
 
 } elseif($action == "edit") {
+	$Reg_Id = $_POST['Reg_Id'];
 	$sql = "UPDATE registrations SET
 			Sponsor_Name = '$sponsor_name',
 			Sponsor_Email = '$sponsor_email',
@@ -101,12 +117,13 @@ if ($action == 'add') {
 			Spouse_Name = '$spouse_name',
 			Spouse_Email = '$spouse_email',
 			Spouse_Phone_Number = '$spouse_phone',
+			Student_Name = '$student_name',
 			Student_Email = '$student_email',
 			Student_Phone_Number = '$student_phone',
-			Class = '$class',
+			Class_Id = '$class_id',
 			Cause = '$cause',
 			Modified_Time = '$timestamp'
-			WHERE Student_Email = '$student_email';";
+			WHERE Reg_Id = '$Reg_Id';";
 
 } elseif($action == "admin_edit") {
 	$Reg_Id = $_POST['Reg_Id'];
@@ -117,9 +134,10 @@ if ($action == 'add') {
 			Spouse_Name = '$spouse_name',
 			Spouse_Email = '$spouse_email',
 			Spouse_Phone_Number = '$spouse_phone',
+			Student_Name = '$student_name',
 			Student_Email = '$student_email',
 			Student_Phone_Number = '$student_phone',
-			Class = '$class',
+			Class_Id = '$class_id',
 			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
@@ -129,26 +147,35 @@ if ($action == 'add') {
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
+if ($action == 'add') {
+	$Reg_Id = mysqli_insert_id($connection);
+	$User_Id = $_SESSION['User_Id'];
+	$sql = 'INSERT INTO user_registrations VALUES (' . $User_Id . ', ' . $Reg_Id .');';
+	if (!mysqli_query($connection, $sql)) {
+		echo("Error description: " . mysqli_error($connection));
+	 }
+}
 mysqli_close($connection);
 
 echo "<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
   <head>
     <title>Learn and Help</title>
 		<link rel=\"icon\" href=\"images/icon_logo.png\" type=\"image/icon type\">
     <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap\" rel=\"stylesheet\">
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
-  <body>
-  <header class=\"inverse\">
+  <body>";
+		show_navbar();
+	echo  "<header class=\"inverse\">
       <div class=\"container\">
         <h1> <span class=\"accent-text\">Registration Submitted</span></h1>
-      </div>";
-      show_navbar();
-echo    "</header>
+      </div>
+  		</header>
 		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
+				<input type='hidden' name='Reg_Id' value=$Reg_Id>
         <!---Sponsors Section -->
         <label id=\"name-label\"><b>Sponsor's Name:</b> $sponsor_name</label><br>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">

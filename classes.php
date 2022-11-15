@@ -1,3 +1,10 @@
+<?php
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,11 +15,11 @@
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
+  <?php show_navbar(); ?>
   <header class="inverse">
       <div class="container">
         <h1><span class="accent-text">Classes</span></h1>
       </div>
-      <?php show_navbar(); ?>
   </header>
     <section class="about-me">
       <div class="container">

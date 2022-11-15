@@ -1,9 +1,35 @@
 <?php
-include 'show-navbar.php';
-
-if (isset($_COOKIE['email'])){
-  header("Location: form-submit.php");
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
 }
+
+// TODO convert this so a user can choose to create a new registration from the registration details page
+// Check to see if the logged in user has a registration on file
+if (isset($_SESSION['User_Id'])) {
+  $User_Id = $_SESSION['User_Id'];
+  $sql = 'SELECT * FROM user_registrations WHERE User_Id = '.$User_Id.';';
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $dbname = "learn_and_help_db";
+
+  $connection = new mysqli($servername, $username, $password, $dbname);
+
+  if ($connection === false) {
+  	die("Failed to connect to database: " . mysqli_connect_error());
+  }
+
+  $result = $connection->query($sql);
+
+  if ($result->num_rows > 0) {
+    header("Location: form-submit.php");
+  }
+} else {
+  header("Location: login.php");
+}
+
+include 'show-navbar.php';
 
 echo "<!DOCTYPE html>
 <html>
@@ -13,13 +39,13 @@ echo "<!DOCTYPE html>
     <link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap\" rel=\"stylesheet\">
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
-  <body>
-      <header class=\"inverse\">
+  <body>";
+    show_navbar();
+echo      "<header class=\"inverse\">
           <div class=\"container\">
               <h1><span class=\"accent-text\">Register Now</span></h1>
-          </div>";
-          show_navbar();
-      echo "</header>
+          </div>
+          </header>
       <h3> Registration Form</h3>
     <div id=\"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
@@ -57,16 +83,16 @@ echo "<!DOCTYPE html>
           <option disabled selected value>
             Select your class
           </option>
-          <option value=\"py1\">
+          <option value=2>
             Python 101
           </option>
-          <option value=\"java1\">
+          <option value=1>
             Java 101
           </option>
-          <option value=\"py2\">
+          <option value=4>
             Python 201
           </option>
-		  <option value=\"java2\">
+		  <option value=3>
 			Java 201
 		  </option>
 		</select>
