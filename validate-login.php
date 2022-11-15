@@ -64,6 +64,6 @@ if ($status == PHP_SESSION_NONE) {
       $_SESSION["role"] = $entry['Role'];
       $_SESSION["first_name"] = $entry['First_Name'];
       $_SESSION["User_Id"] = $entry['User_Id'];
-      header('Location: homepage.php');
+      header('Location: index.php');
   }
 ?>

@@ -3,7 +3,7 @@ include 'show-button.php';
 
 function show_navbar() {
     echo '<div class="navbar">
-      <a href="homepage.php" id="nav-logo"><img id="logo" src="images/learn_n_help_logo.png"></a>
+      <a href="index.php" id="nav-logo"><img id="logo" src="images/learn_n_help_logo.png"></a>
       <div>'; getButton(); echo '</div>
       <a href="classes.php">Classes</a>
       <a href="#">Causes</a>

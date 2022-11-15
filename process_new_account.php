@@ -36,6 +36,6 @@ if ($result->num_rows > 0) {
     $_SESSION['role'] = 'student';
     $_SESSION['User_Id'] = mysqli_insert_id($conn);
     // Send the user to the registration page.
-    header('Location: homepage.php');
+    header('Location: index.php');
 }
 ?>
