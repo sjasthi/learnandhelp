@@ -372,3 +372,15 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 .list_labels label {
   font-weight: bold;
 }
+
+#receipt_table {
+  width: 80%;
+  margin: auto;
+  margin-top: 25px;
+}
+
+#receipt_table th, #receipt_table td {
+  width: 15%;
+  border: 1px solid black;
+  padding: 5px;
+}

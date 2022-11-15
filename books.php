@@ -52,7 +52,10 @@
            <label>Quantity</label>
          </div>
        </div>
-       <input id="booklist_submit" type="submit" name="submit" value= "submit">
+       <div id="booklist_entries">
+       </div>
+       <input type="hidden" id="entry_count" name="entry_count" value="0">
+       <input id="booklist_submit" type="submit" name="submit" value= "Generate Receipt">
      </form>
      <!-- Jquery Data Table -->
      <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
@@ -95,9 +98,9 @@
                  </td><td>". $row["title"]. "</td><td>" .
                  $row["author"]. "</td><td>" . $row["publisher"].
                  "</td><td>" . $row["publishYear"]. "</td><td>" .
-                 $row["numPages"]. "</td><td>  ₹" . $row["price"]."</td>
+                 $row["numPages"]. "</td><td>₹" . $row["price"]."</td>
                  <td>
-                     <Button onclick='addToList(this)'>Add</Button>
+                     <Button onclick='addToList(this)'>Add to List</Button>
                  </td></tr>";
                }
              } else {
