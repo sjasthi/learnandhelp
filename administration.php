@@ -58,6 +58,11 @@
         <br>
         <label for="reports">Reports</label>
       </div>
+      <div class="admin_icon">
+        <a href="books.php" name="books"><img src="images/admin_icons/books_icon.png"></a>
+        <br>
+        <label for="books">Books</label>
+      </div>
     </div>
     <br>
     <div id="icon_attribution">
