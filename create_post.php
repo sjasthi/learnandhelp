@@ -1,11 +1,12 @@
 <?php
+require 'db_configuration.php';
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "learn_and_help_db";
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
+}
 
-$connection = new mysqli($servername, $username, $password, $dbname);
+$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
 if ($connection->connect_error) {
   die("Connection failed: " . $conn->connect_error);
@@ -63,5 +64,5 @@ if (isset($_POST['create_post'])) {
 
 mysqli_close($connection);
 
-header('Location: causes.php');
+header('Location: blog.php');
 ?>

@@ -1,4 +1,11 @@
-'<!DOCTYPE html>
+<?php
+  $status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
+ ?>
+
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
@@ -8,11 +15,11 @@
   </head>
   <body>
       <?php include 'show-navbar.php'; ?>
+      <?php show_navbar(); ?>
       <header class="inverse">
           <div class="container">
               <h1> Welcome to <span class="accent-text">Learn and Help</span></h1>
           </div>
-          <?php show_navbar(); ?>
       </header>
     <div id="container_2">
         <!---Sponsors Section -->

@@ -76,7 +76,7 @@ a:focus {
 }
 
 header  {
-    padding: 100px 0 25px;
+    padding: 50px 0 25px;
 }
 
 section {
@@ -109,6 +109,13 @@ section {
     color: #fff;
 }
 
+.admin_button {
+    background: #131313;
+    padding: 0;
+    float: right;
+    margin-bottom: 0;
+}
+
 .login-button {
 	display: inline-block;
     background-color: #99D930;
@@ -116,31 +123,34 @@ section {
     float: right;
     width: 10%;
     border-radius: 4px;
-    padding: 5px 7px;
     margin-right: 10px;
 }
 
 .navbar {
     overflow: hidden;
     background-color: #666666;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     width: 100%;
 }
 
 #logo {
-    height: 80px;
-    width: 90px;
- 
-} 
+    height: 50px;
+
+}
+
+#big_logo {
+  max-width: 500px;
+  height: auto;
+}
 
  #nav-logo {
     float: left;
     padding: 5px 5px 0px;
-} 
+}
 
 .navbar a {
-    float: center;
+    float: left;
     display: inline-block;
     color: #eeeeee;
     text-align: center;
@@ -169,7 +179,7 @@ section {
 .container_2{
     text-align: left;
 }
-input[type=text],input[type=email], input[type=tel],input[type=password], input[type=file], select {
+input[type=text],input[type=email], input[type=tel],input[type=password], input[type=file], input[type=number], select {
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -178,7 +188,7 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
     box-sizing: border-box;
   }
 
-#usermail, #password {
+#usermail, #password, #firstname, #lastname {
     width: 30%;
 }
 
@@ -201,9 +211,36 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   width: 90%;
 }
 
+#admin_icons {
+  display: inline-block;
+}
+
+#admin_icons img{
+  width: 200px;
+  height: auto;
+}
+
+.admin_icon {
+  display: inline-block;
+  padding:50px;
+  padding-bottom: 0px;
+}
+
+.admin_icon label {
+  font-weight: bold;
+}
+
+#icon_attribution {
+  margin-top: 100px;
+}
+
 #submit-registration, #submit-login {
   width: 30%;
   }
+
+#create_account_button {
+  width: 30%
+}
 
   div .container_2{
     border-radius: 50px;
@@ -233,14 +270,31 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 
 #blog_creation_left, #blog_creation_right {
     width: 25%;
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .blog_post {
   width: 50%;
   display: block;
-  margin: auto;
+  margin-right: 25%;
+  margin-left: auto;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  box-shadow: 5px 5px 5px #888888;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: thin;
+}
+
+.blog_post p, .blog_post h3{
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.blog_post h2 {
+  border-top: none;
 }
 
 .blog_link {
@@ -254,4 +308,79 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   margin: 10px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   border-radius: 10px;
+}
+
+#blog_TOC {
+  display: inline-block;
+  float: left;
+  text-align: left;
+  width: 15%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: thin;
+}
+
+#TOC_title {
+  text-align: center;
+}
+
+#blog_TOC a {
+  cursor: pointer;
+}
+
+#blog_buttons {
+  width: 40%;
+  margin: auto;
+  padding-top: 10px;
+}
+
+#blog_next {
+  float: right;
+  min-width: 200px;
+}
+
+#blog_previous {
+  float: left;
+  min-width: 200px;
+}
+
+#booklist {
+  width: 80%;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: thin;
+  padding: 25px;
+}
+
+#booklist input[type="text"], #booklist input[type="number"] {
+  width: 15%;
+  margin: 15px;
+}
+
+.list_labels {
+  width: 15%;
+  margin: 15px;
+  display: inline-block;
+  text-align: center;
+}
+
+.list_labels label {
+  font-weight: bold;
+}
+
+#receipt_table {
+  width: 80%;
+  margin: auto;
+  margin-top: 25px;
+}
+
+#receipt_table th, #receipt_table td {
+  width: 15%;
+  border: 1px solid black;
+  padding: 5px;
 }
