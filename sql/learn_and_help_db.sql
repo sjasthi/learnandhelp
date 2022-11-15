@@ -71,26 +71,26 @@ CREATE TABLE causes (
 	URL VARCHAR(150),
 	Contact_name VARCHAR(50),
 	Contact_email VARCHAR(50),
-	Contact_phone VARCHAR(15)
+	Contact_phone VARCHAR(15),
 	PRIMARY KEY (Cause_Id)
 );
 
 INSERT INTO causes
 values (
-	NULL, 
-	'Cause1', 
-	'Description1', 
-	'www.cause2.com', 
+	NULL,
+	'Cause1',
+	'Description1',
+	'www.cause2.com',
 	'Con Tactname',
-	'con@cause1.com'
+	'con@cause1.com',
 	'123-456-7890'
 	),
 	(
-	NULL, 
-	'Cause2', 
-	'Description2', 
-	'www.cause2.com', 
+	NULL,
+	'Cause2',
+	'Description2',
+	'www.cause2.com',
 	'Conta Ctname',
-	'ctname@cause2.com'
+	'ctname@cause2.com',
 	'123-456-7890'
 	);
