@@ -13,7 +13,7 @@
         $sql = "SELECT * FROM causes";
         $result = mysqli_query($connection, $sql);
         $i = 0;
-        $admin = 0;
+        $admin = 1;
         if (!$admin) echo '<table id="causes">';
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
         {
