@@ -1,10 +1,7 @@
 <?php
     function show_causes(){
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "learn_and_help_db";
-        $connection = new mysqli($servername, $username, $password, $dbname);
+        require 'db_configuration.php';
+        $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
         if ($connection === false) {
   	    die("Failed to connect to database: " . mysqli_connect_error());
@@ -13,13 +10,13 @@
         $sql = "SELECT * FROM causes";
         $result = mysqli_query($connection, $sql);
         $i = 0;
-        $admin = 1;
+        $admin = 0;
         if (!$admin) echo '<table id="causes">';
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
         {
             if ($admin){
                 echo '
-                    
+
                     <form action="update_causes.php" method="post">
                         <input type="hidden" name="rowId" value="'.$row['Cause_Id'].'">
                             <table id="causes">';
@@ -57,19 +54,19 @@
                                         <input type="hidden" name="action" value="update">
                                         <input type="submit" value="Update">
                                     </td>
-                                
+
                                     <td>
                                         <select name="action" style="width: 100%">
                                             <option value="update">Edit</option>
                                             <option value="delete">Delete</option>
-                                        
+
                                     </td>
                             </tr>
                             </table>
-                        
+
                     ';
 
-               
+
             } else {
 
                    if ($i == 0){
@@ -91,7 +88,7 @@
                         <td>'.$row['Contact_phone'].'</td>
                         <td>'.$row['Contact_email'].'</td>
                     </tr>';
-                
+
             }
             $i++;
         }
