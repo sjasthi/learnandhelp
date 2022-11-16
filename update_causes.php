@@ -1,9 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "learn_and_help_db";
-$connection = new mysqli($servername, $username, $password, $dbname);
+require 'db_configuration.php';
+$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 $action = $_POST['action'];
 $id = $_POST['rowId'];
 $name = $_POST['name'];
@@ -17,7 +14,7 @@ if ($action == 'add'){
     (NULL, '$name', '$desc', '$url', '$cname', '$email', '$phone')";
 }
 else if ($action == 'update'){
-    $sql = "UPDATE causes SET 
+    $sql = "UPDATE causes SET
             Cause_name = '$name',
             description = '$desc',
             URL = '$url',
@@ -25,7 +22,6 @@ else if ($action == 'update'){
             Contact_email = '$email',
             Contact_phone = '$phone'
             WHERE Cause_Id = '$id'";
-
 }
 else if ($action == 'delete')
     $sql = "DELETE FROM causes WHERE Cause_Id = $id";
@@ -33,6 +29,6 @@ if (!mysqli_query($connection, $sql)) {
     echo("Error description: " . mysqli_error($connection));
 }
 mysqli_close($connection);
-header("Location: causes.php");
+header("Location: admin_causes.php");
 echo $action;
 ?>

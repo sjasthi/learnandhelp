@@ -10,13 +10,12 @@
         $sql = "SELECT * FROM causes";
         $result = mysqli_query($connection, $sql);
         $i = 0;
-        $admin = 0;
+        $admin = 1;
         if (!$admin) echo '<table id="causes">';
         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
         {
             if ($admin){
                 echo '
-
                     <form action="update_causes.php" method="post">
                         <input type="hidden" name="rowId" value="'.$row['Cause_Id'].'">
                             <table id="causes">';
@@ -71,23 +70,9 @@
 
                    if ($i == 0){
 
-                    echo '<tr>
-                                <th>Cause</th>
-                                <th>Description</th>
-                                <th>URL</th>
-                                <th>Contact Name</th>
-                                <th>Contact Email</th>
-                                <th>Contact Phone</th>
-                            </tr>';
+                    echo '';
             }
-                    echo '<tr>
-                        <td>'.$row['Cause_name'].'</td>
-                        <td><p style="text-align: left; word-wrap: break-word;">'.$row['description'].'</p></td>
-                        <td>'.$row['URL'].'</td>
-                        <td>'.$row['Contact_name'].'</td>
-                        <td>'.$row['Contact_phone'].'</td>
-                        <td>'.$row['Contact_email'].'</td>
-                    </tr>';
+
 
             }
             $i++;
