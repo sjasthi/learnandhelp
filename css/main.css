@@ -384,3 +384,8 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   border: 1px solid black;
   padding: 5px;
 }
+
+#add_cause {
+  margin: auto;
+  width: 50%;
+}

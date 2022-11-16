@@ -43,7 +43,7 @@
         <label for="users">Users</label>
       </div>
       <div class="admin_icon">
-        <a href="#" name="causes"><img src="images/admin_icons/causes_icon.png"></a>
+        <a href="admin_causes.php" name="causes"><img src="images/admin_icons/causes_icon.png"></a>
         <br>
         <label for="causes">Causes</label>
       </div>
