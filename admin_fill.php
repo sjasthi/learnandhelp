@@ -1,5 +1,5 @@
 <?php
-
+require 'db_configuration.php';
 
   $status = session_status();
   if ($status == PHP_SESSION_NONE) {
@@ -8,11 +8,7 @@
 
 function admin_fill_form($Reg_Id) {
 
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "learn_and_help_db";
-  $connection = new mysqli($servername, $username, $password, $dbname);
+  $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
   if ($connection === false) {
     die("Failed to connect to database: " . mysqli_connect_error());

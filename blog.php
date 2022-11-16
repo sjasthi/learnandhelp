@@ -8,6 +8,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      #causes {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%
+      }
+
+      th, td {
+        border: solid black 1px;
+      }
+    </style>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">

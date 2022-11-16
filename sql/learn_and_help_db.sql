@@ -76,7 +76,39 @@ CREATE TABLE blog_pictures (
 	Blog_Id int,
 	Location varchar(100),
 	PRIMARY KEY (Picture_Id),
-	FOREIGN KEY (Blog_Id) REFERENCES blogs(Blog_Id) ON DELETE CASCADE);
+	FOREIGN KEY (Blog_Id) REFERENCES blogs(Blog_Id));
+
+CREATE TABLE causes (
+	Cause_Id int NOT NULL AUTO_INCREMENT,
+	Cause_name VARCHAR(100),
+	description TEXT,
+	URL VARCHAR(150),
+	Contact_name VARCHAR(50),
+	Contact_email VARCHAR(50),
+	Contact_phone VARCHAR(15),
+	PRIMARY KEY (Cause_Id)
+);
+
+INSERT INTO causes
+values (
+	NULL,
+	'Cause1',
+	'Description1',
+	'www.cause2.com',
+	'Con Tactname',
+	'con@cause1.com',
+	'123-456-7890'
+	),
+	(
+	NULL,
+	'Cause2',
+	'Description2',
+	'www.cause2.com',
+	'Conta Ctname',
+	'ctname@cause2.com',
+	'123-456-7890'
+	);
+
 
 CREATE TABLE user_registrations (
 	User_Id int,
