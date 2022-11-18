@@ -1,3 +1,35 @@
+<?php
+require 'db_configuration.php';
+
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
+}
+  // Create Connection
+  $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+  // Check connection
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
+
+  // Escape inputs to prevent SQL injection
+  $usermail = $conn->escape_string($_POST["usermail"]);
+  $account_password = $conn->escape_string($_POST["password"]);
+  $hash = sha1($account_password);
+
+  $sql = "SELECT Role, First_Name, User_Id FROM users WHERE Email='$usermail' AND Hash='$hash';";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0) {
+      $entry = $result -> fetch_assoc();
+      $_SESSION["email"] = $usermail;
+      $_SESSION["role"] = $entry['Role'];
+      $_SESSION["first_name"] = $entry['First_Name'];
+      $_SESSION["User_Id"] = $entry['User_Id'];
+      header('Location: index.php');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,35 +62,3 @@
   <a href="create_account.php" id="create_account_button">Create Account</button>
   </body>
 </html>
-
-<?php
-require 'db_configuration.php';
-
-$status = session_status();
-if ($status == PHP_SESSION_NONE) {
-  session_start();
-}
-  // Create Connection
-  $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
-  // Check connection
-  if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
-
-  // Escape inputs to prevent SQL injection
-  $usermail = $conn->escape_string($_POST["usermail"]);
-  $account_password = $conn->escape_string($_POST["password"]);
-  $hash = sha1($account_password);
-
-  $sql = "SELECT Role, First_Name, User_Id FROM users WHERE Email='$usermail' AND Hash='$hash';";
-  $result = $conn->query($sql);
-
-  if ($result->num_rows > 0) {
-      $entry = $result -> fetch_assoc();
-      $_SESSION["email"] = $usermail;
-      $_SESSION["role"] = $entry['Role'];
-      $_SESSION["first_name"] = $entry['First_Name'];
-      $_SESSION["User_Id"] = $entry['User_Id'];
-      header('Location: index.php');
-  }
-?>
