@@ -10,11 +10,12 @@ if ($action == 'add'){
     $sql = "INSERT INTO classes VALUES
     (NULL, '$name','$teacher_id','$desc')";
 }
+
+// FIXME: make it so we can change the teacher.
 else if ($action == 'update'){
     $sql = "UPDATE classes SET
             Class_name = '$name',
             Description = '$desc',
-            Teacher_Id = '$teacher_id'
             WHERE Class_Id = '$id'";
 }
 else if ($action == 'delete')

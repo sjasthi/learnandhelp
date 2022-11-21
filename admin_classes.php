@@ -58,6 +58,9 @@
           if ($connection === false) {
             die("Failed to connect to database: " . mysqli_connect_error());
           }
+          // Get the number of teachers.
+          $sql2 = "SELECT * from users WHERE Role = 'admin'";
+          $teachers_result = mysqli_query($connection, $sql2);
           // Query selects all the classes, and relates them to the teachers.
           $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name 
                   FROM classes
@@ -104,8 +107,14 @@
             <textarea rows=9 cols=90 name="description" placeholder="Class Description" required></textarea>
         </label>
         <!-- FIXME: The teacher ID should be a dropdown of the available teachers -->
-        <label>
-            <input type="text" name="teacher_id" placeholder="0" required>
+        <label>Choose A Teacher
+            <select name="teacher_id" id="teacher_id">
+                <?PHP if ($teachers_result->num_rows>0) {
+                    while ($row = $teachers_result->fetch_assoc()) {
+                        echo '<option value = '.$row['User_Id'].'>'.$row['First_Name'].' '.$row['Last_Name'].'</option>';
+                    }
+                }?>
+            </select>
         </label>
         <input type="hidden" name="action" value="add" >
       <input type="submit" value="Add" style="width: 33%">
