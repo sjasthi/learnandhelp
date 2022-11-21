@@ -394,3 +394,7 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   margin: auto;
   width: 50%;
 }
+
+#add_class input[type="text"], #add_class select{
+  width: 40%;
+}

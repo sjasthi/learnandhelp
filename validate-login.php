@@ -59,6 +59,6 @@ if ($status == PHP_SESSION_NONE) {
       <br>
       <input type="submit" id="submit-login" value="Login"/>
 	</form>
-  <a href="create_account.php" id="create_account_button">Create Account</button>
+  <a href="create_account.php" id="create_account_button">Create Account</a>
   </body>
 </html>
