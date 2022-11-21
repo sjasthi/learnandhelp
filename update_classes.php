@@ -8,12 +8,12 @@ $desc = $_POST['description'];
 $teacher_id = $_POST['teacher_id'];
 if ($action == 'add'){
     $sql = "INSERT INTO classes VALUES
-    (NULL, '$name', '$desc', '$teacher_id')";
+    (NULL, '$name','$teacher_id','$desc')";
 }
 else if ($action == 'update'){
     $sql = "UPDATE classes SET
             Class_name = '$name',
-            description = '$desc',
+            Description = '$desc',
             Teacher_Id = '$teacher_id'
             WHERE Class_Id = '$id'";
 }
@@ -23,6 +23,6 @@ if (!mysqli_query($connection, $sql)) {
     echo("Error description: " . mysqli_error($connection));
 }
 mysqli_close($connection);
-header("Location: admin_causes.php");
+header("Location: admin_classes.php");
 echo $action;
 ?>

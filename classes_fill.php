@@ -1,5 +1,5 @@
 <?php
-    function show_causes(){
+    function show_classes(){
         require 'db_configuration.php';
         $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
@@ -8,7 +8,9 @@
   	        die("Failed to connect to database: " . mysqli_connect_error());
         }
         echo '';
-        $sql = "Select C.Class_Name, C.Description, C.Teacher_ID from classes as C";
+        $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name 
+                FROM classes
+                LEFT JOIN users on Teacher_Id = User_Id";
 //        $sql = "SELECT C.Class_Name, U.First_Name, U.Last_Name
 //                FROM classes as C
 //                LEFT JOIN users as U on C.Teacher_Id = U.User_Id";
@@ -22,7 +24,7 @@
             {
                 echo '
                     <form action="update_classes.php" method="post">
-                        <input type="hidden" name="rowId" value="'.$row['C.Class_Id'].'">
+                        <input type="hidden" name="rowId" value="'.$row['Class_Id'].'">
                             <table id="classes">';
                         if ($i == 0)
                         {
@@ -33,13 +35,16 @@
                         }
                         echo   ' <tr>
                                     <td>
-                                        <input type="text" name="name" value="'.$row['C.Class_Name'].'">
+                                        <input type="text" name="name" value="'.$row['Class_Name'].'">
                                     </td>
                                     <td>
-                                        <input type="text" name="description" value="'.$row['C.Description'].'">
+                                        <input type="text" name="description" value="'.$row['Description'].'">
                                     </td>
                                     <td>
-                                        <input type="text" name="teacher_id" value="'.$row['C.Teacher_Id'].'">
+                                        <input type="text" name="teacher_name" value="'.$row['First_Name'].' '.$row['Last_Name'].'">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="teacher_id" value="'.$row['Teacher_Id'].'">
                                     </td>
                                     <td>
                                         <input type="hidden" name="action" value="update">
@@ -77,6 +82,9 @@
                     </td>
                     <td>
                         <input type="text" name="description" placeholder="Description" required>
+                    </td>
+                    <td>
+                        <input type="text" name="teacher_name" placeholder="Silva Jasthi" required>
                     </td>
                     <td>
                         <input type="text" id="teacher_id" name="teacher_id" placeholder="Silva" required>

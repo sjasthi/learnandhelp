@@ -33,36 +33,41 @@
     </header>
     <div id="admin_icons" style="width: 60%; margin: auto;">
       <div class="admin_icon">
-        <a href="admin_registrations.php" name="registraions"><img src="images/admin_icons/registrations_icon.png"></a>
+        <a href="admin_registrations.php" id="registraions"><img src="images/admin_icons/registrations_icon.png" alt="registration"></a>
         <br>
         <label for="registrations">Registrations</label>
       </div>
       <div class="admin_icon">
-        <a href="#" name="users"><img src="images/admin_icons/users_icon.png"></a>
+        <a href="#" id="users"><img src="images/admin_icons/users_icon.png" alt="users"></a>
         <br>
         <label for="users">Users</label>
       </div>
       <div class="admin_icon">
-        <a href="admin_causes.php" name="causes"><img src="images/admin_icons/causes_icon.png"></a>
+        <a href="admin_causes.php" id="causes"><img src="images/admin_icons/causes_icon.png" alt="causes"></a>
         <br>
         <label for="causes">Causes</label>
       </div>
       <br>
       <div class="admin_icon">
-        <a href="#" name="blogs"><img src="images/admin_icons/blogs_icon.png"></a>
+        <a href="#" id="blogs"><img src="images/admin_icons/blogs_icon.png"  alt="blogs"></a>
         <br>
         <label for="blogs">Blogs</label>
       </div>
       <div class="admin_icon">
-        <a href="#" name="reports"><img src="images/admin_icons/reports_icon.png"></a>
+        <a href="#" id="reports"><img src="images/admin_icons/reports_icon.png" alt="reports"></a>
         <br>
         <label for="reports">Reports</label>
       </div>
       <div class="admin_icon">
-        <a href="books.php" name="books"><img src="images/admin_icons/books_icon.png"></a>
+        <a href="books.php" id="books"><img src="images/admin_icons/books_icon.png" alt="books"></a>
         <br>
         <label for="books">Books</label>
       </div>
+        <div class="class_icon">
+            <a href="admin_classes.php" id="classes"><img src="images/admin_icons/class.png" alt="classes"></a>
+            <br>
+            <label for="classes">Classes</label>
+        </div>
     </div>
     <br>
     <div id="icon_attribution">
