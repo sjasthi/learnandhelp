@@ -106,7 +106,6 @@ if (isset($_SESSION['role'])) {
         <label>
             <textarea rows=9 cols=90 name="description" placeholder="Class Description" required></textarea>
         </label>
-        <!-- FIXME: The teacher ID should be a dropdown of the available teachers -->
         <label>
             <select name="teacher_id" id="teacher_id">
                 <?PHP if ($teachers_result->num_rows > 0) {
