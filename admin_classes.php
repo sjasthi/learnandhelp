@@ -52,18 +52,19 @@
         </thead>
         <tbody>
         <?php
-          // Pull Cause data from the databases and create a Jquery Datatable
+          // Pull Class data from the database and create a Jquery Datatable
           require 'db_configuration.php';
           $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
           if ($connection === false) {
             die("Failed to connect to database: " . mysqli_connect_error());
           }
+          // Query selects all the classes, and relates them to the teachers.
           $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name 
                   FROM classes
                   LEFT JOIN users on Teacher_Id = User_Id";
           $result = mysqli_query($connection, $sql);
           if ($result->num_rows > 0) {
-            // Create table with data from each row
+            // Create table with data from every row
             while($row = $result->fetch_assoc()) {
               echo    '<form action="update_classes.php" method="post">
                         <input type="hidden" name="rowId" value="'.$row['Class_Id'].'">
@@ -74,6 +75,7 @@
                           <td>
                             <textarea rows="2" cols="20" name="description">'.$row['Description'].'</textarea>
                           </td>
+                        <!-- FIXME: The teacher name should be a dropdown of the available teachers -->
                           <td>
                             <textarea readonly rows="2" cols="20" name="teacher_name">'.$row['First_Name'].' '.$row['Last_Name'].'</textarea>
                           </td>
@@ -101,7 +103,7 @@
         <label>
             <textarea rows=9 cols=90 name="description" placeholder="Class Description" required></textarea>
         </label>
-        <!--      <input type="text" name="teacher_name" placeholder="Siva Jasthi" required>-->
+        <!-- FIXME: The teacher ID should be a dropdown of the available teachers -->
         <label>
             <input type="text" name="teacher_id" placeholder="0" required>
         </label>
