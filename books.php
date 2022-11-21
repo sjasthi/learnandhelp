@@ -90,7 +90,7 @@
              if ($result->num_rows > 0) {
                // Create table with data from each row
                while($row = $result->fetch_assoc()) {
-                 echo "<tr><td>" . $row["id"]. "</td><td><img src='" . $row["image"] . "'>
+                 echo "<tr><td>" . $row["id"]. "</td><td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\">
                  </td><td>". $row["title"]. "</td><td>" .
                  $row["author"]. "</td><td>" . $row["publisher"].
                  "</td><td>" . $row["publishYear"]. "</td><td>" .
