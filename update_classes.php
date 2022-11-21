@@ -5,15 +5,15 @@ $action = $_POST['action'];
 $id = $_POST['rowId'];
 $name = $_POST['name'];
 $desc = $_POST['description'];
-$teacher_id = $_POST['teacher_id'];
 if ($action == 'add') {
+    $teacher_id = $_POST['teacher_id'];
     $sql = "INSERT INTO classes VALUES
     (NULL, '$name','$teacher_id','$desc')";
 } else if ($action == 'update') {
 // FIXME: make it so we can change the teacher.
     $sql = "UPDATE classes SET
             Class_name = '$name',
-            Description = '$desc',
+            Description = '$desc'
             WHERE Class_Id = '$id'";
 } else if ($action == 'delete')
     $sql = "DELETE FROM classes WHERE Class_Id = $id";

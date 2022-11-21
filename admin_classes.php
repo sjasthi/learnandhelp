@@ -48,6 +48,8 @@ if (isset($_SESSION['role'])) {
             <th>Class</th>
             <th>Description</th>
             <th>Teacher Name</th>
+            <th>Submit</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -62,7 +64,7 @@ if (isset($_SESSION['role'])) {
         $sql2 = "SELECT * from users WHERE Role = 'admin'";
         $teachers_result = mysqli_query($connection, $sql2);
         // Query selects all the classes, and relates them to the teachers.
-        $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name 
+        $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name
                       FROM classes
                       LEFT JOIN users on Teacher_Id = User_Id";
         $result = mysqli_query($connection, $sql);
@@ -103,9 +105,11 @@ if (isset($_SESSION['role'])) {
         <label>
             <input type="text" name="name" placeholder="Class Name" required>
         </label>
+        <br>
         <label>
             <textarea rows=9 cols=90 name="description" placeholder="Class Description" required></textarea>
         </label>
+        <br>
         <!-- FIXME: The teacher ID should be a dropdown of the available teachers -->
         <label>
             <select name="teacher_id" id="teacher_id">
@@ -116,8 +120,9 @@ if (isset($_SESSION['role'])) {
                 } ?>
             </select>
         </label>
+        <br>
         <input type="hidden" name="action" value="add">
-        <input type="submit" value="Add" style="width: 33%">
+        <input type="submit" value="Add" style="width: 15%">
     </form>
 </body>
 </html>

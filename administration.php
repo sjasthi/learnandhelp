@@ -63,11 +63,11 @@
         <br>
         <label for="books">Books</label>
       </div>
-        <div class="class_icon">
-            <a href="admin_classes.php" id="classes"><img src="images/admin_icons/class.png" alt="classes"></a>
-            <br>
-            <label for="classes">Classes</label>
-        </div>
+      <div class="admin_icon">
+        <a href="admin_classes.php" id="classes"><img src="images/admin_icons/class.png" alt="classes"></a>
+        <br>
+        <label for="classes">Classes</label>
+      </div>
     </div>
     <br>
     <div id="icon_attribution">
