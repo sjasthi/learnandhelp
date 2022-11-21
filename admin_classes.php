@@ -107,7 +107,7 @@
             <textarea rows=9 cols=90 name="description" placeholder="Class Description" required></textarea>
         </label>
         <!-- FIXME: The teacher ID should be a dropdown of the available teachers -->
-        <label>Choose A Teacher
+        <label>
             <select name="teacher_id" id="teacher_id">
                 <?PHP if ($teachers_result->num_rows>0) {
                     while ($row = $teachers_result->fetch_assoc()) {
