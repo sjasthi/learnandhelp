@@ -44,23 +44,23 @@
             die("Connection failed: " . $conn->connect_error);
           }
 
-          $sql = "SELECT * FROM book WHERE grade_level LIKE ";
+          $sql = "SELECT * FROM book WHERE LOWER(grade_level) LIKE ";
 
           if (isset($_POST['high'])) {
-            $sql .= '"%High%"';
+            $sql .= '"%high%"';
             if (isset($_POST['middle'])) {
-              $sql .= ' OR grade_level LIKE "%Middle%"';
+              $sql .= ' OR LOWER(grade_level) LIKE "%middle%"';
             }
             if (isset($_POST['elementary'])) {
-              $sql .= ' OR grade_level LIKE "%Elementary%"';
+              $sql .= ' OR LOWER(grade_level) LIKE "%elementary%"';
             }
           } elseif (isset($_POST['middle'])) {
-            $sql .= '"%Middle%"';
+            $sql .= '"%middle%"';
             if (isset($_POST['elementary'])) {
-              $sql .= ' OR grade_Level LIKE "%Elementary%"';
+              $sql .= ' OR LOWER(grade_Level) LIKE "%elementary%"';
             }
           } elseif (isset($_POST['elementary'])) {
-            $sql .= '"%Elementary%"';
+            $sql .= '"%elementary%"';
           }
           $sql .= ";";
 
