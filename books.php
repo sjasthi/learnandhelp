@@ -111,7 +111,7 @@
              <th>Publisher</th>
              <th>Year Published</th>
              <th>Page Count</th>
-             <th>Price</th>
+             <th>Price (₹)</th>
              <th>Action</th>
            </tr>
          </thead>
@@ -132,14 +132,31 @@
              if ($result->num_rows > 0) {
                // Create table with data from each row
                while($row = $result->fetch_assoc()) {
-                 echo "<tr><td>" . $row["grade_level"]. "</td><td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\">
-                 </td><td>". $row["title"]. "</td><td>" .
-                 $row["author"]. "</td><td>" . $row["publisher"].
-                 "</td><td>" . $row["publishYear"]. "</td><td>" .
-                 $row["numPages"]. "</td><td>₹" . $row["price"]."</td>
-                 <td>
-                     <Button onclick='addToList(this)'>Add to List</Button>
-                 </td></tr>";
+                 if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') {
+                   echo "<tr>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"grade_level\",". $row["id"] .")'>" . $row["grade_level"]. "</div></td>
+                          <td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\"></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"title\",". $row["id"] .")'>" . $row["title"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"author\",". $row["id"] .")'>" . $row["author"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"publisher\",". $row["id"] .")'>" . $row["publisher"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"publishYear\",". $row["id"] .")'>" . $row["publishYear"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"numPages\",". $row["id"] .")'>" . $row["numPages"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"price\",". $row["id"] .")'>" . $row["price"]. "</div></td>
+                          <td><Button onclick='addToList(this)'>Add to List</Button></td>
+                         </tr>";
+                 } else {
+                   echo "<tr>
+                          <td>" . $row["grade_level"] . "</td>
+                          <td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\"></td>
+                          <td>" . $row["title"] . "</td>
+                          <td>" . $row["author"] . "</td>
+                          <td>" . $row["publisher"] . "</td>
+                          <td>" . $row["publishYear"] . "</td>
+                          <td>" . $row["numPages"] . "</td>
+                          <td>" . $row["price"] . "</td>
+                          <td><Button onclick='addToList(this)'>Add to List</Button></td>
+                         </tr>";
+                 }
                }
              } else {
                echo "0 results";
@@ -150,4 +167,31 @@
        </table>
      </div>
    </body>
+   <!--JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript" charset="utf8"
+            src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+   <script>
+      function updateValue(element,column,id){
+            console.log(element.innerText)
+            var value = element.innerText
+            $.ajax({
+                url:'inline-edit.php',
+                type: 'post',
+                data:{
+                    value: value,
+                    column: column,
+                    id: id
+                },
+                success:function(php_result){
+    				console.log(php_result);
+
+                }
+
+            })
+        }
+    </script>
  </html>
