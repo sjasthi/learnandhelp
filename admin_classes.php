@@ -28,7 +28,28 @@ if (isset($_SESSION['role'])) {
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
       $(document).ready(function () {
-        var table = $('#classes').DataTable();
+        $('#classes thead tr').clone(true).appendTo( '#classes thead' );
+        $('#classes thead tr:eq(1) th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        });
+
+        var table = $('#classes').DataTable({
+           initComplete: function () {
+               // Apply the search
+               this.api()
+                   .columns()
+                   .every(function () {
+                       var that = this;
+
+                       $('input', this.header()).on('keyup change clear', function () {
+                           if (that.search() !== this.value) {
+                               that.search(this.value).draw();
+                           }
+                       });
+                   });
+               },
+           });
 
         $('a.toggle-vis').on('click', function (e) {
         e.preventDefault();

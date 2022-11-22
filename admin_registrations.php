@@ -29,19 +29,40 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
-      $(document).ready(function () {
-        var table = $('#registration_table').DataTable();
+    $(document).ready(function () {
+      $('#registration_table thead tr').clone(true).appendTo( '#registration_table thead' );
+      $('#registration_table thead tr:eq(1) th').each(function () {
+      var title = $(this).text();
+      $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+      });
 
-        $('a.toggle-vis').on('click', function (e) {
-        e.preventDefault();
+      var table = $('#registration_table').DataTable({
+         initComplete: function () {
+             // Apply the search
+             this.api()
+                 .columns()
+                 .every(function () {
+                     var that = this;
 
-        // Get the column API object
-        var column = table.column($(this).attr('data-column'));
+                     $('input', this.header()).on('keyup change clear', function () {
+                         if (that.search() !== this.value) {
+                             that.search(this.value).draw();
+                         }
+                     });
+                 });
+             },
+         });
 
-        // Toggle the visibility
-        column.visible(!column.visible());
-        });
-       });
+      $('a.toggle-vis').on('click', function (e) {
+      e.preventDefault();
+
+      // Get the column API object
+      var column = table.column($(this).attr('data-column'));
+
+      // Toggle the visibility
+      column.visible(!column.visible());
+      });
+     });
     </script>
   </head>
   <body>

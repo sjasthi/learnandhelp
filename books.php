@@ -20,7 +20,28 @@
      <script type="text/javascript" src="js/book_functions.js"></script>
      <script>
        $(document).ready(function () {
-         var table = $('#books_table').DataTable();
+         $('#books_table thead tr').clone(true).appendTo( '#books_table thead' );
+         $('#books_table thead tr:eq(1) th').each(function () {
+         var title = $(this).text();
+         $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+         });
+
+         var table = $('#books_table').DataTable({
+            initComplete: function () {
+                // Apply the search
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var that = this;
+
+                        $('input', this.header()).on('keyup change clear', function () {
+                            if (that.search() !== this.value) {
+                                that.search(this.value).draw();
+                            }
+                        });
+                    });
+                },
+            });
 
          $('a.toggle-vis').on('click', function (e) {
          e.preventDefault();
