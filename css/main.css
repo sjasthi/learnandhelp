@@ -367,6 +367,10 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   height:auto;
 }
 
+.toggle_columns {
+  padding-top: 10px;
+}
+
 .list_labels {
   width: 15%;
   margin: 15px;
