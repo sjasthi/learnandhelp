@@ -18,9 +18,19 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
-      $(document).ready( function () {
-        $('#causes').DataTable()
-      } );
+      $(document).ready(function () {
+        var table = $('#causes').DataTable();
+
+        $('a.toggle-vis').on('click', function (e) {
+        e.preventDefault();
+
+        // Get the column API object
+        var column = table.column($(this).attr('data-column'));
+
+        // Toggle the visibility
+        column.visible(!column.visible());
+        });
+       });
     </script>
   </head>
   <body>
@@ -31,6 +41,14 @@
         <h1><span class="accent-text">Causes</span></h1>
       </div>
     </header>
+    <div class="toggle_columns">
+      Toggle column: <a class="toggle-vis" data-column="0">Cause</a>
+        - <a class="toggle-vis" data-column="1">Description</a>
+        - <a class="toggle-vis" data-column="2">URL</a>
+        - <a class="toggle-vis" data-column="3">Contact Name</a>
+        - <a class="toggle-vis" data-column="4">Contact Email</a>
+        - <a class="toggle-vis" data-column="5">Contact Phone</a>
+    </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="causes" class="display compact">
         <thead>

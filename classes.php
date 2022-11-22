@@ -16,9 +16,19 @@ if ($status == PHP_SESSION_NONE) {
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#classes').DataTable()
+      $(document).ready(function () {
+        var table = $('#classes').DataTable();
+
+        $('a.toggle-vis').on('click', function (e) {
+        e.preventDefault();
+
+        // Get the column API object
+        var column = table.column($(this).attr('data-column'));
+
+        // Toggle the visibility
+        column.visible(!column.visible());
         });
+       });
     </script>
 </head>
 <body>
@@ -29,6 +39,11 @@ if ($status == PHP_SESSION_NONE) {
         <h1><span class="accent-text">Classes</span></h1>
     </div>
 </header>
+<div class="toggle_columns">
+  Toggle column: <a class="toggle-vis" data-column="0">Class</a>
+    - <a class="toggle-vis" data-column="1">Description</a>
+    - <a class="toggle-vis" data-column="2">Teacher's Name</a>
+</div>
 <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
     <table id="classes" class="display compact">
         <thead>
@@ -45,7 +60,7 @@ if ($status == PHP_SESSION_NONE) {
         if ($connection === false) {
             die("Failed to connect to database: " . mysqli_connect_error());
         }
-        $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name 
+        $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name
                 FROM classes
                 LEFT JOIN users on Teacher_Id = User_Id";
         $result = mysqli_query($connection, $sql);

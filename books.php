@@ -19,9 +19,19 @@
      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
      <script type="text/javascript" src="js/book_functions.js"></script>
      <script>
-       $(document).ready( function () {
-         $('#books_table').DataTable()
-       } );
+       $(document).ready(function () {
+         var table = $('#books_table').DataTable();
+
+         $('a.toggle-vis').on('click', function (e) {
+         e.preventDefault();
+
+         // Get the column API object
+         var column = table.column($(this).attr('data-column'));
+
+         // Toggle the visibility
+         column.visible(!column.visible());
+         });
+        });
      </script>
    </head>
    <body>
@@ -58,6 +68,17 @@
        <input id="booklist_submit" type="submit" name="submit" value= "Generate Receipt">
      </form>
      <!-- Jquery Data Table -->
+     <div class="toggle_columns">
+       Toggle column: <a class="toggle-vis" data-column="0">Grade Level</a>
+         - <a class="toggle-vis" data-column="1">Image</a>
+         - <a class="toggle-vis" data-column="2">Title</a>
+         - <a class="toggle-vis" data-column="3">Author</a>
+         - <a class="toggle-vis" data-column="4">Publisher</a>
+         - <a class="toggle-vis" data-column="5">Year Published</a>
+         - <a class="toggle-vis" data-column="6">Page Count</a>
+         - <a class="toggle-vis" data-column="7">Price</a>
+         - <a class="toggle-vis" data-column="8">Action</a>
+     </div>
      <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
        <table id="books_table" class="display compact">
          <thead>

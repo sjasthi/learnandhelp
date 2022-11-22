@@ -29,9 +29,19 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
-      $(document).ready( function () {
-        $('#causes').DataTable()
-      } );
+      $(document).ready(function () {
+        var table = $('#causes').DataTable();
+
+        $('a.toggle-vis').on('click', function (e) {
+        e.preventDefault();
+
+        // Get the column API object
+        var column = table.column($(this).attr('data-column'));
+
+        // Toggle the visibility
+        column.visible(!column.visible());
+        });
+       });
     </script>
   </head>
   <body>
@@ -39,10 +49,19 @@
   <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Administration</span></h1>
+        <h1><span class="accent-text">Causes</span></h1>
       </div>
     </header>
-    <h1>Causes</h1>
+    <div class="toggle_columns">
+      Toggle column: <a class="toggle-vis" data-column="0">Cause</a>
+        - <a class="toggle-vis" data-column="1">Description</a>
+        - <a class="toggle-vis" data-column="2">Url</a>
+        - <a class="toggle-vis" data-column="3">Contact Name</a>
+        - <a class="toggle-vis" data-column="4">Contact Email</a>
+        - <a class="toggle-vis" data-column="5">Contact Phone</a>
+        - <a class="toggle-vis" data-column="6">Submit</a>
+        - <a class="toggle-vis" data-column="7">Action</a>
+    </div>
     <div style="width: 90%; margin: auto;">
       <table id="causes" class="display compact">
         <thead>
