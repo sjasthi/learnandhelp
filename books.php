@@ -68,7 +68,7 @@
        <h1>Book list</h1>
        <div id="booklist_labels">
          <div class="list_labels">
-           <label>Id</label>
+           <label>Grade Level</label>
          </div>
          <div class="list_labels">
            <label>Title</label>
@@ -166,6 +166,17 @@
          </tbody>
        </table>
      </div>
+     <form action="create_booklist_by_grade.php" method="post">
+       <h3> Generate Books by grade level </h3>
+       <label for="high">High</label>
+       <input class="checkboxes" type="checkbox" name="high" value="True" required>
+       <label for="high">Middle</label>
+       <input class="checkboxes" type="checkbox" name="middle" value="True" required>
+       <label for="high">Elementary</label>
+       <input class="checkboxes" type="checkbox" name="elementary" value="True" required>
+       <br>
+       <input type="submit" name="submit">
+     </form>
    </body>
    <!--JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -193,5 +204,15 @@
 
             })
         }
+      $(document).ready(function(){
+        var checkboxes = $('.checkboxes');
+        checkboxes.change(function(){
+            if($('.checkboxes:checked').length>0) {
+                checkboxes.removeAttr('required');
+            } else {
+                checkboxes.attr('required', 'required');
+            }
+        });
+      });
     </script>
  </html>
