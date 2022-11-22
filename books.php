@@ -195,7 +195,9 @@
                 data:{
                     value: value,
                     column: column,
-                    id: id
+                    id: id,
+                    table: "book",
+                    idName: "id"
                 },
                 success:function(php_result){
     				console.log(php_result);

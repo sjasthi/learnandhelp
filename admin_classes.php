@@ -74,70 +74,42 @@ if (isset($_SESSION['role'])) {
 <div class="toggle_columns">
   Toggle column: <a class="toggle-vis" data-column="0">Class</a>
     - <a class="toggle-vis" data-column="1">Description</a>
-    - <a class="toggle-vis" data-column="2">Teacher Name</a>
-    - <a class="toggle-vis" data-column="3">Submit</a>
-    - <a class="toggle-vis" data-column="4">Action</a>
+    - <a class="toggle-vis" data-column="2">Teacher's Name</a>
 </div>
-<div style="width: 90%; margin: auto;">
+<div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
     <table id="classes" class="display compact">
         <thead>
         <tr>
             <th>Class</th>
             <th>Description</th>
-            <th>Teacher Name</th>
-            <th>Submit</th>
-            <th>Action</th>
+            <th>Teacher Id</th>
         </tr>
         </thead>
-        <tbody>
         <?php
-        // Pull Class data from the database and create a Jquery Datatable
+        // Pull Cause data from the databases and create a Jquery Datatable
         require 'db_configuration.php';
         $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
         if ($connection === false) {
             die("Failed to connect to database: " . mysqli_connect_error());
         }
-        // Get the number of teachers.
-        $sql2 = "SELECT * from users WHERE Role = 'admin'";
-        $teachers_result = mysqli_query($connection, $sql2);
-        // Query selects all the classes, and relates them to the teachers.
         $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name
-                      FROM classes
-                      LEFT JOIN users on Teacher_Id = User_Id";
+                FROM classes
+                LEFT JOIN users on Teacher_Id = User_Id";
         $result = mysqli_query($connection, $sql);
         if ($result->num_rows > 0) {
-            // Create table with data from every row
+            // Create table with data from each row
             while ($row = $result->fetch_assoc()) {
-                echo '<form action="update_classes.php" method="post">
-                            <input type="hidden" name="rowId" value="' . $row['Class_Id'] . '">
-                            <tr>
-                              <td>
-                                <input type="text" name="name" value="' . $row['Class_Name'] . '">
-                              </td>
-                              <td>
-                                <textarea rows="2" cols="20" name="description">' . $row['Description'] . '</textarea>
-                              </td>
-                            <!-- FIXME: The teacher name should be a dropdown of the available teachers -->
-                              <td>
-                                <textarea readonly rows="2" cols="20" name="teacher_name">' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</textarea>
-                              </td>
-                              <td>
-                                <input type="submit" value="Update">
-                              </td>
-                              <td>
-                                <select name="action" style="width: 100%">
-                                  <option value="update">Edit</option>
-                                  <option value="delete">Delete</option>
-                                </select>
-                              </td>
-                          </tr>
-                          </form>';
+                echo "<tr>
+                        <td><div contenteditable='true' onBlur='updateValue(this,\"Class_Name\",". $row["Class_Id"] .")'>" . $row["Class_Name"]. "</div></td>
+                        <td><div contenteditable='true' onBlur='updateValue(this,\"Description\",". $row["Class_Id"] .")'>" . $row["Description"]. "</div></td>
+                        <td><div contenteditable='true' onBlur='updateValue(this,\"Teacher_Id\",". $row["Class_Id"] .")'>" . $row["Teacher_Id"]. "</div></td>
+                      </tr>";
             }
         }
         ?>
-        </tbody>
     </table>
-    <h1>Add New</h1>
+</div>
+  <h1>Add New</h1>
     <form action="update_classes.php" method="post" id="add_class">
         <label>
             <input type="text" name="name" placeholder="Class Name" required>
@@ -161,4 +133,33 @@ if (isset($_SESSION['role'])) {
         <input type="submit" value="Add" style="width: 15%">
     </form>
 </body>
+<!--JQuery-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+ <script type="text/javascript" charset="utf8"
+         src="https://code.jquery.com/jquery-3.3.1.js"></script>
+ <script type="text/javascript" charset="utf8"
+         src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+ <script>
+   function updateValue(element,column,id){
+         console.log(element.innerText)
+         var value = element.innerText
+         $.ajax({
+             url:'inline-edit.php',
+             type: 'post',
+             data:{
+                 value: value,
+                 column: column,
+                 id: id,
+                 table: "classes",
+                 idName: "Class_Id"
+             },
+             success:function(php_result){
+         console.log(php_result);
+
+             }
+
+         })
+     }
+  </script>
 </html>

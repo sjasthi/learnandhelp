@@ -9,8 +9,10 @@ include 'db_configuration.php';
     $value = $_POST['value'];
     $column = $_POST['column'];
     $id = $_POST['id'];
+    $table = $_POST['table'];
+    $idName = $_POST['idName'];
 
-    $sql="UPDATE book SET $column = '$value' WHERE id = '$id'";
+    $sql="UPDATE $table SET $column = '$value' WHERE $idName = '$id'";
     mysqli_query($connection, $sql);
 
 
