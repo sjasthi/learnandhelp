@@ -27,6 +27,13 @@
         <p>Please contact <strong>Siva Jasthi</strong></p>
         <a href="mailto: Siva.Jasthi@gmail.com"> Siva.Jasthi@gmail.com</a>
         <p>651.276.4671</p>
+        <br>
+        <h2>Website Creators</h2>
+        <p>Learn and Help 1.0 development team:</p>
+        <p><b>Daniel Duea</b>: DanielDuea@gmail.com</p>
+        <p><b>Luis Duran-Enriquez</b>: luis.duran-enriquez@my.metrostate.edu</p>
+        <p><b>Michael Olson</b>: michael.olson.2@my.metrostate.edu</p>
+        <p><b>William Vicic</b>: william.vicic@my.metrostate.edu</p>
       </div>
     </section>
   </body>
