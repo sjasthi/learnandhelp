@@ -25,7 +25,6 @@
   </head>
   <body>
     <?php include 'show-navbar.php'; ?>
-    <?php include 'cause_fill.php'; ?>
     <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">

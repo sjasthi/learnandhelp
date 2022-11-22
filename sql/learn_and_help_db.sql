@@ -132,7 +132,8 @@ CREATE TABLE `book` (
   `numPages` int(11) DEFAULT NULL,
   `donatedBy` varchar(5000) DEFAULT NULL,
   `price` varchar(200) DEFAULT NULL,
-  `image` varchar(500) DEFAULT NULL
+  `image` varchar(500) DEFAULT NULL,
+  `grade_level` varchar(20) DEFAULT 'High'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

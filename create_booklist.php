@@ -25,7 +25,7 @@
     <table id="receipt_table">
       <thead>
         <tr>
-          <th>ID</th>
+          <th>Grade Level</th>
           <th>Title</th>
           <th>Publisher</th>
           <th>Price</th>
