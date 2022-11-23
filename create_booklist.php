@@ -25,7 +25,7 @@
     <table id="receipt_table">
       <thead>
         <tr>
-          <th>ID</th>
+          <th>Grade Level</th>
           <th>Title</th>
           <th>Publisher</th>
           <th>Price</th>
@@ -45,7 +45,7 @@
             $publisher_key = 'publisher_' . $i;
             $price_key = 'price_' . $i;
             $quantity_key = 'quantity_' . $i;
-            $entry_price = floatval(substr($_POST[$price_key], 3)) * intval($_POST[$quantity_key]);
+            $entry_price = floatval($_POST[$price_key]) * intval($_POST[$quantity_key]);
             echo "<tr>
                     <td>$_POST[$id_key]</td>
                     <td>$_POST[$title_key]</td>

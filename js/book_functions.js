@@ -2,10 +2,19 @@ function addToList(element) {
 
   // Collect information from the book to be added
   let book = element.parentNode.parentNode;
-  let id = book.children[0].innerHTML;
-  let title = book.children[2].innerHTML;
-  let publisher = book.children[4].innerHTML;
-  let price = book.children[7].innerHTML;
+  let gradeLevel, title, publisher, price;
+  if (book.children[0].firstChild.nodeName != "DIV") {
+    gradeLevel = book.children[0].innerHTML;
+    title = book.children[2].innerHTML;
+    publisher = book.children[4].innerHTML;
+    price = book.children[7].innerHTML;
+  } else {
+    gradeLevel = book.children[0].firstChild.innerHTML;
+    title = book.children[2].firstChild.innerHTML;
+    publisher = book.children[4].firstChild.innerHTML;
+    price = book.children[7].firstChild.innerHTML;
+  }
+
 
   // Select relevant elements from the DOM
   let booklistForm = document.getElementById("booklist");
@@ -15,13 +24,13 @@ function addToList(element) {
   let numberOfEntries = entryCount.getAttribute("value");
 
   // Create input elements and place them in the book list form
-  // Each input corresponds to id, title, publisher, price, or quantity
-  let bookId = document.createElement('input');
-  bookId.setAttribute("type", "text");
-  bookId.setAttribute("name", ("id_" + numberOfEntries))
-  bookId.setAttribute("value", id);
-  bookId.setAttribute("readonly", "")
-  entry.appendChild(bookId);
+  // Each input corresponds to grade_level, title, publisher, price, or quantity
+  let bookGradeLevel = document.createElement('input');
+  bookGradeLevel.setAttribute("type", "text");
+  bookGradeLevel.setAttribute("name", ("id_" + numberOfEntries))
+  bookGradeLevel.setAttribute("value", gradeLevel);
+  bookGradeLevel.setAttribute("readonly", "")
+  entry.appendChild(bookGradeLevel);
 
   let bookTitle = document.createElement('input');
   bookTitle.setAttribute("type", "text");

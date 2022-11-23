@@ -5,15 +5,15 @@ USE learn_and_help_db;
 CREATE TABLE classes (
      Class_Id int NOT NULL AUTO_INCREMENT,
      Class_Name varchar(30),
-     Teacher_Id int,
+     Description TEXT,
      PRIMARY KEY (Class_Id));
 
 INSERT INTO classes
 values
-    (1, 'Java 101', 1),
-    (2, 'Python 101', 1),
-    (3, 'Java 201', 2),
-    (4, 'Python 201', 2);
+    (1, 'Java 101', 'placeholder description'),
+    (2, 'Python 101', 'placeholder description'),
+    (3, 'Java 201', 'placeholder description'),
+    (4, 'Python 201', 'placeholder description');
 
 CREATE TABLE registrations
 	(Reg_Id int NOT NULL AUTO_INCREMENT,
@@ -131,7 +131,8 @@ CREATE TABLE `book` (
   `numPages` int(11) DEFAULT NULL,
   `donatedBy` varchar(5000) DEFAULT NULL,
   `price` varchar(200) DEFAULT NULL,
-  `image` varchar(500) DEFAULT NULL
+  `image` varchar(500) DEFAULT NULL,
+  `grade_level` varchar(30) DEFAULT 'High'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

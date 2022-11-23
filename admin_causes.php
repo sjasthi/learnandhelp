@@ -29,9 +29,40 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
-      $(document).ready( function () {
-        $('#causes').DataTable()
-      } );
+      $(document).ready(function () {
+        $('#causes thead tr').clone(true).appendTo( '#causes thead' );
+        $('#causes thead tr:eq(1) th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        });
+
+        var table = $('#causes').DataTable({
+           initComplete: function () {
+               // Apply the search
+               this.api()
+                   .columns()
+                   .every(function () {
+                       var that = this;
+
+                       $('input', this.header()).on('keyup change clear', function () {
+                           if (that.search() !== this.value) {
+                               that.search(this.value).draw();
+                           }
+                       });
+                   });
+               },
+           });
+
+        $('a.toggle-vis').on('click', function (e) {
+        e.preventDefault();
+
+        // Get the column API object
+        var column = table.column($(this).attr('data-column'));
+
+        // Toggle the visibility
+        column.visible(!column.visible());
+        });
+       });
     </script>
   </head>
   <body>
@@ -39,11 +70,19 @@
   <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Administration</span></h1>
+        <h1><span class="accent-text">Causes</span></h1>
       </div>
     </header>
-    <h1>Causes</h1>
-    <div style="width: 90%; margin: auto;">
+    <div class="toggle_columns">
+      Toggle column: <a class="toggle-vis" data-column="0">Cause</a>
+        - <a class="toggle-vis" data-column="1">Description</a>
+        - <a class="toggle-vis" data-column="2">URL</a>
+        - <a class="toggle-vis" data-column="3">Contact Name</a>
+        - <a class="toggle-vis" data-column="4">Contact Email</a>
+        - <a class="toggle-vis" data-column="5">Contact Phone</a>
+        - <a class="toggle-vis" data-column="6">Delete</a>
+    </div>
+    <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="causes" class="display compact">
         <thead>
           <tr>
@@ -53,11 +92,9 @@
             <th>Contact Name</th>
             <th>Contact Email</th>
             <th>Contact Phone</th>
-            <th>Submit</th>
-            <th>Action</th>
+            <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
         <?php
           // Pull Cause data from the databases and create a Jquery Datatable
           require 'db_configuration.php';
@@ -70,43 +107,25 @@
           if ($result->num_rows > 0) {
             // Create table with data from each row
             while($row = $result->fetch_assoc()) {
-              echo    '<form action="update_causes.php" method="post">
-                        <input type="hidden" name="rowId" value="'.$row['Cause_Id'].'">
-                        <tr>
-                          <td>
-                            <input type="text" name="name" value="'.$row['Cause_name'].'">
-                          </td>
-                          <td>
-                            <textarea rows="2" cols="20" name="description">'.$row['description'].'</textarea>
-                          </td>
-                          <td>
-                            <input type="text" name="URL" value="'.$row['URL'].'">
-                          </td>
-                          <td>
-                            <input type="text" name="contact_name" value="'.$row['Contact_name'].'">
-                          </td>
-                          <td>
-                            <input type="text" name="contact_email" value="'.$row['Contact_email'].'">
-                          </td>
-                          <td>
-                            <input type="text" name="contact_phone" value="'.$row['Contact_phone'].'">
-                          </td>
-                          <td>
-                            <input type="submit" value="Update">
-                          </td>
-                          <td>
-                            <select name="action" style="width: 100%">
-                              <option value="update">Edit</option>
-                              <option value="delete">Delete</option>
-                          </td>
-                      </tr>
-                      </form>';
+              echo "<tr>
+                      <td><div contenteditable='true' onBlur='updateValue(this,\"Cause_name\",". $row["Cause_Id"] .")'>" . $row["Cause_name"]. "</div></td>
+                      <td><div contenteditable='true' onBlur='updateValue(this,\"description\",". $row["Cause_Id"] .")'>" . $row["description"]. "</div></td>
+                      <td><div contenteditable='true' onBlur='updateValue(this,\"URL\",". $row["Cause_Id"] .")'>" . $row["URL"]. "</div></td>
+                      <td><div contenteditable='true' onBlur='updateValue(this,\"Contact_name\",". $row["Cause_Id"] .")'>" . $row["Contact_name"]. "</div></td>
+                      <td><div contenteditable='true' onBlur='updateValue(this,\"Contact_email\",". $row["Cause_Id"] .")'>" . $row["Contact_email"]. "</div></td>
+                      <td><div contenteditable='true' onBlur='updateValue(this,\"Contact_phone\",". $row["Cause_Id"] .")'>" . $row["Contact_phone"]. "</div></td>
+                      <td>
+                        <form action='admin_delete_cause.php' method='POST'>
+                          <input type='hidden' name='Cause_Id' value='". $row["Cause_Id"] . "'>
+                          <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
+                        </form>
+                      </td>
+                    </tr>";
             }
           }
         ?>
-      </tbody>
-      </div>
       </table>
+    </div>
     <h1>Add New</h1>
     <form action="update_causes.php" method="post" id="add_cause">
       <input type="text" name="name" placeholder="Cause name" required>
@@ -119,4 +138,33 @@
       <input type="submit" value="Add" style="width: 33%">
     </form>
   </body>
+  <!--JQuery-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+   <script type="text/javascript" charset="utf8"
+           src="https://code.jquery.com/jquery-3.3.1.js"></script>
+   <script type="text/javascript" charset="utf8"
+           src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+   <script>
+     function updateValue(element,column,id){
+           console.log(element.innerText)
+           var value = element.innerText
+           $.ajax({
+               url:'inline-edit.php',
+               type: 'post',
+               data:{
+                   value: value,
+                   column: column,
+                   id: id,
+                   table: "causes",
+                   idName: "Cause_Id"
+               },
+               success:function(php_result){
+           console.log(php_result);
+
+               }
+
+           })
+       }
+    </script>
 </html>

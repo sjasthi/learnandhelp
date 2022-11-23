@@ -362,6 +362,15 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   margin: 15px;
 }
 
+#book_image, #book_image img {
+  max-width: 200px;
+  height:auto;
+}
+
+.toggle_columns {
+  padding-top: 10px;
+}
+
 .list_labels {
   width: 15%;
   margin: 15px;
@@ -388,4 +397,8 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 #add_cause {
   margin: auto;
   width: 50%;
+}
+
+#add_class input[type="text"], #add_class select{
+  width: 40%;
 }

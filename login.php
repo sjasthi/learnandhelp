@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" href="images/new_logo.png" type="image/icon type">
+    <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
@@ -33,6 +33,6 @@
       <br>
       <input type="submit" id="submit-login" value="Login"/>
 	</form>
-  <a href="create_account.php" id="create_account_button">Create Account</button>
+  <a href="create_account.php" id="create_account_button">Create Account</a>
   </body>
 </html>

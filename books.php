@@ -19,9 +19,40 @@
      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
      <script type="text/javascript" src="js/book_functions.js"></script>
      <script>
-       $(document).ready( function () {
-         $('#books_table').DataTable()
-       } );
+       $(document).ready(function () {
+         $('#books_table thead tr').clone(true).appendTo( '#books_table thead' );
+         $('#books_table thead tr:eq(1) th').each(function () {
+         var title = $(this).text();
+         $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+         });
+
+         var table = $('#books_table').DataTable({
+            initComplete: function () {
+                // Apply the search
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var that = this;
+
+                        $('input', this.header()).on('keyup change clear', function () {
+                            if (that.search() !== this.value) {
+                                that.search(this.value).draw();
+                            }
+                        });
+                    });
+                },
+            });
+
+         $('a.toggle-vis').on('click', function (e) {
+         e.preventDefault();
+
+         // Get the column API object
+         var column = table.column($(this).attr('data-column'));
+
+         // Toggle the visibility
+         column.visible(!column.visible());
+         });
+        });
      </script>
    </head>
    <body>
@@ -37,7 +68,7 @@
        <h1>Book list</h1>
        <div id="booklist_labels">
          <div class="list_labels">
-           <label>Id</label>
+           <label>Grade Level</label>
          </div>
          <div class="list_labels">
            <label>Title</label>
@@ -58,18 +89,29 @@
        <input id="booklist_submit" type="submit" name="submit" value= "Generate Receipt">
      </form>
      <!-- Jquery Data Table -->
+     <div class="toggle_columns">
+       Toggle column: <a class="toggle-vis" data-column="0">Grade Level</a>
+         - <a class="toggle-vis" data-column="1">Image</a>
+         - <a class="toggle-vis" data-column="2">Title</a>
+         - <a class="toggle-vis" data-column="3">Author</a>
+         - <a class="toggle-vis" data-column="4">Publisher</a>
+         - <a class="toggle-vis" data-column="5">Year Published</a>
+         - <a class="toggle-vis" data-column="6">Page Count</a>
+         - <a class="toggle-vis" data-column="7">Price</a>
+         - <a class="toggle-vis" data-column="8">Action</a>
+     </div>
      <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
        <table id="books_table" class="display compact">
          <thead>
            <tr>
-             <th>ID</th>
+             <th>Grade Level</th>
              <th>Image</th>
              <th>Title</th>
              <th>Author</th>
              <th>Publisher</th>
              <th>Year Published</th>
              <th>Page Count</th>
-             <th>Price</th>
+             <th>Price (₹)</th>
              <th>Action</th>
            </tr>
          </thead>
@@ -90,14 +132,31 @@
              if ($result->num_rows > 0) {
                // Create table with data from each row
                while($row = $result->fetch_assoc()) {
-                 echo "<tr><td>" . $row["id"]. "</td><td><img src='" . $row["image"] . "'>
-                 </td><td>". $row["title"]. "</td><td>" .
-                 $row["author"]. "</td><td>" . $row["publisher"].
-                 "</td><td>" . $row["publishYear"]. "</td><td>" .
-                 $row["numPages"]. "</td><td>₹" . $row["price"]."</td>
-                 <td>
-                     <Button onclick='addToList(this)'>Add to List</Button>
-                 </td></tr>";
+                 if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') {
+                   echo "<tr>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"grade_level\",". $row["id"] .")'>" . $row["grade_level"]. "</div></td>
+                          <td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\"></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"title\",". $row["id"] .")'>" . $row["title"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"author\",". $row["id"] .")'>" . $row["author"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"publisher\",". $row["id"] .")'>" . $row["publisher"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"publishYear\",". $row["id"] .")'>" . $row["publishYear"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"numPages\",". $row["id"] .")'>" . $row["numPages"]. "</div></td>
+                          <td><div contenteditable='true' onBlur='updateValue(this,\"price\",". $row["id"] .")'>" . $row["price"]. "</div></td>
+                          <td><Button onclick='addToList(this)'>Add to List</Button></td>
+                         </tr>";
+                 } else {
+                   echo "<tr>
+                          <td>" . $row["grade_level"] . "</td>
+                          <td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\"></td>
+                          <td>" . $row["title"] . "</td>
+                          <td>" . $row["author"] . "</td>
+                          <td>" . $row["publisher"] . "</td>
+                          <td>" . $row["publishYear"] . "</td>
+                          <td>" . $row["numPages"] . "</td>
+                          <td>" . $row["price"] . "</td>
+                          <td><Button onclick='addToList(this)'>Add to List</Button></td>
+                         </tr>";
+                 }
                }
              } else {
                echo "0 results";
@@ -107,5 +166,55 @@
          </tbody>
        </table>
      </div>
+     <form action="create_booklist_by_grade.php" method="post">
+       <h3> Generate Books by grade level </h3>
+       <label for="high">High</label>
+       <input class="checkboxes" type="checkbox" name="high" value="True" required>
+       <label for="high">Middle</label>
+       <input class="checkboxes" type="checkbox" name="middle" value="True" required>
+       <label for="high">Elementary</label>
+       <input class="checkboxes" type="checkbox" name="elementary" value="True" required>
+       <br>
+       <input type="submit" name="submit">
+     </form>
    </body>
+   <!--JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript" charset="utf8"
+            src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+   <script>
+      function updateValue(element,column,id){
+            console.log(element.innerText)
+            var value = element.innerText
+            $.ajax({
+                url:'inline-edit.php',
+                type: 'post',
+                data:{
+                    value: value,
+                    column: column,
+                    id: id,
+                    table: "book",
+                    idName: "id"
+                },
+                success:function(php_result){
+    				console.log(php_result);
+
+                }
+
+            })
+        }
+      $(document).ready(function(){
+        var checkboxes = $('.checkboxes');
+        checkboxes.change(function(){
+            if($('.checkboxes:checked').length>0) {
+                checkboxes.removeAttr('required');
+            } else {
+                checkboxes.attr('required', 'required');
+            }
+        });
+      });
+    </script>
  </html>
