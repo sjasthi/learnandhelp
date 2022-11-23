@@ -89,7 +89,6 @@ if ($status == PHP_SESSION_NONE) {
                 echo '<tr>
                       <td>' . $row['Class_Name'] . '</td>
                       <td><p style="text-align: left; word-wrap: break-word;">' . $row['Description'] . '</p></td>
-                      <td>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</td>
                     </tr>';
             }
         }
