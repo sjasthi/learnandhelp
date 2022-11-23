@@ -6,15 +6,14 @@ CREATE TABLE classes (
      Class_Id int NOT NULL AUTO_INCREMENT,
      Class_Name varchar(30),
      Description TEXT,
-     Teacher_Id int,
      PRIMARY KEY (Class_Id));
 
 INSERT INTO classes
 values
-    (1, 'Java 101', 'placeholder description', 1),
-    (2, 'Python 101', 'placeholder description', 1),
-    (3, 'Java 201', 'placeholder description', 2),
-    (4, 'Python 201', 'placeholder description', 2);
+    (1, 'Java 101', 'placeholder description'),
+    (2, 'Python 101', 'placeholder description'),
+    (3, 'Java 201', 'placeholder description'),
+    (4, 'Python 201', 'placeholder description');
 
 CREATE TABLE registrations
 	(Reg_Id int NOT NULL AUTO_INCREMENT,

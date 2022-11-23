@@ -80,6 +80,7 @@
         - <a class="toggle-vis" data-column="3">Contact Name</a>
         - <a class="toggle-vis" data-column="4">Contact Email</a>
         - <a class="toggle-vis" data-column="5">Contact Phone</a>
+        - <a class="toggle-vis" data-column="6">Delete</a>
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="causes" class="display compact">
@@ -91,6 +92,7 @@
             <th>Contact Name</th>
             <th>Contact Email</th>
             <th>Contact Phone</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <?php
@@ -112,6 +114,12 @@
                       <td><div contenteditable='true' onBlur='updateValue(this,\"Contact_name\",". $row["Cause_Id"] .")'>" . $row["Contact_name"]. "</div></td>
                       <td><div contenteditable='true' onBlur='updateValue(this,\"Contact_email\",". $row["Cause_Id"] .")'>" . $row["Contact_email"]. "</div></td>
                       <td><div contenteditable='true' onBlur='updateValue(this,\"Contact_phone\",". $row["Cause_Id"] .")'>" . $row["Contact_phone"]. "</div></td>
+                      <td>
+                        <form action='admin_delete_cause.php' method='POST'>
+                          <input type='hidden' name='Cause_Id' value='". $row["Cause_Id"] . "'>
+                          <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
+                        </form>
+                      </td>
                     </tr>";
             }
           }
