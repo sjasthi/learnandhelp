@@ -71,7 +71,6 @@ if ($status == PHP_SESSION_NONE) {
         <tr>
             <th>Class</th>
             <th>Description</th>
-            <th>Teacher's Name</th>
         </tr>
         </thead>
         <?php
@@ -81,9 +80,8 @@ if ($status == PHP_SESSION_NONE) {
         if ($connection === false) {
             die("Failed to connect to database: " . mysqli_connect_error());
         }
-        $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name
-                FROM classes
-                LEFT JOIN users on Teacher_Id = User_Id";
+        $sql = "SELECT Class_Id, Class_Name, Description
+                FROM classes;";
         $result = mysqli_query($connection, $sql);
         if ($result->num_rows > 0) {
             // Create table with data from each row

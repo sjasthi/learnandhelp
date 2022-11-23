@@ -74,7 +74,6 @@ if (isset($_SESSION['role'])) {
 <div class="toggle_columns">
   Toggle column: <a class="toggle-vis" data-column="0">Class</a>
     - <a class="toggle-vis" data-column="1">Description</a>
-    - <a class="toggle-vis" data-column="2">Teacher's Name</a>
 </div>
 <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
     <table id="classes" class="display compact">
@@ -82,7 +81,6 @@ if (isset($_SESSION['role'])) {
         <tr>
             <th>Class</th>
             <th>Description</th>
-            <th>Teacher Id</th>
         </tr>
         </thead>
         <?php
@@ -92,9 +90,8 @@ if (isset($_SESSION['role'])) {
         if ($connection === false) {
             die("Failed to connect to database: " . mysqli_connect_error());
         }
-        $sql = "SELECT Class_Id, Class_Name, Description, Teacher_Id, First_Name, Last_Name
-                FROM classes
-                LEFT JOIN users on Teacher_Id = User_Id";
+        $sql = "SELECT Class_Id, Class_Name, Description
+                FROM classes;";
         $result = mysqli_query($connection, $sql);
         if ($result->num_rows > 0) {
             // Create table with data from each row
@@ -102,7 +99,6 @@ if (isset($_SESSION['role'])) {
                 echo "<tr>
                         <td><div contenteditable='true' onBlur='updateValue(this,\"Class_Name\",". $row["Class_Id"] .")'>" . $row["Class_Name"]. "</div></td>
                         <td><div contenteditable='true' onBlur='updateValue(this,\"Description\",". $row["Class_Id"] .")'>" . $row["Description"]. "</div></td>
-                        <td><div contenteditable='true' onBlur='updateValue(this,\"Teacher_Id\",". $row["Class_Id"] .")'>" . $row["Teacher_Id"]. "</div></td>
                       </tr>";
             }
         }
@@ -117,16 +113,6 @@ if (isset($_SESSION['role'])) {
         <br>
         <label>
             <textarea rows=9 cols=90 name="description" placeholder="Class Description" required></textarea>
-        </label>
-        <br>
-        <label>
-            <select name="teacher_id" id="teacher_id">
-                <?PHP if ($teachers_result->num_rows > 0) {
-                    while ($row = $teachers_result->fetch_assoc()) {
-                        echo '<option value = ' . $row['User_Id'] . '>' . $row['First_Name'] . ' ' . $row['Last_Name'] . '</option>';
-                    }
-                } ?>
-            </select>
         </label>
         <br>
         <input type="hidden" name="action" value="add">
