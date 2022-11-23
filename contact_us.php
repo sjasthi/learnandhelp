@@ -31,9 +31,9 @@
         <h2>Website Creators</h2>
         <p>Learn and Help 1.0 development team:</p>
         <p><b>Daniel Duea</b>: DanielDuea@gmail.com</p>
-        <p><b>Luis Duran-Enriquez</b>: luis.duran-enriquez@my.metrostate.edu</p>
-        <p><b>Michael Olson</b>: michael.olson.2@my.metrostate.edu</p>
-        <p><b>William Vicic</b>: william.vicic@my.metrostate.edu</p>
+        <p><b>Luis Duran-Enriquez</b>: duranluis320@gmail.com</p>
+        <p><b>Michael Olson</b>: michaelolson01@gmail.com</p>
+        <p><b>William Vicic</b>: william.vicic@gmail.com</p>
       </div>
     </section>
   </body>
