@@ -74,6 +74,7 @@ if (isset($_SESSION['role'])) {
 <div class="toggle_columns">
   Toggle column: <a class="toggle-vis" data-column="0">Class</a>
     - <a class="toggle-vis" data-column="1">Description</a>
+    - <a class="toggle-vis" data-column="2">Delete</a>
 </div>
 <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
     <table id="classes" class="display compact">
@@ -81,6 +82,7 @@ if (isset($_SESSION['role'])) {
         <tr>
             <th>Class</th>
             <th>Description</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <?php
