@@ -63,6 +63,18 @@
          <h1><span class="accent-text">Books</span></h1>
        </div>
      </header>
+     <!-- Generate books by grade level -->
+     <form action="create_booklist_by_grade.php" method="post">
+       <h3> Generate Books by grade level </h3>
+       <label for="high">High</label>
+       <input class="checkboxes" type="checkbox" name="high" value="True" required>
+       <label for="high">Middle</label>
+       <input class="checkboxes" type="checkbox" name="middle" value="True" required>
+       <label for="high">Elementary</label>
+       <input class="checkboxes" type="checkbox" name="elementary" value="True" required>
+       <br>
+       <input type="submit" name="submit">
+     </form>
      <!-- Book list -->
      <form id="booklist" action="create_booklist.php" method="post" hidden="hidden">
        <h1>Book list</h1>
@@ -99,6 +111,7 @@
          - <a class="toggle-vis" data-column="6">Page Count</a>
          - <a class="toggle-vis" data-column="7">Price</a>
          - <a class="toggle-vis" data-column="8">Action</a>
+         <?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { echo '- <a class="toggle-vis" data-column="9">Change Picture</a>'; } ?>
      </div>
      <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
        <table id="books_table" class="display compact">
@@ -113,6 +126,7 @@
              <th>Page Count</th>
              <th>Price (₹)</th>
              <th>Action</th>
+             <?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { echo '<th>Change Picture</th>'; } ?>
            </tr>
          </thead>
          <tbody>
@@ -126,7 +140,7 @@
                die("Connection failed: " . $conn->connect_error);
              }
 
-             $sql = "SELECT * FROM book";
+             $sql = "SELECT * FROM book ORDER BY id;";
              $result = $conn->query($sql);
 
              if ($result->num_rows > 0) {
@@ -143,6 +157,12 @@
                           <td><div contenteditable='true' onBlur='updateValue(this,\"numPages\",". $row["id"] .")'>" . $row["numPages"]. "</div></td>
                           <td><div contenteditable='true' onBlur='updateValue(this,\"price\",". $row["id"] .")'>" . $row["price"]. "</div></td>
                           <td><Button onclick='addToList(this)'>Add to List</Button></td>
+                          <td style='min-width: 300px;'>
+                            <form action='edit_book_picture.php' method='post' enctype='multipart/form-data'>
+                              <input type='file' name='file' accept='image/*'>
+                              <input type='hidden' name='book_id' value='".$row['id']."'>
+                              <input type='submit' value='Change Picture'>
+                            </form>
                          </tr>";
                  } else {
                    echo "<tr>
@@ -166,17 +186,6 @@
          </tbody>
        </table>
      </div>
-     <form action="create_booklist_by_grade.php" method="post">
-       <h3> Generate Books by grade level </h3>
-       <label for="high">High</label>
-       <input class="checkboxes" type="checkbox" name="high" value="True" required>
-       <label for="high">Middle</label>
-       <input class="checkboxes" type="checkbox" name="middle" value="True" required>
-       <label for="high">Elementary</label>
-       <input class="checkboxes" type="checkbox" name="elementary" value="True" required>
-       <br>
-       <input type="submit" name="submit">
-     </form>
    </body>
    <!--JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
