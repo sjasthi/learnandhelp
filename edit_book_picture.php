@@ -12,7 +12,6 @@ if ($connection->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-print_r($_FILES);
 $book_id = $_POST['book_id'];
 $fileName = $_FILES['file']['name'];
 $fileTMP = $_FILES['file']['tmp_name'];
