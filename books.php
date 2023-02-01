@@ -149,7 +149,7 @@
                  if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') {
                    echo "<tr>
                           <td><div contenteditable='true' onBlur='updateValue(this,\"grade_level\",". $row["id"] .")'>" . $row["grade_level"]. "</div></td>
-                          <td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\"></td>
+                          <td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\" loading='lazy'></td>
                           <td><div contenteditable='true' onBlur='updateValue(this,\"title\",". $row["id"] .")'>" . $row["title"]. "</div></td>
                           <td><div contenteditable='true' onBlur='updateValue(this,\"author\",". $row["id"] .")'>" . $row["author"]. "</div></td>
                           <td><div contenteditable='true' onBlur='updateValue(this,\"publisher\",". $row["id"] .")'>" . $row["publisher"]. "</div></td>
