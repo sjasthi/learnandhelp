@@ -1,3 +1,4 @@
+DROP DATABASE learn_and_help_db;
 CREATE DATABASE learn_and_help_db;
 
 USE learn_and_help_db;
@@ -14,6 +15,26 @@ values
     (2, 'Python 101', 'placeholder description'),
     (3, 'Java 201', 'placeholder description'),
     (4, 'Python 201', 'placeholder description');
+    
+CREATE TABLE schools (
+  id INT AUTO_INCREMENT,
+  name VARCHAR(255),
+  type ENUM('primary school', 'upper primary school', 'high school', 'other'),
+  category ENUM('private', 'public', 'other'),
+  grade_level_start INT,
+  grade_level_end INT,
+  current_enrollment INT,
+  address_text VARCHAR(255),
+  state_name VARCHAR(255),
+  state_code VARCHAR(2),
+  pin_code VARCHAR(5),
+  contact_name VARCHAR(255),
+  contact_designation VARCHAR(255),
+  contact_phone VARCHAR(12),
+  contact_email VARCHAR(255),
+  status ENUM('proposed', 'rejected', 'approved', 'completed'),
+  notes TEXT,
+  PRIMARY KEY (id));
 
 CREATE TABLE registrations
 	(Reg_Id int NOT NULL AUTO_INCREMENT,
@@ -32,6 +53,7 @@ CREATE TABLE registrations
 	Created_Time date,
 	PRIMARY KEY (Reg_Id),
 	FOREIGN KEY (Class_Id) REFERENCES classes(Class_Id) ON DELETE CASCADE);
+    
 
 
 INSERT INTO registrations

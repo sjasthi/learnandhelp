@@ -6,6 +6,28 @@ require 'db_configuration.php';
     session_start();
   }
 
+function admin_class_form($Class_Id){
+  $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+
+  if ($connection === false) {
+    die("Failed to connect to database: " . mysqli_connect_error());
+  }
+  $sql = "SELECT * FROM classes WHERE Class_Id = '$Class_Id'";
+  $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+
+  $class_name = $row["Class_Name"];
+  $description = $row["Description"];
+
+  echo "<div id= \"container_2\">
+  <form id=\"survey-form\" action=\"form-submit_classes.php\" method = \"post\">
+    <input type='hidden' name='Class_Id' value=$Class_Id>
+    <label id=\"name-label\">Course Name</label>
+    <input type=\"text\" id=\"sponsers-name\" name=\"Class_Name\" class=\"form\" value=\"$class_name\" required><br><!--name--->
+    <label id=\"sponsers-email-label\">Course Description</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$description\" required><br><!---email-->";
+  
+}
+
 function admin_fill_form($Reg_Id) {
 
   $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);

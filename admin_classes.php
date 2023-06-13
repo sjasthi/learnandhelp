@@ -102,10 +102,14 @@ if (isset($_SESSION['role'])) {
                         <td><div contenteditable='true' onBlur='updateValue(this,\"Class_Name\",". $row["Class_Id"] .")'>" . $row["Class_Name"]. "</div></td>
                         <td><div contenteditable='true' onBlur='updateValue(this,\"Description\",". $row["Class_Id"] .")'>" . $row["Description"]. "</div></td>
                         <td>
-                          <form action='admin_delete_class.php' method='POST'>
+                        <form action='admin_classes_edit.php' method='POST'>
+                            <input type='hidden' name='Class_Idd' value='". $row["Class_Id"] . "'>
+                            <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
+                        </form>
+                        <form action='admin_delete_class.php' method='POST'>
                             <input type='hidden' name='Class_Id' value='". $row["Class_Id"] . "'>
                             <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
-                          </form>
+                        </form>
                         </td>
                       </tr>";
             }

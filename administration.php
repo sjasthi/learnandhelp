@@ -47,6 +47,11 @@
         <br>
         <label for="causes">Causes</label>
       </div>
+      <div class="admin_icon">
+        <a href="admin_schools.php" id="Schools"><img src="images/admin_icons/school-building.png" alt="Schools"></a>
+        <br>
+        <label for="Schools">Schools</label>
+      </div>
       <br>
       <div class="admin_icon">
         <a href="#" id="blogs"><img src="images/admin_icons/blogs_icon.png"  alt="blogs"></a>
