@@ -402,3 +402,48 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 #add_class input[type="text"], #add_class select{
   width: 40%;
 }
+
+/* schools and school details */
+#school_icons {
+  display: inline-block;
+}
+
+#school_icons img{
+  width: 200px;
+  height: 200px;
+}
+
+.school_icon {
+  display: inline-block;
+  padding:25px;
+  padding-bottom: 0px;
+}
+
+.school_icon label {
+  font-weight: bold;
+}
+
+.school_details label {
+	float: left;
+    font-weight: bold;
+}
+
+.school_details span {
+	float: right;
+	margin-left: 20px;
+}
+
+.school_notes label {
+	color: #99D930;
+	background: #252525;
+    font-weight: bold;
+}
+
+.school_notes span {
+    display: inline-block;
+	width: 25%;
+	text-align: left;
+	border: 1px solid black;
+	padding-left: 4px;
+}
+
