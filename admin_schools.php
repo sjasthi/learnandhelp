@@ -22,7 +22,7 @@
 <html>
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
-    <title>Schools</title>
+    <title>Admin Schools</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -30,13 +30,13 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
     $(document).ready(function () {
-      $('#registration_table thead tr').clone(true).appendTo( '#registration_table thead' );
-      $('#registration_table thead tr:eq(1) th').each(function () {
-      var title = $(this).text();
+      $('#schools_table thead tr').clone(true).appendTo( '#schools_table thead' );
+      $('#schools_table thead tr:eq(1) th').each(function () {
+		  var title = $(this).text();
       $(this).html('<input type="text" placeholder="Search ' + title + '" />');
       });
 
-      var table = $('#registration_table').DataTable({
+      var table = $('#schools_table').DataTable({
          initComplete: function () {
              // Apply the search
              this.api()
@@ -92,9 +92,10 @@
         - <a class="toggle-vis" data-column="14">Contact Email</a>
         - <a class="toggle-vis" data-column="15">Status</a>
         - <a class="toggle-vis" data-column="16">Notes</a>
+		- <a class="toggle-vis" data-column="17">Options</a>
     </div>
-    <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
-      <table id="registration_table" class="display compact">
+    <div style="padding-top: 10px; padding-bottom: 30px; width:95%; margin:auto; overflow:auto">
+      <table id="schools_table" class="display compact">
         <thead>
           <tr>
             <th>Id</th>
@@ -114,11 +115,12 @@
             <th>Contact Email</th>
             <th>Status</th>
             <th>Notes</th>
+            <th>Options</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Populating table with data from the database-->
-          <?php
+		<!-- Populating table with data from the database-->
+        <?php
             require 'db_configuration.php';
             // Create connection
             $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
@@ -133,18 +135,35 @@
             if ($result->num_rows > 0) {
               // Create table with data from each row
               while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["id"]. "</td><td>" . $row["name"].
-                "</td><td>". $row["type"]. "</td><td>" .
-                $row["category"]. "</td><td>" . $row["grade_level_start"].
-                "</td><td>" . $row["grade_level_end"]. "</td><td>" .
-                $row["current_enrollment"]. "</td><td>" . $row["address_text"].
-                "</td><td>" . $row["state_name"]. "</td><td>" .
-                $row["state_code"]. "</td><td>" . $row["pin_code"].
-                "</td><td>" . $row["contact_name"]. "</td><td>" .
-                $row["contact_designation"]. "</td><td>" . $row["contact_phone"].
-                "</td><td>" . $row["contact_email"]. "</td><td>" . $row["status"].
-                "</td><td>" . $row["notes"]. "</td></tr>"; 
-                
+				  echo "<tr>
+					  	<td>". $row["id"]. "</td>
+						<td>" . $row["name"]. "</td>
+						<td>". $row["type"]. "</td>
+						<td>". $row["category"]. "</td>
+						<td>". $row["grade_level_start"]. "</td>
+                    	<td>". $row["grade_level_end"]. "</td>
+                    	<td>". $row["current_enrollment"]. "</td>
+                    	<td>". $row["address_text"]. "</td>
+                    	<td>". $row["state_name"]. "</td>
+                    	<td>". $row["state_code"]. "</td>
+                    	<td>". $row["pin_code"]. "</td>
+                    	<td>". $row["contact_name"]. "</td>
+                    	<td>". $row["contact_designation"]. "</td>
+                    	<td>". $row["contact_phone"]. "</td>
+                    	<td>". $row["contact_email"]. "</td>
+                    	<td>". $row["status"]. "</td>
+                    	<td>". $row["notes"]. "</td>
+                		<td>
+                  			<form action='school_edit.php' method='POST'>
+                    			<input type='hidden' name='id' value='". $row["id"] . "'>
+                    			<input type='submit' id='admin_buttons' name='edit' value='Edit'/>
+                  			</form>
+                  			<form action='school_delete.php' method='POST'>
+                    			<input type='hidden' name='id' value='". $row["id"] . "'>
+                    			<input type='submit' id='admin_buttons' name='delete' value='Delete'/>
+                  			</form>
+                		</td>
+                	</tr>";
               }
             } else {
               echo "0 results";
