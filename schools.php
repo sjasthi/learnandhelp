@@ -44,7 +44,7 @@
 				}
 				echo  '<td class="school_icon">
 							<a href="school_details.php?School_Id=' . $row['id'] . '" target="_blank">
-								<img src="images/school_default.png" alt="school image"></br><label>'. $row['id'] . '</label>
+								<img src="schools/' . $row['id'] . '/profile_image.png" alt="school image"></br><label>'. $row['id'] . '</label>
 							</a>
 						</td>';
 				if($counter % 5 == 0 && $counter > 0) {
