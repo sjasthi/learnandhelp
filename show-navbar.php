@@ -4,10 +4,10 @@ include 'show-button.php';
 function show_navbar() {
     echo '<div class="navbar">
       <a href="index.php" id="nav-logo"><img id="logo" src="images/learn_n_help_logo.png"></a>
-      <div>'; getButton(); echo '</div>
+	  <div>'; getButton(); echo '</div>
+	  <a href=schools.php>Schools</a>
       <a href="classes.php">Classes</a>
       <a href="causes.php">Causes</a>
-      <a href="schools.php">Schools</a>
       <a href="blog.php">Blog</a>
       <a href="meet_our_instructors.php">Meet our Instructors</a>
       <a href="contact_us.php">Contact Us</a>';
