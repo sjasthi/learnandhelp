@@ -5,6 +5,66 @@ require 'db_configuration.php';
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
+function admin_school_form($id){
+  $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+
+  if ($connection === false) {
+    die("Failed to connect to database: " . mysqli_connect_error());
+  }
+  $sql = "SELECT * FROM schools WHERE id = '$id'";
+  $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+  $name = $row["name"];
+  $type = $row["type"];
+  $category = $row["category"];
+  $grade_level_start = $row["grade_level_start"];
+  $grade_level_end = $row["grade_level_end"];
+  $current_enrollment = $row["current_enrollment"];
+  $address_text = $row["address_text"];
+  $state_name = $row["state_name"];
+  $state_code = $row["state_code"];
+  $pin_code = $row["pin_code"];
+  $contact_name = $row["contact_name"];
+  $contact_designation = $row["contact_designation"];
+  $contact_phone = $row["contact_phone"];
+  $contact_email = $row["contact_email"];
+  $status = $row["status"];
+  $notes = $row["notes"];
+  
+  echo "<div id= \"container_2\">
+  <form id=\"survey-form\" action=\"form-submit_classes.php\" method = \"post\">
+    <input type='hidden' name='id' value=$id>
+    <label id=\"name-label\">School Name</label>
+    <input type=\"text\" id=\"sponsers-name\" name=\"Class_Name\" class=\"form\" value=\"$name\" required><br><!--name--->
+    <label id=\"sponsers-email-label\">School Type</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$type\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Grade Start</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$grade_level_start\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Grade End</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$grade_level_end\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Current Enrollment</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$current_enrollment\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">School Address</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$address_text\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">State</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$state_name\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">State Code</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$state_code\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Zip Code</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$pin_code\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Contact Name</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_name\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Contact Designation</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_designation\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Contact Phone</label>
+    <input type=\"tel\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_phone\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Contact Email</label>
+    <input type=\"email\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_email\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Status</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$status\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Notes</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$notes\" required><br><!---email-->";
+  
+}
 
 function admin_class_form($Class_Id){
   $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);

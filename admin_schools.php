@@ -154,7 +154,7 @@
                     	<td>". $row["status"]. "</td>
                     	<td>". $row["notes"]. "</td>
                 		<td>
-                  			<form action='school_edit.php' method='POST'>
+                  			<form action='admin_school_edit.php' method='POST'>
                     			<input type='hidden' name='id' value='". $row["id"] . "'>
                     			<input type='submit' id='admin_buttons' name='edit' value='Edit'/>
                   			</form>
