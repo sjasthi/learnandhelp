@@ -29,7 +29,7 @@
     <?php
       admin_school_form($id);
     ?>
-    <input type="hidden" id="action" name="action" value="admin_edit_classes">
+    <input type="hidden" id="action" name="action" value="admin_edit_school">
 		<br>
 		<input type="submit" id="submit-registration" name="submit" value="Submit">
 	  </form><!---survey-form--->

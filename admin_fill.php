@@ -31,7 +31,7 @@ function admin_school_form($id){
   $notes = $row["notes"];
   
   echo "<div id= \"container_2\">
-  <form id=\"survey-form\" action=\"form-submit_classes.php\" method = \"post\">
+  <form id=\"survey-form\" action=\"form-submit_school.php\" method = \"post\">
     <input type='hidden' name='id' value=$id>
     <label id=\"name-label\">School Name</label>
     <input type=\"text\" id=\"sponsers-name\" name=\"Class_Name\" class=\"form\" value=\"$name\" required><br><!--name--->
@@ -45,10 +45,11 @@ function admin_school_form($id){
     <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$current_enrollment\" required><br><!---email-->
     <label id=\"sponsers-email-label\">School Address</label>
     <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$address_text\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">State</label>
+    <label id=\"sponsers-email-label\">State</label><br>
     <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$state_name\" required><br><!---email-->
     <label id=\"sponsers-email-label\">State Code</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$state_code\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$state_code\" required><br><!---email--></div>
+    <div id=\"right\">
     <label id=\"sponsers-email-label\">Zip Code</label>
     <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$pin_code\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Contact Name</label>
@@ -59,10 +60,10 @@ function admin_school_form($id){
     <input type=\"tel\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_phone\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Contact Email</label>
     <input type=\"email\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_email\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Status</label>
+    <label id=\"sponsers-email-label\">Status</label><br>
     <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$status\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Notes</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$notes\" required><br><!---email-->";
+    <label id=\"sponsers-email-label\">Notes</label><br>
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$notes\" required><br></div><!---email-->";
   
 }
 
@@ -84,7 +85,8 @@ function admin_class_form($Class_Id){
     <label id=\"name-label\">Course Name</label>
     <input type=\"text\" id=\"sponsers-name\" name=\"Class_Name\" class=\"form\" value=\"$class_name\" required><br><!--name--->
     <label id=\"sponsers-email-label\">Course Description</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$description\" required><br><!---email-->";
+    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$description\" required><br><!---email-->
+    </div>";
   
 }
 
