@@ -34,36 +34,38 @@ function admin_school_form($id){
   <form id=\"survey-form\" action=\"form-submit_school.php\" method = \"post\">
     <input type='hidden' name='id' value=$id>
     <label id=\"name-label\">School Name</label>
-    <input type=\"text\" id=\"sponsers-name\" name=\"Class_Name\" class=\"form\" value=\"$name\" required><br><!--name--->
+    <input type=\"text\" id=\"sponsers-name\" name=\"name\" class=\"form\" value=\"$name\" required><br><!--name--->
     <label id=\"sponsers-email-label\">School Type</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$type\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"type\" class=\"form\" value=\"$type\" required><br><!---email-->
+    <label id=\"sponsers-email-label\">Category</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"category\" class=\"form\" value=\"$category\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Grade Start</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$grade_level_start\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"grade_level_start\" class=\"form\" value=\"$grade_level_start\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Grade End</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$grade_level_end\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"grade_level_end\" class=\"form\" value=\"$grade_level_end\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Current Enrollment</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$current_enrollment\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"current_enrollment\" class=\"form\" value=\"$current_enrollment\" required><br><!---email-->
     <label id=\"sponsers-email-label\">School Address</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$address_text\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"address_text\" class=\"form\" value=\"$address_text\" required><br><!---email-->
     <label id=\"sponsers-email-label\">State</label><br>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$state_name\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">State Code</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$state_code\" required><br><!---email--></div>
+    <input type=\"text\" id=\"sponsers-email\" name=\"state_name\" class=\"form\" value=\"$state_name\" required><br><!---email--></div>
     <div id=\"right\">
+    <label id=\"sponsers-email-label\">State Code</label>
+    <input type=\"text\" id=\"sponsers-email\" name=\"state_code\" class=\"form\" value=\"$state_code\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Zip Code</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$pin_code\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"pin_code\" class=\"form\" value=\"$pin_code\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Contact Name</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_name\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"contact_name\" class=\"form\" value=\"$contact_name\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Contact Designation</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_designation\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"contact_designation\" class=\"form\" value=\"$contact_designation\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Contact Phone</label>
-    <input type=\"tel\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_phone\" required><br><!---email-->
+    <input type=\"tel\" id=\"sponsers-email\" name=\"contact_phone\" class=\"form\" value=\"$contact_phone\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Contact Email</label>
-    <input type=\"email\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$contact_email\" required><br><!---email-->
+    <input type=\"email\" id=\"sponsers-email\" name=\"contact_email\" class=\"form\" value=\"$contact_email\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Status</label><br>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$status\" required><br><!---email-->
+    <input type=\"text\" id=\"sponsers-email\" name=\"status\" class=\"form\" value=\"$status\" required><br><!---email-->
     <label id=\"sponsers-email-label\">Notes</label><br>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$notes\" required><br></div><!---email-->";
+    <input type=\"text\" id=\"sponsers-email\" name=\"notes\" class=\"form\" value=\"$notes\" required><br></div><!---email-->";
   
 }
 
