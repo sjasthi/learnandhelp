@@ -21,7 +21,8 @@ if (isset($_POST['action'])) {
 } else {
 	$action = '';
 }
-if($action == 'admin_edit_school'){
+
+if($action == 'admin_edit_school' or $action == 'admin_add_school'){
 	$name = $_POST["name"];
 	$type = $_POST["type"];
 	$category = $_POST["category"];
@@ -38,34 +39,30 @@ if($action == 'admin_edit_school'){
 	$contact_email = $_POST["contact_email"];
 	$status = $_POST["status"];
 	$notes = $_POST["notes"];
-}
-else {
+} else {
 	$id = $_SESSION['id'];
     $sql = "SELECT * FROM schools WHERE id = '$id'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
-		$action = '';
-		$id = $row['id'];
-		$name = $row["name"];
-		$type = $row["type"];
-		$category = $row["category"];
-		$grade_level_start = $row["grade_level_start"];
-		$grade_level_end = $row["grade_level_end"];
-		$current_enrollment = $row["current_enrollment"];
-		$address_text = $row["address_text"];
-		$state_name = $row["state_name"];
-		$state_code = $row["state_code"];
-		$pin_code = $row["pin_code"];
-		$contact_name = $row["contact_name"];
-		$contact_designation = $row["contact_designation"];
-		$contact_phone = $row["contact_phone"];
-		$contact_email = $row["contact_email"];
-		$status = $row["status"];
-		$notes = $row["notes"];
-
+	$action = '';
+	$id = $row['id'];
+	$name = $row["name"];
+	$type = $row["type"];
+	$category = $row["category"];
+	$grade_level_start = $row["grade_level_start"];
+	$grade_level_end = $row["grade_level_end"];
+	$current_enrollment = $row["current_enrollment"];
+	$address_text = $row["address_text"];
+	$state_name = $row["state_name"];
+	$state_code = $row["state_code"];
+	$pin_code = $row["pin_code"];
+	$contact_name = $row["contact_name"];
+	$contact_designation = $row["contact_designation"];
+	$contact_phone = $row["contact_phone"];
+	$contact_email = $row["contact_email"];
+	$status = $row["status"];
+	$notes = $row["notes"];
 }
-
-
 
 if($action == "admin_edit_school") {
 	$id = $_POST['id'];
@@ -88,11 +85,33 @@ if($action == "admin_edit_school") {
 			notes = '$notes'
 			WHERE id = '$id';";
 	header("Location: admin_schools.php");
+} elseif($action == 'admin_add_school') {
+	$sql = "INSERT INTO schools VALUES (
+		NULL,
+		'$name',
+		'$type',
+		'$category',
+		'$grade_level_start', 
+		'$grade_level_end',
+		'$current_enrollment',
+	    '$address_text',
+	    '$state_name',
+		'$state_code',
+		'$pin_code',
+		'$contact_name',
+		'$contact_designation',
+		'$contact_phone',
+		'$contact_email',
+		'$status',
+		'$notes');";
+	header("Location: admin_schools.php");
 }
 
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
-  }
+}
+
+
 
 mysqli_close($connection);
 

@@ -154,11 +154,11 @@
                     	<td>". $row["status"]. "</td>
                     	<td>". $row["notes"]. "</td>
                 		<td>
-                  			<form action='admin_school_edit.php' method='POST'>
+                  			<form action='admin_edit_school.php' method='POST'>
                     			<input type='hidden' name='id' value='". $row["id"] . "'>
                     			<input type='submit' id='admin_buttons' name='edit' value='Edit'/>
                   			</form>
-                  			<form action='school_delete.php' method='POST'>
+                  			<form action='admin_delete_school.php' method='POST'>
                     			<input type='hidden' name='id' value='". $row["id"] . "'>
                     			<input type='submit' id='admin_buttons' name='delete' value='Delete'/>
                   			</form>
@@ -172,6 +172,12 @@
             ?>
         </tbody>
       </table>
-    </div>
+	</div>
+	<h3>Add New School</h3>
+    <form action="admin_edit_school.php" method="POST" id="add_school">
+		<input type="hidden" name="id" value="">
+		<input type="hidden" name="action" value="Add_School">
+       	<input type="submit" value="Add School" style="width: 15%">
+    </form>
   </body>
 </html>

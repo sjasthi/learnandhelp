@@ -6,67 +6,237 @@ require 'db_configuration.php';
     session_start();
   }
 function admin_school_form($id){
-  $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+	if ($id != null) {   	
+		$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
-  if ($connection === false) {
-    die("Failed to connect to database: " . mysqli_connect_error());
-  }
-  $sql = "SELECT * FROM schools WHERE id = '$id'";
-  $row = mysqli_fetch_array(mysqli_query($connection, $sql));
-  $name = $row["name"];
-  $type = $row["type"];
-  $category = $row["category"];
-  $grade_level_start = $row["grade_level_start"];
-  $grade_level_end = $row["grade_level_end"];
-  $current_enrollment = $row["current_enrollment"];
-  $address_text = $row["address_text"];
-  $state_name = $row["state_name"];
-  $state_code = $row["state_code"];
-  $pin_code = $row["pin_code"];
-  $contact_name = $row["contact_name"];
-  $contact_designation = $row["contact_designation"];
-  $contact_phone = $row["contact_phone"];
-  $contact_email = $row["contact_email"];
-  $status = $row["status"];
-  $notes = $row["notes"];
-  
+  		if ($connection === false) {
+    		die("Failed to connect to database: " . mysqli_connect_error());
+  		}
+  		$sql = "SELECT * FROM schools WHERE id = '$id'";
+  		$row = mysqli_fetch_array(mysqli_query($connection, $sql));
+  		$name = $row["name"];
+  		$type = $row["type"];
+  		$category = $row["category"];
+  		$grade_level_start = $row["grade_level_start"];
+  		$grade_level_end = $row["grade_level_end"];
+  		$current_enrollment = $row["current_enrollment"];
+  		$address_text = $row["address_text"];
+  		$state_name = $row["state_name"];
+  		$state_code = $row["state_code"];
+  		$pin_code = $row["pin_code"];
+  		$contact_name = $row["contact_name"];
+  		$contact_designation = $row["contact_designation"];
+  		$contact_phone = $row["contact_phone"];
+  		$contact_email = $row["contact_email"];
+  		$status = $row["status"];
+  		$notes = $row["notes"];
+	} else {
+  		$name = "";
+  		$type = "";
+  		$category = "";
+  		$grade_level_start = "";
+  		$grade_level_end = "";
+  		$current_enrollment = "";
+  		$address_text = "";
+  		$state_name = "";
+  		$state_code = "";
+  		$pin_code = "";
+  		$contact_name = "";
+  		$contact_designation = "";
+  		$contact_phone = "";
+  		$contact_email = "";
+  		$status = "";
+  		$notes = "";
+	}
   echo "<div id= \"container_2\">
   <form id=\"survey-form\" action=\"form-submit_school.php\" method = \"post\">
     <input type='hidden' name='id' value=$id>
-    <label id=\"name-label\">School Name</label>
-    <input type=\"text\" id=\"sponsers-name\" name=\"name\" class=\"form\" value=\"$name\" required><br><!--name--->
-    <label id=\"sponsers-email-label\">School Type</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"type\" class=\"form\" value=\"$type\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Category</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"category\" class=\"form\" value=\"$category\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Grade Start</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"grade_level_start\" class=\"form\" value=\"$grade_level_start\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Grade End</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"grade_level_end\" class=\"form\" value=\"$grade_level_end\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Current Enrollment</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"current_enrollment\" class=\"form\" value=\"$current_enrollment\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">School Address</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"address_text\" class=\"form\" value=\"$address_text\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">State</label><br>
-    <input type=\"text\" id=\"sponsers-email\" name=\"state_name\" class=\"form\" value=\"$state_name\" required><br><!---email--></div>
+    <label id=\"school-name-label\">School Name</label>
+    <input type=\"text\" id=\"school-name\" name=\"name\" class=\"form\" value=\"$name\" required><br><!--name--->
+	<label id=\"school-type-label\">School Type</label>
+	<select id=\"school-type-dropdown\" name=\"type\" required><!--type--->
+    	<option disabled value>Select School Type</option>
+      	<option value='primary school' ";
+        	if ($type == "primary school")
+            	echo "selected";
+      	echo  ">primary school</option>
+      	<option value='upper primary school' ";
+        	if ($type == "upper primary school")
+            	echo "selected";
+      	echo ">upper primary school</option>
+      	<option value='high school' ";
+        	if ($type == "high school")
+            	echo "selected";
+      	echo ">high school</option>
+	  	<option value='other' ";
+        	if ($type == "other")
+            	echo "selected";
+      	echo ">other</option>
+	</select></br>
+	<label id=\"school-category-label\">Category</label>
+	<select id=\"school-category-dropdown\" name=\"category\" required><!--category--->
+    	<option disabled value>Select School Category</option>
+      	<option value='private' ";
+        	if ($category == "private")
+            	echo "selected";
+      	echo  ">private</option>
+      	<option value='public' ";
+        	if ($category == "public")
+            	echo "selected";
+      	echo ">public</option>
+	  	<option value='other' ";
+        	if ($category == "other")
+            	echo "selected";
+      	echo ">other</option>
+	</select></br>
+	<label id=\"grade-level-start-label\">Grade Level Start</label>
+	<select id=\"grade-level-start-dropdown\" name=\"grade_level_start\" required><!--grade_level_start--->
+    	<option disabled value>Select Grade Level Start</option>
+      	<option value='1' ";
+        	if ($grade_level_start == "1")
+            	echo "selected";
+      	echo  ">1</option>
+      	<option value='2' ";
+        	if ($grade_level_start == "2")
+            	echo "selected";
+      	echo ">2</option>
+      	<option value='3' ";
+        	if ($grade_level_start == "3")
+            	echo "selected";
+      	echo ">3</option>
+	  	<option value='4' ";
+        	if ($grade_level_start == "4")
+            	echo "selected";
+      	echo ">4</option>
+      	<option value='5' ";
+        	if ($grade_level_start == "5")
+            	echo "selected";
+      	echo ">5</option>
+	  	<option value='6' ";
+        	if ($grade_level_start == "6")
+            	echo "selected";
+      	echo ">6</option>
+      	<option value='7' ";
+        	if ($grade_level_start == "7")
+            	echo "selected";
+      	echo ">7</option>
+	  	<option value='8' ";
+        	if ($grade_level_start == "8")
+            	echo "selected";
+      	echo ">8</option>
+      	<option value='9' ";
+        	if ($grade_level_start == "9")
+            	echo "selected";
+      	echo ">9</option>
+	  	<option value='10' ";
+        	if ($grade_level_start == "10")
+            	echo "selected";
+      	echo ">10</option>
+	</select></br>
+	<label id=\"grade-level-end-label\">Grade Level End</label>
+	<select id=\"grade-level-end-dropdown\" name=\"grade_level_end\" required><!--grade_level_end--->
+    	<option disabled value>Select Grade Level End</option>
+      	<option value='1' ";
+        	if ($grade_level_end == "1")
+            	echo "selected";
+      	echo  ">1</option>
+      	<option value='2' ";
+        	if ($grade_level_end == "2")
+            	echo "selected";
+      	echo ">2</option>
+      	<option value='3' ";
+        	if ($grade_level_end == "3")
+            	echo "selected";
+      	echo ">3</option>
+	  	<option value='4' ";
+        	if ($grade_level_end == "4")
+            	echo "selected";
+      	echo ">4</option>
+      	<option value='5' ";
+        	if ($grade_level_end == "5")
+            	echo "selected";
+      	echo ">5</option>
+	  	<option value='6' ";
+        	if ($grade_level_end == "6")
+            	echo "selected";
+      	echo ">6</option>
+      	<option value='7' ";
+        	if ($grade_level_end == "7")
+            	echo "selected";
+      	echo ">7</option>
+	  	<option value='8' ";
+        	if ($grade_level_end == "8")
+            	echo "selected";
+      	echo ">8</option>
+      	<option value='9' ";
+        	if ($grade_level_end == "9")
+            	echo "selected";
+      	echo ">9</option>
+	  	<option value='10' ";
+        	if ($grade_level_end == "10")
+            	echo "selected";
+      	echo ">10</option>
+	</select></br>
+	<label id=\"current-enrollment-label\">Current Enrollment</label>
+    <input type=\"text\" id=\"current-enrollment\" name=\"current_enrollment\" class=\"form\" value=\"$current_enrollment\" required><br><!---current_enrollment-->
+    <label id=\"school-address--label\">School Address</label>
+    <input type=\"text\" id=\"school-address\" name=\"address_text\" class=\"form\" value=\"$address_text\" required><br><!---address_text-->
+    <label id=\"state-name-label\">State</label><br>
+    <input type=\"text\" id=\"state-name\" name=\"state_name\" class=\"form\" value=\"$state_name\" required><br><!---state_name--></div>
     <div id=\"right\">
-    <label id=\"sponsers-email-label\">State Code</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"state_code\" class=\"form\" value=\"$state_code\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Zip Code</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"pin_code\" class=\"form\" value=\"$pin_code\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Contact Name</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"contact_name\" class=\"form\" value=\"$contact_name\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Contact Designation</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"contact_designation\" class=\"form\" value=\"$contact_designation\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Contact Phone</label>
-    <input type=\"tel\" id=\"sponsers-email\" name=\"contact_phone\" class=\"form\" value=\"$contact_phone\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Contact Email</label>
-    <input type=\"email\" id=\"sponsers-email\" name=\"contact_email\" class=\"form\" value=\"$contact_email\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Status</label><br>
-    <input type=\"text\" id=\"sponsers-email\" name=\"status\" class=\"form\" value=\"$status\" required><br><!---email-->
-    <label id=\"sponsers-email-label\">Notes</label><br>
-    <input type=\"text\" id=\"sponsers-email\" name=\"notes\" class=\"form\" value=\"$notes\" required><br></div><!---email-->";
-  
+    <label id=\"state-code-label\">State Code</label>
+    <input type=\"text\" id=\"state-code\" name=\"state_code\" class=\"form\" value=\"$state_code\" required><br><!---state_code-->
+    <label id=\"pin-code-label\">Pin Code</label>
+    <input type=\"text\" id=\"pin-code\" name=\"pin_code\" class=\"form\" value=\"$pin_code\" required><br><!---pin_code-->
+    <label id=\"contact-name-label\">Contact Name</label>
+    <input type=\"text\" id=\"contact-name\" name=\"contact_name\" class=\"form\" value=\"$contact_name\" required><br><!---contact_name-->
+
+	<label id=\"contact-designation-label\">Contact Designation</label>
+	<select id=\"contact-designation-dropdown\" name=\"contact_designation\" required><!--contact designation--->
+    	<option disabled value>Select Conect Designation</option>
+      	<option value='teacher' ";
+        	if ($contact_designation == "teacher")
+            	echo "selected";
+      	echo  ">teacher</option>
+      	<option value='head master' ";
+        	if ($contact_designation == "head master")
+            	echo "selected";
+      	echo ">head master</option>
+      	<option value='volunteer' ";
+        	if ($contact_designation == "volunteer")
+            	echo "selected";
+      	echo ">volunteer</option>
+	  	<option value='other' ";
+        	if ($contact_designation == "other")
+            	echo "selected";
+      	echo ">other</option>
+	</select></br>
+	<label id=\"contact-phone-label\">Contact Phone</label>
+    <input type=\"tel\" id=\"contact-phone\" name=\"contact_phone\" class=\"form\" value=\"$contact_phone\" required><br><!---contact_phone-->
+    <label id=\"contact-email-label\">Contact Email</label>
+    <input type=\"email\" id=\"contact-email\" name=\"contact_email\" class=\"form\" value=\"$contact_email\" required><br><!---contact_email-->
+	<label id=\"status-label\">Status</label><br>
+	<select id=\"status-dropdown\" name=\"status\" required><!--status--->
+    	<option disabled value>Select School Status</option>
+      	<option value='proposed' ";
+        	if ($status == "proposed")
+            	echo "selected";
+      	echo  ">proposed</option>
+      	<option value='rejected' ";
+        	if ($status == "rejected")
+            	echo "selected";
+      	echo ">rejected</option>
+      	<option value='approved' ";
+        	if ($status == "approved")
+            	echo "selected";
+      	echo ">approved</option>
+	  	<option value='completed' ";
+        	if ($status == "completed")
+            	echo "selected";
+      	echo ">completed</option>
+	</select></br>
+	<label id=\"notes-label\">Notes</label><br>
+    <input type=\"text\" id=\"notes\" name=\"notes\" class=\"form\" value=\"$notes\"><br></div><!---notes-->";
 }
 
 function admin_class_form($Class_Id){

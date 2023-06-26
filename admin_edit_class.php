@@ -5,7 +5,7 @@
   }
  ?>
 
-<?php $id = $_POST['id']?>
+<?php $Class_Id = $_POST['Class_Id']?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,17 +21,16 @@
     <?php show_navbar(); ?>
     <header class="inverse">
       <div class="container">
-        <h1> <span class="accent-text">Schools Form</span></h1>
+        <h1> <span class="accent-text">Class Editor</span></h1>
       </div>
     </header>
-    <h3> Edit Schools </h3>
     <div id="container_2">
     <?php
-      admin_school_form($id);
+      admin_class_form($Class_Id);
     ?>
-    <input type="hidden" id="action" name="action" value="admin_edit_school">
+    <input type="hidden" id="action" name="action" value="admin_edit_class">
 		<br>
-		<input type="submit" id="submit-registration" name="submit" value="Submit">
+		<input type="submit" id="submit-class" name="submit" value="Submit">
 	  </form><!---survey-form--->
 	</div>
   </body>
