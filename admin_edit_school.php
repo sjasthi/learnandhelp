@@ -5,7 +5,8 @@
   }
  ?>
 
-<?php $id = $_POST['id']?>
+<?php $id = $_POST['id'] ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,6 +16,12 @@
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
+<?php 
+  if(isset($_POST['id'])) echo $_POST['id'];
+  else echo "No ID set";  
+  $id = $_POST['id']
+?>
+
     <?php include 'show-navbar.php';
           include 'admin_fill.php';
           ?>
@@ -39,16 +46,50 @@
 	  	} else {  
 			if($id != null) {
 				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_school\">
-			  	<br/>
+			  	<br>
 			  	<input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
 			} else {
-				echo "<input type='hidden' id='action' name='action' value='admin_add_school'>
-		        <br/>
+				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_add_school\">
+		        <br>
 		        <input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
 			}
 		}
     ?>
 	  </form><!---survey-form--->
+	</div>
+    <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
+      <table id="school_media">
+		<?php
+		$media_files = array_diff(scandir('schools/' . $id . '/'), array('..', '.'));
+		$counter = 0;  
+        while($counter < count($media_files)) {
+			if($counter == 0) {
+				echo '<tr>';
+			}
+			echo  '<td class="school_media">
+					<a href="admin_school_media.php?id=' . $id . '&filename='. $media_files[$counter + 2] .'">
+						<img src="schools/' . $id . '/' . $media_files[$counter + 2] . '" alt="school image">
+						<br>
+						<label>' . $media_files[$counter + 2]. '</label>
+					</a>
+				</td>';
+			if($counter % 5 == 0 && $counter > 0) {
+				echo '</tr>';
+				if($counter < count($media_files)) {
+					echo '<tr>';
+				}
+			}
+			$counter++;
+		}
+		echo "</table><br><br>
+    	<form action='admin_uploads_school.php' method='POST' enctype='multipart/form-data'>
+            Select media files to upload:<br>
+			<input type='hidden' name='id' value='". $id . "'>
+            <input type=\"file\" name=\"files[]\" multiple>
+			<br>
+            <input type=\"submit\" name=\"submit\" value=\"Upload Media\" >
+		</form>";
+    ?>
 	</div>
   </body>
 </html>

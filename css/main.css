@@ -188,6 +188,13 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
     box-sizing: border-box;
   }
 
+input[type=file]::file-selector-button {
+    background-color: #99D930;
+    color: black;
+	height: 40px;
+    border-radius: 4px;
+}
+
 #usermail, #password, #firstname, #lastname {
     width: 30%;
 }
@@ -404,7 +411,7 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 }
 
 /* schools and school details */
-#school_icons {
+#school_icons, #school_media {
   display: inline-block;
 }
 
@@ -413,7 +420,11 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
   height: 200px;
 }
 
-.school_icon {
+#school_media img{
+  width: 200px;
+}
+
+.school_icon, .school_media {
   display: inline-block;
   padding:25px;
   padding-bottom: 0px;
@@ -421,6 +432,12 @@ input[type=text],input[type=email], input[type=tel],input[type=password], input[
 
 .school_icon label {
   font-weight: bold;
+}
+
+.school_media label {
+  font-weight: normal;
+  background: white;
+  color: black;
 }
 
 .school_details label {

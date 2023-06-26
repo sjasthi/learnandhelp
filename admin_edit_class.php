@@ -32,7 +32,7 @@
 	      unset($_SESSION['message']);
 	  } else {
 		  echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_class\">
-		  <br/>
+		  <br>
 		  <input type=\"submit\" id=\"submit-class\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
 	  } ?>
 	  </form><!---survey-form--->

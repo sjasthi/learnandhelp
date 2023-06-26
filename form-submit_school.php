@@ -84,7 +84,7 @@ if($action == "admin_edit_school") {
 			status = '$status',
 			notes = '$notes'
 			WHERE id = '$id';";
-    $_SESSION['message'] = '<h4>Edits Submitted<h4><br/>';
+    $_SESSION['message'] = '<h4>Edits Submitted<h4><br>';
 } elseif($action == 'admin_add_school') {
 	$sql = "INSERT INTO schools VALUES (
 		NULL,

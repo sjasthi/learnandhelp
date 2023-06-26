@@ -44,7 +44,7 @@ if($action == "admin_edit_class") {
 			Class_Name = '$Class_Name',
 			Description = '$Description'
 			WHERE Class_Id = '$Class_Id';";
-	$_SESSION['message'] = '<h4>Edits Submitted<h4><br/>';
+	$_SESSION['message'] = '<h4>Edits Submitted<h4><br>';
 	//	header("Location: admin_edit_class.php");
 }
 

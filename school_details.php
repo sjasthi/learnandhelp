@@ -79,7 +79,32 @@
 	<div class=\"school_notes\">
 	  <span class=\"inverse\"><label id=\"notes-label\">Notes</label></span><br>
 	  <span>" . $notes . "</span>
-    <div>";
+	</div>
+    <div> 
+	    <table id=\"school_media\">";
+			$media_files = array_diff(scandir('schools/' . $School_Id . '/'), array('..', '.'));
+			$counter = 0;  
+        	while($counter < count($media_files)) {
+				if($counter == 0) {
+					echo '<tr>';
+				}
+				if(!str_contains($media_files[$counter + 2], "profile_image")) {
+					echo  '<td class="school_media">
+						<img src="schools/' . $School_Id . '/' . $media_files[$counter + 2] . '" alt="school image">
+						<br>
+						<label>' . $media_files[$counter + 2] . '</label>
+					</td>';
+				}
+				if($counter % 5 == 0 && $counter > 0) {
+					echo '</tr>';
+					if($counter < count($media_files)) {
+						echo '<tr>';
+					}
+				}
+				$counter++;
+			}
+		echo "</table>
+	</div>";
 ?>
   </body>
 </html>
