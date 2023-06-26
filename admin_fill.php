@@ -72,7 +72,7 @@ function admin_school_form($id){
         	if ($type == "other")
             	echo "selected";
       	echo ">other</option>
-	</select></br>
+	</select><br>
 	<label id=\"school-category-label\">Category</label>
 	<select id=\"school-category-dropdown\" name=\"category\" required><!--category--->
     	<option disabled value>Select School Category</option>
@@ -88,7 +88,7 @@ function admin_school_form($id){
         	if ($category == "other")
             	echo "selected";
       	echo ">other</option>
-	</select></br>
+	</select><br>
 	<label id=\"grade-level-start-label\">Grade Level Start</label>
 	<select id=\"grade-level-start-dropdown\" name=\"grade_level_start\" required><!--grade_level_start--->
     	<option disabled value>Select Grade Level Start</option>
@@ -132,7 +132,7 @@ function admin_school_form($id){
         	if ($grade_level_start == "10")
             	echo "selected";
       	echo ">10</option>
-	</select></br>
+	</select><br>
 	<label id=\"grade-level-end-label\">Grade Level End</label>
 	<select id=\"grade-level-end-dropdown\" name=\"grade_level_end\" required><!--grade_level_end--->
     	<option disabled value>Select Grade Level End</option>
@@ -176,7 +176,7 @@ function admin_school_form($id){
         	if ($grade_level_end == "10")
             	echo "selected";
       	echo ">10</option>
-	</select></br>
+	</select><br>
 	<label id=\"current-enrollment-label\">Current Enrollment</label>
     <input type=\"text\" id=\"current-enrollment\" name=\"current_enrollment\" class=\"form\" value=\"$current_enrollment\" required><br><!---current_enrollment-->
     <label id=\"school-address--label\">School Address</label>
@@ -210,7 +210,7 @@ function admin_school_form($id){
         	if ($contact_designation == "other")
             	echo "selected";
       	echo ">other</option>
-	</select></br>
+	</select><br>
 	<label id=\"contact-phone-label\">Contact Phone</label>
     <input type=\"tel\" id=\"contact-phone\" name=\"contact_phone\" class=\"form\" value=\"$contact_phone\" required><br><!---contact_phone-->
     <label id=\"contact-email-label\">Contact Email</label>
@@ -234,7 +234,7 @@ function admin_school_form($id){
         	if ($status == "completed")
             	echo "selected";
       	echo ">completed</option>
-	</select></br>
+	</select><br>
 	<label id=\"notes-label\">Notes</label><br>
     <input type=\"text\" id=\"notes\" name=\"notes\" class=\"form\" value=\"$notes\"><br></div><!---notes-->";
 }
@@ -311,7 +311,7 @@ function admin_fill_form($Reg_Id) {
       <label id=\"students-name-label\">Student's Name</label>
       <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required value=\"$student_name\"><br>
       <label id=\"students-email-label\"> Student's Email</label>
-      <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br
+      <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br>
       <label id=\"students-number-label\">Student's Phone Number</label>
       <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required>
 

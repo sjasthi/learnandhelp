@@ -55,29 +55,29 @@
 	  <div id=\"school_icons\" class=\"school_icon\">
 	      <img src=\"schools/$School_Id/profile_image.png\" alt=\"school image\">
 	  </div>
-	  </br>
+	  <br>
       <div id= \"container_2\" class=\"school_details\">
-      <label id=\"id-label\">School ID:</label><span class=\"school_details\"> " . $School_Id . "</span></br>
-      <label id=\"name-label\">School Name:</label><span class=\"school_details\"> " . $school_name . "</span></br>
-      <label id=\"type-label\">Type:</label><span class=\"school_details\"> " . $school_type . "</span></br>
-      <label id=\"category-label\">Category:</label><span class=\"school_details\"> " . $school_type . "</span></br>
-      <label id=\"grade-range-label\">Grades:</label><span class=\"school_details\"> " . $grade_level_start . " to " . $grade_level_end . "</span></br>
-      <label id=\"enrollment-label\">Current Enrollment:</label><span class=\"school_details\"> " . $current_enrollment . "</span></br>
-      <label id=\"address-label\">Address:</label><span class=\"school_details\"> " . $address_text . "</span></br>
-      <label id=\"state-name-label\">State Name:</label><span class=\"school_details\"> " . $state_name . "</span></br>
-      <label id=\"state-code-label\">State Code:</label><span class=\"school_details\"> " . $state_code . "</span></br>
+      <label id=\"id-label\">School ID:</label><span class=\"school_details\"> " . $School_Id . "</span><br>
+      <label id=\"name-label\">School Name:</label><span class=\"school_details\"> " . $school_name . "</span><br>
+      <label id=\"type-label\">Type:</label><span class=\"school_details\"> " . $school_type . "</span><br>
+      <label id=\"category-label\">Category:</label><span class=\"school_details\"> " . $school_type . "</span><br>
+      <label id=\"grade-range-label\">Grades:</label><span class=\"school_details\"> " . $grade_level_start . " to " . $grade_level_end . "</span><br>
+      <label id=\"enrollment-label\">Current Enrollment:</label><span class=\"school_details\"> " . $current_enrollment . "</span><br>
+      <label id=\"address-label\">Address:</label><span class=\"school_details\"> " . $address_text . "</span><br>
+      <label id=\"state-name-label\">State Name:</label><span class=\"school_details\"> " . $state_name . "</span><br>
+      <label id=\"state-code-label\">State Code:</label><span class=\"school_details\"> " . $state_code . "</span><br>
       <label id=\"type-label\">Pin Code:</label><span class=\"school_details\"> " . $pin_code . "</span>
       </div>
 
 	  <div id=\"right\" class=\"school_details\">
-      <label id=\"contact-name-label\">Contact Name:</label><span class=\"school_details\"> " . $contact_name . "</span></br>
-      <label id=\"contact-designation-label\">Contact Designation:</label><span class=\"school_details\"> " . $contact_designation . "</span></br>
-      <label id=\"contact-number-label\">Contact Phone Number:</label><span class=\"school_details\"> " . $contact_phone . "</span></br>
-	  <label id=\"contact-email-label\">Contact Email:</label><span class=\"school_details\"> " . $contact_email . "</span></br>
+      <label id=\"contact-name-label\">Contact Name:</label><span class=\"school_details\"> " . $contact_name . "</span><br>
+      <label id=\"contact-designation-label\">Contact Designation:</label><span class=\"school_details\"> " . $contact_designation . "</span><br>
+      <label id=\"contact-number-label\">Contact Phone Number:</label><span class=\"school_details\"> " . $contact_phone . "</span><br>
+	  <label id=\"contact-email-label\">Contact Email:</label><span class=\"school_details\"> " . $contact_email . "</span><br>
 	  <label id=\"status-label\">Status:</label><span class=\"school_details\"> " . $status . "</span>
 	</div>
 	<div class=\"school_notes\">
-	  <span class=\"inverse\"><label id=\"notes-label\">Notes</label></span></br>
+	  <span class=\"inverse\"><label id=\"notes-label\">Notes</label></span><br>
 	  <span>" . $notes . "</span>
     <div>";
 ?>
