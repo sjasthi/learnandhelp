@@ -33,14 +33,21 @@
     <div id="container_2">
 	<?php
 	    admin_school_form($id);
-        if($id != null) {
-			echo "<input type='hidden' id='action' name='action' value='admin_edit_school'>";
-		} else {
-			echo "<input type='hidden' id='action' name='action' value='admin_add_school'>";
+     	if(isset($_SESSION['message'])) {
+        	echo $_SESSION['message'];
+	      	unset($_SESSION['message']);
+	  	} else {  
+			if($id != null) {
+				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_school\">
+			  	<br/>
+			  	<input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
+			} else {
+				echo "<input type='hidden' id='action' name='action' value='admin_add_school'>
+		        <br/>
+		        <input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
+			}
 		}
     ?>
-		<br>
-		<input type="submit" id="submit-school" name="submit" value="Submit">
 	  </form><!---survey-form--->
 	</div>
   </body>

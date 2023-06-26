@@ -252,12 +252,12 @@ function admin_class_form($Class_Id){
   $description = $row["Description"];
 
   echo "<div id= \"container_2\">
-  <form id=\"survey-form\" action=\"form-submit_classes.php\" method = \"post\">
+  <form id=\"survey-form\" action=\"form-submit_class.php\" method = \"post\" onSubmit=\"window.location.reload()\">
     <input type='hidden' name='Class_Id' value=$Class_Id>
     <label id=\"name-label\">Course Name</label>
-    <input type=\"text\" id=\"sponsers-name\" name=\"Class_Name\" class=\"form\" value=\"$class_name\" required><br><!--name--->
-    <label id=\"sponsers-email-label\">Course Description</label>
-    <input type=\"text\" id=\"sponsers-email\" name=\"Description\" class=\"form\" value=\"$description\" required><br><!---email-->
+    <input type=\"text\" id=\"class-name\" name=\"Class_Name\" class=\"form\" value=\"$class_name\" required><br><!--class_name--->
+    <label id=\"description-label\">Course Description</label>
+    <input type=\"text\" id=\"description\" name=\"Description\" class=\"form\" value=\"$description\" required><br><!---description-->
     </div>";
   
 }

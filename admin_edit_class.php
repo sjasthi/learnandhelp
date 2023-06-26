@@ -27,10 +27,14 @@
     <div id="container_2">
     <?php
       admin_class_form($Class_Id);
-    ?>
-    <input type="hidden" id="action" name="action" value="admin_edit_class">
-		<br>
-		<input type="submit" id="submit-class" name="submit" value="Submit">
+      if(isset($_SESSION['message'])) {
+          echo $_SESSION['message'];
+	      unset($_SESSION['message']);
+	  } else {
+		  echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_class\">
+		  <br/>
+		  <input type=\"submit\" id=\"submit-class\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
+	  } ?>
 	  </form><!---survey-form--->
 	</div>
   </body>
