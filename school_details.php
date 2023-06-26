@@ -23,11 +23,6 @@
         <h1> <span class="accent-text">School Details</span></h1>
       </div>
     </header>
-	<h3> School Details </h3>
-	<div id="school_icons" class="school_icon">
-		<img src="images/school_default.png" alt="school image">
-	</div>
-	</br>
 <?php
   require 'db_configuration.php';
   $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
@@ -56,7 +51,12 @@
   $status = $row['status'];
   $notes = $row['notes'];
 
-  echo "<div id= \"container_2\" class=\"school_details\">
+  echo "<h3> School Details </h3>
+	  <div id=\"school_icons\" class=\"school_icon\">
+	      <img src=\"schools/$School_Id/profile_image.png\" alt=\"school image\">
+	  </div>
+	  </br>
+      <div id= \"container_2\" class=\"school_details\">
       <label id=\"id-label\">School ID:</label><span class=\"school_details\"> " . $School_Id . "</span></br>
       <label id=\"name-label\">School Name:</label><span class=\"school_details\"> " . $school_name . "</span></br>
       <label id=\"type-label\">Type:</label><span class=\"school_details\"> " . $school_type . "</span></br>
