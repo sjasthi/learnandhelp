@@ -56,38 +56,38 @@ function admin_school_form($id){
 	<label id=\"school-type-label\">School Type</label>
 	<select id=\"school-type-dropdown\" name=\"type\" required><!--type--->
     	<option disabled value>Select School Type</option>
-      	<option value='primary school' ";
-        	if ($type == "primary school")
+      	<option value='Primary School' ";
+        	if ($type == "Primary School" or $type == "primary school")
             	echo "selected";
-      	echo  ">primary school</option>
-      	<option value='upper primary school' ";
-        	if ($type == "upper primary school")
+      	echo  ">Primary School</option>
+      	<option value='Upper Primary School' ";
+        	if ($type == "Upper Primary School" or $type == "upper primary school")
             	echo "selected";
-      	echo ">upper primary school</option>
-      	<option value='high school' ";
-        	if ($type == "high school")
+      	echo ">Upper Primary School</option>
+      	<option value='High School' ";
+        	if ($type == "High School" or $type == "high school")
             	echo "selected";
-      	echo ">high school</option>
-	  	<option value='other' ";
-        	if ($type == "other")
+      	echo ">High School</option>
+	  	<option value='Other' ";
+        	if ($type == "Other" or $type == "other")
             	echo "selected";
-      	echo ">other</option>
+      	echo ">Other</option>
 	</select><br>
 	<label id=\"school-category-label\">Category</label>
 	<select id=\"school-category-dropdown\" name=\"category\" required><!--category--->
     	<option disabled value>Select School Category</option>
-      	<option value='private' ";
-        	if ($category == "private")
+      	<option value='Private' ";
+        	if ($category == "Private" or $category == "private")
             	echo "selected";
-      	echo  ">private</option>
-      	<option value='public' ";
-        	if ($category == "public")
+      	echo  ">Private</option>
+      	<option value='Public' ";
+        	if ($category == "Public" or $category == "public")
             	echo "selected";
-      	echo ">public</option>
-	  	<option value='other' ";
-        	if ($category == "other")
+      	echo ">Public</option>
+	  	<option value='Other' ";
+        	if ($category == "Other" or $category == "other")
             	echo "selected";
-      	echo ">other</option>
+      	echo ">Other</option>
 	</select><br>
 	<label id=\"grade-level-start-label\">Grade Level Start</label>
 	<select id=\"grade-level-start-dropdown\" name=\"grade_level_start\" required><!--grade_level_start--->
@@ -194,22 +194,22 @@ function admin_school_form($id){
 	<label id=\"contact-designation-label\">Contact Designation</label>
 	<select id=\"contact-designation-dropdown\" name=\"contact_designation\" required><!--contact designation--->
     	<option disabled value>Select Conect Designation</option>
-      	<option value='teacher' ";
-        	if ($contact_designation == "teacher")
+      	<option value='Teacher' ";
+        	if ($contact_designation == "Teacher" or $contact_designation == "teacher")
             	echo "selected";
-      	echo  ">teacher</option>
-      	<option value='head master' ";
-        	if ($contact_designation == "head master")
+      	echo  ">Teacher</option>
+      	<option value='Head Master' ";
+        	if ($contact_designation == "Head Master" or $contact_designation == "head master")
             	echo "selected";
-      	echo ">head master</option>
-      	<option value='volunteer' ";
-        	if ($contact_designation == "volunteer")
+      	echo ">Head Master</option>
+      	<option value='Volunteer' ";
+        	if ($contact_designation == "Volunteer" or $contact_designation == "volunteer")
             	echo "selected";
-      	echo ">volunteer</option>
-	  	<option value='other' ";
-        	if ($contact_designation == "other")
+      	echo ">Volunteer</option>
+	  	<option value='Other' ";
+        	if ($contact_designation == "Other" or $contact_designation == "other")
             	echo "selected";
-      	echo ">other</option>
+      	echo ">Other</option>
 	</select><br>
 	<label id=\"contact-phone-label\">Contact Phone</label>
     <input type=\"tel\" id=\"contact-phone\" name=\"contact_phone\" class=\"form\" value=\"$contact_phone\" required><br><!---contact_phone-->
@@ -218,22 +218,22 @@ function admin_school_form($id){
 	<label id=\"status-label\">Status</label><br>
 	<select id=\"status-dropdown\" name=\"status\" required><!--status--->
     	<option disabled value>Select School Status</option>
-      	<option value='proposed' ";
-        	if ($status == "proposed")
+      	<option value='Proposed' ";
+        	if ($status == "Proposed" or $status == "proposed")
             	echo "selected";
-      	echo  ">proposed</option>
-      	<option value='rejected' ";
-        	if ($status == "rejected")
+      	echo  ">Proposed</option>
+      	<option value='Rejected' ";
+        	if ($status == "Rejected" or $status == "rejected")
             	echo "selected";
-      	echo ">rejected</option>
-      	<option value='approved' ";
-        	if ($status == "approved")
+      	echo ">Rejected</option>
+      	<option value='Approved' ";
+        	if ($status == "Approved" or $status == "approved")
             	echo "selected";
-      	echo ">approved</option>
-	  	<option value='completed' ";
-        	if ($status == "completed")
+      	echo ">Approved</option>
+	  	<option value='Completed' ";
+        	if ($status == "Completed" or $status == "completed")
             	echo "selected";
-      	echo ">completed</option>
+      	echo ">Completed</option>
 	</select><br>
 	<label id=\"notes-label\">Notes</label><br>
     <input type=\"text\" id=\"notes\" name=\"notes\" class=\"form\" value=\"$notes\"><br></div><!---notes-->";
