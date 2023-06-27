@@ -31,9 +31,9 @@
         <h1><span class="accent-text">Administration</span></h1>
       </div>
     </header>
-    <div id="admin_icons" style="width: 60%; margin: auto;">
+    <div id="admin_icons" style="width: 80%; margin: auto;">
       <div class="admin_icon">
-        <a href="admin_registrations.php" id="registraions"><img src="images/admin_icons/registrations_icon.png" alt="registration"></a>
+        <a href="admin_registrations.php" id="registrations"><img src="images/admin_icons/registrations_icon.png" alt="registration"></a>
         <br>
         <label for="registrations">Registrations</label>
       </div>
@@ -46,6 +46,11 @@
         <a href="admin_causes.php" id="causes"><img src="images/admin_icons/causes_icon.png" alt="causes"></a>
         <br>
         <label for="causes">Causes</label>
+      </div>
+      <div class="admin_icon">
+        <a href="admin_schools.php" id="schools"><img src="images/admin_icons/school.png" alt="schools"></a>
+        <br>
+        <label for="schools">Schools</label>
       </div>
       <br>
       <div class="admin_icon">
