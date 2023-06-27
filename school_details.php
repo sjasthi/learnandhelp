@@ -4,6 +4,18 @@
     session_start();
   }
 
+	function get_profile_image($id) {
+		$image_name = glob('schools/' . $id . '/profile_image.*');
+		// should only be one file found, if there are two profile_image files
+		// with different extensions something is wrong.  If there is no profile
+		// image or more than one default to the admin_icons school icon.
+		if(count($image_name) == 1) {
+	 		return $image_name[0];
+		} else {
+			return "images/admin_icons/school.png";
+		}
+	}
+
   $School_Id = $_GET['School_Id']
 ?>
 <!DOCTYPE html>
@@ -52,8 +64,9 @@
   $notes = $row['notes'];
 
   echo "<h3> School Details </h3>
-	  <div id=\"school_icons\" class=\"school_icon\">
-	      <img src=\"schools/$School_Id/profile_image.png\" alt=\"school image\">
+	  <div id=\"school_icons\" class=\"school_icon\">";
+			$profile_image = get_profile_image($School_Id); 
+			echo "			<img src=" . $profile_image . " alt=\"school image\">
 	  </div>
 	  <br>
       <div id= \"container_2\" class=\"school_details\">
@@ -79,8 +92,10 @@
 	<div class=\"school_notes\">
 	  <span class=\"inverse\"><label id=\"notes-label\">Notes</label></span><br>
 	  <span>" . $notes . "</span>
-	</div>
-    <div> 
+	</div>";
+	// check that the media directory exists, if not, nothing to show here
+    if(file_exists('schools/' . $School_Id . '/')) {
+     echo "<div> 
 	    <table id=\"school_media\">";
 			$media_files = array_diff(scandir('schools/' . $School_Id . '/'), array('..', '.'));
 			$counter = 0;  
@@ -105,6 +120,7 @@
 			}
 		echo "</table>
 	</div>";
+	} // end if file_exists
 ?>
   </body>
 </html>

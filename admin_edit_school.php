@@ -57,9 +57,12 @@
     ?>
 	  </form><!---survey-form--->
 	</div>
-    <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
-      <table id="school_media">
-		<?php
+<?php
+	// check that the media directory exists, if not, nothing to show here
+	if(file_exists('schools/' . $id . '/')) {
+
+    echo "<div style=\"padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto\">
+      <table id=\"school_media\">";
 		$media_files = array_diff(scandir('schools/' . $id . '/'), array('..', '.'));
 		$counter = 0;  
         while($counter < count($media_files)) {
@@ -81,15 +84,18 @@
 			}
 			$counter++;
 		}
-		echo "</table><br><br>
+		echo "</table>
+		</div>";
+	}
+?>
+	<div>
     	<form action='admin_uploads_school.php' method='POST' enctype='multipart/form-data'>
-            Select media files to upload:<br>
-			<input type='hidden' name='id' value='". $id . "'>
-            <input type=\"file\" name=\"files[]\" multiple>
+           	Select media files to upload:<br>
+			<?php echo "<input type=\"hidden\" name=\"id\" value=\"$id\">"; ?>
+           	<input id="media_upload" type="file" name="files[]" multiple>
 			<br>
-            <input type=\"submit\" name=\"submit\" value=\"Upload Media\" >
-		</form>";
-    ?>
+           	<input type="submit" name="submit" value="Upload Media">
+		</form>
 	</div>
   </body>
 </html>
