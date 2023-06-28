@@ -16,12 +16,6 @@
     <link href="css/main.css" rel="stylesheet">
   </head>
   <body>
-<?php 
-  if(isset($_POST['id'])) echo $_POST['id'];
-  else echo "No ID set";  
-  $id = $_POST['id']
-?>
-
     <?php include 'show-navbar.php';
           include 'admin_fill.php';
           ?>
@@ -59,7 +53,7 @@
 	</div>
 <?php
 	// check that the media directory exists, if not, nothing to show here
-	if(file_exists('schools/' . $id . '/')) {
+	if(file_exists('schools/' . $id . '/') and $id != null) {
 
     echo "<div style=\"padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto\">
       <table id=\"school_media\">";
@@ -88,7 +82,7 @@
 		</div>";
 	}
 ?>
-	<div>
+	<div <?php if($id == null) {?>style="display:none"<?php } ?>>
     	<form action='admin_uploads_school.php' method='POST' enctype='multipart/form-data'>
            	Select media files to upload:<br>
 			<?php echo "<input type=\"hidden\" name=\"id\" value=\"$id\">"; ?>

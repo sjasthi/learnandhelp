@@ -14,7 +14,7 @@ $sql = "DELETE FROM schools WHERE id = " . $id;
 $result = $conn->query($sql);
 
 // delete all media and the media directory for the school
-$structure = glob(rtrim('schools/'$id'/', "/").'/*');
+$structure = glob(rtrim("schools/${id}/", "/").'/*');
 if (is_array($structure)) {
 	foreach($structure as $file) {
  	if (is_dir($file))
@@ -23,7 +23,7 @@ if (is_array($structure)) {
  		unlink($file);
  	}
 }
-rmdir('schools/'$id);
+rmdir("schools/${id}");
 
 $conn->close();
 header("Location: admin_schools.php");

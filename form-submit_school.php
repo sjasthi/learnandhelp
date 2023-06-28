@@ -104,15 +104,24 @@ if($action == "admin_edit_school") {
 		'$contact_email',
 		'$status',
 		'$notes');";
-	header("Location: admin_schools.php");
 }
 
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
+} else {
+	if($action == 'admin_add_school') {
+		$id = mysqli_insert_id($connection);
+		// trigger hidden form to load admin_edit_school.php and POST $id
+		echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
+			  </script>";
+	}
 }
-
-
 
 mysqli_close($connection);
 
 ?>
+
+<form method="POST" id="add_submitted_form" action="admin_edit_school.php">
+	<?php echo "<input type=\"hidden\" name=\"id\" value=\"$id\">"; ?>
+</form>
+
