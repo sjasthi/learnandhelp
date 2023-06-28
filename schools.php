@@ -3,6 +3,18 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
+
+	function get_profile_image($id) {
+		$image_name = glob('schools/' . $id . '/profile_image.*');
+		// should only be one file found, if there are two profile_image files
+		// with different extensions something is wrong.  If there is no profile
+		// image or more than one default to the admin_icons school icon.
+		if(count($image_name) == 1) {
+	 		return $image_name[0];
+		} else {
+			return "images/admin_icons/school.png";
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -42,9 +54,11 @@
 				if($counter == 0) {
 					echo '<tr>';
 				}
+				// if a profile image was not created use the admin_icons school.png as a default fallback image
 				echo  '<td class="school_icon">
-							<a href="school_details.php?School_Id=' . $row['id'] . '" target="_blank">
-								<img src="schools/' . $row['id'] . '/profile_image.png" alt="school image"><br><label>'. $row['id'] . '</label>
+							<a href="school_details.php?School_Id=' . $row['id'] . '" target="_blank">';
+				$profile_image = get_profile_image($row['id']); 
+				echo '			<img src="' . $profile_image . '" alt="school image"><br><label>'. $row['id'] . '</label>
 							</a>
 						</td>';
 				if($counter % 5 == 0 && $counter > 0) {

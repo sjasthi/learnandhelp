@@ -28,13 +28,18 @@
 <?php
 if(isset($_POST['submit'])) {
     // Configure upload directory and allowed file types
-    $upload_dir = 'schools/' . $id . '/';
+    $upload_dir = "schools/$id/";
     $allowed_types = array('jpg', 'png', 'jpeg', 'gif');
      
     // Define maxsize for files i.e 2MB
     $maxsize = 3 * 1024 * 1024;
- 
-    // Checks if user sent an empty form
+
+	echo "$upload_dir";
+	if(!file_exists($upload_dir)) {
+		mkdir($upload_dir);
+	}
+  
+	// Checks if user sent an empty form
     if(!empty(array_filter($_FILES['files']['name']))) {
  
         // Loop through each file in files[] array

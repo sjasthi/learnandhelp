@@ -464,3 +464,15 @@ input[type=file]::file-selector-button {
 	padding-left: 4px;
 }
 
+#media_upload {
+	width: 25%;
+}
+
+#error_msg {
+	color: red;
+	font-weight: bold;
+}
+
+#file-name-field {
+	width: 300px;
+}
