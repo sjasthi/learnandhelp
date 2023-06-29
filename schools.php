@@ -52,19 +52,20 @@
             while($row = $result->fetch_assoc()) {
 				$counter++;
 				if($counter == 0) {
-					echo '<tr>';
+					echo "<tr>";
 				}
+				$id = $row["id"];
 				// if a profile image was not created use the admin_icons school.png as a default fallback image
-				echo  '<td class="school_icon">
-							<a href="school_details.php?School_Id=' . $row['id'] . '" target="_blank">';
-				$profile_image = get_profile_image($row['id']); 
-				echo '			<img src="' . $profile_image . '" alt="school image"><br><label>'. $row['id'] . '</label>
+				echo  "<td class=\"school_icon\">
+							<a href=\"school_details.php?School_Id=$id target=_blank\">";
+				$profile_image = get_profile_image($id); 
+				echo "			<img src=\"$profile_image\" alt=\"school image\"><br><label>$id</label>
 							</a>
-						</td>';
+						</td>";
 				if($counter % 5 == 0 && $counter > 0) {
-					echo '</tr>';
+					echo "</tr>";
 					if($counter < $result->num_rows) {
-						echo '<tr>';
+						echo "<tr>";
 					}
 				}
             }

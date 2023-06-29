@@ -137,7 +137,7 @@
               while($row = $result->fetch_assoc()) {
 				  echo "<tr>
 					  	<td>". $row["id"]. "</td>
-						<td>" . $row["name"]. "</td>
+						<td>". $row["name"]. "</td>
 						<td>". $row["type"]. "</td>
 						<td>". $row["category"]. "</td>
 						<td>". $row["grade_level_start"]. "</td>
