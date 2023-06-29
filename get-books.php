@@ -11,7 +11,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT * FROM book ORDER BY id;";
+  $sql = "SELECT * FROM books ORDER BY id;";
   $result = $conn->query($sql);
   $resultString = "";
   if ($result->num_rows > 0) {

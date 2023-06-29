@@ -44,7 +44,7 @@
             die("Connection failed: " . $conn->connect_error);
           }
 
-          $sql = "SELECT * FROM book WHERE LOWER(grade_level) LIKE ";
+          $sql = "SELECT * FROM books WHERE LOWER(grade_level) LIKE ";
 
           if (isset($_POST['high'])) {
             $sql .= '"%high%"';
