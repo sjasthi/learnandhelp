@@ -28,7 +28,7 @@ if ($fileError === 0) {
 }
 
 
-$sql = "UPDATE book SET image = '$fileDestination' WHERE id = $book_id;";
+$sql = "UPDATE books SET image = '$fileDestination' WHERE id = $book_id;";
 
 if (!mysqli_query($connection, $sql)) {
   echo("Error description: " . mysqli_error($connection));

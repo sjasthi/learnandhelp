@@ -129,7 +129,8 @@
            - <a class="toggle-vis" data-column="5">Year Published</a>
            - <a class="toggle-vis" data-column="6">Page Count</a>
            - <a class="toggle-vis" data-column="7">Price</a>
-           - <a class="toggle-vis" data-column="8">Action</a>
+           - <a class="toggle-vis" data-column="8">Available</a>
+           - <a class="toggle-vis" data-column="9">Action</a>
            <?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { echo '- <a class="toggle-vis" data-column="9">Change Picture</a>'; } ?>
        </div>
        <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
@@ -144,6 +145,7 @@
                <th>Year Published</th>
                <th>Page Count</th>
                <th>Price (₹)</th>
+               <th>Available</th>
                <th>Action</th>
                <?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { echo '<th>Change Picture</th>'; } ?>
              </tr>

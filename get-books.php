@@ -27,6 +27,7 @@
                <td><div contenteditable='true' onBlur='updateValue(this,\"publishYear\",". $row["id"] .")'>" . $row["publishYear"]. "</div></td>
                <td><div contenteditable='true' onBlur='updateValue(this,\"numPages\",". $row["id"] .")'>" . $row["numPages"]. "</div></td>
                <td><div contenteditable='true' onBlur='updateValue(this,\"price\",". $row["id"] .")'>" . $row["price"]. "</div></td>
+               <td><div contenteditable='true' onBlur='updateValue(this,\"price\",". $row["id"] .")'>" . $row["available"]. "</div></td>
                <td><Button onclick='addToList(this)'>Add to List</Button></td>
                <td style='min-width: 300px;'>
                  <form action='edit_book_picture.php' method='post' enctype='multipart/form-data'>
@@ -45,6 +46,7 @@
                <td>" . $row["publishYear"] . "</td>
                <td>" . $row["numPages"] . "</td>
                <td>" . $row["price"] . "</td>
+               <td>" . $row["available"] . "</td>
                <td><Button onclick='addToList(this)'>Add to List</Button></td>
               </tr>";
       }
