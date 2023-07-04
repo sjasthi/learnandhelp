@@ -85,12 +85,12 @@
        <!-- Generate books by grade level -->
        <form action="create_booklist_by_grade.php" method="post">
          <h3> Generate Books by grade level </h3>
-         <label for="high">High</label>
-         <input class="checkboxes" type="checkbox" name="high" value="True" required>
-         <label for="high">Middle</label>
-         <input class="checkboxes" type="checkbox" name="middle" value="True" required>
-         <label for="high">Elementary</label>
-         <input class="checkboxes" type="checkbox" name="elementary" value="True" required>
+         <label for="high">High School</label>
+         <input class="checkboxes" type="checkbox" name="high_school" value="True" required>
+         <label for="upper">Upper Primary School</label>
+         <input class="checkboxes" type="checkbox" name="upper_primary_school" value="True" required>
+         <label for="primary">Primary School</label>
+         <input class="checkboxes" type="checkbox" name="primary_school" value="True" required>
          <br>
          <input type="submit" name="submit">
        </form>

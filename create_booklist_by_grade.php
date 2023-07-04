@@ -46,21 +46,21 @@
 
           $sql = "SELECT * FROM books WHERE LOWER(grade_level) LIKE ";
 
-          if (isset($_POST['high'])) {
-            $sql .= '"%high%"';
-            if (isset($_POST['middle'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%middle%"';
+          if (isset($_POST['high_school'])) {
+            $sql .= '"high school"';
+            if (isset($_POST['upper_primary_school'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "upper primary school"';
             }
-            if (isset($_POST['elementary'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%elementary%"';
+            if (isset($_POST['primary_school'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "primary school"';
             }
-          } elseif (isset($_POST['middle'])) {
-            $sql .= '"%middle%"';
-            if (isset($_POST['elementary'])) {
-              $sql .= ' OR LOWER(grade_Level) LIKE "%elementary%"';
+          } elseif (isset($_POST['upper_primary_school'])) {
+            $sql .= '"upper primary school"';
+            if (isset($_POST['primary_school'])) {
+              $sql .= ' OR LOWER(grade_Level) LIKE "primary school"';
             }
-          } elseif (isset($_POST['elementary'])) {
-            $sql .= '"%elementary%"';
+          } elseif (isset($_POST['primary_school'])) {
+            $sql .= '"primary school"';
           }
           $sql .= ";";
 
