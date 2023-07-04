@@ -57,7 +57,7 @@
 				$id = $row["id"];
 				// if a profile image was not created use the admin_icons school.png as a default fallback image
 				echo  "<td class=\"school_icon\">
-							<a href=\"school_details.php?School_Id=$id target=_blank\">";
+							<a href=\"school_details.php?School_Id=$id&target=_blank\">";
 				$profile_image = get_profile_image($id); 
 				echo "			<img src=\"$profile_image\" alt=\"school image\"><br><label>$id</label>
 							</a>
