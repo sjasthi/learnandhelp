@@ -125,7 +125,7 @@
                         <td>" . $row["Modified_Time"]. "</td> 
                         <td>" . $row["Created_Time"]. "</td> 
                 <td>
-                <form action='admin_assignschooluserrole.php' method='POST'>
+                <form action='admin_edit_blog.php' method='POST'>
                 <input type='hidden' name='id' value='". $row["Blog_Id"] . "'>
                 <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
               </form>
