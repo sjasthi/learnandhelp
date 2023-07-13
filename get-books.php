@@ -17,9 +17,11 @@
   if ($result->num_rows > 0) {
     // Create table with data from each row
     while($row = $result->fetch_assoc()) {
-      if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') {
+      if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') 
+      {
+        $Status = $row["available"]=='0'?'Not Available':'Available';
         $resultString .= "<tr>
-               <td><div contenteditable='true' onBlur='updateValue(this,\"grade_level\",". $row["id"] .")'>" . $row["grade_level"]. "</div></td>
+              <td><div contenteditable='true' onBlur='updateValue(this,\"grade_level\",". $row["id"] .")'>" . $row["grade_level"]. "</div></td>
                <td id='book_image'><img src='" . $row["image"] . "' onerror=\"src='images/books/default.png'\" loading='lazy'></td>
                <td><div contenteditable='true' onBlur='updateValue(this,\"title\",". $row["id"] .")'>" . $row["title"]. "</div></td>
                <td><div contenteditable='true' onBlur='updateValue(this,\"author\",". $row["id"] .")'>" . $row["author"]. "</div></td>
@@ -27,7 +29,7 @@
                <td><div contenteditable='true' onBlur='updateValue(this,\"publishYear\",". $row["id"] .")'>" . $row["publishYear"]. "</div></td>
                <td><div contenteditable='true' onBlur='updateValue(this,\"numPages\",". $row["id"] .")'>" . $row["numPages"]. "</div></td>
                <td><div contenteditable='true' onBlur='updateValue(this,\"price\",". $row["id"] .")'>" . $row["price"]. "</div></td>
-               <td><div contenteditable='true' onBlur='updateValue(this,\"price\",". $row["id"] .")'>" . $row["available"]. "</div></td>
+               <td><div contenteditable='true' onBlur='updateValue(this,\"price\",". $row["id"] .")'>" . $Status. "</div></td>
                <td><Button onclick='addToList(this)'>Add to List</Button></td>
                <td style='min-width: 300px;'>
                  <form action='edit_book_picture.php' method='post' enctype='multipart/form-data'>

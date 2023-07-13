@@ -1,11 +1,31 @@
 <?php
   $status = session_status();
-  if ($status == PHP_SESSION_NONE) {
+  if ($status == PHP_SESSION_NONE) 
+  {
     session_start();
   }
+  require 'db_configuration.php';
+    // Create connection
+    $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT receipt.receipt FROM receipt where receipt_id=(select max(receipt_id) from receipt)";
+    $rows = $conn->query($sql);
+    $result = mysqli_fetch_array($rows);
+
+    if($result!='')
+    {
+      $Max_ID = $result[0];
+      $Max_ID++;
+      $result=$Max_ID;
+    }
+    else
+    {
+      $result=100001;
+    }
  ?>
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -37,9 +57,14 @@
         <?php
           // For each entry, create a row in the table corresponding to that entry
           // Maintain book counts and total costs so they can be displayed below the table
+
+          $CreatedDateTime = date('Y-m-d H:i:s');
+          $QUERY_INSERT= "insert into receipt values(null,'$result','$CreatedDateTime')";
+          $conn->query($QUERY_INSERT);
           $total_price = 0;
           $book_count = 0;
-          for ($i = 0; $i < $_POST['entry_count']; $i++) {
+          for ($i = 0; $i < $_POST['entry_count']; $i++) 
+          {
             $id_key = 'id_' . $i;
             $title_key = 'title_' . $i;
             $publisher_key = 'publisher_' . $i;
@@ -54,13 +79,19 @@
                     <td>$_POST[$quantity_key]</td>
                     <td>₹$entry_price</td>
                   </tr>";
+                  $TOTAL=($_POST[$price_key]*$_POST[$quantity_key]);
+                  $TOTAL = '₹'.$TOTAL;
             $total_price = $total_price + $entry_price;
             $book_count = $book_count + intval($_POST[$quantity_key]);
+
+            $QUERY_RECEIPT = "insert INTO tblreceipt VALUES(NULL,'$result','$_POST[$id_key]','$_POST[$title_key]','$_POST[$publisher_key]','$_POST[$price_key]','$_POST[$quantity_key]','$TOTAL')";
+            $conn->query($QUERY_RECEIPT);
           }
           echo "  </tr>
                 </tbody>
                 </table>
                 <h3>Book Count: $book_count || Total Price: ₹$total_price</h3>"
         ?>
+        <a href="books.php">BACK</a>
   </body>
 </html>

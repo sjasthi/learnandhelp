@@ -78,6 +78,7 @@
        </div>
      </header>
      <div id="loading">
+      
        <h2> Loading Please Wait </h2>
        <img src="images/loadingIcon.gif"></image>
      </div>
@@ -179,7 +180,7 @@
                     idName: "id"
                 },
                 success:function(php_result){
-    				console.log(php_result);
+    				  console.log(php_result);
 
                 }
 

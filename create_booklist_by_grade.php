@@ -4,8 +4,6 @@
     session_start();
   }
  ?>
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,26 +42,27 @@
             die("Connection failed: " . $conn->connect_error);
           }
 
-          $sql = "SELECT * FROM books WHERE LOWER(grade_level) LIKE ";
+          $sql = "SELECT * FROM books WHERE (LOWER(grade_level) LIKE ";
 
-          if (isset($_POST['high_school'])) {
-            $sql .= '"high school"';
+          if (isset($_POST['high_school'])) 
+          {
+            $sql .= '"high school" OR LOWER(grade_level) LIKE "high"';
             if (isset($_POST['upper_primary_school'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "upper primary school"';
+              $sql .= ' OR LOWER(grade_level) LIKE "upper primary school" OR LOWER(grade_level) LIKE "upper primary" OR LOWER(grade_level) LIKE "upper"';
             }
             if (isset($_POST['primary_school'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "primary school"';
+              $sql .= ' OR LOWER(grade_level) LIKE "primary school"  OR LOWER(grade_level) LIKE "primary"';
             }
           } elseif (isset($_POST['upper_primary_school'])) {
-            $sql .= '"upper primary school"';
+            $sql .= '"upper primary school" OR LOWER(grade_level) LIKE "upper primary" OR LOWER(grade_level) LIKE "upper"';
             if (isset($_POST['primary_school'])) {
-              $sql .= ' OR LOWER(grade_Level) LIKE "primary school"';
+              $sql .= ' OR LOWER(grade_level) LIKE "primary school"  OR LOWER(grade_level) LIKE "primary"';
             }
           } elseif (isset($_POST['primary_school'])) {
-            $sql .= '"primary school"';
+            $sql .= '"primary school"  OR LOWER(grade_level) LIKE "primary"';
           }
-          $sql .= ";";
-
+          $sql .= ") AND available = 1";
+          //echo $sql;
           $result = $conn->query($sql);
           $total_price = 0;
           $book_count = 0;
