@@ -125,10 +125,7 @@
                         <td>" . $row["Modified_Time"]. "</td> 
                         <td>" . $row["Created_Time"]. "</td> 
                 <td>
-                <form action='admin_edit_blog.php' method='POST'>
-                <input type='hidden' name='id' value='". $row["Blog_Id"] . "'>
-                <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
-              </form>
+                  <a href='admin_edit_blog.php?query=".$row['Blog_Id']."'><input type='button' style='width:200px; height:44px; background-color:blue; color:white; border:solid 0px; border-radius:5px'  value='Edit'/></a>
                   <form action='admin_delete_blog.php' method='POST'>
                     <input type='hidden' name='Blog_Id' value='". $row["Blog_Id"] . "'>
                     <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
