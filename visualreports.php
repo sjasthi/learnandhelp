@@ -38,6 +38,17 @@
     <link href="css/main.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <script>
+      function printDiv(divId) {
+        var printContents = document.getElementById(divId).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+      }
+
+    </script>
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
@@ -49,8 +60,10 @@
     </header>
 	<!-- Jquery Data Table -->
   <a href="admin_reports.php" style="margin-left:290px; margin-top:70px; float:left; text-decoration:none; color:blue; box-shadow:0px 0px 3px 2px skyblue; padding:10px">BACK</a>
+  <a href="admin_reports.php" style="margin-left:490px; margin-top:70px; float:left; text-decoration:none; color:blue; box-shadow:0px 0px 3px 2px lightgrey; padding:10px">Book Invoice</a>
+  <a href="#" style="margin-left:530px; margin-top:70px; float:left; text-decoration:none; color:blue; box-shadow:0px 0px 3px 2px lightgrey; padding:10px" onclick="printDiv('report')">Print</a>
     
-    <div style="padding-top: 10px; padding-bottom: 30px; width:100%; margin:auto; overflow:auto">
+    <div style="padding-top: 10px; padding-bottom: 30px; width:100%; margin:auto; overflow:auto" id="report">
     <center>
     
     <?php
@@ -78,25 +91,23 @@
           if($Option=='P')
           {
             $ROWS_LIST .=
-                        '<tr>
+                        '<tr style="font-weight:bold; font-size:12px">
                           <td>'.$SNO.'</td>
                           <td>'.$OUTPUT['id'].'</td>
                           <td>'.$row['title'].'</td>
                           <td>'.$row['price'].'</td>
                           <td>'.$row['quantity'].'</td>
                           <td>'.$row['total'].'</td>
-                          <td>
                       </tr>';
           }
           else if($Option=='W')
           {
             $ROWS_LIST .=
-                        '<tr>
+                        '<tr style="font-weight:bold; font-size:12px">
                           <td>'.$SNO.'</td>
                           <td>'.$OUTPUT['id'].'</td>
                           <td>'.$row['title'].'</td>
                           <td>'.$row['quantity'].'</td>
-                          <td>
                         </tr>';
           }
          
@@ -113,11 +124,13 @@
     <br>
     <br>
     <br>
+    <p style="background-color:skyblue; font-weight:bold; font-size:20px; width:68.9%; padding:10px;">Book Invoice</p>
     <table border=0 style="width:70%" cellpadding=5>
-      <tr style="background-color:skyblue; font-weight:bold">
+      
       <?php
          if($Option=='P')
          {?>
+              <tr style="background-color:skyblue; font-weight:bold; font-size:12px">
               <td>Sno</td>
               <td>ID</td>
               <td>TITLE</td>
@@ -131,20 +144,21 @@
         } 
          else if($Option=='W')
          {?>
+          <tr style="background-color:skyblue; font-weight:bold; font-size:12px">
             <td>Sno</td>
             <td>ID</td>
             <td>TITLE</td>
             <td>QUANTITY</td>
-                </tr>
+          </tr>
                   <?php echo $ROWS_LIST; ?>
          <?php
          }
        ?>
      
     </table>
-    <div style="float:right; margin-right:310px; margin-top:100px;">
+    <div style="float:right; margin-right:310px; margin-top:100px; font-size:15px; font-weight:bold">
       
-      <table style="width:300; border-solid 1px gray; box-shadow:0px 0px 5px 3px lightgray; border-radius:5px;" cellspacing=10>
+      <table style="width:300; border-solid 1px gray; box-shadow:0px 0px 5px 3px lightgray; border-radius:5px;" cellspacing=10 cellpadding=1>
         <tr>
           <td>Invoice Date</td><td>:</td><td><?php echo $INVOICE_DATE;?></td>
        </tr>
