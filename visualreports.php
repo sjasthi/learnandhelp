@@ -60,7 +60,7 @@
     </header>
 	<!-- Jquery Data Table -->
   <a href="admin_reports.php" style="margin-left:290px; margin-top:70px; float:left; text-decoration:none; color:blue; box-shadow:0px 0px 3px 2px skyblue; padding:10px">BACK</a>
-  <a href="admin_reports.php" style="margin-left:490px; margin-top:70px; float:left; text-decoration:none; color:blue; box-shadow:0px 0px 3px 2px lightgrey; padding:10px">Book Invoice</a>
+  
   <a href="#" style="margin-left:530px; margin-top:70px; float:left; text-decoration:none; color:blue; box-shadow:0px 0px 3px 2px lightgrey; padding:10px" onclick="printDiv('report')">Print</a>
     
     <div style="padding-top: 10px; padding-bottom: 30px; width:100%; margin:auto; overflow:auto" id="report">
