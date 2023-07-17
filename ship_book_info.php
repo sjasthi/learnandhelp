@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" value="<?php echo $bookInfo['title']; ?>" readonly><br>
             <label for="availability">Availability:</label>
-            <input type="text" id="availability" name="availability" value="<?php echo $bookInfo['availability']; ?>" readonly><br>
+            <input type="text" id="availability" name="availability" value="<?php echo $bookInfo['available']; ?>" readonly><br>
             <label for="numberOfBooks">Number of Books:</label>
             <input type="number" id="numberOfBooks" name="numberOfBooks" min="0" max="10" value="0"><br>
             <button type="submit">Ship</button>
