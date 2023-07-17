@@ -78,6 +78,11 @@
         <br>
         <label for="classes">Assign User</label>
       </div>
+      <div class="admin_icon">
+        <a href="admin_shipping.php" id="admin_shipping"><img src="images/admin_icons/shipping.png" alt="admin_shipping"></a>
+        <br>
+        <label for="classes">Shipping</label>
+      </div>
     </div>
     <br>
     <div id="icon_attribution">

@@ -117,7 +117,8 @@
             {
               die("Connection failed: " . $conn->connect_error);
             }
-            $sql = "select school_user.SchoolUser_Id,schools.id,schools.name,users.User_Id,users.First_Name,users.Last_Name,users.Role,users.Email,school_user.Created_Time,school_user.Modified_Time,school_user.Status from school_user INNER join users on users.User_Id = school_user.User_Id INNER join schools on schools.id = school_user.School_id;";
+            $sql = "select school_user.SchoolUser_Id,schools.id,schools.name,users.User_Id,users.First_Name,users.Last_Name,users.Role,users.Email,school_user.Created_Time,school_user.Modified_Time,school_user.Status
+             from school_user INNER join users on users.User_Id = school_user.User_Id INNER join schools on schools.id = school_user.School_id;";
             $result = $conn->query($sql);
 
             $sqlSchool = "SELECT * FROM `schools`";
