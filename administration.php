@@ -74,7 +74,7 @@
         <label for="classes">Classes</label>
       </div>
       <div class="admin_icon">
-        <a href="admin_assignschooluserrole.php" id="assignschooluserrole"><img src="images/admin_icons/assign.png" alt="assignschooluserrole"></a>
+        <a href="admin_assign_blog.php" id="assignschooluserrole"><img src="images/admin_icons/assign.png" alt="assignschooluserrole"></a>
         <br>
         <label for="classes">Assign User</label>
       </div>
