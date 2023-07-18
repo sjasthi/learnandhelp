@@ -23,16 +23,13 @@ if ($status == PHP_SESSION_NONE) {
     $s_id = $row['id'];
     $s_name = $row['name'];
     $s_email = $row['contact_email'];
-    $s_type = $row['type'];
-    $s_category = $row['category'];
+    
 
   } else {
     $s_id = $_POST['id'];
     $s_name = $row['name'];
     $s_email = $row['contact_email'];
-    $s_type = $row['type'];
-    $s_category = $row['Category'];
-
+    
   }
   include 'show-navbar.php';
 
@@ -61,11 +58,7 @@ echo      "<header class=\"inverse\">
         <label id=\"s-email-label\"> Contact Email</label>
         <input type=\"email\" id=\"s-email\" name=\"s-email\" class=\"form\" value=\"$s_email\" required><br><!---email-->
         
-        <label id=\"s-type-label\">School Type</label>
-        <input type=\"text\" id=\"s-type\" name=\"s-type\" class=\"form\" value=\"$s_type\" required><br>
-
-        <label id=\"s-category-label\">Category</label>
-        <input type=\"text\" id=\"s-category\" name=\"category\" value=\"$s_category\" required>
+        
 
         <br>
         <!---Spouse Section -->
