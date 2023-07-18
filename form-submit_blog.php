@@ -40,6 +40,7 @@ if ($action){
 
 }
 mysqli_close($connection);
-
+header('Location:administration.php');
+exit();
 
 ?>
