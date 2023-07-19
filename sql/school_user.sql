@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 12:07 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jul 19, 2023 at 10:14 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,21 +28,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `school_user` (
-  `SchoolUser_Id` int(11) NOT NULL,
-  `User_Id` int(11) NOT NULL,
-  `School_id` int(11) NOT NULL,
-  `Created_Time` datetime NOT NULL,
-  `Modified_Time` datetime NOT NULL,
-  `Status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `admin_Id` int(11) NOT NULL,
+  `school_id` int(11) DEFAULT NULL,
+  `contact_email` varchar(50) DEFAULT NULL,
+  `school_name` varchar(50) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `passwd` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `school_user`
 --
 
-INSERT INTO `school_user` (`SchoolUser_Id`, `User_Id`, `School_id`, `Created_Time`, `Modified_Time`, `Status`) VALUES
-(2, 1, 17, '2023-07-12 16:56:21', '2023-07-12 17:20:03', 0),
-(5, 6, 13, '2023-07-12 23:43:12', '2023-07-12 23:43:12', 1);
+INSERT INTO `school_user` (`admin_Id`, `school_id`, `contact_email`, `school_name`, `category`, `username`, `passwd`) VALUES
+(1, 1, 'A@SchoolA.org', 'School Alp[ha', 'public', 'A@SchoolA.org', '1234'),
+(2, 1, 'A@SchoolA.org', 'School Alp[ha', 'public', 'A@SchoolA.org', '1234'),
+(3, 2, 'Bm@SchoolB.org', 'School B', 'public', 'Bm@SchoolB.org', '1234'),
+(4, 2, 'Bm@SchoolB.org', 'School B', 'public', 'Bm@SchoolB.org', '1234'),
+(5, 6, 'F@SchoolF.org', 'School F', 'private', 'F@SchoolF.org', '1234');
 
 --
 -- Indexes for dumped tables
@@ -52,7 +56,7 @@ INSERT INTO `school_user` (`SchoolUser_Id`, `User_Id`, `School_id`, `Created_Tim
 -- Indexes for table `school_user`
 --
 ALTER TABLE `school_user`
-  ADD PRIMARY KEY (`SchoolUser_Id`);
+  ADD PRIMARY KEY (`admin_Id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -62,7 +66,7 @@ ALTER TABLE `school_user`
 -- AUTO_INCREMENT for table `school_user`
 --
 ALTER TABLE `school_user`
-  MODIFY `SchoolUser_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `admin_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

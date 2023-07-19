@@ -26,7 +26,10 @@ if ($action){
 	$username = $_POST['s-contact'];
 	$s_pwd = $_POST['pwd'];
 
-	$sql = "INSERT INTO blog_admin (school_name, school_id, contact_email, category, username, passwd) VALUES(
+	$Created_Time  = date('Y-m-d H:i:s');
+	$Modified_Time = $Created_Time	;
+
+	$sql = "INSERT INTO school_user (school_name, school_id, contact_email, category, username, passwd) VALUES(
 		
 		'$s_name',
 		'$s_id',
@@ -36,11 +39,11 @@ if ($action){
 		'$s_pwd'
 	);";
 	$result = mysqli_query($connection, $sql);
-
-
+	
+	
 }
 mysqli_close($connection);
-header('Location:administration.php');
+header('Location:admin_schooluserrole.php');
 exit();
 
 ?>
