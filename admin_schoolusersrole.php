@@ -79,7 +79,7 @@
 
     <div class="toggle_columns">
       Toggle column: 
-          <a class="toggle-vis" data-column="0">SNo</a>
+          
         - <a class="toggle-vis" data-column="1">School Name</a>
         - <a class="toggle-vis" data-column="2">Type</a>
         - <a class="toggle-vis" data-column="3">Category</a>
@@ -93,8 +93,8 @@
       <table id="Blog_table" class="display compact">
         <thead>
           <tr>
-            <th>SNo </th>
-           
+            
+          <th>School Id</th>
             <th>School Name</th>
             <th>Type</th>
             <th>Category</th>
@@ -121,11 +121,11 @@
             if ($result->num_rows > 0) 
             {
               // Create table with data from each row
-              $ID=1;
+              
               while($row = $result->fetch_assoc()) 
               {
                   echo "<tr>
-                    <td style='width:5%; text-align:left; padding-left:20px'>". $ID."</td>
+                     
                     <td style='width:15%; text-align:left; padding-left:20px'>". $row["name"]."</td>
                     <td style='width:15%; text-align:left; padding-left:20px'>". $row["type"]."</td> 
                     <td style='width:15%; text-align:left; padding-left:20px'>". $row["category"]."</td> 
