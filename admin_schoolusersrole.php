@@ -84,7 +84,7 @@
         - <a class="toggle-vis" data-column="2">Type</a>
         - <a class="toggle-vis" data-column="3">Category</a>
         - <a class="toggle-vis" data-column="4">User</a>
-        - <a class="toggle-vis" data-column="5">Contact Email</a>
+        - <a class="toggle-vis" data-column="5">Assigned User_Name</a>
         
         
         
@@ -99,7 +99,7 @@
             <th>Type</th>
             <th>Category</th>
             <th>User</th>
-            <th>Contact Email</th>
+            <th>Assigned User_name</th>
             
             
           </tr>
