@@ -43,7 +43,7 @@ if ($action){
 	
 }
 mysqli_close($connection);
-header('Location:admin_schooluserrole.php');
+header('Location:admin_schoolusersrole.php');
 exit();
 
 ?>
