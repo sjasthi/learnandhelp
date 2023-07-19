@@ -94,7 +94,7 @@
         <thead>
           <tr>
             
-          <th>School Id</th>
+          
             <th>School Name</th>
             <th>Type</th>
             <th>Category</th>
