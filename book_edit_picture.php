@@ -36,5 +36,5 @@ if (!mysqli_query($connection, $sql)) {
 
 mysqli_close($connection);
 
-header('Location: books.php');
+header('Location: edit_book.php');
 ?>

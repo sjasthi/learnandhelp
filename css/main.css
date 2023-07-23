@@ -389,13 +389,13 @@ input[type=file]::file-selector-button {
   font-weight: bold;
 }
 
-#receipt_table {
+#receipt_table, #selection_table {
   width: 80%;
   margin: auto;
   margin-top: 25px;
 }
 
-#receipt_table th, #receipt_table td {
+#receipt_table th, #receipt_table td, #selection_table th, #selection_table td {
   width: 15%;
   border: 1px solid black;
   padding: 5px;

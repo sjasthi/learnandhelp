@@ -63,20 +63,20 @@
 
           if (isset($_POST['high_school'])) 
           {
-            $sql .= '"high school" OR LOWER(grade_level) LIKE "high"';
-            if (isset($_POST['upper_primary_school'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "upper primary school" OR LOWER(grade_level) LIKE "upper primary" OR LOWER(grade_level) LIKE "upper"';
+            $sql .= '"high school"';
+            if (isset($_POST['primary_school_upper'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "primary school upper"';
             }
-            if (isset($_POST['primary_school'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "primary school"  OR LOWER(grade_level) LIKE "primary"';
+            if (isset($_POST['primary_school_lower'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "primary school lower"';
             }
-          } elseif (isset($_POST['upper_primary_school'])) {
-            $sql .= '"upper primary school" OR LOWER(grade_level) LIKE "upper primary" OR LOWER(grade_level) LIKE "upper"';
-            if (isset($_POST['primary_school'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "primary school"  OR LOWER(grade_level) LIKE "primary"';
+          } elseif (isset($_POST['primary_school_upper'])) {
+            $sql .= '"upper primary school"';
+            if (isset($_POST['primary_school_lower'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "primary school lower"';
             }
-          } elseif (isset($_POST['primary_school'])) {
-            $sql .= '"primary school"  OR LOWER(grade_level) LIKE "primary"';
+          } elseif (isset($_POST['primary_school_lower'])) {
+            $sql .= '"primary school lower"';
           }
           $sql .= ") AND available = 1";
           //echo $sql;
@@ -93,7 +93,7 @@
                         <td align='left'>".$row['publisher']."</td>
                         <td align='right'>".$row['price']."</td>
                         <td align='right'>1</td>
-                        <td>₹".$entry_price."</td>
+                        <td>".$entry_price."</td>
                       </tr>";
                 $total_price = $total_price + $entry_price;
                 $book_count = $book_count + 1;
@@ -102,7 +102,7 @@
           echo "  </tr>
                   </tbody>
                   </table>
-                  <h3>Book Count: $book_count || Total Price: ₹$total_price</h3>"
+                  <h3>Book Count: $book_count || Total Price: $total_price</h3>"
         ?>
 </div>
 </body>
