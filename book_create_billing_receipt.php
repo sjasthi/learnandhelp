@@ -40,13 +40,13 @@
   <table id="receipt_table">
       <thead>
         <tr style="font-weight:bold; font-size:15px">
-		  <th align='left'>Item</th>
-		  <th align='left'>Grade Level</th>
-          <th align='left'>Title</th>
-          <th align='left'>Publisher</th>
-          <th align='right'>Price</th>
-          <th align='right'>Quantity</th>
-          <th align='right'>Total Cost</th>
+		  	<th class='item_number' align='left'>Item</th>
+		  	<th align='left'>Grade Level</th>
+          	<th align='left'>Title</th>
+          	<th align='left'>Publisher</th>
+          	<th class='item_price' align='right'>Price</th>
+			<th class='item_quantity' align='right'>Quantity</th>
+          	<th class='item_total' align='right'>Total Cost</th>
         </tr>
       </thead>
 	  <tbody>

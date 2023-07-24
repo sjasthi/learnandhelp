@@ -389,18 +389,6 @@ input[type=file]::file-selector-button {
   font-weight: bold;
 }
 
-#receipt_table, #selection_table {
-  width: 80%;
-  margin: auto;
-  margin-top: 25px;
-}
-
-#receipt_table th, #receipt_table td, #selection_table th, #selection_table td {
-  width: 15%;
-  border: 1px solid black;
-  padding: 5px;
-}
-
 #add_cause {
   margin: auto;
   width: 50%;
@@ -476,3 +464,30 @@ input[type=file]::file-selector-button {
 #file-name-field {
 	width: 300px;
 }
+
+#selection_table, #receipt_table {
+    width: 80%;
+    margin: auto;
+    margin-top: 25px;
+	border-collapse: collapse;
+}
+
+#selection_table th, #receipt_table th {
+    background: #aaa;
+	padding: 5px 8px 5px 8px;
+    border: 1px solid black;
+}
+
+#selection_table td, #receipt_table td {
+	padding: 5px 8px 5px 8px;
+    border: 1px solid black;
+}
+
+#selection_table tr:nth-child(even), #receipt_table tr:nth-child(even) {
+	background-color: #efefef;
+}
+
+.item_number, .item_price, .item_quantity, .item_total {
+	width: 5%;
+}
+

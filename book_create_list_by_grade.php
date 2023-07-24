@@ -64,7 +64,7 @@
   <?php show_navbar(); ?>
   <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Shipping List</span></h1>
+        <h1><span class="accent-text">Selection List</span></h1>
       </div>
   </header>
   <div id="selection">
@@ -75,8 +75,8 @@
           <th align='left'>Grade Level</th>
           <th align='left'>Title</th>
           <th align='left'>Publisher</th>
-          <th align='right'>Price</th>
-		  <th align='right'>Quantity</th>
+          <th class='item_price' align='right'>Price</th>
+		  <th class='item_quantity' align='right'>Quantity</th>
         </tr>
       </thead>
       <tbody>
@@ -112,12 +112,9 @@
           $sql .= ") AND available = 1";
           //echo $sql;
           $result = $conn->query($sql);
-          $total_price = 0;
-          $book_count = 0;
           if ($result->num_rows > 0) {
             // Create table with data from each row
             while($row = $result->fetch_assoc()) {
-				$quantity = 1;
 				$entry_price = floatval($row["price"]);
 				// the quantity column in the table is editable it is not an input field, parsing innerHTML to get
 				// the table data when creating the JSON data does not work if there is an INPUT type of element
