@@ -27,7 +27,7 @@
          });
 
          $.ajax({
-           url: 'books_get_all.php',
+           url: 'get-books.php',
            type: "GET",
            async: false,
            success: function (data) {
@@ -78,22 +78,50 @@
        </div>
      </header>
      <div id="loading">
-      
        <h2> Loading Please Wait </h2>
        <img src="images/loadingIcon.gif"></image>
      </div>
      <div id="books_page" hidden>
-       <form action="book_create_new_record.php" method="post">
-         <input type="submit" name="add_new" value="NEW &nbsp; BOOK">
-       </form>
-       <!-- Select books by grade level -->
-       <form action="book_create_list_by_grade.php" method="post">
-         <h4>Select Books by Grade Level</h4>
-         <input class="checkboxes" type="checkbox" name="high_school" value="True" required>High School&nbsp;&nbsp;&nbsp;&nbsp;</input>
-         <input class="checkboxes" type="checkbox" name="primary_school_upper" value="True" required>Primary School Upper&nbsp;&nbsp;&nbsp;&nbsp;</input>
-         <input class="checkboxes" type="checkbox" name="primary_school_lower" value="True" required>Primary School Lower</input>
+       <!-- Generate books by grade level -->
+       <form action="create_booklist_by_grade.php" method="post">
+         <h3> Generate Books by grade level </h3>
+         <label for="high">High</label>
+         <input class="checkboxes" type="checkbox" name="high" value="True" required>
+         <label for="high">Middle</label>
+         <input class="checkboxes" type="checkbox" name="middle" value="True" required>
+         <label for="high">Elementary</label>
+         <input class="checkboxes" type="checkbox" name="elementary" value="True" required>
          <br>
          <input type="submit" name="submit">
+
+         <!-- Add new book -->
+         <button type='button' id='add_new' onclick='newBook()' class='add_new'>Add new book</button>
+       </form>
+       
+       <!-- Book list -->
+       <form id="booklist" action="create_booklist.php" method="post" hidden="hidden">
+         <h1>Book list</h1>
+         <div id="booklist_labels">
+           <div class="list_labels">
+             <label>Grade Level</label>
+           </div>
+           <div class="list_labels">
+             <label>Title</label>
+           </div>
+           <div class="list_labels">
+             <label>Publisher</label>
+           </div>
+           <div class="list_labels">
+              <label>Price</label>
+           </div>
+           <div class="list_labels">
+             <label>Quantity</label>
+           </div>
+         </div>
+         <div id="booklist_entries">
+         </div>
+         <input type="hidden" id="entry_count" name="entry_count" value="0">
+         <input id="booklist_submit" type="submit" name="submit" value= "Generate Receipt">
        </form>
        <!-- Jquery Data Table -->
        <div class="toggle_columns">
@@ -105,8 +133,8 @@
            - <a class="toggle-vis" data-column="5">Year Published</a>
            - <a class="toggle-vis" data-column="6">Page Count</a>
            - <a class="toggle-vis" data-column="7">Price</a>
-		   - <a class="toggle-vis" data-column="8">Available</a>
-           - <a class="toggle-vis" data-column="9">Edit</a>
+           - <a class="toggle-vis" data-column="8">Action</a>
+           <?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { echo '- <a class="toggle-vis" data-column="9">Change Picture</a>'; } ?>
        </div>
        <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
          <table id="books_table" class="display compact">
@@ -120,8 +148,12 @@
                <th>Year Published</th>
                <th>Page Count</th>
                <th>Price (₹)</th>
-               <th>Available</th>
-               <th>Edit</th>
+               <th>Action</th>
+               <?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') {
+                echo '<th>Edit</th>
+                      <th>Delete</th>
+                      <th>Change Picture</th>';
+                } ?>
              </tr>
            </thead>
            <tbody id="book_body">
@@ -139,6 +171,26 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
    <script>
+      function updateValue(element,column,id){
+            console.log(element.innerText)
+            var value = element.innerText
+            $.ajax({
+                url:'inline-edit.php',
+                type: 'post',
+                data:{
+                    value: value,
+                    column: column,
+                    id: id,
+                    table: "book",
+                    idName: "id"
+                },
+                success:function(php_result){
+    				console.log(php_result);
+
+                }
+
+            })
+        }
       $(document).ready(function(){
         var checkboxes = $('.checkboxes');
         checkboxes.change(function(){
@@ -149,5 +201,11 @@
             }
         });
       });
+    </script>
+
+    <script>
+      function newBook(){
+        location.href='new_book.php';
+      }
     </script>
  </html>
