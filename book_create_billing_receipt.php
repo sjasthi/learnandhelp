@@ -33,7 +33,7 @@
 
   <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Receipt</span></h1>
+        <h1><span class="accent-text">Billing Receipt</span></h1>
       </div>
   </header>
   <div id="receipt">
@@ -60,7 +60,7 @@
 					$item_number . "</td><td align='left'> ".
 					$row["Grade Level"] . "</td><td align='left'> ".
 					$row["Title"] ."</td><td align='left'>".
-					$row["Publisher"] ."/td><td align='right'>".
+					$row["Publisher"] ."</td><td align='right'>".
 					$row["Price"] ."</td><td align='right'>".
 					$row["Quantity"] ."</td><td align='right'>".
 					$row["Price"] * $row["Quantity"] ."</td></tr>";
