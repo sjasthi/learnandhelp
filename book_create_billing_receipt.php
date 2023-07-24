@@ -46,7 +46,7 @@
           	<th align='left'>Publisher</th>
           	<th class='item_price' align='right'>Price</th>
 			<th class='item_quantity' align='right'>Quantity</th>
-          	<th class='item_total' align='right'>Total Cost</th>
+          	<th class='item_total' align='right'>Item Total</th>
         </tr>
       </thead>
 	  <tbody>
