@@ -132,7 +132,7 @@
        </tbody>
 	   <form action="book_create_billing_receipt.php" method="post" onsubmit="get_table_rows();">
             <input type="hidden" id="selected_books" name="selected_books" value=""> <!-- value is set by the javascript -->
-			<input type="submit" name="create_book_billing_receipt" value="Create Billing Receipt">
+			<input type="submit" name="create_book_billing_receipt" value="Create Receipt">
        </form>
 </div>
 </body>
