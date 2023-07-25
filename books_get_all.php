@@ -32,11 +32,18 @@
       		if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') 
       		{
 
-               $resultString .= "<td style='min-width: 300px;'>
+               $resultString .= "<td style='min-width: 120px;'>
                  <form action='book_edit.php' method='post' enctype='multipart/form-data'>
-                   <input type='hidden' name='book_id' value='".$row['id']."'>
-                   <input type='submit' value='Edit Book'>
-                 </form></td>";
+                    <input type='hidden' name='book_image' value='".$row["image"]. "'>
+                   	<input type='hidden' name='book_id' value='".$row['id']."'>
+                	<input type='submit' id='admin_buttons' name='edit_book' value='Edit Book'>
+				</form>
+				<form action='book_delete.php' method='POST'>
+                    <input type='hidden' name='book_image' value='".$row["image"]."'>
+                    <input type='hidden' name='book_id' value='".$row["id"]."'>
+                    <input type='submit' id='admin_buttons' name='delete_book' value='Delete Book'/>
+                </form>
+				</td>";
 			}
 	        $resultString .= "</tr>";
       }

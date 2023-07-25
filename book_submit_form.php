@@ -25,7 +25,6 @@ if (isset($_POST['action'])) {
 // data passed to form by $_POST
 if($action == 'admin_edit_book' or $action == 'admin_add_book'){
 	$id = $_POST['id'];
-	$callnumber = $_POST["callnumber"];
 	$title = $_POST["title"];
 	$author = $_POST["author"];
 	$publisher = $_POST["publisher"];
@@ -45,7 +44,9 @@ if($action == 'admin_edit_book' or $action == 'admin_add_book'){
 		}
 	}
 	$available = $_POST["available"];
-} else {
+}
+/*
+else {
 	// data coming from database, not sure this is even needed
 	$id = $_SESSION['id'];
     $sql = "SELECT * FROM books WHERE id = '$id'";
@@ -53,7 +54,6 @@ if($action == 'admin_edit_book' or $action == 'admin_add_book'){
 
 	$action = '';
 	$id = $row['id'];
-	$callnumber = $row["callNumber"];
 	$title = $row["title"];
 	$author = $row["author"];
 	$publisher = $row["publisher"];
@@ -64,11 +64,10 @@ if($action == 'admin_edit_book' or $action == 'admin_add_book'){
 	$gradelevel = $row["grade_level"];
 	$available = $row["available"];
 }
-
+ */
 // where the inserts and updates take place
 if($action == "admin_edit_book") {
 	$sql = "UPDATE books SET
-			callNumber = '$callnumber',
 			title = '$title',
 			author = '$author',
 			publisher = '$publisher',
@@ -81,32 +80,36 @@ if($action == "admin_edit_book") {
 			WHERE id = '$id';";
     $_SESSION['message'] = '<h4>Edits Submitted<h4><br>';
 } elseif($action == 'admin_add_book') {
-	$sql = "SELECT MAX(id) AS 'id' FROM books;";
-	$row = mysqli_fetch_array(mysqli_query($connection, $sql));
-	$id = $row["id"];
-
 	$sql = "INSERT INTO books VALUES (
-		'$id',
-		'$callnumber',
+		'NULL',
 		'$title',
 		'$author',
 		'$publisher', 
 		'$publishyear',
-		'$numPages',
+		'$numpages',
 	    '$price',
 	    'NULL',
 		'$gradelevel',
-		'$available');";
+		'$available',
+		CURRENT_TIME(),
+	    CURRENT_TIME());";
 }
 
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
+} else {
+	if($action == 'admin_add_book') {
+		$id = mysqli_insert_id($connection);
+		// trigger hidden form to load admin_edit_school.php and POST $id
+		echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
+			  </script>";
+	}
 }
 
 mysqli_close($connection);
 ?>
 
 <form method="POST" id="add_submitted_form" action="book_edit.php">
-	<?php echo "<input type=\"hidden\" name=\"id\" value=\"$id\">"; ?>
+	<?php echo "<input type=\"hidden\" name=\"book_id\" value=\"$id\">"; ?>
 </form>
 

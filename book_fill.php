@@ -17,7 +17,6 @@ require 'db_configuration.php';
   		$row = mysqli_fetch_array(mysqli_query($connection, $sql));
   		$author = $row["author"];
   		$available = $row["available"];
-  		$callnumber = $row["callNumber"];
 		$gradelevel = $row["grade_level"];
 		$id = $row["id"];
   		$image = $row["image"];
@@ -27,17 +26,16 @@ require 'db_configuration.php';
   		$publishyear = $row["publishYear"];
   		$title = $row["title"];
 	} else {
--  		$author = "";
+  		$author = "";
   		$available = "";
--  		$callnumber = "";
--  		$gradelevel = "";
--  		$id = "";
+  		$gradelevel = "";
+  		$id = "";
   		$image = "";
   		$numpages = "";
--  		$price = "";
--  		$publisher = "";
--  		$publishyear = "";
--  		$title = "";
+  		$price = "";
+  		$publisher = "";
+  		$publishyear = "";
+  		$title = "";
 	}
 
 
@@ -45,8 +43,6 @@ require 'db_configuration.php';
     <div id=\"container_2\">
   	<form id=\"survey-form\" action=\"book_submit_form.php\" method = \"post\">
     <input type='hidden' name='id' value=$id>
-	<label id=\"callnumber-label\">Call Number</label><br>
-	<input type=\"text\" id=\"callnumber\" name=\"callnumber\" class=\"form\" value=\"$callnumber\"><br><!--callnumber-->
 	<label id=\"title-label\">Title</label><br>
 	<input type=\"text\" id=\"title\" name=\"title\" class=\"form\" value=\"$title\" required><br><!--title-->
 	<label id=\"author-label\">Author</label><br>
@@ -66,9 +62,14 @@ require 'db_configuration.php';
        	if (str_contains(strtolower($gradelevel), "primary school lower"))
        	echo "selected";
       	echo ">Primary School Lower</option>
-	</select><br>
-	<label id=\"price-label\">Price</label><br>
-    <input type=\"text\" id=\"price\" name=\"price\" class=\"form\" value=\"$price\" required></div><!--price-->
+  	<option value='Other' ";
+       	if (str_contains(strtolower($gradelevel), "other"))
+       	echo "selected";
+      	echo ">Other</option>
+	</select>
+    <label id=\"price-label\">Price</label><br>
+	<input type=\"text\" id=\"price\" name=\"price\" class=\"form\" value=\"$price\" required><!--price-->
+    </div>
 	
 	<div id=\"right\">
 	<label id=\"publisher-label\">Publisher</label><br>
@@ -78,8 +79,20 @@ require 'db_configuration.php';
     <label id=\"numpages-label\">Page Count</label><br>
     <input type=\"text\" id=\"numpages\" name=\"numpages\" class=\"form\" value=\"$numpages\"><br><!--numpages-->
 	<label id=\"available-label\">Available</label><br>
-    <input type=\"text\" id=\"available\" name=\"available\" class=\"form\" value=\"$available\" required><br><!--available-->
+	<select id=\"available-dropdown\" name=\"available\" required><!--available-->
+   	<option disabled value>Select 1 for availble</option>
+   	<option value='1' ";
+   	if ($available == '1')
+       	echo "selected";
+      	echo  ">1</option>
+   	<option value='0' ";
+   	if ($available == '0')
+       	echo "selected";
+      	echo ">0</option>
+	</select></br>
 	<input type=\"hidden\" id=\"image\" name=\"image\" class=\"form\" value=\"$image\">
     </div>";
 }
 ?>
+
+

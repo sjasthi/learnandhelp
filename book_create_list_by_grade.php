@@ -102,13 +102,24 @@
             if (isset($_POST['primary_school_lower'])) {
               $sql .= ' OR LOWER(grade_level) LIKE "%primary school lower%"';
             }
+            if (isset($_POST['other'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
+            }
           } elseif (isset($_POST['primary_school_upper'])) {
             $sql .= '"%primary school upper%"';
             if (isset($_POST['primary_school_lower'])) {
               $sql .= ' OR LOWER(grade_level) LIKE "%primary school lower%"';
             }
+            if (isset($_POST['other'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
+            }
           } elseif (isset($_POST['primary_school_lower'])) {
             $sql .= '"%primary school lower%"';
+            if (isset($_POST['other'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
+            }
+          } elseif (isset($_POST['other'])) {
+            $sql .= '"%other%"';
           }
           $sql .= ") AND available = 1";
           //echo $sql;

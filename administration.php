@@ -59,7 +59,7 @@
         <label for="blogs">Blogs</label>
       </div>
       <div class="admin_icon">
-        <a href="admin_reports.php" id="reports"><img src="images/admin_icons/reports_icon.png" alt="reports"></a>
+        <a href="#" id="reports"><img src="images/admin_icons/reports_icon.png" alt="reports"></a>
         <br>
         <label for="reports">Reports</label>
       </div>
@@ -77,11 +77,6 @@
         <a href="admin_assign_blog.php" id="assignschooluserrole"><img src="images/admin_icons/assign.png" alt="assignschooluserrole"></a>
         <br>
         <label for="classes">Assign User</label>
-      </div>
-      <div class="admin_icon">
-        <a href="admin_shipping.php" id="admin_shipping"><img src="images/admin_icons/shipping.png" alt="admin_shipping"></a>
-        <br>
-        <label for="classes">Shipping</label>
       </div>
     </div>
     <br>

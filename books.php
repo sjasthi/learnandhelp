@@ -82,18 +82,20 @@
        <h2> Loading Please Wait </h2>
        <img src="images/loadingIcon.gif"></image>
      </div>
-     <div id="books_page" hidden>
-       <form action="book_create_new_record.php" method="post">
-         <input type="submit" name="add_new" value="NEW &nbsp; BOOK">
-       </form>
+	 <div id="books_page" hidden>
+		<form action='book_edit.php' method='post' enctype='multipart/form-data'>
+			<input type='hidden' name='book_id' value=''>
+			<input type='submit' name='edit_book' value='Add New Book'>
+		</form>
        <!-- Select books by grade level -->
        <form action="book_create_list_by_grade.php" method="post">
          <h4>Select Books by Grade Level</h4>
          <input class="checkboxes" type="checkbox" name="high_school" value="True" required>High School&nbsp;&nbsp;&nbsp;&nbsp;</input>
          <input class="checkboxes" type="checkbox" name="primary_school_upper" value="True" required>Primary School Upper&nbsp;&nbsp;&nbsp;&nbsp;</input>
-         <input class="checkboxes" type="checkbox" name="primary_school_lower" value="True" required>Primary School Lower</input>
+         <input class="checkboxes" type="checkbox" name="primary_school_lower" value="True" required>Primary School Lower&nbsp;&nbsp;&nbsp;&nbsp;</input>
+         <input class="checkboxes" type="checkbox" name="other" value="True" required>Other</input>
          <br>
-         <input type="submit" name="submit">
+         <input type="submit" name="submit" value="Get Selections">
        </form>
        <!-- Jquery Data Table -->
        <div class="toggle_columns">
