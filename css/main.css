@@ -487,7 +487,7 @@ input[type=file]::file-selector-button {
 	background-color: #efefef;
 }
 
-.item_number, .item_price, .item_quantity, .item_total {
+.item_id, .item_number, .item_price, .item_quantity, .item_total {
 	width: 5%;
 }
 

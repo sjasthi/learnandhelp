@@ -40,7 +40,8 @@
   <table id="receipt_table">
       <thead>
         <tr style="font-weight:bold; font-size:15px">
-		  	<th class='item_number' align='left'>Item</th>
+			<th class='item_number' align='left'>Item</th>
+			<th class='item_id' align='letft'>Book ID</th>
 		  	<th align='left'>Grade Level</th>
           	<th align='left'>Title</th>
           	<th align='left'>Publisher</th>
@@ -58,6 +59,7 @@
 			if($row["Quantity"] > 0) {
 				echo "<tr><td align='left'>".
 					$item_number . "</td><td align='left'> ".
+					$row['Book ID'] . "</td><td align='left'> ".
 					$row["Grade Level"] . "</td><td align='left'> ".
 					$row["Title"] ."</td><td align='left'>".
 					$row["Publisher"] ."/td><td align='right'>".

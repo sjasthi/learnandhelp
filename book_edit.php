@@ -41,15 +41,18 @@
 			if($id != null) { 
 				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_book\">
 			  	<br>
-			  	<input type=\"submit\" id=\"submit-sbook\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
+			  	<input type=\"submit\" id=\"submit-book\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
 			} else {
 				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_add_book\">
 		        <br>
 		        <input type=\"submit\" id=\"submit-book\" name=\"submit\" value=\"Submit\">";
 			}
 		}
-    ?>
+	?>
 	  </form><!---survey-form--->
+		<form method="POST" action="books.php">
+      		<input type="submit" value="Return to Books">
+    	</form>  
 	</div>
   </body>
 </html>

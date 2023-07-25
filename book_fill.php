@@ -52,7 +52,7 @@ require 'db_configuration.php';
 	<label id=\"author-label\">Author</label><br>
 	<input type=\"text\" id=\"author\" name=\"author\" class=\"form\" value=\"$author\" required><br><!--author-->
     <label id=\"grade-level-label\">Grade Level</label><br> <!--make this multi select to format the comma separators etc-->
-	<select id=\"gradelevel-dropdown\" name=\"gradelevel\" multiple required><!--gradelevel-->
+	<select id=\"gradelevel-dropdown\" name=\"gradelevel[]\" multiple required><!--gradelevel-->
    	<option disabled value>Select Grade Level</option>
    	<option value='High School' ";
    	if (str_contains(strtolower($gradelevel), "high school"))
@@ -73,11 +73,13 @@ require 'db_configuration.php';
 	<div id=\"right\">
 	<label id=\"publisher-label\">Publisher</label><br>
     <input type=\"text\" id=\"publisher\" name=\"publisher\" class=\"form\" value=\"$publisher\" required><br><!--publisher-->
-	<label id=\"publish-year-label\">Published Year</label><br>
-	<input type=\"text\" id=\"publish-year\" name=\"publish-year\" class=\"form\" value=\"$publishyear\"><br><!--publishyear-->
-    <label id=\"page-count-label\">Page Count</label><br>
-    <input type=\"text\" id=\"page-count\" name=\"page-count\" class=\"form\" value=\"$numpages\"><br><!--numpages-->
+	<label id=\"publishyear-label\">Published Year</label><br>
+	<input type=\"text\" id=\"publishyear\" name=\"publishyear\" class=\"form\" value=\"$publishyear\"><br><!--publishyear-->
+    <label id=\"numpages-label\">Page Count</label><br>
+    <input type=\"text\" id=\"numpages\" name=\"numpages\" class=\"form\" value=\"$numpages\"><br><!--numpages-->
 	<label id=\"available-label\">Available</label><br>
-    <input type=\"text\" id=\"available\" name=\"available\" class=\"form\" value=\"$available\" required><br></div><!--available-->";
+    <input type=\"text\" id=\"available\" name=\"available\" class=\"form\" value=\"$available\" required><br><!--available-->
+	<input type=\"hidden\" id=\"image\" name=\"image\" class=\"form\" value=\"$image\">
+    </div>";
 }
 ?>

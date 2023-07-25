@@ -22,106 +22,91 @@ if (isset($_POST['action'])) {
 	$action = '';
 }
 
-if($action == 'admin_edit_school' or $action == 'admin_add_school'){
-	$name = $_POST["name"];
-	$type = $_POST["type"];
-	$category = $_POST["category"];
-	$grade_level_start = $_POST["grade_level_start"];
-	$grade_level_end = $_POST["grade_level_end"];
-	$current_enrollment = $_POST["current_enrollment"];
-	$address_text = $_POST["address_text"];
-	$state_name = $_POST["state_name"];
-	$state_code = $_POST["state_code"];
-	$pin_code = $_POST["pin_code"];
-	$contact_name = $_POST["contact_name"];
-	$contact_designation = $_POST["contact_designation"];
-	$contact_phone = $_POST["contact_phone"];
-	$contact_email = $_POST["contact_email"];
-	$status = $_POST["status"];
-	$notes = $_POST["notes"];
+// data passed to form by $_POST
+if($action == 'admin_edit_book' or $action == 'admin_add_book'){
+	$id = $_POST['id'];
+	$callnumber = $_POST["callnumber"];
+	$title = $_POST["title"];
+	$author = $_POST["author"];
+	$publisher = $_POST["publisher"];
+	$publishyear = $_POST["publishyear"];
+	$numpages = $_POST["numpages"];
+	$price = $_POST["price"];
+	$image = $_POST["image"];
+    //potential multiple selections for gradelevel need to be converted to
+	// a comma separated list that can be sent to MYSQL when doing an UPDATE
+	// or INSERT
+	$temp_array = $_POST["gradelevel"];
+	for($i = 0; $i < count($temp_array); $i++) {
+		if($i == 0) {
+			$gradelevel = $temp_array[$i];
+		} else {
+			$gradelevel .= ', ' . $temp_array[$i];
+		}
+	}
+	$available = $_POST["available"];
 } else {
+	// data coming from database, not sure this is even needed
 	$id = $_SESSION['id'];
-    $sql = "SELECT * FROM schools WHERE id = '$id'";
+    $sql = "SELECT * FROM books WHERE id = '$id'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 	$action = '';
 	$id = $row['id'];
-	$name = $row["name"];
-	$type = $row["type"];
-	$category = $row["category"];
-	$grade_level_start = $row["grade_level_start"];
-	$grade_level_end = $row["grade_level_end"];
-	$current_enrollment = $row["current_enrollment"];
-	$address_text = $row["address_text"];
-	$state_name = $row["state_name"];
-	$state_code = $row["state_code"];
-	$pin_code = $row["pin_code"];
-	$contact_name = $row["contact_name"];
-	$contact_designation = $row["contact_designation"];
-	$contact_phone = $row["contact_phone"];
-	$contact_email = $row["contact_email"];
-	$status = $row["status"];
-	$notes = $row["notes"];
+	$callnumber = $row["callNumber"];
+	$title = $row["title"];
+	$author = $row["author"];
+	$publisher = $row["publisher"];
+	$publishyear = $row["publishYear"];
+	$numpages = $row["numPages"];
+	$price = $row["price"];
+	$image = $row["image"];
+	$gradelevel = $row["grade_level"];
+	$available = $row["available"];
 }
 
-if($action == "admin_edit_school") {
-	$id = $_POST['id'];
-	$sql = "UPDATE schools SET
-			name = '$name',
-			type = '$type',
-			category = '$category',
-			grade_level_start = '$grade_level_start',
-			grade_level_end = '$grade_level_end',
-			current_enrollment = '$current_enrollment',
-			address_text = '$address_text',
-			state_name = '$state_name',
-			state_code = '$state_code',
-			pin_code = '$pin_code',
-			contact_name = '$contact_name',
-			contact_designation = '$contact_designation',
-			contact_phone = '$contact_phone',
-			contact_email = '$contact_email',
-			status = '$status',
-			notes = '$notes'
+// where the inserts and updates take place
+if($action == "admin_edit_book") {
+	$sql = "UPDATE books SET
+			callNumber = '$callnumber',
+			title = '$title',
+			author = '$author',
+			publisher = '$publisher',
+			publishYear = '$publishyear',
+			numPages = '$numpages',
+			price = '$price',
+			image = '$image',
+			grade_level = '$gradelevel',
+			available = '$available'
 			WHERE id = '$id';";
     $_SESSION['message'] = '<h4>Edits Submitted<h4><br>';
-} elseif($action == 'admin_add_school') {
-	$sql = "INSERT INTO schools VALUES (
-		NULL,
-		'$name',
-		'$type',
-		'$category',
-		'$grade_level_start', 
-		'$grade_level_end',
-		'$current_enrollment',
-	    '$address_text',
-	    '$state_name',
-		'$state_code',
-		'$pin_code',
-		'$contact_name',
-		'$contact_designation',
-		'$contact_phone',
-		'$contact_email',
-		'$status',
-		'$notes');";
+} elseif($action == 'admin_add_book') {
+	$sql = "SELECT MAX(id) AS 'id' FROM books;";
+	$row = mysqli_fetch_array(mysqli_query($connection, $sql));
+	$id = $row["id"];
+
+	$sql = "INSERT INTO books VALUES (
+		'$id',
+		'$callnumber',
+		'$title',
+		'$author',
+		'$publisher', 
+		'$publishyear',
+		'$numPages',
+	    '$price',
+	    'NULL',
+		'$gradelevel',
+		'$available');";
 }
 
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
-} else {
-	if($action == 'admin_add_school') {
-		$id = mysqli_insert_id($connection);
-		// trigger hidden form to load admin_edit_school.php and POST $id
-		echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
-			  </script>";
-	}
 }
 
 mysqli_close($connection);
-
 ?>
 
-<form method="POST" id="add_submitted_form" action="admin_edit_school.php">
+<form method="POST" id="add_submitted_form" action="book_edit.php">
 	<?php echo "<input type=\"hidden\" name=\"id\" value=\"$id\">"; ?>
 </form>
 

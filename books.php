@@ -119,7 +119,7 @@
                <th>Publisher</th>
                <th>Year Published</th>
                <th>Page Count</th>
-               <th>Price (₹)</th>
+               <th>Price</th>
                <th>Available</th>
                <th>Edit</th>
              </tr>

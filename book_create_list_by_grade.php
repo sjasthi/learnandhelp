@@ -72,6 +72,7 @@
   <table id="selection_table">
       <thead>
         <tr style="font-weight:bold; font-size:15px">
+          <th class='item_id' align='left'>Book ID</th>
           <th align='left'>Grade Level</th>
           <th align='left'>Title</th>
           <th align='left'>Publisher</th>
@@ -115,11 +116,11 @@
           if ($result->num_rows > 0) {
             // Create table with data from each row
             while($row = $result->fetch_assoc()) {
-				$entry_price = floatval($row["price"]);
 				// the quantity column in the table is editable it is not an input field, parsing innerHTML to get
 				// the table data when creating the JSON data does not work if there is an INPUT type of element
 				// in the table
                 echo "<tr style='font-size:12px; font-weight:bold'>
+                        <td align='left'>".$row['id']."</td>
                         <td align='left'>".$row['grade_level']."</td>
                         <td align='left'>".$row['title']."</td>
                         <td align='left'>".$row['publisher']."</td>
