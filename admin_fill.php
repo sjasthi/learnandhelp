@@ -8,7 +8,6 @@ require 'db_configuration.php';
 function admin_school_form($id){
 	if ($id != null) {   	
 		$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
-
   		if ($connection === false) {
     		die("Failed to connect to database: " . mysqli_connect_error());
   		}
@@ -56,14 +55,14 @@ function admin_school_form($id){
 	<label id=\"school-type-label\">School Type</label>
 	<select id=\"school-type-dropdown\" name=\"type\" required><!--type--->
     	<option disabled value>Select School Type</option>
-      	<option value='Primary School Lower' ";
-        	if (strtolower($type) == "primary school lower")
+      	<option value='Primary School' ";
+        	if (strtolower($type) == "primary school")
             	echo "selected";
-      	        echo  ">Primary School Lower</option>
-      	<option value='Primary School Upper' ";
-        	if (strtolower($type) == "primary school upper")
+      	        echo  ">Primary School</option>
+      	<option value='Upper Primary School' ";
+        	if (strtolower($type) == "upper primary school")
             	echo "selected";
-      	        echo ">Primary School Upper</option>
+      	        echo ">Upper Primary School</option>
       	<option value='High School' ";
         	if ($type == "High School" or $type == "high school")
             	echo "selected";
