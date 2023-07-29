@@ -47,7 +47,7 @@
 		// set the value of our hidden input field in the form to the JSON data
 		document.getElementById("selected_books").value = JSON.stringify(rows); 
     document.getElementById("selected_books2").value = JSON.stringify(rows); 
-    document.getElementById("Visual_report").value = JSON.stringify(rows); 
+    document.getElementById("selected_books3").value = JSON.stringify(rows); 
     }  
 </script>	  
 
@@ -150,32 +150,32 @@
 		  }
        ?>
        </tbody>
-	   <!-- <form action="book_create_billing_receipt.php" method="post" onsubmit="get_table_rows();">
+	   <form action="book_create_billing_receipt.php" method="post" onsubmit="get_table_rows();">
             <input type="hidden" id="selected_books" name="selected_books" value=""> <!-- value is set by the javascript -->
-			<!-- <input type="submit" name="create_book_billing_receipt" value="Create Receipt"> --> 
+			<input type="submit" name="create_book_billing_receipt" value="Create Receipt">
 
       <!--  -->
       <div class="form-container">
-        <form action="receipt_with_price.php" method="post" onsubmit="get_table_rows();" target="_blank">
-          <input type="hidden" id="selected_books" name="selected_books" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="receipt_with_price" value="Receipt With Price">
-        </form>
-      </div>
+  <form action="receipt_with_price.php" method="post" onsubmit="get_table_rows();">
+    <input type="hidden" id="selected_books" name="selected_books" value=""> <!-- value is set by the javascript -->
+    <input type="submit" name="receipt_with_price" value="Receipt With Price">
+  </form>
+</div>
 
-      <div class="form-container">
-        <form action="receipt_without_price.php" method="post" onsubmit="get_table_rows();" target="_blank">
-          <input type="hidden" id="selected_books2" name="selected_books2" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="receipt_without_price" value="Receipt Without Price">
-        </form>
-      </div>
+<div class="form-container">
+  <form action="receipt_with_quantity.php" method="post" onsubmit="get_table_rows();">
+    <input type="hidden" id="selected_books2" name="selected_books2" value=""> <!-- value is set by the javascript -->
+    <input type="submit" name="receipt_with_quantity" value="Receipt With Quantity">
+  </form>
+</div>
 
-      <div class="form-container">
-        <form action="Visual_report.php" method="post" onsubmit="get_table_rows();" target="_blank">
-          <input type="hidden" id="Visual_report" name="Visual_report" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="Visual_report" value="Visual Report">
-        </form>
-      </div>
-</form>
+<div class="form-container">
+  <form action="receipt_with_price_and_quantity.php" method="post" onsubmit="get_table_rows();">
+    <input type="hidden" id="selected_books3" name="selected_books3" value=""> <!-- value is set by the javascript -->
+    <input type="submit" name="receipt_with_price_and_quantity" value="Receipt With Price And Quantity">
+  </form>
+</div>
+       </form>
 </div>
 </body>
 </html>
