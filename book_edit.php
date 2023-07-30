@@ -4,8 +4,8 @@
     session_start();
   }
 
-  $book_id = $_POST['book_id'];
-  $book_image = $_POST['book_image'];
+  $book_id = $_POST['book_id'] ?? null;
+  $book_image = $_POST['book_image'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -34,20 +34,15 @@
     ?>
     <div id="container_2">
 	<?php
-	    admin_book_form($book_id);
-		if(isset($_SESSION['message'])) {
-        	echo $_SESSION['message'];
-	      	unset($_SESSION['message']);
-	  	} else {  
-			if($book_id != null) { 
-				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_book\">
-			  	<br>
-			  	<input type=\"submit\" id=\"submit-book\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
-			} else {
-				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_add_book\">
-		        <br>
-		        <input type=\"submit\" id=\"submit-book\" name=\"submit\" value=\"Submit\">";
-			}
+	    fill_book_form($book_id);
+		if($book_id != null) { 
+			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_book\">
+		  	<br>
+		  	<input type=\"submit\" id=\"submit-book\" name=\"submit\" value=\"Submit\">";
+		} else {
+			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_add_book\">
+	        <br>
+	        <input type=\"submit\" id=\"submit-book\" name=\"submit\" value=\"Submit\">";
 		}
 	?>
 	  </form><!--survey-form-->

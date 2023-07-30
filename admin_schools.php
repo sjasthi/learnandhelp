@@ -73,6 +73,12 @@
         <h1><span class="accent-text">Schools</span></h1>
       </div>
     </header>
+	<h3>Add New School</h3>
+    <form action="admin_edit_school.php" method="POST" id="add_school">
+		<input type="hidden" name="id" value="">
+		<input type="hidden" name="action" value="Add_School">
+       	<input type="submit" value="Add School" style="width: 15%">
+    </form>
     <!-- Jquery Data Table -->
     <div class="toggle_columns">
       Toggle column: <a class="toggle-vis" data-column="0">Id</a>
@@ -173,11 +179,5 @@
         </tbody>
       </table>
 	</div>
-	<h3>Add New School</h3>
-    <form action="admin_edit_school.php" method="POST" id="add_school">
-		<input type="hidden" name="id" value="">
-		<input type="hidden" name="action" value="Add_School">
-       	<input type="submit" value="Add School" style="width: 15%">
-    </form>
   </body>
 </html>

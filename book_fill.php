@@ -6,7 +6,7 @@ require 'db_configuration.php';
     session_start();
   }
   
-  function admin_book_form($id){
+  function fill_book_form($id){
 	if ($id != null) {   	
 		$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 

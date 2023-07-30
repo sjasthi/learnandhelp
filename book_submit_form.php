@@ -45,26 +45,7 @@ if($action == 'admin_edit_book' or $action == 'admin_add_book'){
 	}
 	$available = $_POST["available"];
 }
-/*
-else {
-	// data coming from database, not sure this is even needed
-	$id = $_SESSION['id'];
-    $sql = "SELECT * FROM books WHERE id = '$id'";
-    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
-	$action = '';
-	$id = $row['id'];
-	$title = $row["title"];
-	$author = $row["author"];
-	$publisher = $row["publisher"];
-	$publishyear = $row["publishYear"];
-	$numpages = $row["numPages"];
-	$price = $row["price"];
-	$image = $row["image"];
-	$gradelevel = $row["grade_level"];
-	$available = $row["available"];
-}
- */
 // where the inserts and updates take place
 if($action == "admin_edit_book") {
 	$sql = "UPDATE books SET
@@ -78,7 +59,6 @@ if($action == "admin_edit_book") {
 			grade_level = '$gradelevel',
 			available = '$available'
 			WHERE id = '$id';";
-    $_SESSION['message'] = '<h4>Edits Submitted<h4><br>';
 } elseif($action == 'admin_add_book') {
 	$sql = "INSERT INTO books VALUES (
 		'NULL',
@@ -100,15 +80,16 @@ if (!mysqli_query($connection, $sql)) {
 } else {
 	if($action == 'admin_add_book') {
 		$id = mysqli_insert_id($connection);
-		// trigger hidden form to load admin_edit_school.php and POST $id
-		echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
-			  </script>";
 	}
+	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},5000);
+		  </script>";
 }
 
 mysqli_close($connection);
 ?>
-
+<div style="text-align:center;margin-top:200px;"><h3>One moment please. Processing changes...</h3>
+       <img src="images/loadingIcon.gif"></img>
+</div>
 <form method="POST" id="add_submitted_form" action="book_edit.php">
 	<?php echo "<input type=\"hidden\" name=\"book_id\" value=\"$id\">"; ?>
 </form>

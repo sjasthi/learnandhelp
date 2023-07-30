@@ -80,7 +80,7 @@
      <div id="loading">
       
        <h2> Loading Please Wait </h2>
-       <img src="images/loadingIcon.gif"></image>
+       <img src="images/loadingIcon.gif"></img>
      </div>
 	 <div id="books_page" hidden>
 		<form action='book_edit.php' method='post' enctype='multipart/form-data'>
