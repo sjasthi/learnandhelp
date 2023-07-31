@@ -3,7 +3,7 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
-  $selected_books = stripcslashes($_POST['selected_books2']); //need to change this to visual_report
+  $selected_books = $_POST['selected_books'];
   $selected_books = json_decode($selected_books, TRUE);
  ?>
 <!DOCTYPE html>
@@ -33,46 +33,47 @@
 
   <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Receipt</span></h1>
+        <h1><span class="accent-text">Customer Receipt</span></h1>
       </div>
   </header>
   <div id="receipt">
   <table id="receipt_table">
-      <thead>
-        <tr style="font-weight:bold; font-size:15px">
-		  	<th class='item_number' align='left'>No</th>
-		  	<th align='left'>Book ID</th>
-        <th align='left'>Title</th>
-        <!-- <th align='left'>Publisher</th> -->
-        <th class='item_quantity' align='right'>Quantity</th>
-        </tr>
-      </thead>
-	  <tbody>
 		<?php
-		$item_number = 1;
-		$total_books = 0;
-  		$total_cost = 0;
-  		foreach($selected_books as $row) {
-			if($row["Quantity"] > 0) {
-				echo "<tr><td align='left'>".
-					$item_number . "</td><td align='left'> ".
-					$row["Book ID"] . "</td><td align='left'> ".
-					$row["Title"] ."</td><td align='left'>".
-					// $row["Publisher"] ."</td><td align='right'>".
-					$row["Quantity"] ."</td><td align='right'>";
-					$total_books = $total_books + $row["Quantity"];
-				$total_cost = $total_cost + ($row["Price"] * $row["Quantity"]);
-				$item_number += 1;
-			}
-  		}
-    	?>
-	  </tbody>
-</table>
+			// Create table with data from each row
+  			$counter = 0;
+  			$total_books = 0;
+			$order_total = 0;
+
+  			foreach($selected_books as $row) {
+				$price = floatval($row["Price"]);
+				$quantity = floatval($row["Quantity"]);
+				$item_total = $price * $quantity;
+				$total_books += $quantity;
+				$order_total += $item_total;
+
+				$counter++;
+				if($counter == 0) {
+					echo "<tr>";
+				}
+				$id = $row["Book ID"];
+				// if a profile image was not created use the admin_icons school.png as a default fallback image
+				echo  "<td id='book_image'>
+					<img src=".$row["Image"]." onerror=\"src='images/books/default.png'\" loading='lazy'><br>
+					<span>Title: ".$row["Title"]."<br>Quantity: ".$quantity."<br>Price: ".$price."<br>Total: ".$item_total."</span>
+					</td>";
+				if($counter % 5 == 0 && $counter > 0) {
+					echo "</tr>";
+					if($counter < count($selected_books)) {
+						echo "<tr>";
+					}
+				}
+			}  ?>
+	</table>
 	<span>  
 		<?php
 			$today = date("m/d/Y");
 			echo "<h4>Total Count of Books: $total_books &nbsp;&nbsp;&nbsp;&nbsp; "; 
-      echo "<h4>Date: $today</h4>"
+   			echo "<h4> Total Price of Books: $$order_total &nbsp;&nbsp;&nbsp;&nbsp; Date: $today"
 		?>
 	</span>
 </div>
