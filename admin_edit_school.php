@@ -34,46 +34,42 @@
     <div id="container_2">
 	<?php
 	    admin_school_form($id);
-     	if(isset($_SESSION['message'])) {
-        	echo $_SESSION['message'];
-	      	unset($_SESSION['message']);
-	  	} else {  
-			if($id != null) {
-				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_school\">
-			  	<br>
-			  	<input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
-			} else {
-				echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_add_school\">
-		        <br>
-		        <input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
-			}
+		if($id != null) { 
+			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_school\">
+		  	<br>
+		  	<input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
+		} else {
+			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_add_school\">
+	        <br>
+	        <input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
 		}
     ?>
 	  </form><!---survey-form--->
 	</div>
 <?php
 	// check that the media directory exists, if not, nothing to show here
-	if(file_exists('schools/' . $id . '/') and $id != null) {
+	if(file_exists("schools/$id/") and $id != null) {
 
     echo "<div style=\"padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto\">
       <table id=\"school_media\">";
-		$media_files = array_diff(scandir('schools/' . $id . '/'), array('..', '.'));
+		$media_files = array_diff(scandir("schools/$id/"), array('..', '.'));
 		$counter = 0;  
         while($counter < count($media_files)) {
 			if($counter == 0) {
-				echo '<tr>';
+				echo "<tr>";
 			}
-			echo  '<td class="school_media">
-					<a href="admin_school_media.php?id=' . $id . '&filename='. $media_files[$counter + 2] .'">
-						<img src="schools/' . $id . '/' . $media_files[$counter + 2] . '" alt="school image">
+			$filename = $media_files[$counter + 2];
+			echo  "<td class=\"school_media\">
+					<a href=\"admin_school_media.php?id=$id&filename=$filename\">
+						<img src=\"schools/$id/$filename\" alt=\"school image\">
 						<br>
-						<label>' . $media_files[$counter + 2]. '</label>
+						<label>$filename</label>
 					</a>
-				</td>';
+				</td>";
 			if($counter % 5 == 0 && $counter > 0) {
-				echo '</tr>';
+				echo "</tr>";
 				if($counter < count($media_files)) {
-					echo '<tr>';
+					echo "<tr>";
 				}
 			}
 			$counter++;
@@ -90,6 +86,10 @@
 			<br>
            	<input type="submit" name="submit" value="Upload Media">
 		</form>
+        <form method="POST" action="admin_schools.php">
+          <input type="submit" value="Return to Schools">
+		</form>
+
 	</div>
   </body>
 </html>

@@ -38,7 +38,7 @@
         <label for="registrations">Registrations</label>
       </div>
       <div class="admin_icon">
-        <a href="#" id="users"><img src="images/admin_icons/users_icon.png" alt="users"></a>
+        <a href="admin_usersList.php" id="users"><img src="images/admin_icons/users_icon.png" alt="users"></a>
         <br>
         <label for="users">Users</label>
       </div>
@@ -54,7 +54,7 @@
       </div>
       <br>
       <div class="admin_icon">
-        <a href="#" id="blogs"><img src="images/admin_icons/blogs_icon.png"  alt="blogs"></a>
+        <a href="admin_blogs.php" id="blogs"><img src="images/admin_icons/blogs_icon.png"  alt="blogs"></a>
         <br>
         <label for="blogs">Blogs</label>
       </div>
@@ -72,6 +72,11 @@
         <a href="admin_classes.php" id="classes"><img src="images/admin_icons/class.png" alt="classes"></a>
         <br>
         <label for="classes">Classes</label>
+      </div>
+      <div class="admin_icon">
+        <a href="admin_assign_blog.php" id="assignschooluserrole"><img src="images/admin_icons/assign.png" alt="assignschooluserrole"></a>
+        <br>
+        <label for="classes">Assign User</label>
       </div>
     </div>
     <br>

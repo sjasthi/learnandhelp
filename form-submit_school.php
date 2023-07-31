@@ -84,7 +84,6 @@ if($action == "admin_edit_school") {
 			status = '$status',
 			notes = '$notes'
 			WHERE id = '$id';";
-    $_SESSION['message'] = '<h4>Edits Submitted<h4><br>';
 } elseif($action == 'admin_add_school') {
 	$sql = "INSERT INTO schools VALUES (
 		NULL,
@@ -111,16 +110,19 @@ if (!mysqli_query($connection, $sql)) {
 } else {
 	if($action == 'admin_add_school') {
 		$id = mysqli_insert_id($connection);
-		// trigger hidden form to load admin_edit_school.php and POST $id
-		echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
-			  </script>";
 	}
+	// trigger hidden form to load admin_edit_school.php and POST $id
+	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},5000);
+		  </script>";
 }
 
 mysqli_close($connection);
 
 ?>
 
+<div style="text-align:center;margin-top:200px;"><h3>One moment please. Processing changes...</h3>
+       <img src="images/loadingIcon.gif"></img>
+</div>
 <form method="POST" id="add_submitted_form" action="admin_edit_school.php">
 	<?php echo "<input type=\"hidden\" name=\"id\" value=\"$id\">"; ?>
 </form>

@@ -13,6 +13,14 @@ if ($connection->connect_error) {
 }
 
 $book_id = $_POST['book_id'];
+$image = $_POST['book_image'];
+
+// delete the book image
+if(is_file($image)) {
+	unlink($image);
+}
+
+
 $fileName = $_FILES['file']['name'];
 $fileTMP = $_FILES['file']['tmp_name'];
 $fileError = $_FILES['file']['error'];
@@ -20,7 +28,7 @@ $fileExt = explode('.', $fileName);
 $fileActualExt = strtolower(end($fileExt));
 $fileDestination = "";
 if ($fileError === 0) {
-  $fileNewName = uniqid('', true).".".$fileActualExt;
+  $fileNewName = "book".$book_id.".".$fileActualExt;
   $fileDestination = 'images/books/'.$fileNewName;
   move_uploaded_file($fileTMP, $fileDestination);
 } else {
@@ -28,7 +36,7 @@ if ($fileError === 0) {
 }
 
 
-$sql = "UPDATE book SET image = '$fileDestination' WHERE id = $book_id;";
+$sql = "UPDATE books SET image = '$fileDestination' WHERE id = $book_id;";
 
 if (!mysqli_query($connection, $sql)) {
   echo("Error description: " . mysqli_error($connection));
@@ -36,5 +44,11 @@ if (!mysqli_query($connection, $sql)) {
 
 mysqli_close($connection);
 
-header('Location: books.php');
+echo "<div style=\"text-align:center;margin-top:200px;\"><h3>Deleting ".$image." and uploading new image.</h3></div>
+	<form  id='upload_form' action='book_edit.php' method='POST'>
+		<input type='hidden' name='book_id' value='$book_id'>
+		<input type='hidden' name='book_image' value='$fileDestination'>
+  		<script type=\"text/javascript\">setTimeout(function(){document.getElementById('upload_form').submit();},5000);
+		</script>
+	</form>";
 ?>

@@ -66,54 +66,56 @@
   echo "<h3> School Details </h3>
 	  <div id=\"school_icons\" class=\"school_icon\">";
 			$profile_image = get_profile_image($School_Id); 
-			echo "			<img src=" . $profile_image . " alt=\"school image\">
+			echo "			<img src=\"$profile_image\" alt=\"school image\">
 	  </div>
 	  <br>
       <div id= \"container_2\" class=\"school_details\">
-      <label id=\"id-label\">School ID:</label><span class=\"school_details\"> " . $School_Id . "</span><br>
-      <label id=\"name-label\">School Name:</label><span class=\"school_details\"> " . $school_name . "</span><br>
-      <label id=\"type-label\">Type:</label><span class=\"school_details\"> " . $school_type . "</span><br>
-      <label id=\"category-label\">Category:</label><span class=\"school_details\"> " . $school_type . "</span><br>
-      <label id=\"grade-range-label\">Grades:</label><span class=\"school_details\"> " . $grade_level_start . " to " . $grade_level_end . "</span><br>
-      <label id=\"enrollment-label\">Current Enrollment:</label><span class=\"school_details\"> " . $current_enrollment . "</span><br>
-      <label id=\"address-label\">Address:</label><span class=\"school_details\"> " . $address_text . "</span><br>
-      <label id=\"state-name-label\">State Name:</label><span class=\"school_details\"> " . $state_name . "</span><br>
-      <label id=\"state-code-label\">State Code:</label><span class=\"school_details\"> " . $state_code . "</span><br>
-      <label id=\"type-label\">Pin Code:</label><span class=\"school_details\"> " . $pin_code . "</span>
+      <label id=\"id-label\">School ID:</label><span class=\"school_details\">$School_Id</span><br>
+      <label id=\"name-label\">School Name:</label><span class=\"school_details\">$school_name</span><br>
+      <label id=\"type-label\">Type:</label><span class=\"school_details\">$school_type</span><br>
+      <label id=\"category-label\">Category:</label><span class=\"school_details\">$school_type</span><br>
+      <label id=\"grade-range-label\">Grades:</label><span class=\"school_details\">$grade_level_start to $grade_level_end</span><br>
+      <label id=\"enrollment-label\">Current Enrollment:</label><span class=\"school_details\">$current_enrollment</span><br>
+      <label id=\"address-label\">Address:</label><span class=\"school_details\">$address_text</span><br>
+      <label id=\"state-name-label\">State Name:</label><span class=\"school_details\">$state_name</span><br>
+      <label id=\"state-code-label\">State Code:</label><span class=\"school_details\">$state_code</span><br>
+      <label id=\"type-label\">Pin Code:</label><span class=\"school_details\">$pin_code</span>
       </div>
 
 	  <div id=\"right\" class=\"school_details\">
-      <label id=\"contact-name-label\">Contact Name:</label><span class=\"school_details\"> " . $contact_name . "</span><br>
-      <label id=\"contact-designation-label\">Contact Designation:</label><span class=\"school_details\"> " . $contact_designation . "</span><br>
-      <label id=\"contact-number-label\">Contact Phone Number:</label><span class=\"school_details\"> " . $contact_phone . "</span><br>
-	  <label id=\"contact-email-label\">Contact Email:</label><span class=\"school_details\"> " . $contact_email . "</span><br>
-	  <label id=\"status-label\">Status:</label><span class=\"school_details\"> " . $status . "</span>
+      <label id=\"contact-name-label\">Contact Name:</label><span class=\"school_details\">$contact_name</span><br>
+      <label id=\"contact-designation-label\">Contact Designation:</label><span class=\"school_details\">$contact_designation</span><br>
+      <label id=\"contact-number-label\">Contact Phone Number:</label><span class=\"school_details\">$contact_phone</span><br>
+	  <label id=\"contact-email-label\">Contact Email:</label><span class=\"school_details\">$contact_email</span><br>
+	  <label id=\"status-label\">Status:</label><span class=\"school_details\">$status</span>
 	</div>
 	<div class=\"school_notes\">
 	  <span class=\"inverse\"><label id=\"notes-label\">Notes</label></span><br>
-	  <span>" . $notes . "</span>
+	  <span>$notes</span>
 	</div>";
 	// check that the media directory exists, if not, nothing to show here
-    if(file_exists('schools/' . $School_Id . '/')) {
+    if(file_exists("schools/$School_Id/")) {
      echo "<div> 
 	    <table id=\"school_media\">";
-			$media_files = array_diff(scandir('schools/' . $School_Id . '/'), array('..', '.'));
+			$media_files = array_diff(scandir("schools/$School_Id/"), array('..', '.'));
 			$counter = 0;  
         	while($counter < count($media_files)) {
 				if($counter == 0) {
-					echo '<tr>';
+					echo "<tr>";
 				}
+				$filename = $media_files[$counter + 2];
+				// profile image is at top of page so skip tiling it
 				if(!str_contains($media_files[$counter + 2], "profile_image")) {
-					echo  '<td class="school_media">
-						<img src="schools/' . $School_Id . '/' . $media_files[$counter + 2] . '" alt="school image">
+					echo  "<td class=\"school_media\">
+						<img src=\"schools/$School_Id/$filename\" alt=\"school image\">
 						<br>
-						<label>' . $media_files[$counter + 2] . '</label>
-					</td>';
+						<label>$filename</label>
+					</td>";
 				}
 				if($counter % 5 == 0 && $counter > 0) {
-					echo '</tr>';
+					echo "</tr>";
 					if($counter < count($media_files)) {
-						echo '<tr>';
+						echo "<tr>";
 					}
 				}
 				$counter++;

@@ -1,18 +1,23 @@
-function addToList(element) {
-
+function addToList(element) 
+{
   // Collect information from the book to be added
   let book = element.parentNode.parentNode;
   let gradeLevel, title, publisher, price;
-  if (book.children[0].firstChild.nodeName != "DIV") {
-    gradeLevel = book.children[0].innerHTML;
-    title = book.children[2].innerHTML;
-    publisher = book.children[4].innerHTML;
-    price = book.children[7].innerHTML;
-  } else {
+  if (book.children[0].firstChild.nodeName != "DIV") 
+  {
+    gradeLevel  = book.children[0].innerHTML;
+    title       = book.children[2].innerHTML;
+    publisher   = book.children[4].innerHTML;
+    price       = book.children[7].innerHTML;
+  } 
+  else 
+  {
     gradeLevel = book.children[0].firstChild.innerHTML;
-    title = book.children[2].firstChild.innerHTML;
-    publisher = book.children[4].firstChild.innerHTML;
-    price = book.children[7].firstChild.innerHTML;
+    gradeLevel = book.children[0].firstChild.innerHTML;
+    title      = book.children[2].firstChild.innerHTML;
+    publisher  = book.children[4].firstChild.innerHTML;
+    price      = book.children[7].firstChild.innerHTML;
+
   }
 
 
@@ -25,6 +30,7 @@ function addToList(element) {
 
   // Create input elements and place them in the book list form
   // Each input corresponds to grade_level, title, publisher, price, or quantity
+
   let bookGradeLevel = document.createElement('input');
   bookGradeLevel.setAttribute("type", "text");
   bookGradeLevel.setAttribute("name", ("id_" + numberOfEntries))
@@ -54,9 +60,11 @@ function addToList(element) {
   entry.appendChild(bookPrice);
 
   let bookQuantity = document.createElement('input');
-  bookQuantity.setAttribute("type", "number")
-  bookQuantity.setAttribute("name", ("quantity_" + numberOfEntries));
-  bookQuantity.setAttribute("value", 1);
+  bookQuantity.setAttribute("type", "number");
+  bookQuantity.setAttribute("min", 1);
+  bookQuantity.setAttribute("max", 10);
+  bookQuantity.setAttribute("name", "quantity_" + numberOfEntries);
+  bookQuantity.setAttribute("value", "1");
   entry.appendChild(bookQuantity);
 
   // Place the entry in the list and update the entry count for use in create_booklist.php
@@ -64,4 +72,8 @@ function addToList(element) {
   entryCount.setAttribute("value", (parseInt(entryCount.getAttribute("value")) + 1));
   booklistForm.hidden = false;
 
+}
+function UpdateQuantity(v)
+{
+  alert(v);
 }

@@ -8,7 +8,6 @@ require 'db_configuration.php';
 function admin_school_form($id){
 	if ($id != null) {   	
 		$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
-
   		if ($connection === false) {
     		die("Failed to connect to database: " . mysqli_connect_error());
   		}
@@ -57,17 +56,17 @@ function admin_school_form($id){
 	<select id=\"school-type-dropdown\" name=\"type\" required><!--type--->
     	<option disabled value>Select School Type</option>
       	<option value='Primary School' ";
-        	if ($type == "Primary School" or $type == "primary school")
+        	if (strtolower($type) == "primary school")
             	echo "selected";
-      	echo  ">Primary School</option>
+      	        echo  ">Primary School</option>
       	<option value='Upper Primary School' ";
-        	if ($type == "Upper Primary School" or $type == "upper primary school")
+        	if (strtolower($type) == "upper primary school")
             	echo "selected";
-      	echo ">Upper Primary School</option>
+      	        echo ">Upper Primary School</option>
       	<option value='High School' ";
         	if ($type == "High School" or $type == "high school")
             	echo "selected";
-      	echo ">High School</option>
+      	        echo ">High School</option>
 	  	<option value='Other' ";
         	if ($type == "Other" or $type == "other")
             	echo "selected";
@@ -183,7 +182,8 @@ function admin_school_form($id){
     <input type=\"text\" id=\"school-address\" name=\"address_text\" class=\"form\" value=\"$address_text\" required><br><!---address_text-->
     <label id=\"state-name-label\">State</label><br>
     <input type=\"text\" id=\"state-name\" name=\"state_name\" class=\"form\" value=\"$state_name\" required><br><!---state_name--></div>
-    <div id=\"right\">
+	
+	<div id=\"right\">
     <label id=\"state-code-label\">State Code</label>
     <input type=\"text\" id=\"state-code\" name=\"state_code\" class=\"form\" value=\"$state_code\" required><br><!---state_code-->
     <label id=\"pin-code-label\">Pin Code</label>
