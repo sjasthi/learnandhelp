@@ -34,7 +34,6 @@
         <p><b>Luis Duran-Enriquez</b>: duranluis320@gmail.com</p>
         <p><b>Michael Olson</b>: michaelolson01@gmail.com</p>
         <p><b>William Vicic</b>: william.vicic@gmail.com</p>
-        <p><b>Robert LaPrise</b>: lapriserobert1@gmail.com</p>
       </div>
     </section>
   </body>
