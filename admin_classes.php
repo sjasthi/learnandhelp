@@ -73,6 +73,19 @@
         <h1><span class="accent-text">Classes</span></h1>
       </div>
     </header>
+      <h4>Add Class</h4>
+    	<form action="update_classes.php" method="post" id="add_class">
+       		<label>
+           		<input type="text" name="name" placeholder="Class Name" required>
+       		</label>
+       		<br>
+       		<label>
+           		<textarea rows=5 cols=90 name="description" placeholder="Class Description" required></textarea>
+       		</label>
+       		<br>
+       		<input type="hidden" name="action" value="add">
+       		<input type="submit" value="Add" style="width: 15%">
+    	</form>
 	<!-- Jquery Data Table -->
     <div class="toggle_columns">
       Toggle column: <a class="toggle-vis" data-column="0">Class ID</a>
@@ -129,19 +142,6 @@
 		?>
         </tbody>
       </table>
-      <h4>Add Class</h4>
-    	<form action="update_classes.php" method="post" id="add_class">
-       		<label>
-           		<input type="text" name="name" placeholder="Class Name" required>
-       		</label>
-       		<br>
-       		<label>
-           		<textarea rows=5 cols=90 name="description" placeholder="Class Description" required></textarea>
-       		</label>
-       		<br>
-       		<input type="hidden" name="action" value="add">
-       		<input type="submit" value="Add" style="width: 15%">
-    	</form>
 </div>
   </body>
 </html>

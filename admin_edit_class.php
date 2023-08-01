@@ -24,6 +24,9 @@
         <h1> <span class="accent-text">Class Editor</span></h1>
       </div>
     </header>
+    <form method="POST" action="admin_classes.php">
+      <input type="submit" value="Return to Classes">
+	</form>
     <div id="container_2">
     <?php
       admin_class_form($Class_Id);
@@ -33,7 +36,7 @@
 	  } else {
 		  echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_class\">
 		  <br>
-		  <input type=\"submit\" id=\"submit-class\" name=\"submit\" value=\"Submit\" onclick=\"setTimeout(function(){window.location.reload();},10);\">";
+		  <input type=\"submit\" id=\"submit-class\" name=\"submit\" value=\"Submit\">";
 	  } ?>
 	  </form><!---survey-form--->
 	</div>

@@ -3,7 +3,7 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
-  $selected_books = stripcslashes($_POST['selected_books2']); //need to change this to visual_report
+  $selected_books = $_POST['selected_books'];
   $selected_books = json_decode($selected_books, TRUE);
  ?>
 <!DOCTYPE html>
@@ -33,48 +33,59 @@
 
   <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Receipt</span></h1>
+        <h1><span class="accent-text">Billing Receipt</span></h1>
       </div>
   </header>
   <div id="receipt">
+	<span>  
+		<?php
+			$total_books = 0;
+  			$total_cost = 0;
+  			foreach($selected_books as $row) {
+				if($row["Quantity"] > 0) {
+					$price = floatval($row["Price"]);
+					$quantity = floatval($row["Quantity"]);
+					$total_books = $total_books + $quantity;
+					$total_cost = $total_cost + $price * $quantity;
+				}
+  			}
+			$today = date("m/d/Y"); 
+			echo "<h4>Date: $today<br>Total Count of Books: $total_books &nbsp;&nbsp;&nbsp;&nbsp; Total Price of Books: $total_cost</h4>";
+		?>
+	</span>
   <table id="receipt_table">
       <thead>
         <tr style="font-weight:bold; font-size:15px">
 		  	<th class='item_number' align='left'>No</th>
 		  	<th align='left'>Book ID</th>
-        <th align='left'>Title</th>
-        <!-- <th align='left'>Publisher</th> -->
-        <th class='item_quantity' align='right'>Quantity</th>
+	        <th align='left'>Title</th>
+	        <th align='left'>Publisher</th>
+	        <th class='item_quantity' align='right'>Quantity</th>
+	        <th class='item_price' align='right'>Price</th>
+	        <th class='item_total' align='right'>Total_Price</th>
         </tr>
       </thead>
 	  <tbody>
 		<?php
 		$item_number = 1;
-		$total_books = 0;
-  		$total_cost = 0;
   		foreach($selected_books as $row) {
 			if($row["Quantity"] > 0) {
+				$price = floatval($row["Price"]);
+				$quantity = floatval($row["Quantity"]);
 				echo "<tr><td align='left'>".
 					$item_number . "</td><td align='left'> ".
 					$row["Book ID"] . "</td><td align='left'> ".
 					$row["Title"] ."</td><td align='left'>".
-					// $row["Publisher"] ."</td><td align='right'>".
-					$row["Quantity"] ."</td><td align='right'>";
-					$total_books = $total_books + $row["Quantity"];
-				$total_cost = $total_cost + ($row["Price"] * $row["Quantity"]);
+					$row["Publisher"] ."</td><td align='right'>".
+           			$row["Quantity"] ."</td><td align='right'>".
+        			$row["Price"] ."</td><td align='right'>".
+					$price * $quantity ."</td></tr>";
 				$item_number += 1;
 			}
   		}
     	?>
 	  </tbody>
 </table>
-	<span>  
-		<?php
-			$today = date("m/d/Y");
-			echo "<h4>Total Count of Books: $total_books &nbsp;&nbsp;&nbsp;&nbsp; "; 
-      echo "<h4>Date: $today</h4>"
-		?>
-	</span>
 </div>
 </body>
 </html>

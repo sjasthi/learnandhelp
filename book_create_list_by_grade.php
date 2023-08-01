@@ -28,26 +28,29 @@
 	}
 
     // convert the table into a JSON object that can be passed to the receipt page
-	function get_table_rows() {
+	function get_table_rows(receipt_type) {
         var table = document.getElementById("selection_table");
         var header = [];
         var rows = [];
  
-        for (var i = 0; i < table.rows[0].cells.length; i++) {
+		// create the keys based on the header
+		for (var i = 0; i < table.rows[0].cells.length; i++) {
             header.push(table.rows[0].cells[i].innerHTML);
-        }
- 
+		}
+
+ 		// create the data based on the rows
         for (var i = 1; i < table.rows.length; i++) {
             var row = {};
             for (var j = 0; j < table.rows[i].cells.length; j++) {
                 row[header[j]] = table.rows[i].cells[j].innerHTML;
-            }
+			}
             rows.push(row);
 		}
 		// set the value of our hidden input field in the form to the JSON data
-		document.getElementById("selected_books").value = JSON.stringify(rows); 
-    document.getElementById("selected_books2").value = JSON.stringify(rows); 
-    document.getElementById("Visual_report").value = JSON.stringify(rows); 
+		if(receipt_type == 1) document.getElementById("selected_books1").value = JSON.stringify(rows);
+		else if (receipt_type == 2) document.getElementById("selected_books2").value = JSON.stringify(rows);
+		else if (receipt_type == 3) document.getElementById("selected_books3").value = JSON.stringify(rows);
+		else document.getElementById("selected_books4").value = JSON.stringify(rows);
     }  
 </script>	  
 
@@ -59,7 +62,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-     <style>
+	 <style>
         .form-container {
           display: inline-block;
           margin-right: 10px;
@@ -76,10 +79,15 @@
       </div>
   </header>
   <div id="selection">
+  	<form method="POST" action="books.php">
+    	<input type="submit" value="Return to Books">
+	</form>
   <h3><span class="accent-text">Generate An Invoice</span></h3>
   <table id="selection_table">
       <thead>
         <tr style="font-weight:bold; font-size:15px">
+          <th style='display:none'>Image</th>
+          <th align='left'>Line #</th>
           <th align='left'>Book ID</th>
           <th align='left'>Title</th>
           <th align='left'>Grade Level</th>
@@ -134,11 +142,15 @@
           $result = $conn->query($sql);
           if ($result->num_rows > 0) {
             // Create table with data from each row
-            while($row = $result->fetch_assoc()) {
+			$count = 0;  
+			while($row = $result->fetch_assoc()) {
 				// the quantity column in the table is editable it is not an input field, parsing innerHTML to get
 				// the table data when creating the JSON data does not work if there is an INPUT type of element
 				// in the table
-                echo "<tr style='font-size:12px; font-weight:bold'>
+				$count += 1;
+				echo "<tr style='font-size:12px; font-weight:bold'>
+					  <td style='display:none'>".$row['image']."</td>
+					  <td aligh='left'>".$count."</td>	
                       <td align='left'>".$row['id']."</td>
                       <td align='left'>".$row['title']."</td>
                       <td align='left'>".$row['grade_level']."</td>
@@ -150,32 +162,26 @@
 		  }
        ?>
        </tbody>
-	   <!-- <form action="book_create_billing_receipt.php" method="post" onsubmit="get_table_rows();">
-            <input type="hidden" id="selected_books" name="selected_books" value=""> <!-- value is set by the javascript -->
-			<!-- <input type="submit" name="create_book_billing_receipt" value="Create Receipt"> --> 
-
-      <!--  -->
-      <div class="form-container">
-        <form action="receipt_with_price.php" method="post" onsubmit="get_table_rows();" target="_blank">
-          <input type="hidden" id="selected_books" name="selected_books" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="receipt_with_price" value="Receipt With Price">
+	    <form action="books_receipt_with_price.php" method="post" onsubmit="get_table_rows(1);" target="_blank">
+          <input type="hidden" id="selected_books1" name="selected_books" value=""> <!-- value is set by the javascript -->
+          <input type="submit" name="receipt_with_price" value="Billing Receipt: Text">
         </form>
-      </div>
+		&nbsp;&nbsp;
+      <form action="books_receipt_without_price.php" method="post" onsubmit="get_table_rows(2);" target="_blank">
+          <input type="hidden" id="selected_books2" name="selected_books" value=""> <!-- value is set by the javascript -->
+          <input type="submit" name="receipt_without_price" value="Customer Receipt: Text">
+	  </form>
+		&nbsp;&nbsp;
+      <form action="books_visual_receipt_w_prices.php" method="post" onsubmit="get_table_rows(3);" target="_blank">
+          <input type="hidden" id="selected_books3" name="selected_books" value=""> <!-- value is set by the javascript -->
+          <input type="submit" name="visual_report" value="Billing Receipt: Visual">
+	  </form>
+		&nbsp;&nbsp;
+      <form action="books_visual_receipt_no_prices.php" method="post" onsubmit="get_table_rows(4);" target="_blank">
+          <input type="hidden" id="selected_books4" name="selected_books" value=""> <!-- value is set by the javascript -->
+          <input type="submit" name="visual_report" value="Customer Receipt: Visual">
+	  </form>
 
-      <div class="form-container">
-        <form action="receipt_without_price.php" method="post" onsubmit="get_table_rows();" target="_blank">
-          <input type="hidden" id="selected_books2" name="selected_books2" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="receipt_without_price" value="Receipt Without Price">
-        </form>
-      </div>
-
-      <div class="form-container">
-        <form action="Visual_report.php" method="post" onsubmit="get_table_rows();" target="_blank">
-          <input type="hidden" id="Visual_report" name="Visual_report" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="Visual_report" value="Visual Report">
-        </form>
-      </div>
-</form>
 </div>
 </body>
 </html>
