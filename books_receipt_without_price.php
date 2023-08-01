@@ -37,6 +37,18 @@
       </div>
   </header>
   <div id="receipt">
+	<span>  
+		<?php
+			$total_books = 0;
+  			foreach($selected_books as $row) {
+				if($row["Quantity"] > 0) {
+					$total_books = $total_books + $row["Quantity"];
+				}
+  			}
+			$today = date("m/d/Y");
+			echo "<h4>Date: $today<br>Total Count of Books: $total_books</h4>";
+		?>
+	</span>
   <table id="receipt_table">
       <thead>
         <tr style="font-weight:bold; font-size:15px">
@@ -50,7 +62,6 @@
 	  <tbody>
 		<?php
 		$item_number = 1;
-		$total_books = 0;
   		foreach($selected_books as $row) {
 			if($row["Quantity"] > 0) {
 				echo "<tr><td align='left'>".
@@ -66,12 +77,6 @@
     	?>
 	  </tbody>
 </table>
-	<span>  
-		<?php
-			$today = date("m/d/Y");
-			echo "<h4>Total Count of Books: $total_books<br>Date: $today</h4>";
-		?>
-	</span>
 </div>
 </body>
 </html>

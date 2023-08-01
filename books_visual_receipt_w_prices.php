@@ -37,19 +37,33 @@
       </div>
   </header>
   <div id="receipt">
+	<span>  
+		<?php
+			$total_books = 0;
+  			$total_cost = 0;
+			$item_total = 0;
+  			foreach($selected_books as $row) {
+				if($row["Quantity"] > 0) {
+					$price = floatval($row["Price"]);
+					$quantity = floatval($row["Quantity"]);
+					$total_books = $total_books + $quantity;
+					$total_cost = $total_cost + $price * $quantity;
+				}
+  			}
+			$today = date("m/d/Y");
+		echo "<h4>Date: $today<br>Total Count of Books: $total_books &nbsp;&nbsp;&nbsp;&nbsp; Total Price of Books: $total_cost</h4>";
+		?>
+	</span>
   <table id="receipt_table">
 		<?php
 			// Create table with data from each row
   			$counter = 0;
-  			$total_books = 0;
-			$order_total = 0;
+			$total_books = 0;
 
   			foreach($selected_books as $row) {
 				$price = floatval($row["Price"]);
 				$quantity = floatval($row["Quantity"]);
 				$item_total = $price * $quantity;
-				$total_books += $quantity;
-				$order_total += $item_total;
 
 				$counter++;
 				if($counter == 0) {
@@ -71,12 +85,6 @@
 				}
 			}  ?>
 	</table>
-	<span>  
-		<?php
-			$today = date("m/d/Y");
-			echo "<h4>Total Count of Books: $total_books &nbsp;&nbsp;&nbsp;&nbsp; Total Price of Books: $$order_total<br>Date: $today</h4>";
-		?>
-	</span>
 </div>
 </body>
 </html>
