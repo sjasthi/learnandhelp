@@ -57,10 +57,12 @@
 				}
 				$id = $row["Book ID"];
 				// if a profile image was not created use the admin_icons school.png as a default fallback image
-				echo  "<td id='book_image'>
-					<img src=".$row["Image"]." onerror=\"src='images/books/default.png'\" loading='lazy'><br>
-					<span>Title: ".$row["Title"]."<br>Quantity: ".$quantity."<br>Price: ".$price."<br>Total: ".$item_total."</span>
-					</td>";
+				if($quantity > 0) {
+					echo  "<td id='book_image'>
+						<img src=".$row["Image"]." onerror=\"src='images/books/default.png'\" loading='lazy'><br>
+						<span>Title: ".$row["Title"]."<br>Quantity: ".$quantity."<br>Price: ".$price."<br>Total: ".$item_total."</span>
+						</td>";
+				}
 				if($counter % 5 == 0 && $counter > 0) {
 					echo "</tr>";
 					if($counter < count($selected_books)) {
@@ -72,8 +74,7 @@
 	<span>  
 		<?php
 			$today = date("m/d/Y");
-			echo "<h4>Total Count of Books: $total_books &nbsp;&nbsp;&nbsp;&nbsp; "; 
-   			echo "<h4> Total Price of Books: $$order_total &nbsp;&nbsp;&nbsp;&nbsp; Date: $today"
+			echo "<h4>Total Count of Books: $total_books &nbsp;&nbsp;&nbsp;&nbsp; Total Price of Books: $$order_total<br>Date: $today</h4>";
 		?>
 	</span>
 </div>

@@ -44,14 +44,22 @@ if($action == "admin_edit_class") {
 			Class_Name = '$Class_Name',
 			Description = '$Description'
 			WHERE Class_Id = '$Class_Id';";
-	$_SESSION['message'] = '<h4>Edits Submitted<h4><br>';
-	//	header("Location: admin_edit_class.php");
 }
 
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
-}
+} else {
+	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},5000);
+		  </script>";}
 
 mysqli_close($connection);
 
 ?>
+
+<div style="text-align:center;margin-top:200px;"><h3>One moment please. Processing changes...</h3>
+       <img src="images/loadingIcon.gif"></img>
+</div>
+<form method="POST" id="add_submitted_form" action="admin_edit_class.php">
+	<?php echo "<input type=\"hidden\" name=\"Class_Id\" value=\"$Class_Id\">"; ?>
+</form>
+

@@ -31,6 +31,9 @@
 		echo "<h3>Add School</h3>";
 	}
     ?>
+    <form method="POST" action="admin_schools.php">
+      <input type="submit" value="Return to Schools">
+	</form>
     <div id="container_2">
 	<?php
 	    admin_school_form($id);
@@ -49,33 +52,36 @@
 <?php
 	// check that the media directory exists, if not, nothing to show here
 	if(file_exists("schools/$id/") and $id != null) {
-
-    echo "<div style=\"padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto\">
-      <table id=\"school_media\">";
-		$media_files = array_diff(scandir("schools/$id/"), array('..', '.'));
-		$counter = 0;  
-        while($counter < count($media_files)) {
-			if($counter == 0) {
-				echo "<tr>";
-			}
-			$filename = $media_files[$counter + 2];
-			echo  "<td class=\"school_media\">
-					<a href=\"admin_school_media.php?id=$id&filename=$filename\">
-						<img src=\"schools/$id/$filename\" alt=\"school image\">
-						<br>
-						<label>$filename</label>
-					</a>
-				</td>";
-			if($counter % 5 == 0 && $counter > 0) {
-				echo "</tr>";
-				if($counter < count($media_files)) {
+		$fileCount = count(glob("schools/$id/*"));
+		if ($fileCount > 0) {
+			echo "<div style=\"padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto\">
+				Click on media files to edit.<br>
+      	<table id=\"school_media\">";
+			$media_files = array_diff(scandir("schools/$id/"), array('..', '.'));
+			$counter = 0;  
+        	while($counter < count($media_files)) {
+				if($counter == 0) {
 					echo "<tr>";
 				}
+				$filename = $media_files[$counter + 2];
+				echo  "<td class=\"school_media\">
+						<a href=\"admin_school_media.php?id=$id&filename=$filename\">
+							<img src=\"schools/$id/$filename\" alt=\"school image\">
+							<br>
+							<label>$filename</label>
+						</a>
+					</td>";
+				if($counter % 5 == 0 && $counter > 0) {
+					echo "</tr>";
+					if($counter < count($media_files)) {
+						echo "<tr>";
+					}
+				}
+				$counter++;
 			}
-			$counter++;
+			echo "</table>
+			</div>";
 		}
-		echo "</table>
-		</div>";
 	}
 ?>
 	<div <?php if($id == null) {?>style="display:none"<?php } ?>>
@@ -86,10 +92,6 @@
 			<br>
            	<input type="submit" name="submit" value="Upload Media">
 		</form>
-        <form method="POST" action="admin_schools.php">
-          <input type="submit" value="Return to Schools">
-		</form>
-
 	</div>
   </body>
 </html>

@@ -69,8 +69,7 @@
 	<span>  
 		<?php
 			$today = date("m/d/Y");
-			echo "<h4>Total Count of Books: $total_books &nbsp;&nbsp;&nbsp;&nbsp; "; 
-      echo "<h4>Date: $today</h4>"
+			echo "<h4>Total Count of Books: $total_books<br>Date: $today</h4>";
 		?>
 	</span>
 </div>

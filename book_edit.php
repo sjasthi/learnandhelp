@@ -32,6 +32,9 @@
 		echo "<h3>Add Book</h3>";
 	}
     ?>
+    <form method="POST" action="books.php">
+      <input type="submit" value="Return to Books">
+	</form>
     <div id="container_2">
 	<?php
 	    fill_book_form($book_id);
@@ -56,9 +59,6 @@
   		    <input type='submit' name='edit_image' value='Change Image'>
 		</form>
      <?php } ?>
-        <form method="POST" action="books.php">
-          <input type="submit" value="Return to Books">
-		</form>
     </div>  
   </body>
 </html>

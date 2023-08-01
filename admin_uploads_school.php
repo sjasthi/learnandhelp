@@ -24,6 +24,7 @@
         <h1> <span class="accent-text">Upload Media</span></h1>
       </div>
 	</header>
+	You will be returned to the edit page once all processing is complete.<br><br>
 	<div>
 <?php
 if(isset($_POST['submit'])) {
@@ -34,7 +35,7 @@ if(isset($_POST['submit'])) {
     // Define maxsize for files i.e 2MB
     $maxsize = 3 * 1024 * 1024;
 
-	echo "$upload_dir";
+	//echo "$upload_dir";
 	if(!file_exists($upload_dir)) {
 		mkdir($upload_dir);
 	}
@@ -57,24 +58,33 @@ if(isset($_POST['submit'])) {
             if(in_array(strtolower($file_ext), $allowed_types)) {
                 // Verify file size - 3MB max
                 if ($file_size > $maxsize) {        
-                    echo "Error: File size is larger than the allowed limit.<br>Returning to edit page in 5 seconds<br>";
+                    echo "Error: File size is larger than the allowed limit.<br>";
 				} else {
 					// Check if filename already exists
                 	if(file_exists($filepath)) {
-						echo "{$file_name} already exists<br>Returning to edit page in 5 seconds<br>";
+						echo "$file_name already exists<br>";
 					} else {
 						// Upload the file
-                 	   	if( move_uploaded_file($file_tmpname, $filepath)) {
-                    		echo "{$file_name} successfully uploaded<br>Returning to edit page in 5 seconds<br>";
+						if( move_uploaded_file($file_tmpname, $filepath)) {
+                    		echo "$file_name successfully uploaded<br>";
+							$fileCount = count(glob($upload_dir."profile_image.*"));
+							if ($fileCount == 0) {
+								$path_parts = pathinfo($filepath);
+								$new_file = $upload_dir . 'profile_image.' . $path_parts['extension'];
+								$old_file = $filepath;
+								if(copy($old_file, $new_file)) {
+									echo "$old_file has been copied to $new_file<br>";
+								}
+							}
                     	} else {                    
-                        	echo "Error uploading {$file_name}<br>Returning to edit page in 5 seconds<br>";
+                        	echo "Error uploading $file_name<br>";
                     	}
 					}
 				}
             } else {
                 // If file extension not valid
-                echo "Error uploading {$file_name} ";
-                echo "({$file_ext} file type is not allowed)<br>Returning to edit page in 5 seconds<br>";
+                echo "Error uploading $file_name ";
+                echo "($file_ext file type is not allowed)<br>";
             }
 		}
     } else {
