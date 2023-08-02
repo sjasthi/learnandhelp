@@ -11,6 +11,10 @@ body {
     margin: 0 auto;
 }
 
+table {
+	text-align: left;
+}
+
 h1,
 h2 {
     font-weight: 300;
