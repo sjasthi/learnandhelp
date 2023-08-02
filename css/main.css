@@ -512,6 +512,6 @@ input[type=file]::file-selector-button {
 	text-align: left;
 }
 
-#receipt_table {
+#receipt_table, #school_media {
 	text-align: center !important;
 }

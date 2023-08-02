@@ -55,7 +55,6 @@
 		$fileCount = count(glob("schools/$id/*"));
 		if ($fileCount > 0) {
 			echo "<div style=\"padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto\">
-				Click on media files to edit.<br>
       	<table id=\"school_media\">";
 			$media_files = array_diff(scandir("schools/$id/"), array('..', '.'));
 			$counter = 0;  
@@ -65,12 +64,15 @@
 				}
 				$filename = $media_files[$counter + 2];
 				echo  "<td class=\"school_media\">
-						<a href=\"admin_school_media.php?id=$id&filename=$filename\">
 							<img src=\"schools/$id/$filename\" alt=\"school image\">
 							<br>
 							<label>$filename</label>
-						</a>
-					</td>";
+							<form action='admin_school_media.php' method='post' enctype='multipart/form-data'>
+								<input type='hidden' id='Picture_Id' name='filename' value='".$filename."'>
+								<input type='hidden' id='Blog_Id]' name='id' value='".$id."'><br>	
+								<input type=\"submit\" value=\"Edit\" id=\"edit\" name=\"edit\">
+							</form>
+						</td>";
 				if($counter % 5 == 0 && $counter > 0) {
 					echo "</tr>";
 					if($counter < count($media_files)) {

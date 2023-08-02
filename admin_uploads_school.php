@@ -24,7 +24,9 @@
         <h1> <span class="accent-text">Upload Media</span></h1>
       </div>
 	</header>
-	You will be returned to the edit page once all processing is complete.<br><br>
+	<div style="text-align:center;margin-top:200px;"><h3>One moment please. Processing uploads...</h3>
+       <img src="images/loadingIcon.gif"></img>
+	</div>
 	<div>
 <?php
 if(isset($_POST['submit'])) {
@@ -89,13 +91,13 @@ if(isset($_POST['submit'])) {
 		}
     } else {
         // If no files selected
-        echo "No files selected.<br>Returning to edit page in 5 seconds<br>";
+        echo "No files selected.<br>Returning to edit page.<br>";
     }
 }
 			echo "<form  id='upload_form' action='admin_edit_school.php' method='POST'>
 				<input type='hidden' name='id' value='$id'>";
 ?>
-  				<script type="text/javascript">setTimeout(function(){document.getElementById('upload_form').submit();},500);
+  				<script type="text/javascript">setTimeout(function(){document.getElementById('upload_form').submit();},2000);
 				</script>
 			</form>
 		</div>

@@ -43,7 +43,7 @@
     }
     mysqli_close($connection);
 ?>
-<div style="text-align:center;margin-top:200px;"><h3>One moment please. Processing changes...</h3>
+<div style="text-align:center;margin-top:200px;"><h4>One moment please. Processing changes...</h4>
        <img src="images/loadingIcon.gif"></img>
 </div>
 <form method="POST" id="add_submitted_form" action="admin_edit_blog.php">
