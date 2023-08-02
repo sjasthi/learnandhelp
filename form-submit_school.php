@@ -112,7 +112,7 @@ if (!mysqli_query($connection, $sql)) {
 		$id = mysqli_insert_id($connection);
 	}
 	// trigger hidden form to load admin_edit_school.php and POST $id
-	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},5000);
+	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
 		  </script>";
 }
 

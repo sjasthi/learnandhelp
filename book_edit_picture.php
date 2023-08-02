@@ -48,7 +48,7 @@ echo "<div style=\"text-align:center;margin-top:200px;\"><h3>Deleting ".$image."
 	<form  id='upload_form' action='book_edit.php' method='POST'>
 		<input type='hidden' name='book_id' value='$book_id'>
 		<input type='hidden' name='book_image' value='$fileDestination'>
-  		<script type=\"text/javascript\">setTimeout(function(){document.getElementById('upload_form').submit();},5000);
+  		<script type=\"text/javascript\">setTimeout(function(){document.getElementById('upload_form').submit();},500);
 		</script>
 	</form>";
 ?>

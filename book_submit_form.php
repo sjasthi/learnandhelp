@@ -81,7 +81,7 @@ if (!mysqli_query($connection, $sql)) {
 	if($action == 'admin_add_book') {
 		$id = mysqli_insert_id($connection);
 	}
-	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},5000);
+	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
 		  </script>";
 }
 

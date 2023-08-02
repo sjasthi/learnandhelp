@@ -95,7 +95,7 @@ if(isset($_POST['submit'])) {
 			echo "<form  id='upload_form' action='admin_edit_school.php' method='POST'>
 				<input type='hidden' name='id' value='$id'>";
 ?>
-  				<script type="text/javascript">setTimeout(function(){document.getElementById('upload_form').submit();},5000);
+  				<script type="text/javascript">setTimeout(function(){document.getElementById('upload_form').submit();},500);
 				</script>
 			</form>
 		</div>

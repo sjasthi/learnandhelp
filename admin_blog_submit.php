@@ -20,7 +20,7 @@
 		if (!mysqli_query($connection, $sql)) {
 			echo("Error description: " . mysqli_error($connection));
 		} else {
-			echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},5000);
+			echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
 		  		</script>";
 		}
 

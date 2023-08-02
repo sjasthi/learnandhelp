@@ -37,7 +37,7 @@ if ($conn->connect_error)
   $result = $conn->query($sql);
   unlink($location);
   $conn->close();
-	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('delete_submitted_form').submit();},5000);
+	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('delete_submitted_form').submit();},500);
 	</script>";
 
 ?>

@@ -19,7 +19,7 @@
 		$old_file = $filepath . $filename;
 		if(copy($old_file, $new_file)) {
 			echo "<br>$filename has been copied to $new_file";
-			echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('media_edit_form').submit();},5000);
+			echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('media_edit_form').submit();},500);
 				  </script>";
 		} else {
 			echo "<br><span id='error_msg'>ERROR: Unable to set file as profile image.  Renaming failed.</span>";
@@ -31,7 +31,7 @@
     		echo ("<br><span id='error_msg'>$filename cannot be deleted due to an error</span>");
 		} else {
     		echo ("<br>$filename has been deleted");
-			echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('media_edit_form').submit();},5000);
+			echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('media_edit_form').submit();},500);
 				  </script>";
 		}
 	}
