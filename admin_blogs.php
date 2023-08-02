@@ -86,6 +86,7 @@
         - <a class="toggle-vis" data-column="3">Video_Link</a>
         - <a class="toggle-vis" data-column="3">Modified_Time</a>
         - <a class="toggle-vis" data-column="3">Created_Time</a>
+		- <a class="toggle-vis" data-column="3">Option</a>
         
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
@@ -94,7 +95,8 @@
           <tr>
             <th>Blog ID</th>
             <th>Title</th>
-            <th>Author</th>
+			<th>Author</th>
+			<th>Description</th>
             <th>Video Link</th>
             <th>Modified Time</th>
             <th>Created Time</th>
@@ -119,6 +121,7 @@
               // Create table with data from each row
               while($row = $result->fetch_assoc()) {
 				  echo "<tr><td>" . $row["Blog_Id"]. "</td>
+					    <td>" . $row["Title"] . "</td>
 					    <td>" . $row["Author"] . "</td>
 					    <td>" . $row["Description"]. "</td> 
                         <td>" . $row["Video_Link"]. "</td> 
