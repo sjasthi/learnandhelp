@@ -491,3 +491,20 @@ input[type=file]::file-selector-button {
 	width: 5%;
 }
 
+#blog_edit {
+    width: 50%;
+    margin: auto;
+    margin-top: 25px;
+	border-collapse: collapse;
+}
+
+#blog_edit .td_right {
+	width: 15%;
+	text-align: left;
+}
+
+#blog_edit .td_left {
+	width: 85%;
+	text-align: left;
+}
+
