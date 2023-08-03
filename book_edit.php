@@ -4,6 +4,17 @@
     session_start();
   }
 
+  // Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
+
   $book_id = $_POST['book_id'] ?? null;
   $book_image = $_POST['book_image'] ?? null;
 ?>

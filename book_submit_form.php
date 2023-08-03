@@ -4,7 +4,18 @@ require 'db_configuration.php';
 $status = session_status();
 if ($status == PHP_SESSION_NONE) {
   session_start();
-}
+
+  // Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
+
 
 if (!(isset($_SESSION['email']))) {
 	header('Location: login.php');

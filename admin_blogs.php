@@ -73,10 +73,6 @@
         <h1><span class="accent-text">Blogs</span></h1>
       </div>
     </header>
-	<!-- Jquery Data Table -->
-    <!-- <div style="float:right; margin-right:100px; margin-top:20px">
-     <a href="admin_add_blog.php" title="Create New Blogs with Picture uploading">Create New Blog</a>   
-    </div> -->
 
     <div class="toggle_columns">
       Toggle column: <a class="toggle-vis" data-column="0">Blog ID</a>

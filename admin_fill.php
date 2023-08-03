@@ -5,6 +5,18 @@ require 'db_configuration.php';
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
+
+  // Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
+
 function admin_school_form($id){
 	if ($id != null) {   	
 		$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
