@@ -9,3 +9,4 @@ error_log
 *.jpeg
 sql/learn_and_help_db - Copy.sql
 sql/books-dev.sql
+blog_cleanup.php
