@@ -111,6 +111,68 @@ if (!mysqli_query($connection, $sql)) {
 	if($action == 'admin_add_school') {
 		$id = mysqli_insert_id($connection);
 	}
+
+	// id is not null and there is something in $_FILES so upload them
+	if($id != null && !empty(array_filter($_FILES['files']['name']))) {
+    	// Configure upload directory and allowed file types
+    	$upload_dir = "schools/$id/";
+    	$allowed_types = array('jpg', 'png', 'jpeg', 'gif');
+     
+    	// Define maxsize for files i.e 2MB
+    	$maxsize = 3 * 1024 * 1024;
+
+		//echo "$upload_dir";
+		if(!file_exists($upload_dir)) {
+			mkdir($upload_dir);
+		}
+  
+       	// Loop through each file in files[] array
+       	foreach ($_FILES['files']['tmp_name'] as $key => $value) {
+             
+           	$file_tmpname = $_FILES['files']['tmp_name'][$key];
+           	$file_name = $_FILES['files']['name'][$key];
+           	$file_size = $_FILES['files']['size'][$key];
+           	$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+ 
+           	// Set upload file path
+           	$filepath = $upload_dir.$file_name;
+ 
+           	// Check file type is allowed or not
+           	if(in_array(strtolower($file_ext), $allowed_types)) {
+               	// Verify file size - 3MB max
+               	if ($file_size <= $maxsize) {        
+					// Check if filename already exists
+               		if(!file_exists($filepath)) {
+						// Upload the file
+						if( move_uploaded_file($file_tmpname, $filepath)) {
+                   			// check if a profile image already exists
+							$fileCount = count(glob($upload_dir."profile_image.*"));
+							// if there is no profile image copy this file to a new profile image
+							if ($fileCount == 0) {
+								// get the new files name and extension
+								$path_parts = pathinfo($filepath);
+								// create the path and name for the new profile image since one doesn't exist
+								$new_file = $upload_dir . 'profile_image.' . $path_parts['extension'];
+								// copy the new file to profile_image.(extension)
+								copy($filepath, $new_file);
+							}
+                   		} else {                    
+                       		echo "Error uploading $file_name<br>";
+                   		}
+					} else {
+						echo "$file_name already exists<br>";
+					}
+				} else {
+                 	echo "Error: File size is larger than the allowed limit.<br>";
+				}
+           	} else {
+           		// If file extension not valid
+               	echo "Error uploading $file_name ";
+               	echo "($file_ext file type is not allowed)<br>";
+           	}
+		}
+	}
+
 	// trigger hidden form to load admin_edit_school.php and POST $id
 	echo "<script type=\"text/javascript\">setTimeout(function(){document.getElementById('add_submitted_form').submit();},500);
 		  </script>";

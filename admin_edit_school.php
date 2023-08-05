@@ -14,9 +14,9 @@
     http_response_code(403);
     die('Forbidden');
   }
- ?>
 
-<?php $id = $_POST['id'] ?>
+  $id = $_POST['id'];
+?>
 
 <!DOCTYPE html>
 <html>
@@ -36,37 +36,17 @@
         <h1> <span class="accent-text">Schools Form</span></h1>
       </div>
 	</header>
-	<?php if ($id != null) {
-		echo "<h3>Edit School</h3>";
-	} else {
-		echo "<h3>Add School</h3>";
-	}
-    ?>
-    <form method="POST" action="admin_schools.php">
+   <form method="POST" action="admin_schools.php">
       <input type="submit" value="Return to Schools">
 	</form>
-    <div id="container_2">
-	<?php
-	    admin_school_form($id);
-		if($id != null) { 
-			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_school\">
-		  	<br>
-		  	<input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
-		} else {
-			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_add_school\">
-	        <br>
-	        <input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
-		}
-    ?>
-	  </form><!---survey-form--->
-	</div>
 <?php
 	// check that the media directory exists, if not, nothing to show here
 	if(file_exists("schools/$id/") and $id != null) {
 		$fileCount = count(glob("schools/$id/*"));
 		if ($fileCount > 0) {
 			echo "<div style=\"padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto\">
-      	<table id=\"edit_school_media\">";
+   		<h3>Edit Media</h3>
+   		<table id=\"edit_school_media\">";
 			$media_files = array_diff(scandir("schools/$id/"), array('..', '.'));
 			$counter = 0;  
         	while($counter < count($media_files)) {
@@ -74,16 +54,32 @@
 					echo "<tr>";
 				}
 				$filename = $media_files[$counter + 2];
+				// add a "version" string to the filename so the system thinks it's a new file each load
+				// this keeps the old profile image from being displayed when the page loads even though
+				// it was changed to a different file
+				$time = time();
 				echo  "<td class=\"edit_school_media\">
-							<img src=\"schools/$id/$filename\" alt=\"school image\">
+							<img src=\"schools/$id/$filename?v=$time\" alt=\"school image\">
 							<br>
-							<label>$filename</label>
-							<form action='admin_school_media.php' method='post' enctype='multipart/form-data'>
-								<input type='hidden' id='Picture_Id' name='filename' value='".$filename."'>
-								<input type='hidden' id='Blog_Id]' name='id' value='".$id."'><br>	
-								<input type=\"submit\" value=\"Edit\" id=\"edit\" name=\"edit\">
-							</form>
-						</td>";
+							<label>$filename</label>";
+							
+					if(!str_contains($filename, 'profile_image')) { ?>
+						<form method="post" is="profile_update" action="admin_school_media.php">
+							<?php echo "<input type=\"hidden\" name=\"update\" value=1>"; ?>
+							<?php echo "<input type=\"hidden\" name=\"id\" value='$id'>"; ?>
+							<?php echo "<input type=\"hidden\" name=\"filename\" value='$filename'>"; ?>
+        					<input type="submit" id="admin_buttons" name="default_btn" value="Make Profile Image"/>
+						</form>
+						<form method="post" id="media_delete" action="admin_school_media.php">
+							<?php echo "<input type=\"hidden\" name=\"delete\" value=1>"; ?>
+							<?php echo "<input type=\"hidden\" name=\"id\" value='$id'>"; ?>
+							<?php echo "<input type=\"hidden\" name=\"filename\" value='$filename'>"; ?>
+        					<input type="submit" id="admin_buttons" name="delete_btn" value="Delete File"/>
+						</form>
+				<?php
+					}
+					echo "</td>";
+
 				if($counter % 5 == 0 && $counter > 0) {
 					echo "</tr>";
 					if($counter < count($media_files)) {
@@ -97,14 +93,32 @@
 		}
 	}
 ?>
-	<div <?php if($id == null) {?>style="display:none"<?php } ?>>
-    	<form action='admin_uploads_school.php' method='POST' enctype='multipart/form-data'>
-           	Select media files to upload:<br>
+	<?php if ($id != null) {
+		echo "<h3>Edit School Details</h3>";
+	} else {
+		echo "<h3>Add School Details</h3>";
+	}
+    ?>
+     <div>
+	<?php
+	admin_school_form($id); ?>
+		<div >
+       		Select media files to upload:<br>
 			<?php echo "<input type=\"hidden\" name=\"id\" value=\"$id\">"; ?>
-           	<input id="media_upload" type="file" name="files[]" multiple>
-			<br>
-           	<input type="submit" name="submit" value="Upload Media">
-		</form>
+       		<input id="media_upload" type="file" name="files[]" multiple>
+		</div>
+		<?php
+		if($id != null) { 
+			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_school\">
+		  	<br>
+		  	<input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
+		} else {
+			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_add_school\">
+	        <br>
+	        <input type=\"submit\" id=\"submit-school\" name=\"submit\" value=\"Submit\">";
+		}
+        ?>
+	  </form><!---survey-form--->
 	</div>
   </body>
 </html>
