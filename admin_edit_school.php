@@ -102,7 +102,7 @@
      <div>
 	<?php
 	admin_school_form($id); ?>
-		<div >
+		<div>
        		Select media files to upload:<br>
 			<?php echo "<input type=\"hidden\" name=\"id\" value=\"$id\">"; ?>
        		<input id="media_upload" type="file" name="files[]" multiple>

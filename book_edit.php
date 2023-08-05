@@ -46,9 +46,15 @@
     <form method="POST" action="books.php">
       <input type="submit" value="Return to Books">
 	</form>
-    <div id="container_2">
+    <div>
 	<?php
-	    fill_book_form($book_id);
+		  fill_book_form($book_id);
+		  echo "<div>
+			Select cover image for book:<br>
+			<input type=\"hidden\" name=\"book_id\" value=\"$book_id\">
+			<input type=\"hidden\" name=\"book_image\" value=\"$book_image\">
+			<input id=\"media_upload\" type=\"file\" name=\"file\">
+		</div>";
 		if($book_id != null) { 
 			echo "<input type=\"hidden\" id=\"action\" name=\"action\" value=\"admin_edit_book\">
 		  	<br>
@@ -61,15 +67,5 @@
 	?>
 	  </form><!--survey-form-->
 	</div>
-    <div>
-    <?php if($book_id != null) { ?>
-    	  <form action='book_edit_picture.php' method='post' enctype='multipart/form-data'>
-			<?php echo "<input type=\"hidden\" name=\"book_id\" value=\"$book_id\">
-			<input type=\"hidden\" name=\"book_image\" value=\"$book_image\">"; ?>
-           	<input id="media_upload" type="file" name="file">
-  		    <input type='submit' name='edit_image' value='Change Image'>
-		</form>
-     <?php } ?>
-    </div>  
   </body>
 </html>
