@@ -58,9 +58,13 @@
 				// this keeps the old profile image from being displayed when the page loads even though
 				// it was changed to a different file
 				$time = time();
-				echo  "<td class=\"edit_school_media\">
-							<img src=\"schools/$id/$filename?v=$time\" alt=\"school image\">
-							<br>
+				echo  "<td class=\"edit_school_media\">";
+						if(str_contains($filename, 'profile_image')) {
+							echo "<img src=\"schools/$id/$filename?v=$time\" alt=\"school image\">";
+						} else {
+							echo "<img src=\"schools/$id/$filename\" alt=\"school image\">";
+						}	
+						echo "<br>
 							<label>$filename</label>";
 							
 					if(!str_contains($filename, 'profile_image')) { ?>
