@@ -3,7 +3,7 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
-
+/*
   // Block unauthorized users from accessing the page
   if (isset($_SESSION['role'])) {
     if ($_SESSION['role'] != 'admin') {
@@ -14,6 +14,7 @@
     http_response_code(403);
     die('Forbidden');
   }
+*/
 ?>
 
   <script type="text/javascript">
@@ -93,7 +94,11 @@
   	<form method="POST" action="books.php">
     	<input type="submit" value="Return to Books">
 	</form>
-  <h3><span class="accent-text">Generate An Invoice</span></h3>
+	<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
+  	<h3><span class="accent-text">Generate An Invoice</span></h3>
+    <?php } else { ?>
+  	<h3><span class="accent-text">Create a Book Request</span></h3>
+    <?php } ?>
   <table id="selection_table">
       <thead>
         <tr style="font-weight:bold; font-size:15px">
@@ -103,8 +108,10 @@
           <th align='left'>Title</th>
           <th align='left'>Grade Level</th>
           <th align='left'>Publisher</th>
+  	<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?>
           <th class='item_price' align='right'>Price</th>
-		      <th class='item_quantity' align='right'>Quantity</th>
+	<?php } ?>
+	      <th class='item_quantity' align='right'>Quantity</th>
         </tr>
       </thead>
       <tbody>
@@ -165,34 +172,51 @@
                       <td align='left'>".$row['id']."</td>
                       <td align='left'>".$row['title']."</td>
                       <td align='left'>".$row['grade_level']."</td>
-                      <td align='left'>".$row['publisher']."</td>
-                      <td align='right'>".$row['price']."</td>
-                      <td align='right' contentEditable='true' tabindex='0' onfocusin='select_all(this);'>1</td>
+					  <td align='left'>".$row['publisher']."</td>";
+  					  if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') {
+						echo "<td align='right'>".$row['price']."</td>";
+					  }
+                	echo "<td align='right' contentEditable='true' tabindex='0' onfocusin='select_all(this);'>1</td>
                       </tr>";
 			}
 		  }
        ?>
        </tbody>
+  	<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?>
 	    <form action="books_receipt_with_price.php" method="post" onsubmit="get_table_rows(1);" target="_blank">
           <input type="hidden" id="selected_books1" name="selected_books" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="receipt_with_price" value="Billing Receipt: Text">
-        </form>
+          <input type="submit" name="receipt_with_price" value="Billing Invoice: Text">
+		</form>
 		&nbsp;&nbsp;
-      <form action="books_receipt_without_price.php" method="post" onsubmit="get_table_rows(2);" target="_blank">
+   		<form action="books_receipt_without_price.php" method="post" onsubmit="get_table_rows(2);" target="_blank">
           <input type="hidden" id="selected_books2" name="selected_books" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="receipt_without_price" value="Customer Receipt: Text">
-	  </form>
+          <input type="submit" name="receipt_without_price" value="Customer Invoice: Text">
+	  	</form>
 		&nbsp;&nbsp;
-      <form action="books_visual_receipt_w_prices.php" method="post" onsubmit="get_table_rows(3);" target="_blank">
+   	<?php } else { ?>
+   		<form action="books_receipt_without_price.php" method="post" onsubmit="get_table_rows(2);" target="_blank">
+          <input type="hidden" id="selected_books2" name="selected_books" value=""> <!-- value is set by the javascript -->
+          <input type="submit" name="receipt_without_price" value="Book Request: Text">
+	  	</form>
+		&nbsp;&nbsp;
+     <?php } ?>
+  	<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?>
+      	<form action="books_visual_receipt_w_prices.php" method="post" onsubmit="get_table_rows(3);" target="_blank">
           <input type="hidden" id="selected_books3" name="selected_books" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="visual_report" value="Billing Receipt: Visual">
-	  </form>
+          <input type="submit" name="visual_report" value="Billing Invoice: Visual">
+	  	</form>
 		&nbsp;&nbsp;
-      <form action="books_visual_receipt_no_prices.php" method="post" onsubmit="get_table_rows(4);" target="_blank">
+      	<form action="books_visual_receipt_no_prices.php" method="post" onsubmit="get_table_rows(4);" target="_blank">
           <input type="hidden" id="selected_books4" name="selected_books" value=""> <!-- value is set by the javascript -->
-          <input type="submit" name="visual_report" value="Customer Receipt: Visual">
-	  </form>
-
+          <input type="submit" name="visual_report" value="Customer Invoice: Visual">
+	  	</form>
+	<?php } else { ?>
+      	<form action="books_visual_receipt_no_prices.php" method="post" onsubmit="get_table_rows(4);" target="_blank">
+          <input type="hidden" id="selected_books4" name="selected_books" value=""> <!-- value is set by the javascript -->
+          <input type="submit" name="visual_report" value="Book Request: Visual">
+	  	</form>
+     <?php } ?>
+		<br>Click on quantity to change.  Set to 0 to remove that book from selection.	
 </div>
 </body>
 </html>

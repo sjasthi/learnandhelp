@@ -83,10 +83,14 @@
        <img src="images/loadingIcon.gif"></img>
      </div>
 	 <div id="books_page" hidden>
+  	<?php if (isset($_SESSION['role'])) { 
+	if ($_SESSION['role'] != 'admin') { ?>
 		<form action='book_edit.php' method='post' enctype='multipart/form-data'>
 			<input type='hidden' name='book_id' value=''>
 			<input type='submit' name='edit_book' value='Add New Book'>
 		</form>
+	<?php }
+		} ?>
        <!-- Select books by grade level -->
        <form action="book_create_list_by_grade.php" method="post">
          <h4>Select Books by Grade Level</h4>
@@ -106,9 +110,16 @@
            - <a class="toggle-vis" data-column="4">Publisher</a>
            - <a class="toggle-vis" data-column="5">Year Published</a>
            - <a class="toggle-vis" data-column="6">Page Count</a>
+			<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
            - <a class="toggle-vis" data-column="7">Price</a>
 		   - <a class="toggle-vis" data-column="8">Available</a>
+			<?php } else { ?>
+		   - <a class="toggle-vis" data-column="7">Available</a>
+			<?php } ?>
+
+			<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
            - <a class="toggle-vis" data-column="9">Edit</a>
+			<?php } ?>
        </div>
        <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
          <table id="books_table" class="display compact">
@@ -121,9 +132,13 @@
                <th>Publisher</th>
                <th>Year Published</th>
                <th>Page Count</th>
+			<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
                <th>Price</th>
+			<?php } ?>
                <th>Available</th>
+			<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
                <th>Edit</th>
+			<?php } ?>
              </tr>
            </thead>
            <tbody id="book_body">

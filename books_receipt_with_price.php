@@ -45,7 +45,7 @@
 
   <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Billing Receipt</span></h1>
+        <h1><span class="accent-text">Billing Invoice</span></h1>
       </div>
   </header>
   <div id="receipt">
