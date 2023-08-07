@@ -3,6 +3,18 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
+/*
+  // Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
+ */
   require 'db_configuration.php';
   // Create connection
   $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
@@ -25,9 +37,11 @@
                <td>" . $row["author"]. "</td>
                <td>" . $row["publisher"]. "</td>
                <td>" . $row["publishYear"]. "</td>
-               <td>" . $row["numPages"]. "</td>
-               <td>" . $row["price"]. "</td>
-			   <td>" . $Status. "</td>";
+			   <td>" . $row["numPages"]. "</td>";
+      			if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { 
+			    $resultString .= "<td>" . $row["price"]. "</td>";
+				}
+			   $resultString .= "<td>" . $Status. "</td>";
 
       		if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') 
       		{

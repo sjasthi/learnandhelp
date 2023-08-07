@@ -4,6 +4,17 @@ require 'db_configuration.php';
   $status = session_status();
   if ($status == PHP_SESSION_NONE) {
     session_start();
+
+  // Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
   }
   
   function fill_book_form($id){
@@ -39,9 +50,9 @@ require 'db_configuration.php';
 	}
 
 
-	echo "<img src='" . $image . "' onerror=\"src='images/books/default.png'\" loading='lazy'><br>
+	echo "<img id=\"book_image\" src='" . $image . "' onerror=\"src='images/books/default.png'\" loading='lazy'><br>
     <div id=\"container_2\">
-  	<form id=\"survey-form\" action=\"book_submit_form.php\" method = \"post\">
+  	<form id=\"survey-form\" action=\"book_submit_form.php\" method = \"post\" enctype=\"multipart/form-data\">
     <input type='hidden' name='id' value=$id>
 	<label id=\"title-label\">Title</label><br>
 	<input type=\"text\" id=\"title\" name=\"title\" class=\"form\" value=\"$title\" required><br><!--title-->

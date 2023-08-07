@@ -11,6 +11,10 @@ body {
     margin: 0 auto;
 }
 
+table {
+	text-align: left;
+}
+
 h1,
 h2 {
     font-weight: 300;
@@ -409,7 +413,7 @@ input[type=file]::file-selector-button {
 }
 
 #school_media img{
-  width: 200px;
+	max-height: 150px;
 }
 
 .school_icon, .school_media {
@@ -489,5 +493,43 @@ input[type=file]::file-selector-button {
 
 .item_id, .item_number, .item_price, .item_quantity, .item_total {
 	width: 5%;
+}
+
+#blog_edit {
+    width: 50%;
+    margin: auto;
+    margin-top: 25px;
+	border-collapse: collapse;
+}
+
+#blog_edit .td_right {
+	width: 15%;
+	text-align: left;
+}
+
+#blog_edit .td_left {
+	width: 85%;
+	text-align: left;
+}
+
+#receipt_table {
+	text-align: center !important;
+}
+
+#edit_school_media {
+  text-align: center !important;
+  border: 1px;
+  display: inline-block;
+}
+
+#edit_school_media td {
+	border: 1px solid black;
+}
+#edit_school_media img{
+	max-height: 150px;
+}
+
+#book_image {
+	max-height: 150px;
 }
 

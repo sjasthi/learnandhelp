@@ -5,6 +5,18 @@ require 'db_configuration.php';
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
+
+  // Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
+
 function admin_school_form($id){
 	if ($id != null) {   	
 		$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
@@ -48,7 +60,7 @@ function admin_school_form($id){
   		$notes = "";
 	}
   echo "<div id= \"container_2\">
-  <form id=\"survey-form\" action=\"form-submit_school.php\" method = \"post\">
+  <form id=\"survey-form\" action=\"form-submit_school.php\" method = \"post\" enctype=\"multipart/form-data\">
     <input type='hidden' name='id' value=$id>
     <label id=\"school-name-label\">School Name</label>
     <input type=\"text\" id=\"school-name\" name=\"name\" class=\"form\" value=\"$name\" required><br><!--name--->

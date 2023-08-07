@@ -3,6 +3,18 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
+/*
+  // Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
+ */
   $selected_books = $_POST['selected_books'];
   $selected_books = json_decode($selected_books, TRUE);
  ?>
@@ -33,8 +45,11 @@
 
   <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Customer Receipt</span></h1>
-      </div>
+		<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
+		<h1><span class="accent-text">Customer Invoice</span></h1>
+        <?php } else { ?>
+		<h1><span class="accent-text">Book Request</span></h1>
+        <?php } ?>      </div>
   </header>
   <div id="receipt">
 	<span>  

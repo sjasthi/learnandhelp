@@ -3,6 +3,18 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
+
+  // Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
+
   $selected_books = $_POST['selected_books'];
   $selected_books = json_decode($selected_books, TRUE);
  ?>
@@ -33,7 +45,7 @@
 
   <header class="inverse">
       <div class="container">
-        <h1><span class="accent-text">Billing Receipt</span></h1>
+        <h1><span class="accent-text">Billing Invoice</span></h1>
       </div>
   </header>
   <div id="receipt">
