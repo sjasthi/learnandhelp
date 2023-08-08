@@ -407,9 +407,12 @@ input[type=file]::file-selector-button {
   display: inline-block;
 }
 
+#school_icons td {
+	text-align: center !important;
+}
+
 #school_icons img{
-  width: 100px;
-  height: 100px;
+  max-width: 120px;
 }
 
 #school_media img{

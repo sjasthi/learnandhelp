@@ -63,10 +63,11 @@
   $status = $row['status'];
   $notes = $row['notes'];
 
+  $time = time();
   echo "<h3> School Details </h3>
 	  <div id=\"school_icons\" class=\"school_icon\">";
 			$profile_image = get_profile_image($School_Id); 
-			echo "			<img src=\"$profile_image\" alt=\"school image\">
+			echo "			<img src=\"$profile_image?v=$time\" alt=\"school image\">
 	  </div>
 	  <br>
       <div id= \"container_2\" class=\"school_details\">
