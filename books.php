@@ -83,14 +83,12 @@
        <img src="images/loadingIcon.gif"></img>
      </div>
 	 <div id="books_page" hidden>
-  	<?php if (isset($_SESSION['role'])) { 
-	if ($_SESSION['role'] != 'admin') { ?>
+  	 <?php if (isset($_SESSION['role']) and $_SESSION['role'] == 'admin') { ?>
 		<form action='book_edit.php' method='post' enctype='multipart/form-data'>
 			<input type='hidden' name='book_id' value=''>
 			<input type='submit' name='edit_book' value='Add New Book'>
 		</form>
-	<?php }
-		} ?>
+	 <?php } ?>
        <!-- Select books by grade level -->
        <form action="book_create_list_by_grade.php" method="post">
          <h4>Select Books by Grade Level</h4>
