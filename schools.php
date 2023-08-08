@@ -50,6 +50,7 @@
 			$counter = 0;  
 			// Create table with data from each row
             while($row = $result->fetch_assoc()) {
+				$time = time();
 				$counter++;
 				if($counter == 0) {
 					echo "<tr>";
@@ -59,7 +60,7 @@
 				echo  "<td class=\"school_icon\">
 							<a href=\"school_details.php?School_Id=$id&target=_blank\">";
 				$profile_image = get_profile_image($id); 
-				echo "			<img src=\"$profile_image\" alt=\"school image\"><br><label>$id</label>
+				echo "			<img src=\"$profile_image?v=$time\" alt=\"school image\"><br><label>$id</label>
 							</a>
 						</td>";
 				if($counter % 5 == 0 && $counter > 0) {
