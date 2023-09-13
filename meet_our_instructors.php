@@ -56,5 +56,24 @@
 		  helping others as she has done in her volunteering so far.</p>
 	  </div>
 	</section>
+
+   <section class="about-me">
+      <div class="container">
+        <h2>Hello, my name is<span class="accent-text">Sumedh Ghatti</span>
+          <img src="images/sumedh.png" alt="pic of Sumedh"></h2>
+		<p> Sumedh Ghatti is a 9th grader at Independence High School, 
+		    dedicated to nurturing academic growth and inspiring young minds. 
+		    His journey is distinguished by the prestigious Presidential Award, 
+		    accompanied by his exceptional performance as the top player on the Junior Varsity Tennis team. 
+		    With extensive expertise as an app and game developer, a passion ignited during his early years 
+		    at the School of India for Languages and Culture (SILC)," Sumedh's commitment to technology 
+		    is evident. He earned his Python Entry Level Certified Programmer certification in April 2023.  
+		    Beyond his academic and athletic pursuits, he expresses himself artistically through playing 
+		    the tabla. In his role as an educator, Sumedh strives to ignite curiosity, 
+		    foster a pursuit of excellence, and guide students in discovering their passion for coding, 
+		    mirroring his own journey. </p>
+      </div>
+   </section>
+	  
   </body>
 </html>
