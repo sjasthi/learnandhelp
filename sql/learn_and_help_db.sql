@@ -20,8 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `learn_and_help_db`
 --
-CREATE DATABASE IF NOT EXISTS `learn_and_help_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `learn_and_help_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `learn_and_help_db`;
+
 
 -- --------------------------------------------------------
 
@@ -37,7 +38,7 @@ CREATE TABLE `blogs` (
   `Video_Link` varchar(200) DEFAULT NULL,
   `Modified_Time` datetime DEFAULT NULL,
   `Created_Time` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `blogs`
@@ -56,7 +57,7 @@ CREATE TABLE `blog_pictures` (
   `Picture_Id` int NOT NULL,
   `Blog_Id` int DEFAULT NULL,
   `Location` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -3567,7 +3568,7 @@ CREATE TABLE `causes` (
   `Contact_name` varchar(50) DEFAULT NULL,
   `Contact_email` varchar(50) DEFAULT NULL,
   `Contact_phone` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `causes`
@@ -3587,7 +3588,7 @@ CREATE TABLE `classes` (
   `Class_Id` int NOT NULL,
   `Class_Name` varchar(30) DEFAULT NULL,
   `Description` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `classes`
@@ -3618,7 +3619,7 @@ CREATE TABLE `registrations` (
   `Cause` varchar(20) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
   `Created_Time` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `registrations`
@@ -3697,7 +3698,7 @@ CREATE TABLE `users` (
   `Role` varchar(20) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
   `Created_Time` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `users`
@@ -3720,7 +3721,7 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 CREATE TABLE `user_registrations` (
   `User_Id` int NOT NULL,
   `Reg_Id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Indexes for dumped tables
