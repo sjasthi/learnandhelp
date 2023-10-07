@@ -145,8 +145,8 @@ error_reporting(E_ALL);
                     <td>". $row["Role"]."</td> 
                     <td>". $row["Modified_Time"]."</td> 
                     <td>". $row["Created_Time"]."</td> 
-    <td><button type=\"button\" style=\"width:200px; height:44px; background-color:transparent; color:black; border:solid black 1px; border-radius:5px\" onclick=\"location.href='admin_updateuser.php?id=" . $row['User_Id'] . "'\">Update User</button>
-     <button class=\"deleteBtn\" style=\"width: 200px; height: 44px; background-color: transparent; color: red; border: solid red 1px; border-radius: 5px\" onclick=\"deleteUser(" . $row['User_Id'] . ")\">Delete </button>
+    <td><button type=\"button\" style=\"width:100px; height:44px; background-color:transparent; color:black; border:solid black 1px; border-radius:5px\" onclick=\"location.href='admin_updateuser.php?id=" . $row['User_Id'] . "'\">Update User</button>
+     <button class=\"deleteBtn\" style=\"width: 100px; height: 44px; background-color: transparent; color: red; border: solid red 1px; border-radius: 5px\" onclick=\"deleteUser(" . $row['User_Id'] . ")\">Delete </button>
                         </td>
                     
                   

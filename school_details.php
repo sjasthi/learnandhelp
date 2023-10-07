@@ -74,7 +74,7 @@
       <label id=\"id-label\">School ID:</label><span class=\"school_details\">$School_Id</span><br>
       <label id=\"name-label\">School Name:</label><span class=\"school_details\">$school_name</span><br>
       <label id=\"type-label\">Type:</label><span class=\"school_details\">$school_type</span><br>
-      <label id=\"category-label\">Category:</label><span class=\"school_details\">$school_type</span><br>
+      <label id=\"category-label\">Category:</label><span class=\"school_details\">$school_category</span><br>
       <label id=\"grade-range-label\">Grades:</label><span class=\"school_details\">$grade_level_start to $grade_level_end</span><br>
       <label id=\"enrollment-label\">Current Enrollment:</label><span class=\"school_details\">$current_enrollment</span><br>
       <label id=\"address-label\">Address:</label><span class=\"school_details\">$address_text</span><br>
