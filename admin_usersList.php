@@ -19,8 +19,6 @@ error_reporting(E_ALL);
     http_response_code(403);
     die('Forbidden');
   }
-
-
  ?>
 
 <!DOCTYPE html>
