@@ -36,6 +36,13 @@ error_reporting(E_ALL);
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
+      function deleteUser(userId){
+        var confirmation = confirm("Are you sure you want to delete this user?");
+        if(confirmation){
+          window.location.href = 'admin_deleteuser.php?id=' +userId;
+        }
+
+      }
     $(document).ready(function () {
       $('#Blog_table thead tr').clone(true).appendTo( '#Blog_table thead' );
       $('#Blog_table thead tr:eq(1) th').each(function () {
