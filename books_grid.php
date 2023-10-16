@@ -11,8 +11,8 @@
         font-size: 20px;
     }
     .book-card {
-      max-width: 200px;
-      height: 250px;
+      max-width: 250px;
+      height: 300px;
       text-align: center;
       cursor: pointer;
       border: 1px solid #ccc;
@@ -34,6 +34,15 @@
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       /* justify-content: center; */
     }
+
+     input{
+    padding: 10px;
+    width: 200px;
+   }
+
+   .hidden {
+     display: none;
+   }
   </style>
 </head>
 <body>
@@ -44,6 +53,12 @@
       <h1 class="accent-text">Books(Grid)</h1>
     </div>
   </header>
+
+  <!-- Search -->
+  <div class="search-container">
+  <input type="search" id="search-input" class="search-input" placeholder="Search by title or author">
+  <button id="search-button" class="search-button">Search</button>
+</div>
 
   <div class="book-grid-container">
     <?php
@@ -65,6 +80,9 @@
         echo '<img src="images/books/default.png" alt="' . $row['title'] . '">';
         echo '<h3>' . $row['title'] . '</h3>';
         echo '<p>Author: ' . $row['author'] . '</p>';
+        echo '<p class="hidden grade_level">Grade Level: ' . $row['grade_level'] . '</p>';
+        echo '<p class="hidden publisher">Publisher: ' . $row['publisher'] . '</p>';
+
         echo '</div>';
       }
     } else {
@@ -80,6 +98,38 @@
     function openBookDetails(bookId) {
       window.location.href = 'book_details.php?book_id=' + bookId;
     }
+
+
+  // JavaScript code for handling search functionality
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const bookCards = document.querySelectorAll('.book-card');
+
+    searchButton.addEventListener('click', function () {
+      filterBooks(searchInput.value.toLowerCase());
+    });
+
+    searchInput.addEventListener('input', function () {
+      filterBooks(searchInput.value.toLowerCase());
+    });
+
+    function filterBooks(searchText) {
+      bookCards.forEach((bookCard) => {
+        const title = bookCard.querySelector('h3').textContent.toLowerCase();
+        const author = bookCard.querySelector('p').textContent.toLowerCase();
+        const gradeLevel = bookCard.querySelector('.grade_level').textContent.toLowerCase();
+        const publisher = bookCard.querySelector('.publisher').textContent.toLowerCase();
+        if (title.includes(searchText) || author.includes(searchText) || gradeLevel.includes(searchText) || publisher.includes(searchText)) {
+          bookCard.style.display = 'block';
+        } else {
+          bookCard.style.display = 'none';
+        }
+      });
+    }
+  });
+
+
   </script>
 </body>
 </html>
