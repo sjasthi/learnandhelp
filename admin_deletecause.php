@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
 
     // Check if the query was successful
     if ($deleteResult) {
-        header("Location: causesList.php");  // Assuming you have a page to list causes similar to admin_usersList.php
+        header("Location: causes.php");  // Assuming you have a page to list causes similar to admin_usersList.php
         exit;
     } else {
         echo "Error deleting cause: " . mysqli_error($connection);
