@@ -14,7 +14,8 @@ def get_school_info(school_id):
             print(f"Failed to fetch school info for school_id {school_id}. Status code: {response.status_code}")
     except Exception as e:
         print(f"Failed to fetch school info for school_id {school_id}. Error: {str(e)}")
-    return None
+    return None\
+
 
 # Calling the function to get book information
 school_id = 1
