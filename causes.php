@@ -77,7 +77,8 @@
         - <a class="toggle-vis" data-column="5">Contact Phone</a>
     </div>
     <div style="margin-top: 20px;">
-        <a href="admin_createcause.php" class="addCauseBtn">Create</a>
+        <!-- <a href="admin_createcause.php" class="addCauseBtn">Create</a> -->
+            <button type="button" style="width:fit-content; height:44px; background-color:#99D930; color:white; border:solid 0px; border-radius:5px; padding:0 20px; margin-right:0;" onclick="location.href='admin_createcause.php'">Create Cause</button>
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="causes" class="display compact">

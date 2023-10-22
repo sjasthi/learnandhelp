@@ -1,146 +1,145 @@
 body {
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-    font-size: 21px;
-    font-weight: 300;
-    margin: 0;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 21px;
+  font-weight: 300;
+  margin: 0;
 }
 
 .container {
-    width: 570px;
-    margin: 0 auto;
+  width: 570px;
+  margin: 0 auto;
 }
 
 table {
-	text-align: left;
+  text-align: left;
 }
 
 h1,
 h2 {
-    font-weight: 300;
+  font-weight: 300;
 }
 
 h1 {
-    font-size: 60px;
-    margin-top: 0;
+  font-size: 60px;
+  margin-top: 0;
 }
 
 h2 {
-    font-size: 42px;
-    margin-top: 10px;
-    border-top: solid 1px #c4c4c4;
-    border-bottom: solid 1px #c4c4c4;
+  font-size: 42px;
+  margin-top: 10px;
+  border-top: solid 1px #c4c4c4;
+  border-bottom: solid 1px #c4c4c4;
 
-    padding: 20px 0;
-    margin-bottom: 20px;
+  padding: 20px 0;
+  margin-bottom: 20px;
 }
 
 h3 {
-    font-size: 36px;
-    font-weight: 900;
-    margin-bottom: 0;
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 0;
 }
 
 .accent-text {
-    display: block;
+  display: block;
 }
 
 h1 .accent-text {
-    font-size: 80px;
+  font-size: 80px;
 }
 
 h2 .accent-text {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 .accent-text,
 .name,
 time {
-    font-weight: 900;
-    color: #99D930;
+  font-weight: 900;
+  color: #99d930;
 }
 
 p {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 a {
-    color: #99D930;
-    font-weight: 900;
+  color: #99d930;
+  font-weight: 900;
 }
 
 a:hover,
 a:focus {
-    color: #131313;
+  color: #131313;
 }
 
 .small-text {
-    font-size: 16px;
-    margin-top: 5px;
+  font-size: 16px;
+  margin-top: 5px;
 }
 
-header  {
-    padding: 50px 0 25px;
+header {
+  padding: 50px 0 25px;
 }
 
 section {
-    padding: 100px 0;
+  padding: 100px 0;
 }
 
 .inverse {
-    color: #fff;
-    background: #252525;
+  color: #fff;
+  background: #252525;
 }
 
 .inverse .btn:hover,
 .inverse .btn:focus {
-    background: #fff;
-    color: #252525;
+  background: #fff;
+  color: #252525;
 }
 
 .btn {
-    display: inline-block;
-    color: #252525;
-    text-decoration: none;
-    background: #99D930;
-    padding: 10px 25px;
-    margin-top: 25px;
+  display: inline-block;
+  color: #252525;
+  text-decoration: none;
+  background: #99d930;
+  padding: 10px 25px;
+  margin-top: 25px;
 }
 
 .btn:hover,
 .btn:focus {
-    background: #252525;
-    color: #fff;
+  background: #252525;
+  color: #fff;
 }
 
 .admin_button {
-    background: #131313;
-    padding: 0;
-    float: right;
-    margin-bottom: 0;
+  background: #131313;
+  padding: 0;
+  float: right;
+  margin-bottom: 0;
 }
 
 .login-button {
-	display: inline-block;
-    background-color: #99D930;
-    color: #252525;
-    float: right;
-    width: 10%;
-    border-radius: 4px;
-    margin-right: 10px;
+  display: inline-block;
+  background-color: #99d930;
+  color: #252525;
+  float: right;
+  width: 10%;
+  border-radius: 4px;
+  margin-right: 10px;
 }
 
 .navbar {
-    overflow: hidden;
-    background-color: #666666;
-    /* position: fixed; */
-    top: 0;
-    width: 100%;
+  overflow: hidden;
+  background-color: #666666;
+  /* position: fixed; */
+  top: 0;
+  width: 100%;
 }
 
 #logo {
-    height: 50px;
-
+  height: 50px;
 }
 
 #big_logo {
@@ -148,71 +147,80 @@ section {
   height: auto;
 }
 
- #nav-logo {
-    float: left;
-    padding: 5px 5px 0px;
+#nav-logo {
+  float: left;
+  padding: 5px 5px 0px;
 }
 
 .navbar a {
-    float: left;
-    display: inline-block;
-    color: #eeeeee;
-    text-align: center;
-    padding: 15px 18px;
-    text-decoration: none;
-    font-size: 18px;
+  float: left;
+  display: inline-block;
+  color: #eeeeee;
+  text-align: center;
+  padding: 15px 18px;
+  text-decoration: none;
+  font-size: 18px;
 }
 
 .navbar a:hover {
-    color:#99D930;
+  color: #99d930;
 }
 
-#login{
-    background-color: #99D930;
-    color: #252525;
-    float: right;
-    border-radius: 4px;
-
+#login {
+  background-color: #99d930;
+  color: #252525;
+  float: right;
+  border-radius: 4px;
 }
 
 #login:hover,
 #login:focus {
-    background: #fff;
-    color: #252525;
+  background: #fff;
+  color: #252525;
 }
-.container_2{
-    text-align: left;
+.container_2 {
+  text-align: left;
 }
-input[type=text],input[type=email], input[type=tel],input[type=password], input[type=file], input[type=number], select {
-    width: 80%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-
-input[type=file]::file-selector-button {
-    background-color: #99D930;
-    color: black;
-	height: 40px;
-    border-radius: 4px;
-}
-
-#usermail, #password, #firstname, #lastname {
-    width: 30%;
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="file"],
+input[type="number"],
+select {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-  input[type=submit], button {
-    background-color: #99D930;
-    color: black;
-    padding: 14px 20px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+input[type="file"]::file-selector-button {
+  background-color: #99d930;
+  color: black;
+  height: 40px;
+  border-radius: 4px;
+}
+
+#usermail,
+#password,
+#firstname,
+#lastname {
+  width: 30%;
+}
+
+input[type="submit"],
+button {
+  background-color: #99d930;
+  color: black;
+  padding: 14px 20px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
 #form_show_button {
   margin-top: 20px;
@@ -226,14 +234,14 @@ input[type=file]::file-selector-button {
   display: inline-block;
 }
 
-#admin_icons img{
+#admin_icons img {
   width: 80px;
   height: auto;
 }
 
 .admin_icon {
   display: inline-block;
-  padding:50px;
+  padding: 50px;
   padding-bottom: 0px;
 }
 
@@ -245,44 +253,48 @@ input[type=file]::file-selector-button {
   margin-top: 100px;
 }
 
-#submit-registration, #submit-login {
+#submit-registration,
+#submit-login {
   width: 30%;
-  }
+}
 
 #create_account_button {
-  width: 30%
+  width: 30%;
 }
 
-  div .container_2{
-    border-radius: 50px;
-    padding: 20px;
-  }
+div .container_2 {
+  border-radius: 50px;
+  padding: 20px;
+}
 
-  input[type=submit]:hover {
-    background-color: #45a049;
-  }
-  label{
-    text-align: left;
-  }
-#register{
-    color: #99D930;
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+label {
+  text-align: left;
+}
+#register {
+  color: #99d930;
 }
 #register:hover,
-#register:focus{
-    color: black;
-
+#register:focus {
+  color: black;
 }
 
-#container_2, #blog_creation_left, #blog_creation_right, #right{
-    display: inline-block;
-    padding: 50px;
-    vertical-align: top;
+#container_2,
+#blog_creation_left,
+#blog_creation_right,
+#right {
+  display: inline-block;
+  padding: 50px;
+  vertical-align: top;
 }
 
-#blog_creation_left, #blog_creation_right {
-    width: 25%;
-    padding-right: 0;
-    padding-left: 0;
+#blog_creation_left,
+#blog_creation_right {
+  width: 25%;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .blog_post {
@@ -298,7 +310,8 @@ input[type=file]::file-selector-button {
   border-width: thin;
 }
 
-.blog_post p, .blog_post h3{
+.blog_post p,
+.blog_post h3 {
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
@@ -317,7 +330,7 @@ input[type=file]::file-selector-button {
   width: 80%;
   height: auto;
   margin: 10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
 
@@ -368,14 +381,16 @@ input[type=file]::file-selector-button {
   padding: 25px;
 }
 
-#booklist input[type="text"], #booklist input[type="number"] {
+#booklist input[type="text"],
+#booklist input[type="number"] {
   width: 15%;
   margin: 15px;
 }
 
-#book_image, #book_image img {
+#book_image,
+#book_image img {
   max-width: 200px;
-  height:auto;
+  height: auto;
 }
 
 .toggle_columns {
@@ -398,30 +413,33 @@ input[type=file]::file-selector-button {
   width: 50%;
 }
 
-#add_class input[type="text"], #add_class select{
+#add_class input[type="text"],
+#add_class select {
   width: 40%;
 }
 
 /* schools and school details */
-#school_icons, #school_media {
+#school_icons,
+#school_media {
   display: inline-block;
 }
 
 #school_icons td {
-	text-align: center !important;
+  text-align: center !important;
 }
 
-#school_icons img{
+#school_icons img {
   max-width: 120px;
 }
 
-#school_media img{
-	max-height: 150px;
+#school_media img {
+  max-height: 150px;
 }
 
-.school_icon, .school_media {
+.school_icon,
+.school_media {
   display: inline-block;
-  padding:25px;
+  padding: 25px;
   padding-bottom: 0px;
 }
 
@@ -436,87 +454,95 @@ input[type=file]::file-selector-button {
 }
 
 .school_details label {
-	float: left;
-    font-weight: bold;
+  float: left;
+  font-weight: bold;
 }
 
 .school_details span {
-	float: right;
-	margin-left: 20px;
+  float: right;
+  margin-left: 20px;
 }
 
 .school_notes label {
-	color: #99D930;
-	background: #252525;
+  color: #99d930;
+  background: #252525;
   font-weight: bold;
 }
 
 .school_notes span {
-    display: inline-block;
-	width: 25%;
-	text-align: left;
-	border: 1px solid black;
-	padding-left: 4px;
+  display: inline-block;
+  width: 25%;
+  text-align: left;
+  border: 1px solid black;
+  padding-left: 4px;
 }
 
 #media_upload {
-	width: 25%;
+  width: 25%;
 }
 
 #error_msg {
-	color: red;
-	font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 #file-name-field {
-	width: 300px;
+  width: 300px;
 }
 
-#selection_table, #receipt_table {
-    width: 80%;
-    margin: auto;
-    margin-top: 25px;
-	border-collapse: collapse;
+#selection_table,
+#receipt_table {
+  width: 80%;
+  margin: auto;
+  margin-top: 25px;
+  border-collapse: collapse;
 }
 
-#selection_table th, #receipt_table th {
-    background: #aaa;
-	padding: 5px 8px 5px 8px;
-    border: 1px solid black;
+#selection_table th,
+#receipt_table th {
+  background: #aaa;
+  padding: 5px 8px 5px 8px;
+  border: 1px solid black;
 }
 
-#selection_table td, #receipt_table td {
-	padding: 5px 8px 5px 8px;
-    border: 1px solid black;
+#selection_table td,
+#receipt_table td {
+  padding: 5px 8px 5px 8px;
+  border: 1px solid black;
 }
 
-#selection_table tr:nth-child(even), #receipt_table tr:nth-child(even) {
-	background-color: #efefef;
+#selection_table tr:nth-child(even),
+#receipt_table tr:nth-child(even) {
+  background-color: #efefef;
 }
 
-.item_id, .item_number, .item_price, .item_quantity, .item_total {
-	width: 5%;
+.item_id,
+.item_number,
+.item_price,
+.item_quantity,
+.item_total {
+  width: 5%;
 }
 
 #blog_edit {
-    width: 50%;
-    margin: auto;
-    margin-top: 25px;
-	border-collapse: collapse;
+  width: 50%;
+  margin: auto;
+  margin-top: 25px;
+  border-collapse: collapse;
 }
 
 #blog_edit .td_right {
-	width: 15%;
-	text-align: left;
+  width: 15%;
+  text-align: left;
 }
 
 #blog_edit .td_left {
-	width: 85%;
-	text-align: left;
+  width: 85%;
+  text-align: left;
 }
 
 #receipt_table {
-	text-align: center !important;
+  text-align: center !important;
 }
 
 #edit_school_media {
@@ -526,13 +552,12 @@ input[type=file]::file-selector-button {
 }
 
 #edit_school_media td {
-	border: 1px solid black;
+  border: 1px solid black;
 }
-#edit_school_media img{
-	max-height: 150px;
+#edit_school_media img {
+  max-height: 150px;
 }
 
 #book_image {
-	max-height: 150px;
+  max-height: 150px;
 }
-
