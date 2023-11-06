@@ -62,6 +62,8 @@
   $contact_email = $row['contact_email'];
   $status = $row['status'];
   $notes = $row['notes'];
+  $referenced_by = $row['referenced_by'];
+  $supported_by = $row['supported_by'];
 
   $time = time();
   echo "<h3> School Details </h3>
@@ -80,7 +82,9 @@
       <label id=\"address-label\">Address:</label><span class=\"school_details\">$address_text</span><br>
       <label id=\"state-name-label\">State Name:</label><span class=\"school_details\">$state_name</span><br>
       <label id=\"state-code-label\">State Code:</label><span class=\"school_details\">$state_code</span><br>
-      <label id=\"type-label\">Pin Code:</label><span class=\"school_details\">$pin_code</span>
+      <label id=\"type-label\">Pin Code:</label><span class=\"school_details\">$pin_code</span><br>
+      <label id=\"referenced-by-label\">Referenced By: </label><span class\"school_details\">$referenced_by</span><br>
+      <label id=\"supported-by-by\">Supported By:</label><span class=\"school_details\">$supported_by</span>
       </div>
 
 	  <div id=\"right\" class=\"school_details\">

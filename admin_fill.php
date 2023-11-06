@@ -40,6 +40,8 @@ function admin_school_form($id){
   		$contact_phone = $row["contact_phone"];
   		$contact_email = $row["contact_email"];
   		$status = $row["status"];
+		$referenced_by = $row["referenced_by"];
+		$supported_by = $row["supported_by"];
   		$notes = $row["notes"];
 	} else {
   		$name = "";
@@ -57,6 +59,8 @@ function admin_school_form($id){
   		$contact_phone = "";
   		$contact_email = "";
   		$status = "";
+		$referenced_by = "";
+		$supported_by = "";
   		$notes = "";
 	}
   echo "<div id= \"container_2\">
@@ -247,6 +251,25 @@ function admin_school_form($id){
             	echo "selected";
       	echo ">Completed</option>
 	</select><br>
+	<label id\"referenced-by-label\">Referenced By </label>
+	<input type=\"text\" id=\"reference-by\" name=\"referenced-by\" class=\"form\" value=\"$referenced_by\"><br>
+	<label id=\"supported-by-label\">Supported By</label>
+	<select id=\"supported-by-dropdown\" name=\"supported-by\" required>
+		<option disable value>Select Supported By</option>
+		<option value='Learn and Help'";
+			if ($supported_by == "Learn and Help" or $supported_by == "learn and help")
+				echo "selected";
+		echo ">Learn and Help</option>
+		<option value='NRIVA'";
+			if ($supported_by == "NRIVA" or $supported_by == "nriva")
+				echo "selected";
+		echo ">NRIVA</option>
+		<option value='PGNF'";
+			if ($supported_by == "PGNF" or $supported_by == "pgnf")
+				echo "selected";
+		echo ">PGNF</option>
+		
+	
 	<label id=\"notes-label\">Notes</label><br>
     <input type=\"text\" id=\"notes\" name=\"notes\" class=\"form\" value=\"$notes\"><br></div><!---notes-->";
 }
