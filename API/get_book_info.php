@@ -49,7 +49,7 @@ $connection = new mysqli($hostname, $username, $password, $database);
             $bookData = $result->fetch_assoc();
             echo json_encode($bookData);
         } else {
-            // Book not found
+            // Book not found and the error code like 200, 404, 500
             echo json_encode(array("error" => "Book not found"));
         }
     } else {
