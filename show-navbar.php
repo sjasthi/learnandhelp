@@ -8,6 +8,7 @@ function show_navbar() {
 	  <a href=schools.php>Schools</a>
       <a href="classes.php">Classes</a>
       <a href="books.php">Books</a>
+      <a href="books_grid.php">Books(Grid)</a>
       <a href="causes.php">Causes</a>
       <a href="blog.php">Blog</a>
       <a href="meet_our_instructors.php">Meet our Instructors</a>

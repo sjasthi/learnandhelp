@@ -52,6 +52,11 @@
         <br>
         <label for="schools">Schools</label>
       </div>
+      <div class="admin_icon">
+        <a href="school_report_html.php" id="schools"><img src="images/admin_icons/school.png" alt="schools"></a>
+        <br>
+        <label for="schools">Schools Report (HTML)</label>
+      </div>
       <br>
       <div class="admin_icon">
         <a href="admin_blogs.php" id="blogs"><img src="images/admin_icons/blogs_icon.png"  alt="blogs"></a>
@@ -67,6 +72,11 @@
         <a href="books.php" id="books"><img src="images/admin_icons/books_icon.png" alt="books"></a>
         <br>
         <label for="books">Books</label>
+      </div>
+      <div class="admin_icon">
+        <a href="book_report_html.php" id="books"><img src="images/admin_icons/books_icon.png" alt="books"></a>
+        <br>
+        <label for="books">Books Report(HTML)</label>
       </div>
       <div class="admin_icon">
         <a href="admin_classes.php" id="classes"><img src="images/admin_icons/class.png" alt="classes"></a>

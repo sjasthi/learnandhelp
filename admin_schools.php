@@ -98,7 +98,9 @@
         - <a class="toggle-vis" data-column="14">Contact Email</a>
         - <a class="toggle-vis" data-column="15">Status</a>
         - <a class="toggle-vis" data-column="16">Notes</a>
-		- <a class="toggle-vis" data-column="17">Options</a>
+        - <a class="toggle-vis" data-column="17">Referenced By</a>
+        - <a class="toggle-vis" data-column="18">Supported By</a>
+		- <a class="toggle-vis" data-column="19">Options</a>
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:95%; margin:auto; overflow:auto">
       <table id="schools_table" class="display compact">
@@ -121,6 +123,8 @@
             <th>Contact Email</th>
             <th>Status</th>
             <th>Notes</th>
+            <th>Referenced By</th>
+            <th>Supported By</th>
             <th>Options</th>
           </tr>
         </thead>
@@ -159,6 +163,9 @@
                     	<td>". $row["contact_email"]. "</td>
                     	<td>". $row["status"]. "</td>
                     	<td>". $row["notes"]. "</td>
+                      <td>". $row["referenced_by"]. "</td>
+                      <td>". $row["supported_by"]. "</td>
+                      
                 		<td>
                   			<form action='admin_edit_school.php' method='POST'>
                     			<input type='hidden' name='id' value='". $row["id"] . "'>

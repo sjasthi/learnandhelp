@@ -1,4 +1,9 @@
 <?php
+
+// Print errors
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
   $status = session_status();
   if ($status == PHP_SESSION_NONE) {
     session_start();
@@ -14,8 +19,6 @@
     http_response_code(403);
     die('Forbidden');
   }
-
-
  ?>
 
 <!DOCTYPE html>
@@ -31,6 +34,13 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
+      function deleteUser(userId){
+        var confirmation = confirm("Are you sure you want to delete this user?");
+        if(confirmation){
+          window.location.href = 'admin_deleteuser.php?id=' +userId;
+        }
+
+      }
     $(document).ready(function () {
       $('#Blog_table thead tr').clone(true).appendTo( '#Blog_table thead' );
       $('#Blog_table thead tr:eq(1) th').each(function () {
@@ -87,8 +97,12 @@
         - <a class="toggle-vis" data-column="6">Active</a>
         - <a class="toggle-vis" data-column="7">Role</a>
         - <a class="toggle-vis" data-column="8">Created_Time</a>
-        - <a class="toggle-vis" data-column="9">ModifiedDateTime </a>
+        - <a class="toggle-vis" data-column="9">Modified DateTime </a>
         
+    </div>
+    <!-- Create and Update User Buttons -->
+    <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
+    <button type="button" style="width:fit-content; height:44px; background-color:#99D930; color:white; border:solid 0px; border-radius:5px; padding:0 20px; margin-right:0;" onclick="location.href='admin_createuser.php'">Create User</button>
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="Blog_table" class="display compact">
@@ -101,8 +115,10 @@
             <th>Phone</th>
             <th>Active</th>
             <th>Role</th>
-            <th>Created DateTime</th>
-            <th>Modified DateTime</th>
+            <th>Created Date</th>
+            <th>Last Modified</th>
+            <!-- action buttons -->
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -134,7 +150,10 @@
                     <td>". $row["Role"]."</td> 
                     <td>". $row["Modified_Time"]."</td> 
                     <td>". $row["Created_Time"]."</td> 
-                    <td>
+    <td><button type=\"button\" style=\"width:100px; height:44px; background-color:transparent; color:black; border:solid black 1px; border-radius:5px\" onclick=\"location.href='admin_updateuser.php?id=" . $row['User_Id'] . "'\">Update User</button>
+     <button class=\"deleteBtn\" style=\"width: 100px; height: 44px; background-color: transparent; color: red; border: solid red 1px; border-radius: 5px\" onclick=\"deleteUser(" . $row['User_Id'] . ")\">Delete </button>
+                        </td>
+                    
                   
                     </tr>";
                     //  <a href='#'><input type='button' style='width:200px; height:44px; background-color:blue; color:white; border:solid 0px; border-radius:5px' value='Edit' title='".$Editable."' onclick='EditFun(this.title)'/></a>

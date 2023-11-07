@@ -18,6 +18,12 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
+      function deleteCause(causeId){
+        var confirmation = confirm("Are you sure you want to delete this cause?");
+        if(confirmation){
+          window.location.href = 'admin_deletecause.php?id=' + causeId;
+        }
+      }
       $(document).ready(function () {
         $('#causes thead tr').clone(true).appendTo( '#causes thead' );
         $('#causes thead tr:eq(1) th').each(function () {
@@ -70,6 +76,9 @@
         - <a class="toggle-vis" data-column="4">Contact Email</a>
         - <a class="toggle-vis" data-column="5">Contact Phone</a>
     </div>
+    <div style="margin-top: 20px;">
+        <a href="admin_createcause.php" class="addCauseBtn">Create</a>
+    </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="causes" class="display compact">
         <thead>
@@ -101,6 +110,9 @@
                       <td>'.$row['Contact_name'].'</td>
                       <td>'.$row['Contact_phone'].'</td>
                       <td>'.$row['Contact_email'].'</td>
+                      <td><a href="admin_updatecause.php?id='.$row['Cause_Id'].'" class="btn btn-edit">Edit</a>
+                      <button class="btn btn-delete" onclick="deleteCause(' . $row['Cause_Id'] . ')">Delete</button>
+                      </td>
                     </tr>';
             }
           }
