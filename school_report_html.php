@@ -20,6 +20,8 @@ if ($conn->connect_error) {
 $query = "SELECT * FROM schools";
 $result = $conn->query($query);
 
+
+
 // Create an HTML output
 $html = '<html>
 <head>
@@ -65,18 +67,20 @@ $html = '<html>
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
         .column {
             flex: 1;
             text-align: left;
             margin: 4px 10px;
+            max-width: 50%;
         }
     </style>
 </head>
 <body>';
-
 // Loop through the results and generate the HTML content
 while ($row = $result->fetch_assoc()) {
+    $supported_by = $row['supported_by'];
     $html .= '<div class="container">';
     $html .= '<div class="header">';
     $html .= '<img src="images/admin_icons/school.png" alt="logo">';
@@ -101,6 +105,17 @@ while ($row = $result->fetch_assoc()) {
     $html .= '<p>Notes: ' . $row['notes'] . '</p>';
     $html .= '</div>';
     $html .= '</div>';
+    $html .= '<div class="column">';
+    $html .= '<p>Referenced By: ' . $row['referenced_by'] . '</p>';
+    $html .= '<p>Supported By: </p>';
+    // supported_by company image logo
+    if($supported_by == 'Learn and Help') {
+    $html .= '<img src="images/supported_by/learn and help.png" alt="logo">';   } 
+    else {
+    $html .= '<img src="images/supported_by/'. $supported_by .'.png" alt="logo">';
+    }
+    // $html .= '<p>Supported By: ' . $row['supported_by'] . '</p>';
+     $html .= '</div>';
     $html .= '</div>';
     // Page break before the next school
     $html .= '<div style="page-break-before: always;"></div>';

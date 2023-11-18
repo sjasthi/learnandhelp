@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require 'db_configuration.php';
 
   $status = session_status();
@@ -252,9 +256,9 @@ function admin_school_form($id){
       	echo ">Completed</option>
 	</select><br>
 	<label id\"referenced-by-label\">Referenced By </label>
-	<input type=\"text\" id=\"reference-by\" name=\"referenced-by\" class=\"form\" value=\"$referenced_by\"><br>
+	<input type=\"text\" id=\"reference-by\" name=\"referenced_by\" class=\"form\" value=\"$referenced_by\"><br>
 	<label id=\"supported-by-label\">Supported By</label>
-	<select id=\"supported-by-dropdown\" name=\"supported-by\" required>
+	<select id=\"supported-by-dropdown\" name=\"supported_by\" required>
 		<option disable value>Select Supported By</option>
 		<option value='Learn and Help'";
 			if ($supported_by == "Learn and Help" or $supported_by == "learn and help")
