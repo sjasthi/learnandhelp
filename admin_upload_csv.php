@@ -2,32 +2,32 @@
 
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
-    // Database connection parameters
+    // Database connection
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "learn_and_help_db";
 
-    // Create connection
+    // connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
+    // Checks connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Check if a file is uploaded
+    // Checks if a file is uploaded
     if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         $file = $_FILES['file']['tmp_name'];
 
-        // Read the uploaded file
+        // Reads the uploaded file
         $handle = fopen($file, "r");
 
-        // Skip the header row
+        // Skips the header row
         fgetcsv($handle);
         $row_count = 0;
         while (($data = fgetcsv($handle, 1000, ",")) !== false && $row_count < 10) {
-            // Replace empty strings with NULL
+            // Replaces empty strings with NULL
             foreach ($data as $key => $value) {
                 if ($value === '') {
                     $data[$key] = 'NULL';

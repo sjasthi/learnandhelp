@@ -7,7 +7,7 @@ table_name = 'schools'
 # Open the structured CSV file and read its contents
 with open(file_path, 'r') as csvfile:
     csv_reader = csv.DictReader(csvfile)
-    with open('insert.sql', 'w') as sqlfile:  # Overwrite the file
+    with open('insert.sql', 'w') as sqlfile:  # Overwrites the file
         for row in csv_reader:
             columns = ', '.join(row.keys())
             values = ', '.join([f"'{value}'" if value else 'NULL' for value in row.values()])
@@ -15,7 +15,7 @@ with open(file_path, 'r') as csvfile:
             updates = ', '.join([f"{key} = VALUES({key})" for key in row.keys() if key != 'id'])
             sql_query += updates + ';'
 
-            # Write SQL query to the file
+            # Writes the SQL query to the file
             sqlfile.write(sql_query + '\n')
 
         print(f"SQL statements have been written to insert.sql")
