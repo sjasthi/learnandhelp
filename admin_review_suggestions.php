@@ -31,24 +31,31 @@
         .container{
             margin-top: 4rem;
         }
+
+        .move{
+            margin-left: 1rem;
+        }
     </style>
 </head>
 <body>
-    <?php include 'show-navbar.php'; ?>
-    <?php show_navbar(); ?>
+    <?php
+    // Show errors
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    // Start session
+    session_start();
+    include 'show-navbar.php';
+    show_navbar();
+     ?>
+    
       <div class="container">
-        <h1><span class="accent-text">Schools</span></h1>
+        <h1 class="accent-text">Suggested Schools</h1>
       </div>
   
-    <!-- <h2>Review Suggested Schools</h2> -->
 
     <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// include 'show-navbar.php';
-// show_navbar();
 
     // Include database configuration and connect to the database
     require 'db_configuration.php';
@@ -84,6 +91,14 @@ error_reporting(E_ALL);
             echo "<form action='delete_suggestion.php' method='post'>";
             echo "<input type='hidden' name='suggested_school_id' value='" . $row['id'] . "'>";
             echo "<input type='submit' value='Delete'>";
+            echo "</form>";
+
+
+            // Move to schools button
+
+            echo "<form class='move' action='move_to_schools.php' method='post'>";
+            echo "<input type='hidden' name='suggested_school_id' value='" . $row['id'] . "'>";
+            echo "<input type='submit' value='Move to Schools'>";
             echo "</form>";
             echo "</td>";
 

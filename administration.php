@@ -90,7 +90,7 @@
     </div>
     <!-- review suggested schools -->
     <div class="admin_icon">
-      <a href="review_suggestions.php" id="suggested_schools"><img src="images/admin_icons/review.jpg" alt="suggested schools review logo"></a>
+      <a href="admin_review_suggestions.php" id="suggested_schools"><img src="images/admin_icons/review.jpg" alt="suggested schools review logo"></a>
       <br>
       <label for="suggested_schools">Suggested Schools</label>
     </div>
