@@ -25,8 +25,8 @@ if (isset($_POST['submit'])) {
 
         // Skips the header row
         fgetcsv($handle);
-        $row_count = 0;
-        while (($data = fgetcsv($handle, 1000, ",")) !== false && $row_count < 10) {
+        // skip first line
+        while (($data = fgetcsv($handle, 1000, ",")) !== false && $data[0] != "id") {
             // Replaces empty strings with NULL
             foreach ($data as $key => $value) {
                 if ($value === '') {
@@ -48,8 +48,6 @@ if (isset($_POST['submit'])) {
             if ($conn->query($sql) !== TRUE) {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-
-            $row_count++;
         }
 
         fclose($handle);

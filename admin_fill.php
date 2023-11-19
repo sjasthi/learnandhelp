@@ -197,22 +197,22 @@ function admin_school_form($id){
       	echo ">10</option>
 	</select><br>
 	<label id=\"current-enrollment-label\">Current Enrollment</label>
-    <input type=\"text\" id=\"current-enrollment\" name=\"current_enrollment\" class=\"form\" value=\"$current_enrollment\" required><br><!---current_enrollment-->
+    <input type=\"text\" id=\"current-enrollment\" name=\"current_enrollment\" class=\"form\" value=\"$current_enrollment\" ><br><!---current_enrollment-->
     <label id=\"school-address--label\">School Address</label>
     <input type=\"text\" id=\"school-address\" name=\"address_text\" class=\"form\" value=\"$address_text\" required><br><!---address_text-->
     <label id=\"state-name-label\">State</label><br>
-    <input type=\"text\" id=\"state-name\" name=\"state_name\" class=\"form\" value=\"$state_name\" required><br><!---state_name--></div>
+    <input type=\"text\" id=\"state-name\" name=\"state_name\" class=\"form\" value=\"$state_name\" ><br><!---state_name--></div>
 	
 	<div id=\"right\">
     <label id=\"state-code-label\">State Code</label>
-    <input type=\"text\" id=\"state-code\" name=\"state_code\" class=\"form\" value=\"$state_code\" required><br><!---state_code-->
+    <input type=\"text\" id=\"state-code\" name=\"state_code\" class=\"form\" value=\"$state_code\" ><br><!---state_code-->
     <label id=\"pin-code-label\">Pin Code</label>
-    <input type=\"text\" id=\"pin-code\" name=\"pin_code\" class=\"form\" value=\"$pin_code\" required><br><!---pin_code-->
+    <input type=\"text\" id=\"pin-code\" name=\"pin_code\" class=\"form\" value=\"$pin_code\" ><br><!---pin_code-->
     <label id=\"contact-name-label\">Contact Name</label>
-    <input type=\"text\" id=\"contact-name\" name=\"contact_name\" class=\"form\" value=\"$contact_name\" required><br><!---contact_name-->
+    <input type=\"text\" id=\"contact-name\" name=\"contact_name\" class=\"form\" value=\"$contact_name\" ><br><!---contact_name-->
 
 	<label id=\"contact-designation-label\">Contact Designation</label>
-	<select id=\"contact-designation-dropdown\" name=\"contact_designation\" required><!--contact designation--->
+	<select id=\"contact-designation-dropdown\" name=\"contact_designation\" ><!--contact designation--->
     	<option disabled value>Select Conect Designation</option>
       	<option value='Teacher' ";
         	if ($contact_designation == "Teacher" or $contact_designation == "teacher")
@@ -234,9 +234,9 @@ function admin_school_form($id){
 	<label id=\"contact-phone-label\">Contact Phone</label>
     <input type=\"tel\" id=\"contact-phone\" name=\"contact_phone\" class=\"form\" value=\"$contact_phone\" required><br><!---contact_phone-->
     <label id=\"contact-email-label\">Contact Email</label>
-    <input type=\"email\" id=\"contact-email\" name=\"contact_email\" class=\"form\" value=\"$contact_email\" required><br><!---contact_email-->
+    <input type=\"email\" id=\"contact-email\" name=\"contact_email\" class=\"form\" value=\"$contact_email\" ><br><!---contact_email-->
 	<label id=\"status-label\">Status</label><br>
-	<select id=\"status-dropdown\" name=\"status\" required><!--status--->
+	<select id=\"status-dropdown\" name=\"status\" ><!--status--->
     	<option disabled value>Select School Status</option>
       	<option value='Proposed' ";
         	if ($status == "Proposed" or $status == "proposed")
