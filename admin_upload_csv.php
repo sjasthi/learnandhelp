@@ -69,6 +69,52 @@ if (isset($_POST['submit'])) {
     <title>Upload CSV</title>
 </head>
 
+<style>
+       body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 5px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+</style>
+
 <body>
     <form method="post" enctype="multipart/form-data">
         <input type="file" name="file">
