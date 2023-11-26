@@ -75,6 +75,21 @@ $html = '<html>
             margin: 4px 10px;
             max-width: 50%;
         }
+        .header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            // align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        h2{
+            display: block;
+        }
+        .id {
+            font-size: 2rem;
+            margin: 0;
+            // align-self: flex-start;
     </style>
 </head>
 <body>';
@@ -83,8 +98,12 @@ while ($row = $result->fetch_assoc()) {
     $supported_by = $row['supported_by'];
     $html .= '<div class="container">';
     $html .= '<div class="header">';
+    $html .= '<img src="images/learn_n_help_logo.png" alt="logo">';
+    $html .= '<div>';
     $html .= '<img src="images/admin_icons/school.png" alt="logo">';
     $html .= '<h2>' . $row['name'] . '</h2>';
+    $html .= '</div>';
+    $html .= '<p class="id">' . $row['id'] . '</p>';
     $html .= '</div>';
     $html .= '<div class="info">';
     $html .= '<div class="column">';
