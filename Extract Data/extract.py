@@ -43,6 +43,7 @@ for line in lines:
 
 # Write extracted information to a CSV file
 csv_file = "extracted_school_data.csv"
+
 try:
     with open(csv_file, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=csv_columns)

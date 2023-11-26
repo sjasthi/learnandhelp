@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 18, 2023 at 03:57 AM
--- Server version: 8.0.31
--- PHP Version: 8.2.4
+-- Host: localhost
+-- Generation Time: Nov 19, 2023 at 09:52 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,9 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `learn_and_help_db`
 --
-CREATE DATABASE IF NOT EXISTS `learn_and_help_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `learn_and_help_db`;
-
 
 -- --------------------------------------------------------
 
@@ -31,14 +28,14 @@ USE `learn_and_help_db`;
 --
 
 CREATE TABLE `blogs` (
-  `Blog_Id` int NOT NULL,
+  `Blog_Id` int(11) NOT NULL,
   `Title` varchar(100) DEFAULT NULL,
   `Author` varchar(50) DEFAULT NULL,
-  `Description` text,
+  `Description` text DEFAULT NULL,
   `Video_Link` varchar(200) DEFAULT NULL,
   `Modified_Time` datetime DEFAULT NULL,
   `Created_Time` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `blogs`
@@ -54,10 +51,10 @@ INSERT INTO `blogs` (`Blog_Id`, `Title`, `Author`, `Description`, `Video_Link`, 
 --
 
 CREATE TABLE `blog_pictures` (
-  `Picture_Id` int NOT NULL,
-  `Blog_Id` int DEFAULT NULL,
+  `Picture_Id` int(11) NOT NULL,
+  `Blog_Id` int(11) DEFAULT NULL,
   `Location` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -66,27 +63,27 @@ CREATE TABLE `blog_pictures` (
 --
 
 CREATE TABLE `books` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `callNumber` varchar(200) DEFAULT NULL,
   `title` varchar(200) DEFAULT NULL,
   `author` varchar(200) DEFAULT NULL,
   `publisher` varchar(200) DEFAULT NULL,
   `publishYear` varchar(20) DEFAULT NULL,
-  `numPages` int DEFAULT NULL,
+  `numPages` int(11) DEFAULT NULL,
   `price` varchar(200) DEFAULT NULL,
   `image` varchar(500) DEFAULT NULL,
   `grade_level` varchar(30) DEFAULT 'High',
-  `available` tinyint(1) NOT NULL DEFAULT '1',
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `available` tinyint(1) NOT NULL DEFAULT 1,
+  `date_created` timestamp NULL DEFAULT current_timestamp(),
+  `date_modified` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `books`
 --
 
 INSERT INTO `books` (`id`, `callNumber`, `title`, `author`, `publisher`, `publishYear`, `numPages`, `price`, `image`, `grade_level`, `available`, `date_created`, `date_modified`) VALUES
-(1377, '1', 'సమ్మీకి నేస్తం దొరికింది', 'రూపమ్ క్యారొల్', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/649ee4912ba451.03444147.png', 'High School', 1, '2023-06-30 19:38:47', '2023-07-04 03:31:28'),
+(1377, '1', 'సమ్మీకి నేస్తం దొరికింది', 'రూపమ్ క్యారొల్', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/book1377.jpg', 'High School', 1, '2023-06-30 19:38:47', '2023-11-07 01:55:27'),
 (1378, '2', 'తుంపా మరియు పిచ్చుకలు', 'స్వప్నమయి చక్రవర్తి', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/book1378.JPG', 'Primary School', 1, '2023-06-30 19:38:47', '2023-07-04 03:29:42'),
 (1379, '3', 'ఏద ఇస్తామో దానిని పొందుతాము', 'శుద్ద సత్వబసు', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/book1379.JPG', 'High School', 1, '2023-06-30 19:38:47', '2023-07-04 03:31:28'),
 (1380, '4', 'నోనా మరియు వాన', 'ప్రియా నాగరాజన్', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '35', 'images/books/book1380.JPG', 'Upper Primary School', 1, '2023-06-30 19:38:47', '2023-07-04 03:32:24'),
@@ -3561,22 +3558,21 @@ INSERT INTO `books` (`id`, `callNumber`, `title`, `author`, `publisher`, `publis
 --
 
 CREATE TABLE `causes` (
-  `Cause_Id` int NOT NULL,
+  `Cause_Id` int(11) NOT NULL,
   `Cause_name` varchar(100) DEFAULT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `URL` varchar(150) DEFAULT NULL,
   `Contact_name` varchar(50) DEFAULT NULL,
   `Contact_email` varchar(50) DEFAULT NULL,
   `Contact_phone` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `causes`
 --
 
 INSERT INTO `causes` (`Cause_Id`, `Cause_name`, `description`, `URL`, `Contact_name`, `Contact_email`, `Contact_phone`) VALUES
-(1, 'Cause1', 'Description1', 'www.cause2.com', 'Con Tactname', 'con@cause1.com', '123-456-7890'),
-(2, 'Cause2', 'Description2', 'www.cause2.com', 'Conta Ctname', 'ctname@cause2.com', '123-456-7890');
+(1, 'Cause1', 'Description1', 'www.cause2.com', 'Con Tactname', 'con@cause1.com', '123-456-7890');
 
 -- --------------------------------------------------------
 
@@ -3585,10 +3581,10 @@ INSERT INTO `causes` (`Cause_Id`, `Cause_name`, `description`, `URL`, `Contact_n
 --
 
 CREATE TABLE `classes` (
-  `Class_Id` int NOT NULL,
+  `Class_Id` int(11) NOT NULL,
   `Class_Name` varchar(30) DEFAULT NULL,
-  `Description` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  `Description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `classes`
@@ -3605,7 +3601,7 @@ INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`) VALUES
 --
 
 CREATE TABLE `registrations` (
-  `Reg_Id` int NOT NULL,
+  `Reg_Id` int(11) NOT NULL,
   `Sponsor_Name` varchar(50) DEFAULT NULL,
   `Sponsor_Email` varchar(50) DEFAULT NULL,
   `Sponsor_Phone_Number` varchar(15) DEFAULT NULL,
@@ -3615,11 +3611,11 @@ CREATE TABLE `registrations` (
   `Student_Name` varchar(50) DEFAULT NULL,
   `Student_Email` varchar(50) DEFAULT NULL,
   `Student_Phone_Number` varchar(15) DEFAULT NULL,
-  `Class_Id` int DEFAULT NULL,
+  `Class_Id` int(11) DEFAULT NULL,
   `Cause` varchar(20) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
   `Created_Time` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `registrations`
@@ -3635,51 +3631,119 @@ INSERT INTO `registrations` (`Reg_Id`, `Sponsor_Name`, `Sponsor_Email`, `Sponsor
 --
 
 CREATE TABLE `schools` (
-  `id` int NOT NULL COMMENT 'school id',
-  `name` varchar(60) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'school name',
-  `type` varchar(25) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'school type',
-  `category` varchar(10) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'school category',
-  `grade_level_start` tinyint NOT NULL COMMENT 'starting grade level',
-  `grade_level_end` tinyint NOT NULL COMMENT 'ending grade level',
-  `current_enrollment` smallint NOT NULL COMMENT 'how many students are enrolled',
-  `address_text` varchar(120) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'street address',
-  `state_name` varchar(40) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'state name',
-  `state_code` varchar(2) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'state abbreviation',
-  `pin_code` varchar(10) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'zip code, can take hyphens',
-  `contact_name` varchar(80) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'library administrator',
-  `contact_designation` varchar(15) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'administrator''s title',
-  `contact_phone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s phone',
-  `contact_email` varchar(60) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s email',
-  `status` varchar(10) COLLATE utf8mb4_general_ci NOT NULL COMMENT 'school''s status',
-  `notes` text COLLATE utf8mb4_general_ci NOT NULL COMMENT 'additional notes/comments'
-) ;
+  `id` int(11) NOT NULL COMMENT 'school id',
+  `name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school name',
+  `type` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school type',
+  `category` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school category',
+  `grade_level_start` tinyint(4) DEFAULT NULL COMMENT 'starting grade level',
+  `grade_level_end` tinyint(4) DEFAULT NULL COMMENT 'ending grade level',
+  `current_enrollment` smallint(6) DEFAULT 0 COMMENT 'how many students are enrolled',
+  `address_text` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'street address',
+  `state_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'state name',
+  `state_code` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'state abbreviation',
+  `pin_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'zip code, can take hyphens',
+  `contact_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'library administrator',
+  `contact_designation` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s title',
+  `contact_phone` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s phone',
+  `contact_email` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s email',
+  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school''s status',
+  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'additional notes/comments',
+  `referenced_by` varchar(60) DEFAULT NULL,
+  `supported_by` varchar(200) DEFAULT 'Learn and Help'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `schools`
 --
 
-INSERT INTO `schools` (`id`, `name`, `type`, `category`, `grade_level_start`, `grade_level_end`, `current_enrollment`, `address_text`, `state_name`, `state_code`, `pin_code`, `contact_name`, `contact_designation`, `contact_phone`, `contact_email`, `status`, `notes`) VALUES
-(1, 'School Alp[ha', 'primary school', 'public', 1, 5, 2200, 'Address A', 'Minnesota', 'MN', '55343', 'Registrar', 'teacher', '123-456-7890', 'A@SchoolA.org', 'proposed', 'some notes'),
-(2, 'School B', 'upper primary school', 'public', 6, 10, 1200, 'Address B', 'Minnesota', 'MN', '55434', 'Administrator', 'head master', '123-454-9981', 'Bm@SchoolB.org', 'approved', 'some more notes'),
-(3, 'School C', 'high school', 'private', 9, 10, 800, 'Address C', 'Minnesota', 'MN', '55113', 'Admissions', 'volunteer', '321-654-9984', 'C@SchoolC.org', 'approved', ''),
-(4, 'School D', 'primary school', 'public', 2, 5, 2200, 'Address D', 'Minnesota', 'MN', '55343', 'Registrar', 'teacher', '123-456-7890', 'D@Schoola.org', 'proposed', 'some notes'),
-(5, 'School E', 'upper primary school', 'public', 6, 10, 1200, 'Address E', 'Minnesota', 'MN', '55434', 'Administrator', 'head master', '123-454-9981', 'E@SchoolE.org', 'approved', 'some more notes'),
-(6, 'School F', 'high school', 'private', 9, 10, 800, 'Address F', 'Minnesota', 'MN', '55113', 'Admissions', 'teacher', '321-654-9984', 'F@SchoolF.org', 'approved', ''),
-(7, 'School G', 'primary school', 'public', 2, 5, 2200, 'Address G', 'Minnesota', 'MN', '55343', 'Registrar', 'teacher', '123-456-7890', 'G@SchoolG.org', 'proposed', 'some notes'),
-(8, 'School H', 'upper primary school', 'public', 6, 10, 1200, 'Address H', 'Minnesota', 'MN', '55434', 'Administrator', 'head master', '123-454-9981', 'H@SchoolH.org', 'approved', 'some more notes'),
-(9, 'School I', 'high school', 'private', 9, 10, 800, 'Address I', 'Minnesota', 'MN', '55113', 'Admissions', 'teacher', '321-654-9984', 'I@SchoolI.org', 'approved', ''),
-(10, 'School J', 'primary school', 'public', 2, 5, 2200, 'Address J', 'Minnesota', 'MN', '55343', 'Registrar', 'teacher', '123-456-7890', 'J@SchoolJ.org', 'proposed', 'some notes'),
-(11, 'School K', 'upper primary school', 'public', 6, 10, 1200, 'Address K', 'Minnesota', 'MN', '55434', 'Administrator', 'head master', '123-454-9981', 'K@SchoolK.org', 'approved', 'some more notes'),
-(12, 'School L', 'high school', 'private', 9, 10, 800, 'Address L', 'Minnesota', 'MN', '55113', 'Admissions', 'teacher', '321-654-9984', 'L@SchoolL.org', 'approved', ''),
-(13, 'School M', 'primary school', 'public', 2, 5, 2200, 'Address M', 'Minnesota', 'MN', '55343', 'Registrar', 'teacher', '123-456-7890', 'M@SchoolM.org', 'proposed', 'some notes'),
-(14, 'School N', 'upper primary school', 'public', 6, 10, 1200, 'Address N', 'Minnesota', 'MN', '55434', 'Administrator', 'head master', '123-454-9981', 'N@SchoolN.org', 'approved', 'some more notes'),
-(15, 'School O', 'high school', 'private', 9, 10, 800, 'Address O', 'Minnesota', 'MN', '55113', 'Admissions', 'teacher', '321-654-9984', 'O@SchoolO.org', 'approved', ''),
-(16, 'School P', 'primary school', 'public', 2, 5, 2200, 'Address P', 'Minnesota', 'MN', '55343', 'Registrar', 'teacher', '123-456-7890', 'P@SchoolP.org', 'proposed', 'some notes'),
-(17, 'School Q', 'upper primary school', 'public', 6, 10, 1200, 'Address Q', 'Minnesota', 'MN', '55434', 'Administrator', 'head master', '123-454-9981', 'Q@SchoolQ.org', 'approved', 'some more notes'),
-(18, 'School R', 'high school', 'private', 9, 10, 800, 'Address R', 'Minnesota', 'MN', '55113', 'Admissions', 'teacher', '321-654-9984', 'R@SchoolR.org', 'approved', ''),
-(19, 'School S', 'primary school', 'public', 2, 5, 2200, 'Address S', 'Minnesota', 'MN', '55343', 'Registrar', 'teacher', '123-456-7890', 'S@SchoolS.org', 'proposed', 'some notes'),
-(20, 'School T', 'upper primary school', 'public', 6, 10, 1200, 'Address T', 'Minnesota', 'MN', '55434', 'Administrator', 'head master', '123-454-9981', 'T@SchoolT.org', 'approved', 'some more notes'),
-(21, 'School U', 'high school', 'private', 9, 10, 800, 'Address U', 'Minnesota', 'MN', '55113', 'Admissions', 'teacher', '321-654-9984', 'U@SchoolU.org', 'approved', '');
+INSERT INTO `schools` (`id`, `name`, `type`, `category`, `grade_level_start`, `grade_level_end`, `current_enrollment`, `address_text`, `state_name`, `state_code`, `pin_code`, `contact_name`, `contact_designation`, `contact_phone`, `contact_email`, `status`, `notes`, `referenced_by`, `supported_by`) VALUES
+(1, 'Z P H  School G  - 4 .', NULL, '1', 12, NULL, NULL, 'Nakshatra  Enclave . Police Raj road - Near - Sri Chaithanya Techno School Payaka Rao Pet - Anakapalli Dist AP', NULL, NULL, NULL, 'Smt. Vijaya Bhanu Kote', NULL, '9502247679 / 8247769052', NULL, NULL, NULL, NULL, 'PGNF'),
+(2, 'Chethana School', 'Primary School', 'Private', 1, 1, 0, 'Chowdavaram Village Guntur (District) AP - 522019', '', '', '', 'Ms. Marudwathi', 'Teacher', '9848132435', '', 'Proposed', '', '', 'Learn and Help'),
+(3, 'Librarian Z P H. School.', 'Primary School', 'Private', 1, 1, 0, 'Unnava (Village) Edlapadu (Mandal) Guntur (District) AP - 522233', '', '', '', 'Kakumanu Hima Bindu', 'Teacher', '9505550075', '', 'Proposed', '', '', 'NRIVA'),
+(4, 'Abhyasa vidyalaya', NULL, NULL, NULL, NULL, NULL, 'Near Water tank Gangireddula dibba Gunadala Vijayawada - 520010', NULL, NULL, NULL, 'Krishna', NULL, '9440579922', NULL, NULL, NULL, NULL, 'PGNF'),
+(5, 'C E O H E A L Paradise', NULL, NULL, NULL, NULL, NULL, 'Thotapalli post - Agiripalli mandal - Krishna (Dt.) AP - 521211', NULL, NULL, NULL, 'Sri Ajay Kumar', NULL, '7032885515', NULL, NULL, NULL, NULL, 'PGNF'),
+(6, 'Principal Pragathi Vidya Nikethan  ( P V N )', NULL, NULL, NULL, NULL, NULL, 'Opp : sub station Prashanthi Hills Phase - 1 - Road .', NULL, NULL, NULL, 'Smt  Madhavi', NULL, '9490233878', NULL, NULL, NULL, NULL, 'PGNF'),
+(7, 'Head Master Govt A G H School', NULL, NULL, NULL, NULL, NULL, 'Chintoor - vill/ PO / & mandal .', NULL, NULL, NULL, 'Smt. Krishna Kumari', NULL, '7673947896', NULL, NULL, NULL, NULL, 'PGNF'),
+(8, 'Aravinda model school.', NULL, NULL, NULL, NULL, NULL, 'Mangalagiri Guntur (Dt.) AP - 522501', NULL, NULL, NULL, 'Smt. Indrani', NULL, '703249666', NULL, NULL, NULL, NULL, 'PGNF'),
+(9, 'Head Master Z P H  School', NULL, NULL, NULL, NULL, NULL, 'Boggaram - village & post Eepuru (Mandal) Palnadu (District) AP - 522658', NULL, NULL, NULL, 'Sri Ch.Veerappayya', NULL, '9949931545', NULL, NULL, NULL, NULL, 'PGNF'),
+(10, 'VIVA the School', NULL, NULL, NULL, NULL, NULL, 'V V I T campus Nambur village Peda kakani (Mandal) Guntur (District) AP - 522508', NULL, NULL, NULL, 'Modugula Ravi Krishna', NULL, '9440320580', NULL, NULL, NULL, NULL, 'PGNF'),
+(11, 'ZP High School', NULL, NULL, NULL, NULL, NULL, 'Cheruvu Jammula Palem Bapatla (Dt.) AP 522113', NULL, NULL, NULL, 'Subhani', NULL, '7995872899', NULL, NULL, NULL, NULL, 'PGNF'),
+(12, 'Head Master Govt. High School', NULL, NULL, NULL, NULL, NULL, '(Main Road) Yellandu (p.o) Bhadradri Kothagudem Telangana - 507123 Dist. Co-Education School. 6th to 10th class. Both Media TM & EM Total Strength. 200.', NULL, NULL, NULL, 'Swamy', NULL, '970 144 5736', NULL, NULL, NULL, NULL, 'PGNF'),
+(13, 'Mary Swarna Latha (HM)', NULL, NULL, NULL, NULL, NULL, ' Cheerlavancha', NULL, NULL, NULL, '9441974422', NULL, 'ZP High School', NULL, NULL, NULL, NULL, 'PGNF'),
+(14, 'T.S.R. Prasad', NULL, NULL, NULL, NULL, NULL, ' Telangana', NULL, NULL, NULL, '984 903 1630', NULL, 'Krushi Home for Street Children Hyderabad', NULL, NULL, NULL, NULL, 'PGNF'),
+(15, 'H M : Nagamuni Reddy', NULL, NULL, NULL, NULL, NULL, ' Rayachoti -Galiveedu Rd', NULL, NULL, NULL, '9441124310', NULL, 'ZPHS Madhavaram', NULL, NULL, NULL, NULL, 'PGNF'),
+(16, 'Dr. M. Harikishan', NULL, NULL, NULL, NULL, NULL, ' AP', NULL, NULL, NULL, '94410 32212', NULL, 'ZPH School Amadaguntla Kodumur Mandal Kurnool (Dt.)', NULL, NULL, NULL, NULL, 'PGNF'),
+(17, 'Sri Venkata Subba Reddy', NULL, NULL, NULL, NULL, NULL, 'Srikanth Tirumala', NULL, NULL, NULL, '8106050045', NULL, 'Z P H School ( Boys) Badvel Kadapa Dist', NULL, NULL, NULL, NULL, 'PGNF'),
+(18, 'SJRRMMC High school .', NULL, NULL, NULL, NULL, NULL, ' Opp: Bhaskar Deluxe Theatre Kotha pet Guntur', NULL, NULL, NULL, '9491672311', NULL, 'Ms. Sudha Rani .', NULL, NULL, NULL, NULL, 'PGNF'),
+(19, 'Venkata Kotaiah Balijepalli', NULL, NULL, NULL, NULL, NULL, ' AP', NULL, NULL, NULL, '91777 14380', NULL, 'ZP High School Adusumalli (Village) Bapatla (Dt.)', NULL, NULL, NULL, NULL, 'PGNF'),
+(20, 'shyamala nagar school', NULL, NULL, NULL, NULL, NULL, ' Guntur', NULL, NULL, NULL, 'Sri Venkateswara Bala Kuteer 3rd Line', NULL, ' Syamala Nagar', NULL, NULL, NULL, NULL, 'PGNF'),
+(21, 'Cheerlavancha Elementary School - 1', NULL, NULL, NULL, NULL, NULL, 'Siva Jasthi', NULL, NULL, NULL, NULL, NULL, 'Babu Dundrapelly', NULL, NULL, NULL, NULL, 'PGNF'),
+(22, 'Cheerlavancha Elementary School - 2', NULL, NULL, NULL, NULL, NULL, 'Siva Jasthi', NULL, NULL, NULL, NULL, NULL, 'Babu Dundrapelly', NULL, NULL, NULL, NULL, 'PGNF'),
+(23, 'Sri Nagaraja Special Muncipal Corporation Elementary School', NULL, NULL, NULL, NULL, NULL, 'Rajamahendravaram East Godavari (Dt.)', NULL, NULL, NULL, 'Vivek Kommireddy (Plymouth', NULL, ' MN)', NULL, NULL, NULL, NULL, 'PGNF'),
+(24, 'The Indo-English School', NULL, NULL, NULL, NULL, NULL, 'Chundurivari Veedhi', NULL, NULL, NULL, '6281 459 914', NULL, 'Jyothi (Admin)', NULL, NULL, NULL, NULL, 'PGNF'),
+(25, 'MPPS', NULL, NULL, NULL, NULL, NULL, 'Belupalli (Village)', NULL, NULL, NULL, 'P. Subramanyam (Telugu Teacher)', NULL, '9502407323', NULL, NULL, NULL, NULL, 'PGNF'),
+(26, 'MPPS Machireddy Pally', NULL, NULL, NULL, NULL, NULL, 'Nagaram (Mandal)', NULL, NULL, NULL, 'KLN Rao', NULL, '9848105200', NULL, NULL, NULL, NULL, 'PGNF'),
+(27, 'MPP School', NULL, NULL, NULL, NULL, NULL, 'Venkatagiri', NULL, NULL, NULL, NULL, NULL, 'Manoja Namuburi', NULL, NULL, NULL, NULL, 'PGNF'),
+(28, 'Vunnava MPPS (Surya Nagar Elementary School)', NULL, NULL, NULL, NULL, NULL, 'Gopichand Jasthi', NULL, NULL, NULL, NULL, NULL, 'Himabindu Kakumanu', NULL, NULL, NULL, NULL, 'PGNF'),
+(29, 'Vunnava MPPS (Udayapuri Elementary School)', NULL, NULL, NULL, NULL, NULL, 'Gopichand Jasthi', NULL, NULL, NULL, NULL, NULL, 'Himabindu Kakumanu', NULL, NULL, NULL, NULL, 'PGNF'),
+(30, 'Vunnava MPPS (Yanadi Mastari School / HE School)', NULL, NULL, NULL, NULL, NULL, 'Gopichand Jasthi', NULL, NULL, NULL, NULL, NULL, 'Himabindu Kakumanu', NULL, NULL, NULL, NULL, 'PGNF'),
+(31, 'Vunnava MPPS (Main Elementary School)', NULL, NULL, NULL, NULL, NULL, 'Gopichand Jasthi', NULL, NULL, NULL, NULL, NULL, 'Himabindu Kakumanu', NULL, NULL, NULL, NULL, 'PGNF'),
+(32, 'M P U P School', NULL, NULL, NULL, NULL, NULL, 'Inkollu mandal Bapatla District Pin. 523190', NULL, NULL, NULL, NULL, NULL, 'Veera Reddy - teacher', NULL, NULL, NULL, NULL, 'PGNF'),
+(33, 'M P U P School .', NULL, NULL, NULL, NULL, NULL, 'Near Rajamandry - E G Dist .', NULL, NULL, NULL, NULL, NULL, 'Smt Madhavi varigonda', NULL, NULL, NULL, NULL, 'PGNF'),
+(34, 'M P U P School .', NULL, NULL, NULL, NULL, NULL, 'Medak Dist - 502316 .', NULL, NULL, NULL, '9010902056', NULL, 'Ravi Raju - H M', NULL, NULL, NULL, NULL, 'PGNF'),
+(35, 'M P U P School .', NULL, NULL, NULL, NULL, NULL, 'Vijayanagaram Dist - Pin 535273', NULL, NULL, NULL, '9704487533', NULL, 'Rajesh Koluri (Cell 9704487533)', NULL, NULL, NULL, NULL, 'PGNF'),
+(36, 'Farm Hill learning .', NULL, NULL, NULL, NULL, NULL, 'Shoolagiri Krishna giri Dist - 635117 Tamilnadu .', NULL, NULL, NULL, '8431032239', NULL, 'Venu  &  Chitra', NULL, NULL, NULL, NULL, 'PGNF'),
+(37, 'Amma Social Welfare Association', NULL, NULL, NULL, NULL, NULL, 'Shadnagar Ranga Reddy Dist', NULL, NULL, NULL, NULL, NULL, 'Haritha:  +91 99497 89229', NULL, NULL, NULL, NULL, 'PGNF'),
+(38, 'LR Primary /  Elementary School', NULL, NULL, NULL, NULL, NULL, 'Alokam Peddabbai (School Committee President)', NULL, NULL, NULL, '98667 27707', NULL, 'Rayappa', NULL, NULL, NULL, NULL, 'PGNF'),
+(39, 'Nagalakshmi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '+91 94908 87025', NULL, NULL, NULL, NULL, 'PGNF'),
+(40, 'S. Chalapathi', NULL, NULL, NULL, NULL, NULL, 'S. R . Nagar .', NULL, NULL, NULL, '9989520053', NULL, NULL, NULL, NULL, NULL, NULL, 'PGNF'),
+(41, 'ZPHS', NULL, NULL, NULL, NULL, NULL, 'ZPH School Chinna Hothur Aspari Mandal Kurnool (Dt.)', NULL, NULL, NULL, '94914 07655', NULL, 'K. Chandra Moulini', NULL, NULL, NULL, NULL, 'PGNF'),
+(42, 'ZPHS', NULL, NULL, NULL, NULL, NULL, 'ZPH SCHOOL PYDIBHEAVARAM RANASTHALAM Md SRIKAKULAM Dt', NULL, NULL, NULL, '9441259972', NULL, 'Dr. S. YELLAYYA', NULL, NULL, NULL, NULL, 'PGNF'),
+(43, 'ZPHS', NULL, NULL, NULL, NULL, NULL, 'Balaji Paripati (Dallas', NULL, NULL, NULL, NULL, NULL, 'Belupalli Baireddy (ZPHS)', NULL, NULL, NULL, NULL, 'PGNF'),
+(44, 'AP Residential High School (Tadikonda)', NULL, NULL, NULL, NULL, NULL, 'A P Residential School  .', NULL, NULL, NULL, '9618817161', NULL, 'Smt  Bala Sri', NULL, NULL, NULL, NULL, 'PGNF'),
+(45, 'Intel High School (perecherla', NULL, NULL, NULL, NULL, NULL, 'Dr. Jayakumar', NULL, NULL, NULL, ' guntur)', NULL, NULL, NULL, NULL, NULL, NULL, 'PGNF'),
+(46, 'Abbinenigunta vari palem', NULL, NULL, NULL, NULL, NULL, 'Abbineniguntapalem', NULL, NULL, NULL, NULL, NULL, 'Mrs Leela Rani garu', NULL, NULL, NULL, NULL, 'PGNF'),
+(47, 'ZILLA PARISHAD HIGH SCHOOL;', NULL, NULL, NULL, NULL, NULL, 'LINGARAOPALEM; EDALAPADU MANDAL; GUNTUR Dt.', NULL, NULL, NULL, ' \"91 91540 39037', NULL, 'P. Srinivasa Rao', NULL, NULL, NULL, NULL, 'PGNF'),
+(48, 'Sri Mavuleti Soma Raju zilla praja parishad high school', NULL, NULL, NULL, NULL, NULL, 'G.Kanaka Durga Suneetha', NULL, NULL, NULL, NULL, NULL, 'D.Durga Prasad (Library Assistant)', NULL, NULL, NULL, NULL, 'PGNF'),
+(49, 'Z P H School .', NULL, NULL, NULL, NULL, NULL, 'Kondapuram  (Mandal) Nellore district - 524228', NULL, NULL, NULL, NULL, NULL, 'V Naresh .', NULL, NULL, NULL, NULL, 'PGNF'),
+(50, 'K R Z P H School .', NULL, NULL, NULL, NULL, NULL, 'Rajanna Sirisilla Dist Telangana state', NULL, NULL, NULL, '9848377734', NULL, 'P . Shankar', NULL, NULL, NULL, NULL, 'PGNF'),
+(51, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'TARLUPADU MANDAL Prakasam Dist Pin Code: 523371', NULL, NULL, NULL, NULL, NULL, 'K Sudha Rani .', NULL, NULL, NULL, NULL, 'PGNF'),
+(52, 'Lalitha Budarapu', NULL, NULL, NULL, NULL, NULL, 'Ramagiri mandal', NULL, NULL, NULL, '6300989173', NULL, 'Lalitha Budarapu', NULL, NULL, NULL, NULL, 'PGNF'),
+(53, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Vizianagaram district', NULL, NULL, NULL, NULL, NULL, 'Vaddi Usha Rani .', NULL, NULL, NULL, NULL, 'PGNF'),
+(54, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Nellore District', NULL, NULL, NULL, NULL, NULL, 'T.LakshmiBhavani.', NULL, NULL, NULL, NULL, 'PGNF'),
+(55, 'M P P School .', NULL, NULL, NULL, NULL, NULL, 'Chittore Dist PIN 517408', NULL, NULL, NULL, '9492551451', NULL, 'Vadla Hari Prasad .', NULL, NULL, NULL, NULL, 'PGNF'),
+(56, 'GDET Municipal Corporation Elementary School .', NULL, NULL, NULL, NULL, NULL, 'NTR District', NULL, NULL, NULL, '7702916617', NULL, 'N Kusuma ( SGT )', NULL, NULL, NULL, NULL, 'PGNF'),
+(57, 'M P P School .', NULL, NULL, NULL, NULL, NULL, 'Prakasam Dist PIN:523274', NULL, NULL, NULL, '9848883025', NULL, 'M. Rajani .', NULL, NULL, NULL, NULL, 'PGNF'),
+(58, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Srikakulam (Dist)', NULL, NULL, NULL, '9989827116', NULL, 'P Krishnaveni - SGT .', NULL, NULL, NULL, NULL, 'PGNF'),
+(59, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Bapatla Dist -  523184', NULL, NULL, NULL, '7702208643', NULL, 'P Gayathri ( SGT )', NULL, NULL, NULL, NULL, 'PGNF'),
+(60, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Prakasam dt - 523274', NULL, NULL, NULL, '9440107592', NULL, 'K Rama Devi - SGT .', NULL, NULL, NULL, NULL, 'PGNF'),
+(61, 'aa', NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, 'bb', NULL, '123', NULL, NULL, NULL, NULL, NULL),
+(62, 'sds', NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, 'aa', NULL, '23213', NULL, NULL, NULL, NULL, NULL),
+(63, 'aa', NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, 'bb', NULL, '123', NULL, NULL, NULL, NULL, NULL),
+(64, 'Metro', NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, 'Jasthi', NULL, '1341421', NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schools_suggested`
+--
+
+CREATE TABLE `schools_suggested` (
+  `id` int(11) NOT NULL,
+  `school_name` varchar(100) NOT NULL,
+  `contact_name` varchar(100) NOT NULL,
+  `contact_mobile` varchar(20) DEFAULT NULL,
+  `commitment_statement` text DEFAULT NULL,
+  `suggested_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `supported` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `schools_suggested`
+--
+
+INSERT INTO `schools_suggested` (`id`, `school_name`, `contact_name`, `contact_mobile`, `commitment_statement`, `suggested_at`, `supported`) VALUES
+(2, 'aa', 'bb', '123', 'wevafvaseb dsvsvwec sfeff', '2023-11-19 16:00:25', 0);
 
 -- --------------------------------------------------------
 
@@ -3688,7 +3752,7 @@ INSERT INTO `schools` (`id`, `name`, `type`, `category`, `grade_level_start`, `g
 --
 
 CREATE TABLE `users` (
-  `User_Id` int NOT NULL,
+  `User_Id` int(11) NOT NULL,
   `First_Name` varchar(30) DEFAULT NULL,
   `Last_Name` varchar(30) DEFAULT NULL,
   `Email` varchar(75) DEFAULT NULL,
@@ -3698,19 +3762,21 @@ CREATE TABLE `users` (
   `Role` varchar(20) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
   `Created_Time` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Hash`, `Active`, `Role`, `Modified_Time`, `Created_Time`) VALUES
-(1, 'Siva', 'Jasthi', 'siva@silcmn.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'admin', '2023-05-20', '2023-05-20'),
+(1, 'Sivaaaaa', 'Jasthi', 'siva@silcmn.com', '123-456-7890', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 'Yes', 'admin', '2023-10-02', '2023-05-20'),
 (2, 'Ishana', 'Didwania', 'ishana@silcmn.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'admin', '2023-05-20', '2023-05-20'),
 (3, 'Mike', 'Rotch', 'mikerotch@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', '2023-05-20', '2023-05-20'),
 (4, 'Anita', 'Bath', 'anitabath@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', '2023-05-20', '2023-05-20'),
 (5, 'Pierre', 'Pants', 'pierrepants@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', '2023-05-20', '2023-05-20'),
-(6, 'Seth', 'Arndt', 'a@b.c', NULL, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'yes', 'admin', '2023-05-22', '2023-05-22');
+(6, 'Seth', 'Arndt', 'a@b.c', NULL, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'yes', 'admin', '2023-05-22', '2023-05-22'),
+(7, 'Abdulkader', 'Abdi', 'aa@gmail.com', '333', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 'Yes', 'admin', '2023-10-02', '2023-09-25'),
+(16, 'aa', 'bb', 'aa@gmail.com', '12344', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 'Yes', 'admin', '2023-10-02', '2023-10-01');
 
 -- --------------------------------------------------------
 
@@ -3719,9 +3785,9 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 --
 
 CREATE TABLE `user_registrations` (
-  `User_Id` int NOT NULL,
-  `Reg_Id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  `User_Id` int(11) NOT NULL,
+  `Reg_Id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -3739,6 +3805,12 @@ ALTER TABLE `blogs`
 ALTER TABLE `blog_pictures`
   ADD PRIMARY KEY (`Picture_Id`),
   ADD KEY `Blog_Id` (`Blog_Id`);
+
+--
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `causes`
@@ -3766,6 +3838,12 @@ ALTER TABLE `schools`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `schools_suggested`
+--
+ALTER TABLE `schools_suggested`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -3786,43 +3864,55 @@ ALTER TABLE `user_registrations`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `Blog_Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Blog_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `blog_pictures`
 --
 ALTER TABLE `blog_pictures`
-  MODIFY `Picture_Id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `Picture_Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `books`
+--
+ALTER TABLE `books`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4933;
 
 --
 -- AUTO_INCREMENT for table `causes`
 --
 ALTER TABLE `causes`
-  MODIFY `Cause_Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Cause_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `Class_Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Class_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `Reg_Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'school id';
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'school id', AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT for table `schools_suggested`
+--
+ALTER TABLE `schools_suggested`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_Id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables

@@ -85,7 +85,7 @@ mysqli_close($connection);
             color: #333;
         }
 
-        form {
+        .form {
             width: 400px;
             margin-top: 20px;
         }
@@ -124,6 +124,7 @@ mysqli_close($connection);
 <body>
     <?php 
     include 'show-navbar.php'; 
+    show_navbar();
     ?>
      <?php
     //  show_navbar();
@@ -137,7 +138,7 @@ $currentDateTime = date("Y-m-d H:i:s"); // Format: YYYY-MM-DD HH:MM:SS
 
     <main>
         <h1>Create User</h1>
-        <form method="POST" action="" autocomplete="on" >
+        <form class="form" method="POST" action="" autocomplete="on" >
             <label for="First_Name">First Name</label>
             <input type="text" name="First_Name" id="First_Name" required placeholder="First Name">
 

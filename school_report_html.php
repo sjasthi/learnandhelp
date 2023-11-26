@@ -33,7 +33,6 @@ $html = '<html>
         }
         body {
             display: flex;
-            // flex-direction: column;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
@@ -43,7 +42,7 @@ $html = '<html>
         }
         .container {
             width: 600px;
-            height: 80%;
+            height: fit-content;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -93,6 +92,8 @@ $html = '<html>
     </style>
 </head>
 <body>';
+// link back to the administration page
+// $html .= '<a href="administration.php">Back</a>';
 // Loop through the results and generate the HTML content
 while ($row = $result->fetch_assoc()) {
     $supported_by = $row['supported_by'];
@@ -129,11 +130,10 @@ while ($row = $result->fetch_assoc()) {
     $html .= '<p>Supported By: </p>';
     // supported_by company image logo
     if($supported_by == 'Learn and Help') {
-    $html .= '<img src="images/supported_by/learn and help.png" alt="logo">';   } 
-    else {
-    $html .= '<img src="images/supported_by/'. $supported_by .'.png" alt="logo">';
+    $html .= '<img src="images/supported_by/learn and help.png" alt="logo">';   
+    } else {
+    $html .= '<img src="images/supported_by/'. $supported_by .'.png" alt="'. $supported_by .' logo">';
     }
-    // $html .= '<p>Supported By: ' . $row['supported_by'] . '</p>';
      $html .= '</div>';
     $html .= '</div>';
     // Page break before the next school
