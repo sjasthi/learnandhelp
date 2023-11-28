@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
                     $response['data'] = $schoolData;
                 } else {
                     // School not found
-                    $response['response_code'] = 404;
+                    $response['response_code'] = 400;
                     $response['message'] = "School not found";
                 }
             } else {
