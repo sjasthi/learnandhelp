@@ -1,5 +1,6 @@
 <?php
-
+// session
+session_start();
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
     // Database connection
@@ -51,7 +52,9 @@ if (isset($_POST['submit'])) {
         }
 
         fclose($handle);
-        echo "Data uploaded successfully!";
+
+        // alert the user that the CSV file was uploaded successfully
+        echo "<script type='text/javascript'>alert('CSV file uploaded successfully!');</script>";
     } else {
         echo "Error uploading file.";
     }
@@ -67,25 +70,22 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <title>Upload CSV</title>
+    <link style="text/css" rel="stylesheet" href="css/main.css">
 </head>
 
 <style>
        body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             height: 100vh;
-
         }
 
         h2 {
             margin-bottom: 20px;
         }
 
-        form {
+        .form {
             margin-bottom: 20px;
+            width: 30%;
         }
 
         input[type="file"] {
@@ -104,22 +104,28 @@ if (isset($_POST['submit'])) {
             background-color: #0056b3;
         }
 
-        .error {
-            color: red;
-            font-weight: bold;
-        }
+    
 
-        .success {
-            color: green;
-            font-weight: bold;
-        }
+       .container{
+        width: 100%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       }
 </style>
 
 <body>
-    <form method="post" enctype="multipart/form-data">
+    <!-- include navbar -->
+    <?php include 'show-navbar.php';
+    show_navbar();
+    ?>
+    <div class="container">
+    <form class="form" method="post" enctype="multipart/form-data">
         <input type="file" name="file">
         <input type="submit" name="submit" value="Upload">
     </form>
+    </div>
 </body>
 
 </html>
