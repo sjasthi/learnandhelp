@@ -13,12 +13,14 @@
     <style>
         /* Style the form layout */
         .form {
-            width: 50%;
+            width: 30%;
             margin: 20px auto;
             padding: 20px;
+            font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #f9f9f9;
+            text-align: left;
         }
 
         input[type="text"],
@@ -30,6 +32,7 @@
             border-radius: 3px;
             border: 1px solid #ccc;
             box-sizing: border-box;
+             font-size: 1.3rem;
         }
 
         input[type="submit"] {
@@ -43,6 +46,9 @@
 
         input[type="submit"]:hover {
             background-color: #45a049;
+        }
+        label{
+            color: gray;
         }
     </style>
 </head>

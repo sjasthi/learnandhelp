@@ -40,7 +40,7 @@ $html = '<html>
         }
         .container {
             width: 600px;
-            height: 80%;
+            height: fit-content;
             display: flex;
             flex-direction: column;
             align-items: center;
