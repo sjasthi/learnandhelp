@@ -104,7 +104,7 @@ mysqli_close($connection);
             color: #333;
         }
 
-        form {
+        .form {
             width: 400px;
             margin-top: 20px;
         }
@@ -140,11 +140,13 @@ mysqli_close($connection);
     </style>
 </head>
 <body>
-    <?php include 'show-navbar.php'; ?>
+    <?php include 'show-navbar.php'; 
+    show_navbar();
+    ?>
 
     <main>
         <h1>Update Cause</h1>
-        <form method="POST" action="">
+        <form class="form" method="POST" action="">
             <input type="hidden" name="Cause_ID" value="<?php echo $cause_id; ?>">
             
             <label for="Cause_Name">Cause Name</label>

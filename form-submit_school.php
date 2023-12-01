@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require 'db_configuration.php';
 
 $status = session_status();
@@ -39,6 +42,8 @@ if($action == 'admin_edit_school' or $action == 'admin_add_school'){
 	$contact_email = $_POST["contact_email"];
 	$status = $_POST["status"];
 	$notes = $_POST["notes"];
+	$referenced_by = $_POST["referenced_by"];
+	$supported_by = $_POST["supported_by"];
 } else {
 	$id = $_SESSION['id'];
     $sql = "SELECT * FROM schools WHERE id = '$id'";
@@ -62,6 +67,8 @@ if($action == 'admin_edit_school' or $action == 'admin_add_school'){
 	$contact_email = $row["contact_email"];
 	$status = $row["status"];
 	$notes = $row["notes"];
+	$referenced_by = $row["referenced_by"];
+	$supported_by = $row["supported_by"];
 }
 
 if($action == "admin_edit_school") {
@@ -82,7 +89,9 @@ if($action == "admin_edit_school") {
 			contact_phone = '$contact_phone',
 			contact_email = '$contact_email',
 			status = '$status',
-			notes = '$notes'
+			notes = '$notes',
+			referenced_by = '$referenced_by',
+			supported_by = '$supported_by'
 			WHERE id = '$id';";
 } elseif($action == 'admin_add_school') {
 	$sql = "INSERT INTO schools VALUES (
@@ -102,7 +111,9 @@ if($action == "admin_edit_school") {
 		'$contact_phone',
 		'$contact_email',
 		'$status',
-		'$notes');";
+		'$notes',
+		'$referenced_by',
+		'$supported_by');";
 }
 
 if (!mysqli_query($connection, $sql)) {

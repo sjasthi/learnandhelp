@@ -20,6 +20,8 @@ if ($conn->connect_error) {
 $query = "SELECT * FROM schools";
 $result = $conn->query($query);
 
+
+
 // Create an HTML output
 $html = '<html>
 <head>
@@ -31,7 +33,6 @@ $html = '<html>
         }
         body {
             display: flex;
-            // flex-direction: column;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
@@ -41,7 +42,7 @@ $html = '<html>
         }
         .container {
             width: 600px;
-            height: 80%;
+            height: fit-content;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -65,22 +66,45 @@ $html = '<html>
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
         .column {
             flex: 1;
             text-align: left;
             margin: 4px 10px;
+            max-width: 50%;
         }
+        .header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            // align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        h2{
+            display: block;
+        }
+        .id {
+            font-size: 2rem;
+            margin: 0;
+            // align-self: flex-start;
     </style>
 </head>
 <body>';
-
+// link back to the administration page
+// $html .= '<a href="administration.php">Back</a>';
 // Loop through the results and generate the HTML content
 while ($row = $result->fetch_assoc()) {
+    $supported_by = $row['supported_by'];
     $html .= '<div class="container">';
     $html .= '<div class="header">';
+    $html .= '<img src="images/learn_n_help_logo.png" alt="logo">';
+    $html .= '<div>';
     $html .= '<img src="images/admin_icons/school.png" alt="logo">';
     $html .= '<h2>' . $row['name'] . '</h2>';
+    $html .= '</div>';
+    $html .= '<p class="id">' . $row['id'] . '</p>';
     $html .= '</div>';
     $html .= '<div class="info">';
     $html .= '<div class="column">';
@@ -101,6 +125,16 @@ while ($row = $result->fetch_assoc()) {
     $html .= '<p>Notes: ' . $row['notes'] . '</p>';
     $html .= '</div>';
     $html .= '</div>';
+    $html .= '<div class="column">';
+    $html .= '<p>Referenced By: ' . $row['referenced_by'] . '</p>';
+    $html .= '<p>Supported By: </p>';
+    // supported_by company image logo
+    if($supported_by == 'Learn and Help') {
+    $html .= '<img src="images/supported_by/learn and help.png" alt="logo">';   
+    } else {
+    $html .= '<img src="images/supported_by/'. $supported_by .'.png" alt="'. $supported_by .' logo">';
+    }
+     $html .= '</div>';
     $html .= '</div>';
     // Page break before the next school
     $html .= '<div style="page-break-before: always;"></div>';

@@ -124,7 +124,7 @@ mysqli_close($connection);
             color: #333;
         }
 
-        form {
+        .form {
             width: 400px;
             margin-top: 20px;
         }
@@ -162,6 +162,7 @@ mysqli_close($connection);
 <body>
     <?php 
     include 'show-navbar.php'; 
+    show_navbar();
     ?>
     <?php
     // Central Daylight Time
@@ -172,7 +173,7 @@ mysqli_close($connection);
 
     <main>
         <h1>Update User</h1>
-        <form method="POST" action="" autocomplete="on">
+        <form class="form" method="POST" action="" autocomplete="on">
             <!-- Include a hidden field for User_ID to specify the user to update -->
             <input type="hidden" name="User_ID" value="<?php echo $user_id; ?>">
             

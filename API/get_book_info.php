@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
                     $response['data'] = $bookData;
                 } else {
                     // Book not found
-                    $response['response_code'] = 404;
+                    $response['response_code'] = 400;
                     $response['message'] = "Book not found";
                 }
             } else {

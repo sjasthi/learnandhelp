@@ -64,6 +64,26 @@
         });
        });
     </script>
+    <style>
+      form a{
+        background-color: #99D930;
+        color: black;
+        font-weight: normal;
+        font-size: 16px;
+        padding: 10px 20px;
+        margin: 10px 0px;
+        text-decoration: none;
+        border-radius: 5px;
+        width: 100% !important;
+    
+
+
+      }
+
+      #admin_buttons{
+        width: fit-content;
+      }
+    </style>
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
@@ -116,6 +136,7 @@
                       <td><div contenteditable='true' onBlur='updateValue(this,\"Contact_phone\",". $row["Cause_Id"] .")'>" . $row["Contact_phone"]. "</div></td>
                       <td>
                         <form action='admin_delete_cause.php' method='POST'>
+                        <a href='admin_edit_cause.php?id=". $row["Cause_Id"] . "'>Edit</a>
                           <input type='hidden' name='Cause_Id' value='". $row["Cause_Id"] . "'>
                           <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
                         </form>
@@ -132,8 +153,8 @@
       <textarea type="textarea" rows=9 cols=90 name="description" placeholder="Cause Description" required></textarea>
       <input type="text" name="URL" placeholder="URL" required>
       <input type="text" name="contact_name" placeholder="Contact name" required>
-      <input type="email" id="contact-email" name="contact_email" class="form" required placeholder="Contact email">
-      <input type="tel" id="contact-phone" name="contact_phone" placeholder="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+      <input type="email" id="contact-email" name="contact_email" value="aa@b.com" class="form" required placeholder="Contact email">
+      <input type="tel" id="contact-phone" name="contact_phone" placeholder="123-456-7899" value="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
       <input type="hidden" name="action" value="add" >
       <input type="submit" value="Add" style="width: 33%">
     </form>

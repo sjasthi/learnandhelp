@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
   $status = session_status();
   if ($status == PHP_SESSION_NONE) {
     session_start();
@@ -110,7 +115,8 @@ document.addEventListener('DOMContentLoaded', function () {
           }
            // Updated SQL query to include a search filter
             $search = isset($_GET['search']) ? $_GET['search'] : '';
-            $sql = "SELECT id, name, type, category, state_name, state_code FROM schools WHERE id LIKE '%$search%' OR name LIKE '%$search%' OR type LIKE '%$search%' OR state_name LIKE '%$search%' OR state_code LIKE '%$search%' OR category LIKE '%$search%' ORDER BY name ASC";
+            // sorted by id by default
+            $sql = "SELECT id, name, type, category, state_name, state_code, address_text FROM schools WHERE id LIKE '%$search%' OR name LIKE '%$search%' OR type LIKE '%$search%' OR state_name LIKE '%$search%' OR state_code LIKE '%$search%' OR address_text LIKE '%$search%' OR category LIKE '%$search%' ORDER BY id";
           $result = mysqli_query($connection, $sql);
           if ($result->num_rows > 0) {
 			$counter = 0;  
