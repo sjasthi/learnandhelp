@@ -5,16 +5,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Connect to your database
-$servername = "localhost";
-$dbname = "learn_and_help_db";
-$username = "root";
-$password = "";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die('Connection failed: ' . $conn->connect_error);
-}
+include 'db_configuration.php';
+$conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
 // Query to fetch all schools
 $query = "SELECT * FROM schools";
