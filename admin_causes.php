@@ -150,13 +150,13 @@
     <h1>Add New</h1>
     <form action="update_causes.php" method="post" id="add_cause">
       <input type="text" name="name" placeholder="Cause name" required>
-      <textarea type="textarea" rows=9 cols=90 name="description" placeholder="Cause Description" required></textarea>
+      <input type="text" name="description" placeholder="Cause Description" required>
       <input type="text" name="URL" placeholder="URL" required>
       <input type="text" name="contact_name" placeholder="Contact name" required>
       <input type="email" id="contact-email" name="contact_email" value="aa@b.com" class="form" required placeholder="Contact email">
       <input type="tel" id="contact-phone" name="contact_phone" placeholder="123-456-7899" value="123-456-7899" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
       <input type="hidden" name="action" value="add" >
-      <input type="submit" value="Add" style="width: 33%">
+      <input type="submit" value="Add" style="width: 25%">
     </form>
   </body>
   <!--JQuery-->
