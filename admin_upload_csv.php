@@ -4,13 +4,8 @@ session_start();
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
     // Database connection
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "learn_and_help_db";
-
-    // connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+  include 'db_configuration.php';
+$conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
     // Checks connection
     if ($conn->connect_error) {
