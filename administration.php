@@ -84,7 +84,11 @@
         <label for="classes">Classes</label>
       </div>
       <div class="admin_icon">
-
+        <a href="admin_email_distribution.php" id="Email Distribution"><img src="images/admin_icons/email.png" alt="Email Distribution"></a>
+        <br>
+        <label for="Email Distribution">Email Distribution</label>
+      </div>
+      <div class="admin_icon">
         <a href="admin_upload_csv.php" id="upload_csv">
         <img src="images/admin_icons/upload.png" alt="upload_csv"></a>
         <br>
