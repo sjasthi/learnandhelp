@@ -105,6 +105,22 @@ error_reporting(E_ALL);
     <button type="button" style="width:fit-content; height:44px; background-color:#99D930; color:white; border:solid 0px; border-radius:5px; padding:0 20px; margin-right:0;" onclick="location.href='admin_createuser.php'">Create User</button>
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
+
+      <html lang="en" dir="ltr">
+          <head>
+              <meta charset="utf-8">
+              <title>Send Email</title>
+          </head>
+          <body>
+              <form class="" action="send.php" method="post">
+              Email <input type="email" name="email" value=""> <br>
+              Subject <input type="text" name="subject" value=""> <br>
+              Message <input type="text" name="message" value=""> <br>
+              <button type="submit" name="send">Send</button>
+              </form>
+          </body>
+      </html>
+
       <table id="Blog_table" class="display compact">
         <thead>
           <tr>
