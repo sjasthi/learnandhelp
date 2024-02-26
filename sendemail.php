@@ -12,12 +12,12 @@ if(isset($_POST["send"])){
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'pongeslee@gmail.com';                 //gmail account
-    $mail->Password = 'ufwdtrhbaxmgzmam';                 //password
+    $mail->Username = 'mekics499project24@gmail.com';                 //gmail account
+    $mail->Password = 'fwlphiafqwbzkubj';                 //password
     $mail->SMTPSecure = 'ssl';
     $mail-> Port= 465;
 
-    $mail->setFrom('pongeslee@gmail.com');                    // sender gmail account from the admin
+    $mail->setFrom('mekics499project24@gmail.com');                    // sender gmail account from the admin
 
     $mail->addAddress($_POST["email"]);   //recepient email address (user email address)
     $mail->isHTML(true);
