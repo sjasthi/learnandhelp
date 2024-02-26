@@ -1,11 +1,10 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
+require 'PHPMailer-master/src/Exception.php';
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
 
 if(isset($_POST["send"])){
     $mail = new PHPMailer(true);
@@ -13,12 +12,12 @@ if(isset($_POST["send"])){
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = '';                 //gmail account
-    $mail->Password = '';                 //password
+    $mail->Username = 'pongeslee@gmail.com';                 //gmail account
+    $mail->Password = 'ufwdtrhbaxmgzmam';                 //password
     $mail->SMTPSecure = 'ssl';
     $mail-> Port= 465;
 
-    $mail->setFrom('');                    // sender gmail account from the admin
+    $mail->setFrom('pongeslee@gmail.com');                    // sender gmail account from the admin
 
     $mail->addAddress($_POST["email"]);   //recepient email address (user email address)
     $mail->isHTML(true);
@@ -36,7 +35,4 @@ if(isset($_POST["send"])){
     </script>
     ";
 }
-
-
 ?>
-

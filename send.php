@@ -20,7 +20,6 @@
         $mail->setFrom('mekics499project24@gmail.com'); // your gmail
 
         $mail->addAddress($_POST["email"]);
-
         $mail->isHTML(true);
 
         $mail->Subject = $_POST["subject"];
