@@ -18,24 +18,21 @@
   <?php show_navbar(); ?>
   <header class="inverse">
       <div class="container">
-          <h1><span class="accent-text">Login</span></h1>
+          <h1><span class="accent-text">Reset your password</span></h1>
       </div>
   </header>
   <br>
-  <form action="validate-login.php" method="post">
+  <form action="password_reset_notification.php" method="post"> <!-- This button will take the user's email and once they click on the button
+                                                                     it should send them a email about the next steps -->
       <label for="usermail">Email</label>
       <br>
       <input id="usermail" type="email" name="usermail" placeholder="Yourname@email.com" required>
       <br>
-      <label for="password">Password</label>
-      <br>
-      <input id="password" type="password" name="password" placeholder="Password" required>
-      <br>
-      <input type="submit" id="submit-login" value="Login"/>
+      <input type="submit" id="submit" value="submit"/> 
 	</form>
-  <a href="create_account.php" id="create_account_button">Create Account</a>
-  <br>
-  <br>
-  <a href="forgot_password.php" id="create_account_button">Forgot password?</a>
-  </body>
+
+    <form action="login.php" method="post"> <!-- This form/button is a cancel button which will take the user back to the login page -->
+        <br>
+        <input type="submit" id="submit" value="cancel"/>
+    </form>
 </html>
