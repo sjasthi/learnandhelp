@@ -18,7 +18,7 @@
   <?php show_navbar(); ?>
   <header class="inverse">
       <div class="container">
-          <h1><span class="accent-text">We've sent you an email</span></h1>
+          <h1><span class="accent-text">We've sent you an email</span></h1> <!-- This is the header. No function implemented yet  -->
       </div>
   </header>
   <br>

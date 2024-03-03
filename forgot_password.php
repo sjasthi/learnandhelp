@@ -28,7 +28,7 @@
       <br>
       <input id="usermail" type="email" name="usermail" placeholder="Yourname@email.com" required>
       <br>
-      <input type="submit" id="submit" value="submit"/> 
+      <input type="submit" id="submit" value="submit"/> <!-- no functionality of sending an password reset to user as of now-->
 	</form>
 
     <form action="login.php" method="post"> <!-- This form/button is a cancel button which will take the user back to the login page -->
