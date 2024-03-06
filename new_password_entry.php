@@ -17,9 +17,11 @@
         if (document.getElementById('password1').value == document.getElementById('password2').value) {
           document.getElementById('message').style.color = 'green';
           document.getElementById('message').innerHTML = 'Password match';
+          document.getElementById('button1').disabled = false;
         } else {
             document.getElementById('message').style.color = 'red';
             document.getElementById('message').innerHTML = 'Password does not match';
+            document.getElementById('button1').disabled = true;
       }
     }
     </script>
@@ -56,7 +58,7 @@
       <br>
       <span id='message'></span>
       <br>
-      <input type="submit" id="submit" value="Save password"/>
+      <input type="submit" id="button1" value="Save password"/>
   </form>
   </body>
 </html>
