@@ -9,7 +9,7 @@
 <html lang="en">
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
-    <title>Login</title>
+    <title>Forgot password</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
   </head>

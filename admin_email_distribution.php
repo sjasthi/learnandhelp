@@ -27,7 +27,7 @@ error_reporting(E_ALL);
 <html>
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
-    <title>Administration</title>
+    <title>Administration email distribution</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
