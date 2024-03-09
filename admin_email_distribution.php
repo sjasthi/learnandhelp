@@ -99,7 +99,7 @@ if (isset($_SESSION['role'])) {
             <label>From Admin:</label>
           </td>
           <td>
-            <input style="height:20px; width:500px" type="email" name="from" value="" required></input><br>
+            <textarea style="height:20px; width:500px" type="email" name="from" value="" required><?php echo $_SESSION["email"]; ?></textarea><br>
           </td>
         </tr>
         <tr>
@@ -107,8 +107,7 @@ if (isset($_SESSION['role'])) {
             <label>Email:</label>
           </td>
           <td>
-            <textarea style="height:auto; width:500px;" type="text" name="email" placeholder="recipients" value="" required>
-        <?php
+            <textarea style="height:auto; width:500px;" type="text" name="email" placeholder="recipients" value="" required><?php
         // Connect to your database
         $db_host = "localhost";
         $db_name = "learn_and_help_db";
@@ -144,9 +143,6 @@ if (isset($_SESSION['role'])) {
         } else {
           echo "0 results";
         }
-
-
-
         $conn->close();
 
         ?></textarea><br>
