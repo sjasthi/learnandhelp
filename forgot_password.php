@@ -22,13 +22,13 @@
       </div>
   </header>
   <br>
-  <form action="password_reset_notification.php" method="post"> <!-- This button will take the user's email and once they click on the button
+  <form action="password_change.php" method="post"> <!-- This button will take the user's email and once they click on the button
                                                                      it should send them a email about the next steps -->
       <label for="usermail">Email</label>
       <br>
       <input id="usermail" type="email" name="usermail" placeholder="Yourname@email.com" required>
       <br>
-      <input type="submit" id="submit" value="submit"/> <!-- no functionality of sending an password reset to user as of now-->
+      <input type="submit" id="submit" value="submit" name="submit"/> <!-- no functionality of sending an password reset to user as of now-->
 	</form>
 
     <form action="login.php" method="post"> <!-- This form/button is a cancel button which will take the user back to the login page -->
