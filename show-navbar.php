@@ -19,6 +19,8 @@ function show_navbar() {
           echo '<a href="administration.php">Administration</a>';
         }
         echo '<a href="registration_form.php" id="register">Register Now</a>';
+      }elseif(isset($_SESSION['email']) == false){
+        echo '<a href="login.php" id="register">Register Now</a>';
       }
        echo '</div>';
 
