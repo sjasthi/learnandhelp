@@ -42,7 +42,7 @@
         // Check if the query was successful
         if ($updateResult) {
           // Redirect back to the main PHP file or any desired page after successful update
-          header("Location: admin_usersList.php");
+          header("Location: login.php");
           exit;
         } else {
           // If there was an error, display the error message

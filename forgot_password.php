@@ -1,9 +1,9 @@
 <?php
-  $status = session_status();
-  if ($status == PHP_SESSION_NONE) {
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
     session_start();
-  }
- ?>
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,16 +22,15 @@
       </div>
   </header>
   <br>
-  <form action="password_change.php" method="post"> <!-- This button will take the user's email and once they click on the button
-                                                                     it should send them a email about the next steps -->
+  <form action="password_change.php" method="post">
       <label for="usermail">Email</label>
       <br>
       <input id="usermail" type="email" name="usermail" placeholder="Yourname@email.com" required>
       <br>
-      <input type="submit" id="submit" value="submit" name="submit"/> <!-- no functionality of sending an password reset to user as of now-->
+      <input type="submit" id="submit" value="submit" name="submit"/>
 	</form>
 
-    <form action="login.php" method="post"> <!-- This form/button is a cancel button which will take the user back to the login page -->
+    <form action="login.php" method="post">
         <br>
         <input type="submit" id="submit" value="cancel"/>
     </form>
