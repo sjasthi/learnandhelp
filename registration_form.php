@@ -13,7 +13,7 @@ if (isset($_SESSION['User_Id'])) {
   $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
   if ($connection === false) {
-  	die("Failed to connect to database: " . mysqli_connect_error());
+    die("Failed to connect to database: " . mysqli_connect_error());
   }
 
   $result = $connection->query($sql);
@@ -75,42 +75,43 @@ echo      "<header class=\"inverse\">
         <br>
         <br>
         <label id=\"class\">Select Class: </label>
-        <select id=\"dropdown\" name=\"role\" required>
-          <option disabled selected value>
-            Select your class
-          </option>
-          <option value=2>
-            Python 101
-          </option>
-          <option value=1>
-            Java 101
-          </option>
-          <option value=4>
-            Python 201
-          </option>
-		  <option value=3>
-			Java 201
-		  </option>
-		</select>
-		<!--dropdown--->
-		<p><strong>Cause</strong></p>
-		<label>
-		  <input type=\"radio\" name=\"cause\" value=\"lib\">Library
-		</label>
-		<br>
-		<label>
-		  <input type=\"radio\" name=\"cause\" value=\"Dig_class\">Digital Classroom</label>
-		<label>
-		  <br>
-		  <input type=\"radio\" name=\"cause\" value=\"Other\"> No Preference
-		</label><!---radioButtons--->
-		<br>
+        <select id=\"dropdown\" name=\"class\" required>"; // changed name to class
+
+          // Fetch classes from the database
+          $class_query = "SELECT * FROM classes";
+          $class_result = $connection->query($class_query);
+          if (!$class_result) {
+            echo "Error: " . $connection->error;
+          } else {
+            if ($class_result->num_rows > 0) {
+              while($row = $class_result->fetch_assoc()) {
+                echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] . "</option>";
+              }
+            } else {
+              echo "<option disabled selected value>No classes found</option>";
+            }
+          }
+
+echo      "</select>
+        <!--dropdown--->
+        <p><strong>Cause</strong></p>
+        <label>
+          <input type=\"radio\" name=\"cause\" value=\"lib\">Library
+        </label>
+        <br>
+        <label>
+          <input type=\"radio\" name=\"cause\" value=\"Dig_class\">Digital Classroom</label>
+        <label>
+          <br>
+          <input type=\"radio\" name=\"cause\" value=\"Other\"> No Preference
+        </label><!---radioButtons--->
+        <br>
     </div>
 <br>
-		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Submit\">
+    <input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Submit\">
     <input type=\"hidden\" id=\"action\" name=\"action\" value=\"add\">
-	  </form><!---survey-form--->
+    </form><!---survey-form--->
 
   </body>
-</html>"
+</html>";
 ?>
