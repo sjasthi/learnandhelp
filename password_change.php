@@ -8,9 +8,6 @@ require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
 
-$subject = 'Password Reset';
-$message = 'please click the following link to proceed to the change password: http://localhost/learnandhelp/new_password_entry.php';
-
 // Connect to your database
 $connection = mysqli_connect(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
@@ -24,11 +21,16 @@ if (isset($_POST['submit'])) {
         $emails = $_POST['usermail'];  // reads in the comma delimited list from email field
         $emailArray = explode(';', $emails);   // Converts the list to an array
 
+        $subject = 'Password Reset';
+        
+
         $mail = new PHPMailer(true);        //Get new instance of the class for PHMailer()
         
         // Retrieve the user's email from the form
         $email = $_POST['usermail'];
-        
+
+        $message = 'please click the following link to proceed to the change password: http://localhost/learnandhelp/new_password_entry.php?email=<?php echo urlencode($email); ?>';
+
         // Check if the email exists in the database
         $selectQuery = "SELECT * FROM users WHERE Email = '$email'";
         $result = mysqli_query($connection, $selectQuery);
