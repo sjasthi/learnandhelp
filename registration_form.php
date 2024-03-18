@@ -43,41 +43,7 @@ echo      "<header class=\"inverse\">
           </div>
           </header>
       <h3> Registration Form</h3>
-      <div id= \"container_2\">
-        <!---Student Section -->
-        <label id=\"students-name-label\">*Student's Name: </label>
-        <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required placeholder=\"Enter Student's name\"><br>
-        <label id=\"students-email-label\"> *Student's Email: </label>
-        <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required placeholder=\"Enter Student's email\"><br>
-        <label id=\"students-number-label\">*Student's Number: </label>
-        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
-        <br>
-        <br>
-        <label id=\"class\">*Select Class: </label>
-        <select id=\"dropdown\" name=\"role\" required>
-          <option disabled selected value>
-            Select your class
-          </option>
-          <option value=2>
-            Python 101
-          </option>
-          <option value=1>
-            Java 101
-          </option>
-          <option value=4>
-            Python 201
-          </option>
-		  <option value=3>
-			Java 201
-		  </option>
-		</select>
-		<!--dropdown--->
-		
-		</label><!---radioButtons--->
-		<br>
-    </div>
-
-    <div id=\"right\">
+    <div id=\"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
         <!---Sponsors Section -->
         <label id=\"name-label\">Sponsor's Name: </label>
