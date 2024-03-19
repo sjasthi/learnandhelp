@@ -43,7 +43,42 @@ echo      "<header class=\"inverse\">
           </div>
           </header>
       <h3> Registration Form</h3>
-    <div id=\"container_2\">
+      <div id= \"container_2\">
+        <!---Student Section -->
+        <label id=\"students-name-label\">*Student's Name: </label>
+        <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required placeholder=\"Enter Student's name\"><br>
+        <label id=\"students-email-label\"> *Student's Email: </label>
+        <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required placeholder=\"Enter Student's email\"><br>
+        <label id=\"students-number-label\">*Student's Number: </label>
+        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
+        <br>
+        <br>
+        <label id=\"class\">*Select Class: </label>
+        <select id=\"dropdown\" name=\"class\" required>"; // changed name to class
+
+          // Fetch classes from the database
+          $class_query = "SELECT * FROM classes";
+          $class_result = $connection->query($class_query);
+          if (!$class_result) {
+            echo "Error: " . $connection->error;
+          } else {
+            if ($class_result->num_rows > 0) {
+              while($row = $class_result->fetch_assoc()) {
+                echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] . "</option>";
+              }
+            } else {
+              echo "<option disabled selected value>No classes found</option>";
+            }
+          }
+
+echo      "</select>
+		<!--dropdown--->
+		
+		</label><!---radioButtons--->
+		<br>
+    </div>
+
+    <div id=\"right\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
         <!---Sponsors Section -->
         <label id=\"name-label\">Sponsor's Name: </label>
@@ -64,49 +99,6 @@ echo      "<header class=\"inverse\">
         <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
 
       </div>
-      <div id= \"right\">
-        <!---Student Section -->
-        <label id=\"students-name-label\">Student's Name: </label>
-        <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required placeholder=\"Enter Student's name\"><br>
-        <label id=\"students-email-label\"> Student's Email: </label>
-        <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required placeholder=\"Enter Student's email\"><br>
-        <label id=\"students-number-label\">Student's Number: </label>
-        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
-        <br>
-        <br>
-        <label id=\"class\">Select Class: </label>
-        <select id=\"dropdown\" name=\"class\" required>"; // changed name to class
-
-          // Fetch classes from the database
-          $class_query = "SELECT * FROM classes";
-          $class_result = $connection->query($class_query);
-          if (!$class_result) {
-            echo "Error: " . $connection->error;
-          } else {
-            if ($class_result->num_rows > 0) {
-              while($row = $class_result->fetch_assoc()) {
-                echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] . "</option>";
-              }
-            } else {
-              echo "<option disabled selected value>No classes found</option>";
-            }
-          }
-
-echo      "</select>
-        <!--dropdown--->
-        <p><strong>Cause</strong></p>
-        <label>
-          <input type=\"radio\" name=\"cause\" value=\"lib\">Library
-        </label>
-        <br>
-        <label>
-          <input type=\"radio\" name=\"cause\" value=\"Dig_class\">Digital Classroom</label>
-        <label>
-          <br>
-          <input type=\"radio\" name=\"cause\" value=\"Other\"> No Preference
-        </label><!---radioButtons--->
-        <br>
-    </div>
 <br>
     <input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Submit\">
     <input type=\"hidden\" id=\"action\" name=\"action\" value=\"add\">
@@ -115,3 +107,5 @@ echo      "</select>
   </body>
 </html>";
 ?>
+
+
