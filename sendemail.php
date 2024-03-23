@@ -6,33 +6,33 @@ require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
 
-if(isset($_POST["send"])){
+function sendEmail($recipient, $subject, $message) {
     $mail = new PHPMailer(true);
 
+    // SMTP Configuration
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'mekics499project24@gmail.com';                 //gmail account
-    $mail->Password = 'fwlphiafqwbzkubj';                 //password
+    $mail->Username = 'mekics499project24@gmail.com'; // Your Gmail address
+    $mail->Password = 'fwlphiafqwbzkubj'; // Your Gmail password
     $mail->SMTPSecure = 'ssl';
-    $mail-> Port= 465;
+    $mail->Port = 465;
 
-    $mail->setFrom('mekics499project24@gmail.com');                    // sender gmail account from the admin
+    // Sender and recipient
+    $mail->setFrom('mekics499project24@gmail.com');
+    $mail->addAddress($recipient);
 
-    $mail->addAddress($_POST["email"]);   //recepient email address (user email address)
+    // Content
     $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body = $message;
 
-    $mail->Subject = $_POST["subject"];
-    $mail->Body = $_POST["message"];
-
-    $mail->send();
-
-    echo 
-    "
-    <script>
-    alert('sent Successfully');
-    document.location.href = 'email_index.php';
-    </script>
-    ";
+    // Send email
+    try {
+        $mail->send();
+        return true; // Email sent successfully
+    } catch (Exception $e) {
+        return false; // Failed to send email
+    }
 }
 ?>

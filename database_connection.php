@@ -1,14 +1,16 @@
-<?php
+<<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$db_host = "localhost"; 
-$db_name = "learn_and_help_db";              
-$db_user = "root";
-$db_pass = "";
+$host = "localhost";
+$dbname = "learn_and_help_db";
+$username = "root";
+$password = "";
 
-$conn = mysqli_connect ($db_host, $db_user, $db_pass, $db_name);
-if(mysqli_connect_error()){
-    echo mysqli_connect_error();
-    exit;
+$mysqli = new mysqli($host,$username,$password,$dbname);
+                     
+if ($mysqli->connect_errno) {
+    die("Connection error: " . $mysqli->connect_error);
 }
-echo "connected successfuly. ";
 
+return $mysqli;

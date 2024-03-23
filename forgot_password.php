@@ -23,9 +23,9 @@ if ($status == PHP_SESSION_NONE) {
   </header>
   <br>
   <form action="password_change.php" method="post">
-      <label for="usermail">Email</label>
+      <label for="email">Email</label>
       <br>
-      <input id="usermail" type="email" name="usermail" placeholder="Yourname@email.com" required>
+      <input id="email" type="email" name="email" placeholder="Yourname@email.com" required>
       <br>
       <input type="submit" id="submit" value="submit" name="submit"/>
 	</form>

@@ -1,84 +1,78 @@
 <?php
-require 'db_configuration.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// Sanitize user input
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
-require 'PHPMailer-master/src/Exception.php';
-require 'PHPMailer-master/src/PHPMailer.php';
-require 'PHPMailer-master/src/SMTP.php';
-
-// Connect to your database
-$connection = mysqli_connect(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
-
-// Check if the connection is established
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
+if ($email === false) {
+    echo "Invalid email address.";
+    exit;
 }
 
-if (isset($_POST['submit'])) {
-    if (isset($_POST['usermail'])) {
-        $emails = $_POST['usermail'];  // reads in the comma delimited list from email field
-        $emailArray = explode(';', $emails);   // Converts the list to an array
+$mysqli = require __DIR__ . "/database_connection.php";
 
-        $subject = 'Password Reset';
-        
+// Check if the email exists in the database
+$sql_check_email = "SELECT COUNT(*) FROM users WHERE email = ?";
+$stmt_check_email = $mysqli->prepare($sql_check_email);
 
-        $mail = new PHPMailer(true);        //Get new instance of the class for PHMailer()
-        
-        // Retrieve the user's email from the form
-        $email = $_POST['usermail'];
+if (!$stmt_check_email) {
+    echo "Failed to prepare statement for email check.";
+    exit;
+}
 
-        $message = 'please click the following link to proceed to the change password: http://localhost/learnandhelp/new_password_entry.php?email=<?php echo urlencode($email); ?>';
+$stmt_check_email->bind_param("s", $email);
+$stmt_check_email->execute();
 
-        // Check if the email exists in the database
-        $selectQuery = "SELECT * FROM users WHERE Email = '$email'";
-        $result = mysqli_query($connection, $selectQuery);
+$stmt_check_email->bind_result($email_count);
+$stmt_check_email->fetch();
+$stmt_check_email->close();
 
-        if (!$result) {
-            // If there was an error in the query, display the error message
-            echo "Error checking email: " . mysqli_error($connection);
-        } else {
-            // Check if the email exists
-            if (mysqli_num_rows($result) == 0) {
-                // If the email does not exist in the database, inform the user
-                echo"<script> alert('Email not found please try again');document.location.href = 'forgot_password.php'</script>";
-            }
-        }
+if ($email_count === 0) {
+    echo "Email address not found in our records.";
+    exit;
+}
 
-        // print "Values from email list: <br>";
-        for ($i = 0; $i < count($emailArray); $i++) {
-            // print "$emailArray[$i]<br>";  //debug line -- Remove when not needed.
+// Proceed with generating the reset token and sending the reset email
+$token = bin2hex(random_bytes(16));
+$token_hash = hash("sha1", $token);
 
+$expiry = date("Y-m-d H:i:s", time() + 60 * 30); // Token expires in 30 minutes
 
-            // $mail = new PHPMailer(true);
+// Update the users table with reset token and expiry
+$sql_insert_token = "UPDATE users SET reset_token_hash = ?, reset_token_expires_at = ? WHERE email = ?";
+$stmt_insert_token = $mysqli->prepare($sql_insert_token);
 
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'mekics499project24@gmail.com'; // your gmail, substitute with admin email
-            $mail->Password = 'fwlphiafqwbzkubj'; // your gmail app pass
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
+if (!$stmt_insert_token) {
+    echo "Failed to prepare statement for token insertion.";
+    exit;
+}
 
-            $mail->setFrom('mekics499project24@gmail.com'); // your gmail
+$stmt_insert_token->bind_param("sss", $token_hash, $expiry, $email);
 
-            $mail->addAddress($emailArray[$i]);   // Get email from array segment
-            // $mail->addAddress('schoolkolles@gmail.com');   // Get email from array segment
+if (!$stmt_insert_token->execute()) {
+    echo "Failed to update reset token into the database.";
+    exit;
+}
 
-            $mail->isHTML(true);
+if ($stmt_insert_token->affected_rows) {
+    // Include mailer script
+    require __DIR__ . "/sendemail.php";
 
+    // Send password reset email
+    $subject = "Password Reset";
+    $message = <<<END
+    Click <a href="http://localhost/learnandhelp/new_password_entry.php?token=$token">here</a> 
+    to reset your password.
+    END;
 
-            $mail->Subject = $subject;
-            $mail->Body = $message;
-            $mail->send();
-        }
-        
-        // Close the database connection
-        mysqli_close($connection);
-        echo"<script> alert('email sent');document.location.href = 'password_reset_notification.php'</script>";
-    } else {  
-        $emails = array();
+    if (sendEmail($email, $subject, $message)) {
+        header("location:password_reset_notification.php");
+        exit;
+    } else {
+        echo "Failed to send password reset email.";
     }
+} else {
+    echo "Failed to update reset token into the database.";
 }
 ?>
