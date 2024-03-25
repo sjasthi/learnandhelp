@@ -308,7 +308,7 @@ if (isset($_POST['submit'])) {
             <style>
         /* CSS Styles */
         h1 {
-            color: yellowgreen; /* Set the desired text color */
+            color: yellowgreen; 
         }
     </style>
 
