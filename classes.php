@@ -79,8 +79,22 @@ if ($status == PHP_SESSION_NONE) {
         if ($connection === false) {
             die("Failed to connect to database: " . mysqli_connect_error());
         }
-        $sql = "SELECT Class_Id, Class_Name, Description
-                FROM classes;";
+
+        // Select view of available classes for users from accessing the page 
+        // Admin's can see all classes regardless of status
+        if ((isset($_SESSION['email'])) &&  $_SESSION['role'] == 'admin'){
+            $sql = "SELECT Class_Id, Class_Name, Description, Status
+                FROM classes;";                                                  
+        }
+        
+        //Non-Admin's and users not logged in can only see "Approved" Classes
+        else {
+            $sql = "SELECT Class_Id, Class_Name, Description, Status
+                FROM classes
+                WHERE Status = 'Approved';";
+        }
+        
+        
         $result = mysqli_query($connection, $sql);
         if ($result->num_rows > 0) {
             // Create table with data from each row

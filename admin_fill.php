@@ -289,7 +289,9 @@ function admin_class_form($Class_Id){
 
   $class_name = $row["Class_Name"];
   $description = $row["Description"];
+  $status = $row["Status"];  //Added to pull in Status column value
 
+  // Updated form to include course status read in from database.  Gives admin option to change.
   echo "<div id= \"container_2\">
   <form id=\"survey-form\" action=\"form-submit_class.php\" method = \"post\" onSubmit=\"window.location.reload()\">
     <input type='hidden' name='Class_Id' value=$Class_Id>
@@ -297,6 +299,12 @@ function admin_class_form($Class_Id){
     <input type=\"text\" id=\"class-name\" name=\"Class_Name\" class=\"form\" value=\"$class_name\" required><br><!--class_name--->
     <label id=\"description-label\">Course Description</label>
     <input type=\"text\" id=\"description\" name=\"Description\" class=\"form\" value=\"$description\" required><br><!---description-->
+	<label id=\"status-label\">Course Status</label>
+	<select id=\"status\" name=\"Status\" class=\"form\" required>
+		<option value=\"Proposed\" ". ($status == 'Proposed' ? 'selected' : '') .">Proposed</option>
+		<option value=\"Approved\" ". ($status == 'Approved' ? 'selected' : '') .">Approved</option>
+		<option value=\"Inactive\" ". ($status == 'Inactive' ? 'selected' : '') .">Inactive</option>
+	</select><br><!---status-->    
     </div>";
   
 }
