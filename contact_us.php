@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
         $mail->send();
 
         // sends a alert 
-        echo "<script>alert('Sent Successfully');document.location.href = 'contact_us2.php'</script>";
+        echo "<script>alert('Sent Successfully');document.location.href = 'contact_us.php'</script>";
         exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -83,13 +83,15 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
   <head>
-   <title>Align Content to Left</title>
+   <title>Algin to left</title>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    
+    
+    
 
-  
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
@@ -235,6 +237,9 @@ if (isset($_POST['submit'])) {
     transform: translateY(-50%);
 }
 
+
+
+
      
 </style>
 </head>
@@ -262,6 +267,7 @@ if (isset($_POST['submit'])) {
 
     <div class="button-container">
     <input type="submit" value="Submit" name="submit" style="display: inline-block;">
+
     <input type="button" value="Cancel" onclick="window.location.href='index.php'" style="display: inline-block; background-color: #002f3a; color: white; width: 100px;">
     </div>
 
