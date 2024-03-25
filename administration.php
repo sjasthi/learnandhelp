@@ -100,6 +100,11 @@
       <br>
       <label for="suggested_schools">Suggested Schools</label>
     </div>
+    <div class="admin_icon">
+            <a href="admin_api.php" id="api"><img src="images/admin_icons/api.png" alt="api"></a>
+            <br>
+            <label for="api">API</label>
+    </div>
     <br>
     <div id="icon_attribution">
       <a href="https://www.flaticon.com/authors/freepik" title="freepik icons" id="icon_attribution">Icons created by Freepik - Flaticon</a>
