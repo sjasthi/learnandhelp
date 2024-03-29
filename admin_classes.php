@@ -82,8 +82,8 @@
        		<label>
            		<textarea rows=5 cols=90 name="description" placeholder="Class Description" required></textarea>
        		</label>
-       		<br>
-          <label for="status">Status:</label>
+       		<br><br>
+          <label for="status">Status:</label><br>
             <select name="status" id="status" required>
               <option value="Proposed">Proposed</option>
               <option value="Approved">Approved</option>

@@ -213,7 +213,7 @@ function admin_school_form($id){
 
 	<label id=\"contact-designation-label\">Contact Designation</label>
 	<select id=\"contact-designation-dropdown\" name=\"contact_designation\" ><!--contact designation--->
-    	<option disabled value>Select Conect Designation</option>
+    	<option disabled value>Select Contact Designation</option>
       	<option value='Teacher' ";
         	if ($contact_designation == "Teacher" or $contact_designation == "teacher")
             	echo "selected";
@@ -292,14 +292,14 @@ function admin_class_form($Class_Id){
   $status = $row["Status"];  //Added to pull in Status column value
 
   // Updated form to include course status read in from database.  Gives admin option to change.
-  echo "<div id= \"container_2\">
+  // Changed "Course Description" field for input type="text" to text area; allowing customer to resize field.
+  echo "<div id= \"container\">
   <form id=\"survey-form\" action=\"form-submit_class.php\" method = \"post\" onSubmit=\"window.location.reload()\">
     <input type='hidden' name='Class_Id' value=$Class_Id>
     <label id=\"name-label\">Course Name</label>
     <input type=\"text\" id=\"class-name\" name=\"Class_Name\" class=\"form\" value=\"$class_name\" required><br><!--class_name--->
-    <label id=\"description-label\">Course Description</label>
-    <input type=\"text\" id=\"description\" name=\"Description\" class=\"form\" value=\"$description\" required><br><!---description-->
-	<label id=\"status-label\">Course Status</label>
+    <label id=\"description-label\">Course Description</label><br>
+	<textarea rows=\"5\" cols=\"35\" id=\"description\" name=\"Description\" class=\"form\" required>". htmlspecialchars($description) ."</textarea><br><!---description-->
 	<select id=\"status\" name=\"Status\" class=\"form\" required>
 		<option value=\"Proposed\" ". ($status == 'Proposed' ? 'selected' : '') .">Proposed</option>
 		<option value=\"Approved\" ". ($status == 'Approved' ? 'selected' : '') .">Approved</option>
