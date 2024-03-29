@@ -64,6 +64,14 @@
       });
      });
     </script>
+    <style>
+        .text-container {
+            text-align: left;
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+    </style>
+
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
@@ -74,29 +82,40 @@
       </div>
     </header>
     <h3>API Documentation:</h3>
-    <p1>
-    To do an API call to get school information, type the following link into the URL
-    http://localhost/learnandhelp/api/get_school_info.php?id=(index)
-     </p1>
-     <br>
-     <p2>
-     To do an API call to get book information, type the following link into the URL
-     http://localhost/learnandhelp/api/get_book_info.php?id=(index)
-     </p2>
-     <br>
+    <div class="text-container">
+        <p1>
+        To do an API call to get school information, type the following link into the URL with a specific index within the school array database:
+        <mark>https://learnandhelp.jasthi.com/api/get_school_info.php?id=</mark>
+        </p1>
+        <br>
+        <br>
+        <p2>
+        To do an API call to get book information, type the following link into the URL with a specific index within the book array database:
+        <mark>https://learnandhelp.jasthi.com/api/get_book_info.php?id=</mark>
+        </p2>
+     </div>
      <h3> Parameters:</h3>
-     <p3>
-     The parameters of the URL after the equal sign is the index in which users can input to get information
-     of a specific book or a specific school at that index.
-     </p3>
+     <div class="text-container">
+        <p3>
+        The parameters of the URL after the equal sign is the index in which users can input to get information
+        of a specific book or a specific school at that index.
+        </p3>
+        <br>
+        <p3>https://learnandhelp.jasthi.com/api/get_school_info.php?id=<mark>(parameters/index)</mark></p3>
+
+     </div>
 
      <h3>Examples:</h3>
-    <p1>Clicking this URL will fetch the school info of #10. You can change the ID in the URL to get the school information of a different school.</p1>
-    <a href="http://localhost/learnandhelp/api/get_school_info.php?id=10">http://localhost/learnandhelp/api/get_school_info.php?id=10</a>
+    <div class="text-container">
+        <p1>Clicking this URL will fetch the school info of #10. You can change the ID in the URL to get the school information of a different school.</p1>
+        <a href="http://localhost/learnandhelp/api/get_school_info.php?id=10">https://learnandhelp.jasthi.com/api/get_school_info.php?id=10</a>
+    </div>
     <br>
     <img src="images/api_example1.png" alt="API example 1">
     <br>
-    <p1>Clicking this URL will fetch the book info of #1389. You can change the ID in the URL to get the book information of a different book.</p1>
-    <a href="http://localhost/learnandhelp/api/get_book_info.php?id=1389">http://localhost/learnandhelp/api/get_book_info.php?id=1389</a>
+    <div class="text-container">
+        <p1>Clicking this URL will fetch the book info of #1389. You can change the ID in the URL to get the book information of a different book.</p1>
+        <a href="http://localhost/learnandhelp/api/get_book_info.php?id=1389">https://learnandhelp.jasthi.com/api/get_book_info.php?id=1389</a>
+    </div>
     <img src="images/books_api.png" alt="API example 2" width= 966;height= 175;>
 
