@@ -1,4 +1,5 @@
 <?php
+require 'db_configuration.php';
 
 // Print errors
 ini_set('display_errors', 1);
@@ -108,44 +109,40 @@ if (isset($_SESSION['role'])) {
           </td>
           <td>
             <textarea style="height:auto; width:500px;" type="text" name="email" placeholder="recipients" value="" required><?php
-        // Connect to your database
-        $db_host = "localhost";
-        $db_name = "learn_and_help_db";
-        $db_user = "root";
-        $db_pass = "";
-
-        $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-        if (mysqli_connect_error()) {
-          echo mysqli_connect_error();
-          exit;
-        }
-
-        $sql = "SELECT Email FROM users";
-        $result = $conn->query($sql);
-
-
-        if ($result->num_rows > 0) {  //Grab all email address and populate Email field
-
-          $rowCount = $result->num_rows;   //Get total # of Emails found
-          $loops = 1;
-
-          // Output data in the email field in form.  Creates email list separated by ';'.
-          while ($row = $result->fetch_assoc()) {
-
-            if ($loops == $rowCount) {
-              echo $row["Email"]; // omit comma at end.
-            } else {
-              echo $row["Email"] . "; "; // Add ; to list
+            // Create Connection to Database
+            
+            $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+            // Check connection
+            if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
             }
-            $loops += 1;  //increment loop count
 
-          }
-        } else {
-          echo "0 results";
-        }
-        $conn->close();
+            $sql = "SELECT Email FROM users";
+            $result = $conn->query($sql);
 
-        ?></textarea><br>
+
+            if ($result->num_rows > 0) {  //Grab all email address and populate Email field
+
+              $rowCount = $result->num_rows;   //Get total # of Emails found
+              $loops = 1;
+
+              // Output data in the email field in form.  Creates email list separated by ';'.
+              while ($row = $result->fetch_assoc()) {
+
+                if ($loops == $rowCount) {
+                  echo $row["Email"]; // omit comma at end.
+                } else {
+                  echo $row["Email"] . "; "; // Add ; to list
+                }
+                $loops += 1;  //increment loop count
+
+              }
+            } else {
+              echo "0 results";
+            }
+            $conn->close();
+
+            ?></textarea><br>
           </td>
         </tr>
         <tr>
