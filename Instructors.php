@@ -65,7 +65,7 @@
       </div>
     </header>
       <h4></h4>
-    	<form action="update_Instructors.php" method="post" id="add_Instructor">
+    	<form action="update_instructors.php" method="post" id="add_Instructor">
        		
       
       
@@ -83,7 +83,13 @@
        		<br><br>
 
            <label>
-           		<textarea rows=5 cols=90 name="image" placeholder="image" required></textarea>
+
+          
+        <input type="file" name="image" accept="image/*" required>
+      </label>
+      <br><br>
+      <input type="hidden" name="action" value="add">
+
        		</label>
        		<br><br>
           
