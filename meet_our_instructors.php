@@ -33,7 +33,7 @@
                   {
                     die("Connection failed: " . $conn->connect_error);
                   }
-                  $sql = "SELECT * FROM `instructors`;";
+                  $sql = "SELECT * FROM `instructor`;";
                   $result = $conn->query($sql);
 
 
