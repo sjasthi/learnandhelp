@@ -3,13 +3,9 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
-
-  
 ?>
 
 <!DOCTYPE html>
-<script>
-</script>
 <html>
   <head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
@@ -21,8 +17,8 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
     $(document).ready(function () {
-      $('#instructor2_table thead tr').clone(true).appendTo( '#instructor_table thead' );
-      $('#instructor2_table thead tr:eq(1) th').each(function () {
+      $('#instructor_table thead tr').clone(true).appendTo( '#instructor_table thead' );
+      $('#instructor_table thead tr:eq(1) th').each(function () {
       var title = $(this).text();
       $(this).html('<input type="text" placeholder="Search ' + title + '" />');
       });
@@ -64,31 +60,22 @@
         <h1><span class="accent-text">Instructors</span></h1>
       </div>
     </header>
-      <h4></h4>
+      <h4>Add Instructor</h4>
     	<form action="update_Instructors.php" method="post" id="add_Instructor">
-       		
-      
-      
-      <label>
-           		<input type="text" First_name="First_name" placeholder="Enter first Name" required>
-       		</label>
-           <br><br>
-           <label>
-           		<input type="text" Last_name="Last_name" placeholder="Enter last Name" required>
-       		</label>
-       		<br><br>
        		<label>
-           		<textarea rows=5 cols=90 name="Bio_data" placeholder="Enter Bio_data" required></textarea>
+           		<input type="text" name="name" placeholder="Name" required>
        		</label>
-       		<br><br>
+       		<br>
+       		<label>
+           		<textarea rows=5 cols=90 name="Bio_data" placeholder="Bio_data" required></textarea>
+       		</label>
+       		<br>
 
-           <label>
-           		<textarea rows=5 cols=90 name="image" placeholder="image" required></textarea>
-       		</label>
-       		<br><br>
-          
-  <label for="Image"></label>
-            
+       		
+          <label for="Image">Image:</label>
+            <select name="status" id="status" required>
+             
+            </select>
           <br>
        		<input type="hidden" name="action" value="add">
        		<input type="submit" value="Add" style="width: 15%">
@@ -96,24 +83,20 @@
 	<!-- Jquery Data Table -->
     <div class="toggle_columns">
       Toggle column: <a class="toggle-vis" data-column="0">Instructor ID</a>
-        - <a class="toggle-vis" data-column="1"> First_name</a>
-        - <a class="toggle-vis" data-column="1"> Last_name</a>
+        - <a class="toggle-vis" data-column="1"> Name</a>
         - <a class="toggle-vis" data-column="2">Bio</a>
         - <a class="toggle-vis" data-column="3"></a>        
         - <a class="toggle-vis" data-column="4">Image</a>
-
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
-      <table id="instructor_table" class="display compact">
+      <table id="Instructor_table" class="display compact">
         <thead>
           <tr>
             <th>Instructor ID</th>
-            <th> First_name</th><br><br>
-            <th> Last_name</th><br><br>
-            <th>Bio_data</th>
-            <th>image</th>
+            <th> Name</th>
+            <th>Bio</th>
+            <th>Image</th>  <!-- Added Status -->
             <th>Options</th>
-
           </tr>
         </thead>
         <tbody>
@@ -128,41 +111,46 @@
             }
 
             $sql = "SELECT * FROM instructor";
-        $result = $conn->query($sql);
+            $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            // Create table with data from each row
-            while ($row = $result->fetch_assoc()) {
+            if ($result->num_rows > 0) {
+              // Create table with data from each row
+              // Added "Status"
+              while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                      <td>" . $row["instructor_ID"] . "</td>
-                      <td>" . $row["First_name"] . "</td>
-                      <td>" . $row["Last_name"] . "</td>
-                      <td>" . $row["Bio_data"] . "</td>
-                      <td>";
-                $imagePaths = explode(',', $row["Image"]); // Split multiple image paths if stored in a single column
-                foreach ($imagePaths as $imagePath) {
-                    echo "<img src='$imagePath' width='100'>";
-                }
-                echo "</td>
-                      <td>
-                        <form action='Instructors.php' method='POST'>
-                          <input type='hidden' name='instructor_ID' value='" . $row["instructor_ID"] . "'>
-                          <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
-                        </form>
-                        <form action='Instructors.php' method='POST'>
-                          <input type='hidden' name='instructor_ID' value='" . $row["instructor_ID"] . "'>
-                          <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
-                        </form>
-                      </td>
+                        <td>" . $row["instructor_ID"]. "</td>
+                        <td>" . $row["Name"] . "</td>
+                        <td>" . $row["Bio_data"]. "</td>
+                        <td>
+                            <a href='http://localhost/learnandhelp/images/" . $row["images"]. "'>
+                                <img src='images/" . $row["Image"]. "' alt='siva Image'>
+
+                                <a href='http://localhost/learnandhelp/images/" . $row["images"]. "'>
+                                <img src='images/" . $row["Image"]. "' alt='Ishana Image'>   
+                            </a>
+
+                            <a href='http://localhost/learnandhelp/images/" . $row["images"]. "'>
+                                <img src='images/" . $row["Image"]. "' alt='sumedh Image'>
+                        </td>
+                        <td>
+                            <form action='Instructors.php' method='POST'>
+                                <input type='hidden' name='instructor_ID' value='". $row["instructor_ID"] . "'>
+                                <input type='submit' id='admin_buttons' name='edit' value='Edit'>
+                            </form>
+                            <form action='Instructors.php' method='POST'>
+                                <input type='hidden' name='instructor_ID' value='". $row["instructor_ID"] . "'>
+                                <input type='submit' id='admin_buttons' name='delete' value='Delete'>
+                            </form>
+                        </td>
                     </tr>";
+              }
+            } else {
+              echo "0 results";
             }
-        } else {
-            echo "0 results";
-        }
-        $conn->close();
-        ?>
+            $conn->close();
+          ?>
         </tbody>
-    </table>
-</div>
-</body>
+      </table>
+    </div>
+  </body>
 </html>
