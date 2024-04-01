@@ -114,6 +114,7 @@
         </thead>
         <tbody>
           <!-- Populating table with data from the database-->
+          <!-- Added re-direct on hitting 'Delete' - warning user they will be deleting record from database --> 
           <?php
             require 'db_configuration.php';
             // Create connection
@@ -139,7 +140,7 @@
                     <input type='hidden' name='Class_Id' value='". $row["Class_Id"] . "'>
                     <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
                   </form>
-                  <form action='admin_delete_class.php' method='POST'>
+                  <form action='admin_delete_record_warning.php' method='POST'>
                     <input type='hidden' name='Class_Id' value='". $row["Class_Id"] . "'>
                     <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
                   </form>
