@@ -237,9 +237,6 @@ if (isset($_POST['submit'])) {
     transform: translateY(-50%);
 }
 
-
-
-
      
 </style>
 </head>
@@ -308,7 +305,7 @@ if (isset($_POST['submit'])) {
             <style>
         /* CSS Styles */
         h1 {
-            color: yellowgreen; 
+            color: yellowgreen; /* Set the desired text color */
         }
     </style>
 

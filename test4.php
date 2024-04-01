@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
         $mail->send();
 
         // sends a alert 
-        echo "<script>alert('Sent Successfully');document.location.href = 'contact_us.php'</script>";
+        echo "<script>alert('Sent Successfully');document.location.href = 'contact_us2.php'</script>";
         exit();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -83,15 +83,13 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
   <head>
-   <title>Algin to left</title>
+   <title>Align Content to Left</title>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    
-    
-    
 
+  
   </head>
   <body>
   <?php include 'show-navbar.php'; ?>
@@ -111,17 +109,14 @@ if (isset($_POST['submit'])) {
                 
              </div>
        
-             <div class="Any Question?">
         <h1 class="left-align"><span class="accent-text" style="font-size:34px;">Any Questions?</span></h1>
-</div>
+
         
        <style>
         h1.accent-text{
         font-size:45px;
          text-align: left;
     }
-
-   
 </style>
          
 
@@ -229,18 +224,10 @@ if (isset($_POST['submit'])) {
             padding: 10px;
            
         }
-
-        .learn-and-help-pdf {
-    position: absolute;
-    bottom: -680px;
-    right: 280px;
-    transform: translateY(-50%);
-}
+        
 
 
 
-
-     
 </style>
 </head>
 <body>
@@ -251,28 +238,22 @@ if (isset($_POST['submit'])) {
 
      <form action="" method="post">
        
-    <label for="user_name">Your Name:</label><br>
-    <input type="name" id="user_name" name="user_name" placeholder="Your Name" style="width: 300px; height: 50px;" require><br>
+    <label for="user_email">Your Name:</label><br>
+    <input type="email" id="user_email" name="user_email" placeholder="Your Name" style="width: 300px; height: 50px;" require><br>
 
     <label for="user_email">Your Email:</label><br>
     <input type="email" id="user_email" name="user_email" placeholder="Your email" style="width: 300px; height: 50px;" require><br>
 
-    <label for="user_phone">Your Phone:</label><br>
-    <input type="phone" id="user_phone" name="user_phone" placeholder="Your phone" style="width: 300px; height: 50px;" require><br>
+    <label for="user_email">Your Phone:</label><br>
+    <input type="email" id="user_email" name="user_email" placeholder="Your phone" style="width: 300px; height: 50px;" require><br>
 
 
 
     <label for="message">Message:</label><br>
     <textarea id="message" name="message" rows="5" cols="50" placeholder="Enter your message" require></textarea><br>
 
-    <div class="button-container">
-    <input type="submit" value="Submit" name="submit" style="display: inline-block;">
-
-    <input type="button" value="Cancel" onclick="window.location.href='index.php'" style="display: inline-block; background-color: #002f3a; color: white; width: 100px;">
-    </div>
-
-    
-
+    <input type="submit" value="Submit" name="submit">
+    <input type="button" value="Cancel" onclick="window.location.href='index.php'">
 </form>
 <style>
 
@@ -304,16 +285,7 @@ if (isset($_POST['submit'])) {
         <br>
         
         <div class="website-creators">
-            
-            <style>
-        /* CSS Styles */
-        h1 {
-            color: yellowgreen; 
-        }
-    </style>
-
-        
-         <h1>Meet The Team</h1>
+            <h1>Meet The Team</h1>
         <h2>Website Creators</h2>
         
         <p>Learn and Help 1.0 development team:</p>
@@ -329,13 +301,10 @@ if (isset($_POST['submit'])) {
       <div class="container22">
         <div class="info-box">
 
-        <div class="learn-and-help-pdf">
           <p><a href="http://localhost/learnandhelp.php">Learn and Help PDF</a></p>
-    </div>
-    
+
          
       </div>
     </section>
   </body>
 </html>
-
