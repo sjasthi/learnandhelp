@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
      <div class="search-container">
         <input type="search" id="search-input" class="search-input" placeholder="Search by name or ID">
         <button id="search-button" class="search-button">Search</button>
+        <button onclick="window.location.href='school_location.php'">Google Pins</button>
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="school_icons">
