@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+//Establish connection to database
 $mysqli = require __DIR__ . "/database_connection.php";
 
 // Retrieve form data
@@ -81,7 +82,6 @@ $stmt->execute();
 //echo "Email: $email<br>";
 
 //echo "Password updated. You can now login.";
-?>
 
-
-
+//Close the database connection if anything else failed above
+$mysqli->close();

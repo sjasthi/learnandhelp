@@ -10,6 +10,7 @@ if ($email === false) {
     exit;
 }
 
+//Establish connection to database
 $mysqli = require __DIR__ . "/database_connection.php";
 
 // Check if the email exists in the database
@@ -59,14 +60,27 @@ if ($stmt_insert_token->affected_rows) {
     // Include mailer script
     require __DIR__ . "/sendemail.php";
 
-    // Send password reset email
-    $subject = "Password Reset";
-    $message = <<<END
+    //Execute if running on localhost (local instance)
+    if (DATABASE_USER === 'root') {
+
+        // Send password reset email
+        $subject = "Password Reset";
+        $message = <<<END
     Click <a href="http://localhost/learnandhelp/new_password_entry.php?token=$token">here</a> 
     to reset your password.
     END;
+    } else {  // code is executing on the remote server
+        // Send password reset email
+        $subject = "Password Reset";
+        $message = <<<END
+    Click <a href="https://learnandhelp.jasthi.com/new_password_entry.php?token=$token">here</a> 
+    to reset your password.
+    END;
+    }
 
     if (sendEmail($email, $subject, $message)) {
+        // Close the database connection after all operations are completed
+        $mysqli->close();
         header("location:password_reset_notification.php");
         exit;
     } else {
@@ -75,4 +89,6 @@ if ($stmt_insert_token->affected_rows) {
 } else {
     echo "Failed to update reset token into the database.";
 }
-?>
+
+//Close the database connection if anything else failed above
+$mysqli->close();
