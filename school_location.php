@@ -1,22 +1,3 @@
-<?php
-// Connect to your database
-$db_host = "localhost";
-$db_name = "learn_and_help_db";
-$db_user = "root";
-$db_pass = "";
-
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-
-if (mysqli_connect_error()) {
-    echo "<p>Error: Unable to connect to the database. Please try again.</p>";
-    exit;
-}
-
-// gets all the zipcode(pincodes)
-$sql = "SELECT pin_code FROM schools";
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +11,7 @@ $sql = "SELECT pin_code FROM schools";
     <style>
         .google-map {
             width: 100%;
-            height: calc(100vh - 150px); /* Adjusted height to accommodate header */
+            height: calc(100vh - 150px);
         }
     </style>
 </head>
