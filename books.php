@@ -18,6 +18,24 @@
      <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
      <script type="text/javascript" src="js/book_functions.js"></script>
+
+     <style>
+        .view-buttons button {
+            display: inline-block;
+            position: relative;
+            top: 50%;
+            transform: translateX(-50%);
+            width: 100px; /* Adjust the width as needed */
+            margin-right: 300px; /* Adjust the margin as needed */
+        }
+
+        
+    </style>
+
+
+     
+
+     
      <script>
        $(document).ready(function () {
          $('#books_table thead tr').clone(true).appendTo( '#books_table thead' );
@@ -77,7 +95,27 @@
          <h1><span class="accent-text">Books</span></h1>
        </div>
      </header>
-     <div id="loading">
+
+<!-- Add buttons for grid view and list view -->
+<div class="view-buttons">
+    <button id="grid-view-btn">Grid View</button>
+    <span style="margin-right: 10px;"></span>
+    <button id="list-view-btn">List View</button>
+</div>
+
+
+
+<script>
+    document.getElementById("grid-view-btn").addEventListener("click", function() {
+        window.location.href = "books_grid.php"; 
+    });
+
+    document.getElementById("list-view-btn").addEventListener("click", function() {
+        window.location.href = "books.php";  
+    });
+</script>
+
+<div id="loading">
       
        <h2> Loading Please Wait </h2>
        <img src="images/loadingIcon.gif"></img>
@@ -88,7 +126,24 @@
 			<input type='hidden' name='book_id' value=''>
 			<input type='submit' name='edit_book' value='Add New Book'>
 		</form>
-	 <?php } ?>
+
+
+</body>
+</html>
+
+
+<?php
+if(isset($_POST['redirect'])) {
+    // Redirect the user to another page
+    header("Location: books_grid2.php");
+    exit;
+}
+?>
+
+
+     
+
+     <?php } ?>
        <!-- Select books by grade level -->
        <form action="book_create_list_by_grade.php" method="post">
          <h4>Select Books by Grade Level</h4>
@@ -111,13 +166,18 @@
 			<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
            - <a class="toggle-vis" data-column="7">Price</a>
 		   - <a class="toggle-vis" data-column="8">Available</a>
-			<?php } else { ?>
+			
+           <?php } else { ?>
+                
 		   - <a class="toggle-vis" data-column="7">Available</a>
-			<?php } ?>
+			
+           <?php } ?>
+           
 
 			<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
            - <a class="toggle-vis" data-column="9">Edit</a>
 			<?php } ?>
+            
        </div>
        <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
          <table id="books_table" class="display compact">
@@ -133,10 +193,12 @@
 			<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
                <th>Price</th>
 			<?php } ?>
+            
                <th>Available</th>
 			<?php if (isset($_SESSION['role']) AND $_SESSION['role'] == 'admin') { ?> 
                <th>Edit</th>
 			<?php } ?>
+            
              </tr>
            </thead>
            <tbody id="book_body">
@@ -145,7 +207,7 @@
          </table>
        </div>
      </div>
-   </body>
+   
    <!--JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -153,6 +215,28 @@
             src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+   
+   
+            <script>
+    $(document).ready(function () {
+        // Show grid view by default
+        $('#books_table').addClass('grid-view');
+
+        // Function to switch to grid view
+        $('#grid-view-btn').click(function () {
+            $('#books_table').removeClass('list-view').addClass('grid-view');
+        });
+
+        // Function to switch to list view
+        $('#list-view-btn').click(function () {
+            $('#books_table').removeClass('grid-view').addClass('list-view');
+        });
+    });
+</script>
+   
+   
+   
+   
    <script>
       $(document).ready(function(){
         var checkboxes = $('.checkboxes');
@@ -165,4 +249,8 @@
         });
       });
     </script>
+
+
+    
+</body>
  </html>

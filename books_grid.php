@@ -58,6 +58,25 @@ session_start();
     </div>
   </header>
 
+  <!-- Add buttons for grid view and list view -->
+<div class="view-buttons">
+    <button id="grid-view-btn">Grid View</button>
+    <span style="margin-right: 10px;"></span>
+    <button id="list-view-btn">List View</button>
+</div>
+
+
+
+<script>
+    document.getElementById("grid-view-btn").addEventListener("click", function() {
+        window.location.href = "books_grid.php"; 
+    });
+
+    document.getElementById("list-view-btn").addEventListener("click", function() {
+        window.location.href = "books.php";  
+    });
+</script>
+
   <!-- Search -->
   <div class="search-container">
   <input type="search" id="search-input" class="search-input" placeholder="Search by title or author">
