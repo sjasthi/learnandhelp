@@ -3,8 +3,6 @@
   if ($status == PHP_SESSION_NONE) {
     session_start();
   }
-
-  
 ?>
 
 <!DOCTYPE html>
@@ -21,13 +19,13 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
     $(document).ready(function () {
-      $('#instructor2_table thead tr').clone(true).appendTo( '#instructor_table thead' );
-      $('#instructor2_table thead tr:eq(1) th').each(function () {
+      $('#instructor_table thead tr').clone(true).appendTo( '#instructor_table thead' );
+      $('#instructor_table thead tr:eq(1) th').each(function () {
       var title = $(this).text();
       $(this).html('<input type="text" placeholder="Search ' + title + '" />');
       });
 
-      var table = $('#instructor_table').DataTable({
+      var table = $('#instructors_table').DataTable({
          initComplete: function () {
              // Apply the search
              this.api()
@@ -67,14 +65,12 @@
       <h4></h4>
     	<form action="update_instructors.php" method="post" id="add_Instructor">
        		
-      
-      
       <label>
-           		<input type="text" First_name="First_name" placeholder="Enter first Name" required>
+           		<input type="text" name="First_name" placeholder="Enter first Name" required>
        		</label>
            <br><br>
            <label>
-           		<input type="text" Last_name="Last_name" placeholder="Enter last Name" required>
+           		<input type="text" name="Last_name" placeholder="Enter last Name" required>
        		</label>
        		<br><br>
        		<label>
@@ -83,16 +79,12 @@
        		<br><br>
 
            <label>
-
-          
         <input type="file" name="image" accept="image/*" required>
       </label>
       <br><br>
       <input type="hidden" name="action" value="add">
-
        		</label>
        		<br><br>
-          
   <label for="Image"></label>
             
           <br>
@@ -105,7 +97,7 @@
         - <a class="toggle-vis" data-column="1"> First_name</a>
         - <a class="toggle-vis" data-column="1"> Last_name</a>
         - <a class="toggle-vis" data-column="2">Bio</a>
-        - <a class="toggle-vis" data-column="3"></a>        
+             
         - <a class="toggle-vis" data-column="4">Image</a>
 
     </div>
@@ -151,11 +143,11 @@
                 }
                 echo "</td>
                       <td>
-                        <form action='Instructors.php' method='POST'>
+                        <form action='admin_edit_instructors.php' method='POST'>
                           <input type='hidden' name='instructor_ID' value='" . $row["instructor_ID"] . "'>
                           <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
                         </form>
-                        <form action='Instructors.php' method='POST'>
+                        <form action='admin_delete_instructor.php' method='POST'>
                           <input type='hidden' name='instructor_ID' value='" . $row["instructor_ID"] . "'>
                           <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
                         </form>
