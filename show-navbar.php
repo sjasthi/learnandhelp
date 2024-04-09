@@ -11,10 +11,10 @@ function show_navbar() {
       
       <a href="causes.php">Causes</a>
       <a href="blog.php">Blog</a>
-      <a href="meet_our_instructors.php">Meet our Instructors</a>
+      <a href="meet_our_instructors.php">Instructors</a>
       <a href="suggest_school.php">Suggest a School</a>
       <a href="contact_us.php">Contact Us</a>';
-       
+
       if (isset($_SESSION['email'])) {
         if ($_SESSION['role'] == 'admin') {
           echo '<a href="administration.php">Administration</a>';
