@@ -1,3 +1,28 @@
+<?php
+             require 'db_configuration.php';
+            // Create connection
+                      $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+
+                      // Check connection
+                      if ($conn->connect_error)
+                      {
+                        die("Connection failed: " . $conn->connect_error);
+                      }
+
+                      $sql = "SELECT * FROM `schools`;";
+                      $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0){
+                            // Create table with data from each row
+                            while($row = $result->fetch_assoc()){
+                                $pin = $row['pin_code'];
+
+                            }
+                        }
+            $conn->close();
+    ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
