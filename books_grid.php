@@ -54,7 +54,7 @@ session_start();
   <?php show_navbar(); ?>
   <header class="inverse">
     <div class="container">
-      <h1 class="accent-text">Books(Grid)</h1>
+      <h1 class="accent-text">Books</h1>
     </div>
   </header>
 
@@ -64,6 +64,20 @@ session_start();
     <span style="margin-right: 10px;"></span>
     <button id="list-view-btn">List View</button>
 </div>
+
+<style>
+
+#grid-view-btn{
+  margin-left: -1085px;
+
+}
+
+#list-view-btn {
+  margin-left: -255px; 
+}
+
+</style>
+
 
 
 

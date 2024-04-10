@@ -100,23 +100,24 @@
 <div class="view-buttons">
 
     <button id="grid-view-btn">Grid View</button>
-    <span style="margin-right: 20px;"></span>
+    
     <button id="list-view-btn">List View</button>
 </div>
 
 <style>
-.view-buttons {
-  display: flex;
-  justify-content: flex-start; /* Align items to the start of the flex container */
-}
 
 #grid-view-btn{
-  margin-left: 55px; /* Add space between buttons */ 
+  margin-left: -645px;
+
 }
 
 #list-view-btn {
-  margin-right: 25px; /* Add space between buttons */
+  margin-left: -255px; 
 }
+
+
+
+
 </style>
 
 
