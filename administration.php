@@ -110,6 +110,11 @@
             <br>
             <label for="api">API</label>
     </div>
+    <div class="admin_icon">
+        <a href="admin_upload_csv.php" id="upload"><img src="images/admin_icons/upload.png" alt="upload"></a>
+        <br>
+        <label for="upload">Upload</label>
+    </div>
     <br>
     <div id="icon_attribution">
       <a href="https://www.flaticon.com/authors/freepik" title="freepik icons" id="icon_attribution">Icons created by Freepik - Flaticon</a>

@@ -1,11 +1,24 @@
 <?php
 // session
 session_start();
+
+// Block unauthorized users from accessing the page
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] != 'admin') {
+      http_response_code(403);
+      die('Forbidden');
+    }
+  } else {
+    http_response_code(403);
+    die('Forbidden');
+  }
+
 // Check if the form is submitted
 if (isset($_POST['submit'])) {
     // Database connection
-  include 'db_configuration.php';
-$conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+    require 'db_configuration.php';
+
+    $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
     // Checks connection
     if ($conn->connect_error) {
@@ -60,13 +73,14 @@ $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DAT
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 
 <head>
-    <meta charset="UTF-8">
+    <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Upload CSV</title>
-    <link style="text/css" rel="stylesheet" href="css/main.css">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+  </head>
 
 <style>
        body {
@@ -109,12 +123,16 @@ $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DAT
         align-items: center;
        }
 </style>
-
-<body>
     <!-- include navbar -->
     <?php include 'show-navbar.php';
     show_navbar();
     ?>
+<header class="inverse">
+      <div class="container">
+        <h1><span class="accent-text">Upload CSV</span></h1>
+      </div>
+</header>
+<body>
     <div class="container">
     <form class="form" method="post" enctype="multipart/form-data">
         <input type="file" name="file">
