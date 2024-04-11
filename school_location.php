@@ -1,4 +1,9 @@
 <?php
+
+$status = session_status();
+  if ($status == PHP_SESSION_NONE) {
+    session_start();
+  }
              require 'db_configuration.php';
             // Create connection
                       $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);

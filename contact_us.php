@@ -88,9 +88,9 @@ if (isset($_POST['submit'])) {
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    
-    
-    
+
+
+
 
   </head>
   <body>
@@ -140,14 +140,6 @@ if (isset($_POST['submit'])) {
         position: relative;
         top: 50%;
         transform: translateX(-50%);
-    }
-    
-    body {
-        font-family: Arial, sans-serif;
-        font-size: 16px;
-        margin: 0;
-        background: #fff;
-        color: #000;
     }
 
     .form-container {

@@ -20,12 +20,7 @@ include 'show-navbar.php';
     <!-- main css -->
     <link rel="stylesheet" href="css/main.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        /* padding: 20px; */
-        background-color: #f4f4f4;
-      }
+
 
       .container {
         max-width: 600px;
@@ -67,15 +62,6 @@ include 'show-navbar.php';
         border-radius: 4px;
         resize: vertical;
         box-sizing: border-box;
-      }
-
-      input[type="submit"] {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
       }
 
       input[type="submit"]:hover {

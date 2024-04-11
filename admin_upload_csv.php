@@ -83,10 +83,6 @@ if (isset($_POST['submit'])) {
   </head>
 
 <style>
-       body {
-            font-family: Arial, sans-serif;
-            height: 100vh;
-        }
 
         h2 {
             margin-bottom: 20px;
@@ -99,14 +95,6 @@ if (isset($_POST['submit'])) {
 
         input[type="file"] {
             margin-right: 10px;
-        }
-
-        input[type="submit"] {
-            padding: 5px 15px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
         }
 
         input[type="submit"]:hover {
