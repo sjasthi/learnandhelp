@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
   <head>
-   <title>Algin to left</title>
+   <title>Contact us</title>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
   <header class="inverse">
     
       <div class="container">
-        <h1> <span class="accent-text">About</span></h1>
+        <h1> <span class="accent-text">Contact Us</span></h1>
       </div>
   </header>
     <section class="about-me">
