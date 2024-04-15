@@ -41,7 +41,18 @@ $status = session_status();
     <style>
         .google-map {
             width: 100%;
-            height: calc(100vh - 150px);
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .google-map iframe {
+            position: absolute;
+            top: -100px; /* Adjust top position to hide the black bars */
+            left: 0;
+            width: 100%;
+            height: calc(100% + 200px); /* Adjust height to include the black bars */
+            border: 0;
         }
     </style>
 </head>
@@ -56,7 +67,7 @@ $status = session_status();
     </header>
     <br>
     <div class="google-map">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=15Z3ti2e87K_gqlgufm7YPgjBNI-g2Pw&ehbc=2E312F&noprof=1" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=15Z3ti2e87K_gqlgufm7YPgjBNI-g2Pw&ehbc=2E312F" width="100%" height="100%" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>
 </body>
 

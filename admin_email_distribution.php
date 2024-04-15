@@ -78,7 +78,7 @@ if (isset($_SESSION['role'])) {
   <?php show_navbar(); ?>
   <header class="inverse">
     <div class="container">
-      <h1><span class="accent-text">Users Email List</span></h1>
+      <h1><span class="accent-text">Email Users</span></h1>
     </div>
   </header>
 
