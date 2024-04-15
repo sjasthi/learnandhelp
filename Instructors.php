@@ -1,15 +1,13 @@
 <?php
-  $status = session_status();
-  if ($status == PHP_SESSION_NONE) {
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
     session_start();
-  }
+}
 ?>
 
 <!DOCTYPE html>
-<script>
-</script>
 <html>
-  <head>
+<head>
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Instructors</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
@@ -18,93 +16,84 @@
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script>
-    $(document).ready(function () {
-      $('#instructor_table thead tr').clone(true).appendTo( '#instructor_table thead' );
-      $('#instructor_table thead tr:eq(1) th').each(function () {
-      var title = $(this).text();
-      $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-      });
+        $(document).ready(function () {
+            $('#instructor_table thead tr').clone(true).appendTo('#instructor_table thead');
+            $('#instructor_table thead tr:eq(1) th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
 
-      var table = $('#instructors_table').DataTable({
-         initComplete: function () {
-             // Apply the search
-             this.api()
-                 .columns()
-                 .every(function () {
-                     var that = this;
+            var table = $('#instructors_table').DataTable({
+                initComplete: function () {
+                    // Apply the search
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var that = this;
 
-                     $('input', this.header()).on('keyup change clear', function () {
-                         if (that.search() !== this.value) {
-                             that.search(this.value).draw();
-                         }
-                     });
-                 });
-             },
-         });
+                            $('input', this.header()).on('keyup change clear', function () {
+                                if (that.search() !== this.value) {
+                                    that.search(this.value).draw();
+                                }
+                            });
+                        });
+                },
+            });
 
-      $('a.toggle-vis').on('click', function (e) {
-      e.preventDefault();
+            $('a.toggle-vis').on('click', function (e) {
+                e.preventDefault();
 
-      // Get the column API object
-      var column = table.column($(this).attr('data-column'));
+                // Get the column API object
+                var column = table.column($(this).attr('data-column'));
 
-      // Toggle the visibility
-      column.visible(!column.visible());
-      });
-     });
+                // Toggle the visibility
+                column.visible(!column.visible());
+            });
+        });
     </script>
-  </head>
-  <body>
-  <?php include 'show-navbar.php'; ?>
-  <?php show_navbar(); ?>
-    <header class="inverse">
-      <div class="container">
+</head>
+<body>
+<?php include 'show-navbar.php'; ?>
+<?php show_navbar(); ?>
+<header class="inverse">
+    <div class="container">
         <h1><span class="accent-text">Instructors</span></h1>
-      </div>
-    </header>
-      <h4></h4>
-    	<form action="update_instructors.php" method="post" id="add_Instructor">
-       		
-      <label>
-           		<input type="text" name="First_name" placeholder="Enter first Name" required>
-       		</label>
-           <br><br>
-           <label>
-           		<input type="text" name="Last_name" placeholder="Enter last Name" required>
-       		</label>
-       		<br><br>
-       		<label>
-           		<textarea rows=5 cols=90 name="Bio_data" placeholder="Enter Bio_data" required></textarea>
-       		</label>
-       		<br><br>
-
-           <label>
-        <input type="file" name="image" accept="image/*" required>
-      </label>
-      <br><br>
-      <input type="hidden" name="action" value="add">
-       		</label>
-       		<br><br>
-  <label for="Image"></label>
-            
-          <br>
-       		<input type="hidden" name="action" value="add">
-       		<input type="submit" value="Add" style="width: 15%">
-    	</form>
-	<!-- Jquery Data Table -->
-    <div class="toggle_columns">
-      Toggle column: <a class="toggle-vis" data-column="0">Instructor ID</a>
-        - <a class="toggle-vis" data-column="1"> First_name</a>
-        - <a class="toggle-vis" data-column="1"> Last_name</a>
-        - <a class="toggle-vis" data-column="2">Bio</a>
-             
-        - <a class="toggle-vis" data-column="4">Image</a>
-
     </div>
-    <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
-      <table id="instructor_table" class="display compact">
+</header>
+<h4></h4>
+<form action="update_instructors.php" method="post" id="add_Instructor" enctype="multipart/form-data">
+
+    <label>
+        <input type="text" name="First_name" placeholder="Enter first Name" required>
+    </label>
+    <br><br>
+    <label>
+        <input type="text" name="Last_name" placeholder="Enter last Name" required>
+    </label>
+    <br><br>
+    <label>
+        <textarea rows=5 cols=90 name="Bio_data" placeholder="Enter Bio_data" required></textarea>
+    </label>
+    <br><br>
+    <label>
+        <input type="file" name="image" accept="image/*" required>
+    </label>
+    <br><br>
+    <input type="hidden" name="action" value="add">
+    <input type="submit" value="Add" style="width: 15%">
+</form>
+<!-- Jquery Data Table -->
+<div class="toggle_columns">
+    Toggle column: <a class="toggle-vis" data-column="0">Instructor ID</a>
+    - <a class="toggle-vis" data-column="1"> First_name</a>
+    - <a class="toggle-vis" data-column="1"> Last_name</a>
+    - <a class="toggle-vis" data-column="2">Bio</a>
+    - <a class="toggle-vis" data-column="4">Image</a>
+</div>
+<div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
+    <table id="instructor_table" class="display compact">
         <thead>
-          <tr>
+        <tr>
             <th>Instructor ID</th>
             <th> First_name</th><br><br>
             <th> Last_name</th><br><br>
@@ -112,20 +101,20 @@
             <th>image</th>
             <th>Options</th>
 
-          </tr>
+        </tr>
         </thead>
         <tbody>
-          <!-- Populating table with data from the database-->
-          <?php
-            require 'db_configuration.php';
-            // Create connection
-            $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
-            // Check connection
-            if ($conn->connect_error) {
-              die("Connection failed: " . $conn->connect_error);
-            }
+        <!-- Populating table with data from the database-->
+        <?php
+        require 'db_configuration.php';
+        // Create connection
+        $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
 
-            $sql = "SELECT * FROM instructor";
+        $sql = "SELECT * FROM instructor";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
