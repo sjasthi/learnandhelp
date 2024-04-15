@@ -131,24 +131,24 @@
           {
             $sql .= '"%high school%"';
             if (isset($_POST['primary_school_upper'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%primary school upper%"';
+              $sql .= ' OR LOWER(grade_level) LIKE "%upper primary school%"';
             }
             if (isset($_POST['primary_school_lower'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%primary school lower%"';
+              $sql .= ' OR LOWER(grade_level) LIKE "%lower primary school%"';
             }
             if (isset($_POST['other'])) {
               $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
             }
           } elseif (isset($_POST['primary_school_upper'])) {
-            $sql .= '"%primary school upper%"';
+            $sql .= '"%upper primary school%"';
             if (isset($_POST['primary_school_lower'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%primary school lower%"';
+              $sql .= ' OR LOWER(grade_level) LIKE "%lower primary school%"';
             }
             if (isset($_POST['other'])) {
               $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
             }
           } elseif (isset($_POST['primary_school_lower'])) {
-            $sql .= '"%primary school lower%"';
+            $sql .= '"%lower primary school%"';
             if (isset($_POST['other'])) {
               $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
             }
@@ -168,7 +168,7 @@
 				$count += 1;
 				echo "<tr style='font-size:12px; font-weight:bold'>
 					  <td style='display:none'>".$row['image']."</td>
-					  <td aligh='left'>".$count."</td>	
+					  <td align='left'>".$count."</td>
                       <td align='left'>".$row['id']."</td>
                       <td align='left'>".$row['title']."</td>
                       <td align='left'>".$row['grade_level']."</td>
