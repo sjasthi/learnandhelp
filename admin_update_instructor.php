@@ -42,7 +42,6 @@ if(isset($_POST['submit'])) {
 
         // Execute update query
         if ($conn->query($sql) === TRUE) {
-            
             $conn->close();
             // Redirect back to instructors.php
             header("Location: instructors.php");
