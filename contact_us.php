@@ -9,6 +9,8 @@ if ($status == PHP_SESSION_NONE) {
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+include 'determine_paths.php';  //sets path for linked files
+
 require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
@@ -284,9 +286,8 @@ if (isset($_POST['submit'])) {
                         <p>651.276.4671</p>
                         <br>
                         <!-- <div class="learn-and-help-pdf"> -->
-                        <p><a href="http://localhost/learnandhelp/learnandhelp.php">Learn and Help PDF</a></p>
-
-                        <!-- </div> -->
+                        <!-- <p><a href="http://localhost/learnandhelp/learnandhelp.php">Learn and Help PDF</a></p> -->
+                        <p><a href="<?php echo $baseUrl ?>learnandhelp.php">Learn and Help PDF</a></p> <!-- Uses the includes determine_paths.php to get url -->
                     </div>
                     <div class="website-creators">
                         <style>
