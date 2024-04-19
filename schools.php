@@ -144,9 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class=\"school-info\">
                       <p>$id</p>
                       <p>$name</p>
-                      <p>$type</p>
-                      <p>$state_code</p>
-                      <p>$category</p>
                     </div>
                   </a>
                 </td>";
