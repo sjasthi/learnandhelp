@@ -33,6 +33,7 @@ $mail->Port = 587;                                     // sets port number that 
 $mail->Username = "mekics499project24@gmail.com";        //user email address
 $mail->Password = "fwlp hiaf qwbz kubj";                  //password
 
+
 $mail->isHtml(true);                                // content of email sent to HTML format
 
 return $mail;                                     // return PHPMailer

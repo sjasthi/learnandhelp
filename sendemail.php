@@ -19,7 +19,7 @@ function sendEmail($recipient, $subject, $message) {
     $mail->Port = 465;
 
     // Sender and recipient
-    $mail->setFrom('mekics499project24@gmail.com');
+    $mail->setFrom('mekics499project24@gmail.com', 'no-reply@learnandhelp.com');
     $mail->addAddress($recipient);
 
     // Content

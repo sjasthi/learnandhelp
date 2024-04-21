@@ -166,8 +166,7 @@ if(isset($_POST['redirect'])) {
          <h4>Select Books by Grade Level</h4>
          <input class="checkboxes" type="checkbox" name="high_school" value="True" required>High School&nbsp;&nbsp;&nbsp;&nbsp;</input>
          <input class="checkboxes" type="checkbox" name="primary_school_upper" value="True" required>Primary School Upper&nbsp;&nbsp;&nbsp;&nbsp;</input>
-         <input class="checkboxes" type="checkbox" name="primary_school_lower" value="True" required>Primary School Lower&nbsp;&nbsp;&nbsp;&nbsp;</input>
-         <input class="checkboxes" type="checkbox" name="other" value="True" required>Other</input>
+         <input class="checkboxes" type="checkbox" name="primary_school" value="True" required>Primary School&nbsp;&nbsp;&nbsp;&nbsp;</input>
          <br>
          <input type="submit" name="submit" value="Get Selections">
        </form>

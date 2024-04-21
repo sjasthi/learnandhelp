@@ -129,31 +129,20 @@
 
           if (isset($_POST['high_school'])) 
           {
-            $sql .= '"%high school%"';
+            $sql .= '"high school"';
             if (isset($_POST['primary_school_upper'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%upper primary school%"';
+              $sql .= ' OR LOWER(grade_level) LIKE "upper primary school"';
             }
-            if (isset($_POST['primary_school_lower'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%lower primary school%"';
-            }
-            if (isset($_POST['other'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
+            if (isset($_POST['primary_school'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "primary school"';
             }
           } elseif (isset($_POST['primary_school_upper'])) {
-            $sql .= '"%upper primary school%"';
-            if (isset($_POST['primary_school_lower'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%lower primary school%"';
+            $sql .= '"upper primary school"';
+            if (isset($_POST['primary_school'])) {
+              $sql .= ' OR LOWER(grade_level) LIKE "primary school"';
             }
-            if (isset($_POST['other'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
-            }
-          } elseif (isset($_POST['primary_school_lower'])) {
-            $sql .= '"%lower primary school%"';
-            if (isset($_POST['other'])) {
-              $sql .= ' OR LOWER(grade_level) LIKE "%other%"';
-            }
-          } elseif (isset($_POST['other'])) {
-            $sql .= '"%other%"';
+          } elseif (isset($_POST['primary_school'])) {
+            $sql .= '"primary school"';
           }
           $sql .= ") AND available = 1";
           //echo $sql;

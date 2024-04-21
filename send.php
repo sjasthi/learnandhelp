@@ -7,6 +7,10 @@ require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
 
+$status = session_status();
+if ($status == PHP_SESSION_NONE) {
+  session_start();
+}
 
 if (isset($_POST['send'])) {
 
@@ -32,7 +36,7 @@ if (isset($_POST['send'])) {
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
 
-            $mail->setFrom('mekics499project24@gmail.com'); // your gmail
+            $mail->setFrom('mekics499project24@gmail.com', $_SESSION["email"]); // your gmail
 
             $mail->addAddress($emailArray[$i]);   // Get email from array segment
 

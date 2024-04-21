@@ -108,14 +108,14 @@
      <h3>Examples:</h3>
     <div class="text-container">
         <p1>Clicking this URL will fetch the school info of #10. You can change the ID in the URL to get the school information of a different school.</p1>
-        <a href="http://localhost/learnandhelp/api/get_school_info.php?id=10">https://learnandhelp.jasthi.com/api/get_school_info.php?id=10</a>
+        <a href="https://learnandhelp.jasthi.com/api/get_school_info.php?id=10">https://learnandhelp.jasthi.com/api/get_school_info.php?id=10</a>
     </div>
     <br>
     <img src="images/api_example1.png" alt="API example 1">
     <br>
     <div class="text-container">
         <p1>Clicking this URL will fetch the book info of #1389. You can change the ID in the URL to get the book information of a different book.</p1>
-        <a href="http://localhost/learnandhelp/api/get_book_info.php?id=1389">https://learnandhelp.jasthi.com/api/get_book_info.php?id=1389</a>
+        <a href="https://learnandhelp.jasthi.com/api/get_book_info.php?id=1389">https://learnandhelp.jasthi.com/api/get_book_info.php?id=1389</a>
     </div>
     <img src="images/books_api.png" alt="API example 2" width= 966;height= 175;>
 

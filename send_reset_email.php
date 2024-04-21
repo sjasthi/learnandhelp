@@ -17,7 +17,7 @@ $token_hash = hash("sha256", $token);                   // holds the resulting h
 
 $expiry = date("Y-m-d H:i:s", time() + 60 * 30);          //generate timestamp for future date and time
 
-$mysqli = require __DIR__ . "/database_connection.php";     //directory to the datebase_connection
+$mysqli = require __DIR__ . "/database_connection.php";     //directory to the database_connection
 
 //sql statement using update columns in user table
 $sql = "UPDATE user                                         
@@ -35,7 +35,7 @@ if ($mysqli->affected_rows) {
 
     $mail = require __DIR__ . "/email.php";              //directory to email.php
 
-    $mail->setFrom("mekics499project24@gmail.com");       // sending email using mail library (admin email add)
+    $mail->setFrom('mekics499project24@gmail.com', 'no-reply@learnandhelp.com');       // sending email using mail library (admin email add)
     $mail->addAddress($email);
     $mail->Subject = "Password Reset";                    //subject password rest
     $mail->Body = <<<END
