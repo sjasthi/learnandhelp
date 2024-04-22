@@ -114,7 +114,6 @@
 					echo  "<td class=\"school_media\">
 						<img src=\"schools/$School_Id/$filename\" alt=\"school image\">
 						<br>
-						<label>$filename</label>
 					</td>";
 				}
 				if($counter % 5 == 0 && $counter > 0) {
