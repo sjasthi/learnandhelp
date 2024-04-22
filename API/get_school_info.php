@@ -6,10 +6,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Define the database connection parameters
-$hostname = 'localhost'; 
-$username = 'root'; 
-$password = ''; 
-$database = 'learn_and_help_db'; 
+// $hostname = 'localhost';
+// $username = 'root';
+// $password = '';
+// $database = 'learn_and_help_db';
 
 // Initialize the response array
 $response = array();
@@ -19,8 +19,13 @@ if (isset($_GET['id'])) {
     // Get the school ID from the request
     $schoolId = $_GET['id'];
 
+
+    //Establish connection to database
+    $connection = require_once __DIR__ . "/../database_connection.php";
+
+
     // Create a new MySQLi object for the database connection
-    $connection = new mysqli($hostname, $username, $password, $database);
+    // $connection = new mysqli($hostname, $username, $password, $database);
 
     // Check for a successful database connection
     if ($connection->connect_error) {
@@ -75,4 +80,3 @@ if (isset($_GET['id'])) {
 
 // Return the response as JSON
 echo json_encode($response);
-?>
