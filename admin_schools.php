@@ -81,7 +81,8 @@
     </form>
     <!-- Jquery Data Table -->
     <div class="toggle_columns">
-      Toggle column: <a class="toggle-vis" data-column="0">Id</a>
+    -Toggle column: <a class="toggle-vis" data-column="19">Options</a>
+       <a class="toggle-vis" data-column="0">Id</a>
         - <a class="toggle-vis" data-column="1">Name</a>
         - <a class="toggle-vis" data-column="2">Type</a>
         - <a class="toggle-vis" data-column="3">Category</a>
@@ -106,6 +107,7 @@
       <table id="schools_table" class="display compact">
         <thead>
           <tr>
+          <th>Options</th>
             <th>Id</th>
             <th>Name</th>
             <th>Type</th>
@@ -125,7 +127,7 @@
             <th>Notes</th>
             <th>Referenced By</th>
             <th>Supported By</th>
-            <th>Options</th>
+           
           </tr>
         </thead>
         <tbody>
@@ -146,6 +148,19 @@
               // Create table with data from each row
               while($row = $result->fetch_assoc()) {
 				  echo "<tr>
+
+
+
+          <td>
+                  			<form action='admin_edit_school.php' method='POST'>
+                    			<input type='hidden' name='id' value='". $row["id"] . "'>
+                    			<input type='submit' id='admin_buttons' name='edit' value='Edit'/>
+                  			</form>
+                  			<form action='admin_delete_school.php' method='POST'>
+                    			<input type='hidden' name='id' value='". $row["id"] . "'>
+                    			<input type='submit' id='admin_buttons' name='delete' value='Delete'/>
+                  			</form>
+                		</td>
 					  	<td>". $row["id"]. "</td>
 						<td>". $row["name"]. "</td>
 						<td>". $row["type"]. "</td>
@@ -166,16 +181,7 @@
                       <td>". $row["referenced_by"]. "</td>
                       <td>". $row["supported_by"]. "</td>
                       
-                		<td>
-                  			<form action='admin_edit_school.php' method='POST'>
-                    			<input type='hidden' name='id' value='". $row["id"] . "'>
-                    			<input type='submit' id='admin_buttons' name='edit' value='Edit'/>
-                  			</form>
-                  			<form action='admin_delete_school.php' method='POST'>
-                    			<input type='hidden' name='id' value='". $row["id"] . "'>
-                    			<input type='submit' id='admin_buttons' name='delete' value='Delete'/>
-                  			</form>
-                		</td>
+                		
                 	</tr>";
               }
             } else {
