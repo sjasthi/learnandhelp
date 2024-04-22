@@ -15,8 +15,16 @@
 			return "images/admin_icons/school.png";
 		}
 	}
+  if (isset($schools_id['schools_id'])) {
+    // Access the value of 'schools_id' key
+    $schools_id =['schools_id'];
+} else {
+    
+    $schools_id = null; 
+}
 
-  $School_Id = $_GET['School_Id']
+
+ 
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,38 +50,47 @@
   if ($connection === false) {
     die("Failed to connect to database: " . mysqli_connect_error());
   }
-  $sql = "SELECT * FROM schools WHERE id = '$School_Id'";
+  $sql = "SELECT * FROM schools WHERE id = 'school_id'";
   $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
-  $school_name = $row['name'];
-  $school_type = $row['type'];
-  $school_category = $row['category'];
-  $grade_level_start = $row['grade_level_start'];
-  $grade_level_end = $row['grade_level_end'];
-  $current_enrollment = $row['current_enrollment'];
-  $address_text = $row['address_text'];
-  $state_name = $row['state_name'];
-  $state_code = $row['state_code'];
-  $pin_code = $row['pin_code'];
+  $school_name = isset($row['name']) ? $row['name'] : '';
+  $school_type = isset($row['type']) ? $row['type'] : '';
+  $school_category = isset($row['category']) ? $row['category'] : '';
+  $grade_level_start = isset($row['grade_level_start']) ? $row['grade_level_start'] : '';
+  $grade_level_end = isset($row['grade_level_end']) ? $row['grade_level_end'] : '';
+  $current_enrollment = isset($row['current_enrollment']) ? $row['current_enrollment'] : '';
+  $address_text = isset($row['address_text']) ? $row['address_text'] : '';
+  $state_name = isset($row['state_name']) ? $row['state_name'] : '';
+  $state_code = isset($row['state_code']) ? $row['state_code'] : '';
+  $pin_code = isset($row['pin_code']) ? $row['pin_code'] : '';
   
-  $contact_name = $row['contact_name'];
-  $contact_designation = $row['contact_designation'];
-  $contact_phone = $row['contact_phone'];
-  $contact_email = $row['contact_email'];
-  $status = $row['status'];
-  $notes = $row['notes'];
-  $referenced_by = $row['referenced_by'];
-  $supported_by = $row['supported_by'];
+  $contact_name = isset($row['contact_name']) ? $row['contact_name'] : '';
+  $contact_designation = isset($row['contact_designation']) ? $row['contact_designation'] : '';
+  $contact_phone = isset($row['contact_phone']) ? $row['contact_phone'] : '';
+  $contact_email = isset($row['contact_email']) ? $row['contact_email'] : '';
+  $status = isset($row['status']) ? $row['status'] : '';
+  $notes = isset($row['notes']) ? $row['notes'] : '';
+ $referenced_by = isset($row['referenced_by']) ? $row['referenced_by'] : '';
+ $supported_by = isset($row['supported_by']) ? $row['supported_by'] : '';
+  
 
   $time = time();
   echo "<h3> School Details </h3>
 	  <div id=\"school_icons\" class=\"school_icon\">";
-			$profile_image = get_profile_image($School_Id); 
+			
+      if (isset($school_id)) {
+        $profile_image = get_profile_image($school_id);
+    } else {
+        // Handle the case when $school_id is not set
+        $profile_image = ''; // or any default value you want
+    }
 			echo "			<img src=\"$profile_image?v=$time\" alt=\"school image\">
 	  </div>
 	  <br>
       <div id= \"container_2\" class=\"school_details\">
-      <label id=\"id-label\">School ID:</label><span class=\"school_details\">$School_Id</span><br>
+      <label id=\"id-label\">School id:</label><span class=\"school_details\">$schools_id</span><br>
+      
+
       <label id=\"name-label\">School Name:</label><span class=\"school_details\">$school_name</span><br>
       <label id=\"type-label\">Type:</label><span class=\"school_details\">$school_type</span><br>
       <label id=\"category-label\">Category:</label><span class=\"school_details\">$school_category</span><br>
@@ -99,10 +116,10 @@
 	  <span>$notes</span>
 	</div>";
 	// check that the media directory exists, if not, nothing to show here
-    if(file_exists("schools/$School_Id/")) {
+    if(file_exists("schools/$schools_id/")) {
      echo "<div> 
 	    <table id=\"school_media\">";
-			$media_files = array_diff(scandir("schools/$School_Id/"), array('..', '.'));
+			$media_files = array_diff(scandir("schools/$schools_id/"), array('..', '.'));
 			$counter = 0;  
         	while($counter < count($media_files)) {
 				if($counter == 0) {
@@ -112,7 +129,7 @@
 				// profile image is at top of page so skip tiling it
 				if(!str_contains($media_files[$counter + 2], "profile_image")) {
 					echo  "<td class=\"school_media\">
-						<img src=\"schools/$School_Id/$filename\" alt=\"school image\">
+						<img src=\"schools/$schools_id/$filename\" alt=\"school image\">
 						<br>
 						<label>$filename</label>
 					</td>";
