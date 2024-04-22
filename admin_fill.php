@@ -69,7 +69,8 @@ function admin_school_form($id){
 	}
   echo "<div id= \"container_2\">
   <form id=\"survey-form\" action=\"form-submit_school.php\" method = \"post\" enctype=\"multipart/form-data\">
-    <input type='hidden' name='id' value=$id>
+  	<label id=\"school-name-label\">School id</label>
+	<input type=\"text\" id=\"school-name\" name=\"name\" class=\"form\" value=\"$id\" readonly required><br><!--name--->
     <label id=\"school-name-label\">School Name</label>
     <input type=\"text\" id=\"school-name\" name=\"name\" class=\"form\" value=\"$name\" required><br><!--name--->
 	<label id=\"school-type-label\">School Type</label>
