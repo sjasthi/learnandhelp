@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $profile_image = get_profile_image($id);
         echo "      <img src=\"$profile_image?v=$time\" alt=\"school image\"><br>
                     <div class=\"school-info\">
+                      <p>$id</p>
                       <p>$name</p>
                     </div>
                   </a>
