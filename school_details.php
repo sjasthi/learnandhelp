@@ -15,9 +15,9 @@
 			return "images/admin_icons/school.png";
 		}
 	}
-  if (isset($schools_id['schools_id'])) {
+  if (isset($schools_id['id'])) {
     // Access the value of 'schools_id' key
-    $schools_id =['schools_id'];
+    $schools_id =['id'];
 } else {
     
     $schools_id = null; 

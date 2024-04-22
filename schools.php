@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		      // if a profile image was not created use the admin_icons school.png as a default fallback image
         echo  "<td class=\"school-icon\">
-                  <a href=\"school_details.php?School_Id=$id&target=_blank\">";
+                  <a href=\"school_details.php?id=$id\">";
         $profile_image = get_profile_image($id);
         echo "      <img src=\"$profile_image?v=$time\" alt=\"school image\"><br>
                     <div class=\"school-info\">
