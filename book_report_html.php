@@ -19,6 +19,7 @@ $result = $conn->query($query);
 // Create an HTML output
 $html = '<html>
 <head>
+    <meta charset="UTF-8">
     <title>Book Details</title>
     <style>
         @page {
@@ -76,20 +77,39 @@ while ($row = $result->fetch_assoc()) {
     $html .= '<div class="container">';
     $html .= '<div class="header">';
     $html .= '<img src="images/books/default.png" alt="book image">';
-    $html .= '<h2>' . $row['title'] . '</h2>';
+
+    $html .= '<h2>' . htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8') . '</h2>'; // HTML entity encode the title
+
     $html .= '</div>';
     $html .= '<div class="info">';
     $html .= '<div class="column">';
-    $html .= '<p>Author: ' . $row['author'] . '</p>';
-    $html .= '<p>Publisher: ' . $row['publisher'] . '</p>';
-    $html .= '<p>Publish Year: ' . $row['publishYear'] . '</p>';
+
+    $html .= '<p>Author: ' . htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8') . '</p>'; // HTML entity encode author
+    $html .= '<p>Publisher: ' . htmlspecialchars($row['publisher'], ENT_QUOTES, 'UTF-8') . '</p>'; // HTML entity encode publisher
+    $html .= '<p>Publish Year: ' . htmlspecialchars($row['publishYear'], ENT_QUOTES, 'UTF-8') . '</p>'; // HTML entity encode publishYear
+
+
+
     $html .= '<p>Number of Pages: ' . $row['numPages'] . '</p>';
     $html .= '</div>';
     $html .= '<div class="column">';
     $html .= '<p>Price: ' . $row['price'] . '</p>';
+
+
     $html .= '<p>Grade Level: ' . $row['grade_level'] . '</p>';
     $html .= '<p>Availability: ' . $row['available'] . '</p>';
     $html .= '<p>Date Created: ' . $row['date_created'] . '</p>';
+     
+    $html .= '<p>Publisher: ' . htmlspecialchars($row['publisher'], ENT_QUOTES, 'UTF-8') . ' &#169;</p>'; // HTML entity encode publisher
+    $html .= '<p>Publish Year: ' . htmlspecialchars($row['publishYear'], ENT_QUOTES, 'UTF-8') . '</p>'; // HTML entity encode publishYear
+
+
+$html .= '<p>Number of Pages: ' . $row['numPages'] . '</p>';
+$html .= '<p>Price: ' . $row['price'] . ' </p>';
+    
+
+
+
     $html .= '</div>';
     $html .= '</div>';
     $html .= '</div>';
