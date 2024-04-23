@@ -149,8 +149,6 @@
               while($row = $result->fetch_assoc()) {
 				  echo "<tr>
 
-
-
           <td>
                   			<form action='admin_edit_school.php' method='POST'>
                     			<input type='hidden' name='id' value='". $row["id"] . "'>
@@ -180,8 +178,6 @@
                     	<td>". $row["notes"]. "</td>
                       <td>". $row["referenced_by"]. "</td>
                       <td>". $row["supported_by"]. "</td>
-                      
-                		
                 	</tr>";
               }
             } else {
