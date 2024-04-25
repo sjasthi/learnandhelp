@@ -5,7 +5,6 @@ if ($status == PHP_SESSION_NONE) {
 }
 
 include 'determine_paths.php';  //sets path for linked files
-echo $baseUrl;
 
 // Block unauthorized users from accessing the page
 if (isset($_SESSION['role'])) {

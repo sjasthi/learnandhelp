@@ -9,7 +9,7 @@ if ($status == PHP_SESSION_NONE) {
 // Check to see if the logged in user has a registration on file
 if (isset($_SESSION['User_Id'])) {
   $User_Id = $_SESSION['User_Id'];
-  $sql = 'SELECT * FROM user_registrations WHERE User_Id = '.$User_Id.';';
+  $sql = 'SELECT * FROM user_registrations WHERE User_Id = ' . $User_Id . ';';
   $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
   if ($connection === false) {
@@ -36,7 +36,7 @@ echo "<!DOCTYPE html>
     <link href=\"css/main.css\" rel=\"stylesheet\">
   </head>
   <body>";
-    show_navbar();
+show_navbar();
 echo      "<header class=\"inverse\">
           <div class=\"container\">
               <h1><span class=\"accent-text\">Register Now</span></h1>
@@ -56,20 +56,36 @@ echo      "<header class=\"inverse\">
         <label id=\"class\">*Select Class: </label>
         <select id=\"dropdown\" name=\"class\" required>"; // changed name to class
 
-          // Fetch classes from the database
-          $class_query = "SELECT * FROM classes";
-          $class_result = $connection->query($class_query);
-          if (!$class_result) {
-            echo "Error: " . $connection->error;
-          } else {
-            if ($class_result->num_rows > 0) {
-              while($row = $class_result->fetch_assoc()) {
-                echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] . "</option>";
-              }
-            } else {
-              echo "<option disabled selected value>No classes found</option>";
-            }
-          }
+
+// Select view of available classes for users from accessing the page 
+// Admin's can see all classes regardless of status
+if ((isset($_SESSION['email'])) &&  $_SESSION['role'] == 'admin') {
+  $class_query = "SELECT Class_Id, Class_Name, Description, Status
+              FROM classes;";
+}
+
+//Non-Admin's and users not logged in can only see "Approved" Classes
+else {
+  $class_query = "SELECT Class_Id, Class_Name, Description, Status
+              FROM classes
+              WHERE Status = 'Approved';";
+}
+
+
+// Fetch classes from the database
+//$class_query = "SELECT * FROM classes";
+$class_result = $connection->query($class_query);
+if (!$class_result) {
+  echo "Error: " . $connection->error;
+} else {
+  if ($class_result->num_rows > 0) {
+    while ($row = $class_result->fetch_assoc()) {
+      echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] . "</option>";
+    }
+  } else {
+    echo "<option disabled selected value>No classes found</option>";
+  }
+}
 
 echo      "</select>
 		<!--dropdown--->
@@ -106,6 +122,3 @@ echo      "</select>
 
   </body>
 </html>";
-?>
-
-
