@@ -78,13 +78,13 @@ while ($row = $result->fetch_assoc()) {
     $html .= '<div class="header">';
     $html .= '<img src="images/books/default.png" alt="book image">';
 
-    $html .= '<h2>' . htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8') . '</h2>'; // HTML entity encode the title
+    $html .= '<h2>' . htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8') .' &#169; </h2>'; // HTML entity encode the title
 
     $html .= '</div>';
     $html .= '<div class="info">';
     $html .= '<div class="column">';
 
-    $html .= '<p>Author: ' . htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8') . '</p>'; // HTML entity encode author
+    $html .= '<p>Author: ' . htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8') .' &#169; </p>'; // HTML entity encode author
     $html .= '<p>Publisher: ' . htmlspecialchars($row['publisher'], ENT_QUOTES, 'UTF-8') . '</p>'; // HTML entity encode publisher
     $html .= '<p>Publish Year: ' . htmlspecialchars($row['publishYear'], ENT_QUOTES, 'UTF-8') . '</p>'; // HTML entity encode publishYear
 
