@@ -299,7 +299,7 @@ if (isset($_POST['submit'])) {
                         <h1>Meet The Team</h1>
                         <h2>Website Creators</h2>
 
-                        <p>Learn and Help 2.0 development team:</p>
+                        <p>Learn and Help 3.0 development team:</p>
                         <p><b>Mekdes Gebrechristos</b>: mekigebr21@gmail.com</p>
                         <p><b>Hamdi Kelil</b>: Hamdimuhe3@gmail.com</p>
                         <p><b>Pong Shoua Lee</b>: pongeslee@gmail.com</p>
