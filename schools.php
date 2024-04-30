@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
      <div class="search-container">
         <input type="search" id="search-input" class="search-input" placeholder="Search by name or ID">
         <button id="search-button" class="search-button">Search</button>
+        <button onclick="window.location.href='school_location.php'">Google Pins</button>
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="school_icons">
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		      // if a profile image was not created use the admin_icons school.png as a default fallback image
         echo  "<td class=\"school-icon\">
-                  <a href=\"school_details.php?School_Id=$id&target=_blank\">";
+                  <a href=\"school_details.php?id=$id\">";
         $profile_image = get_profile_image($id);
         echo "      <img src=\"$profile_image?v=$time\" alt=\"school image\"><br>
                     <div class=\"school-info\">

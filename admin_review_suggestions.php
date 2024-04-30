@@ -1,42 +1,50 @@
 <!-- review_suggestions.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Review Suggested Schools</title>
+    <title>Suggested Schools</title>
     <!-- css stylesheet main.css -->
     <link href="css/main.css" rel="stylesheet">
 
     <style>
-        body{
-             margin: auto;
-             max-width: 100%;
+        body {
+            margin: auto;
+            max-width: 100%;
         }
+
         table {
             border-collapse: collapse;
             width: 75%;
             margin: 5rem auto;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         form {
             display: inline;
         }
-        .container{
+
+        .container {
             margin-top: 4rem;
         }
 
-        .move{
+        .move {
             margin-left: 1rem;
         }
     </style>
 </head>
+
 <body>
     <?php
     // Show errors
@@ -48,13 +56,12 @@
     session_start();
     include 'show-navbar.php';
     show_navbar();
-     ?>
-    
-      <div class="container">
-        <h1 class="accent-text">Suggested Schools</h1>
-      </div>
-  
-
+    ?>
+    <header class="inverse">
+        <div>
+            <h1><span class="accent-text">Suggested Schools</span></h1>
+        </div>
+    </header>
     <?php
 
     // Include database configuration and connect to the database
@@ -114,4 +121,5 @@
     ?>
 
 </body>
+
 </html>

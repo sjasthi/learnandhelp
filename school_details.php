@@ -16,7 +16,7 @@
 		}
 	}
 
-  $School_Id = $_GET['School_Id']
+  $School_Id = $_GET['id']
 ?>
 <!DOCTYPE html>
 <html>

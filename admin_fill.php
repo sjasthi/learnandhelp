@@ -69,11 +69,15 @@ function admin_school_form($id){
 	}
   echo "<div id= \"container_2\">
   <form id=\"survey-form\" action=\"form-submit_school.php\" method = \"post\" enctype=\"multipart/form-data\">
-    <input type='hidden' name='id' value=$id>
-    <label id=\"school-name-label\">School Name</label>
-    <input type=\"text\" id=\"school-name\" name=\"name\" class=\"form\" value=\"$name\" required><br><!--name--->
+  <div id=\"right\" style=\"width:400px;\">
+  	<label id=\"school-name-label\" style=\"width: 50px;\">School ID</label>
+  	<input type=\"text\" id=\"school-name\" name=\"name\" class=\"form\" value=\"$id\" readonly required><br> <!-- School ID -->
+  
+	<label id=\"school-name-label\">School Name</label>
+    <input type=\"text\" id=\"school-name\" name=\"name\" class=\"form\" value=\"$name\" required><br> <!--School name--->
+	
 	<label id=\"school-type-label\">School Type</label>
-	<select id=\"school-type-dropdown\" name=\"type\" required><!--type--->
+	<select id=\"school-type-dropdown\" name=\"type\" required> <!--type--->
     	<option disabled value>Select School Type</option>
       	<option value='Primary School' ";
         	if (strtolower($type) == "primary school")
@@ -92,8 +96,10 @@ function admin_school_form($id){
             	echo "selected";
       	echo ">Other</option>
 	</select><br>
+
+	
 	<label id=\"school-category-label\">Category</label>
-	<select id=\"school-category-dropdown\" name=\"category\" required><!--category--->
+	<select id=\"school-category-dropdown\" name=\"category\" required> <!--category--->
     	<option disabled value>Select School Category</option>
       	<option value='Private' ";
         	if ($category == "Private" or $category == "private")
@@ -108,8 +114,9 @@ function admin_school_form($id){
             	echo "selected";
       	echo ">Other</option>
 	</select><br>
+
 	<label id=\"grade-level-start-label\">Grade Level Start</label>
-	<select id=\"grade-level-start-dropdown\" name=\"grade_level_start\" required><!--grade_level_start--->
+	<select id=\"grade-level-start-dropdown\" name=\"grade_level_start\" required> <!--grade_level_start--->
     	<option disabled value>Select Grade Level Start</option>
       	<option value='1' ";
         	if ($grade_level_start == "1")
@@ -152,6 +159,7 @@ function admin_school_form($id){
             	echo "selected";
       	echo ">10</option>
 	</select><br>
+
 	<label id=\"grade-level-end-label\">Grade Level End</label>
 	<select id=\"grade-level-end-dropdown\" name=\"grade_level_end\" required><!--grade_level_end--->
     	<option disabled value>Select Grade Level End</option>
@@ -196,24 +204,29 @@ function admin_school_form($id){
             	echo "selected";
       	echo ">10</option>
 	</select><br>
+
 	<label id=\"current-enrollment-label\">Current Enrollment</label>
-    <input type=\"text\" id=\"current-enrollment\" name=\"current_enrollment\" class=\"form\" value=\"$current_enrollment\" ><br><!---current_enrollment-->
+    <input type=\"text\" id=\"current-enrollment\" name=\"current_enrollment\" class=\"form\" value=\"$current_enrollment\" ><br> <!---current_enrollment-->
+
     <label id=\"school-address--label\">School Address</label>
-    <input type=\"text\" id=\"school-address\" name=\"address_text\" class=\"form\" value=\"$address_text\" required><br><!---address_text-->
+    <input type=\"text\" id=\"school-address\" name=\"address_text\" class=\"form\" value=\"$address_text\" required><br> <!---address_text-->
+
     <label id=\"state-name-label\">State</label><br>
-    <input type=\"text\" id=\"state-name\" name=\"state_name\" class=\"form\" value=\"$state_name\" ><br><!---state_name--></div>
-	
+    <input type=\"text\" id=\"state-name\" name=\"state_name\" class=\"form\" value=\"$state_name\" ><br> <!---state_name--></div>
+
 	<div id=\"right\">
     <label id=\"state-code-label\">State Code</label>
-    <input type=\"text\" id=\"state-code\" name=\"state_code\" class=\"form\" value=\"$state_code\" ><br><!---state_code-->
+    <input type=\"text\" id=\"state-code\" name=\"state_code\" class=\"form\" value=\"$state_code\" ><br> <!---state_code-->
+
     <label id=\"pin-code-label\">Pin Code</label>
-    <input type=\"text\" id=\"pin-code\" name=\"pin_code\" class=\"form\" value=\"$pin_code\" ><br><!---pin_code-->
+    <input type=\"text\" id=\"pin-code\" name=\"pin_code\" class=\"form\" value=\"$pin_code\" ><br> <!---pin_code-->
+
     <label id=\"contact-name-label\">Contact Name</label>
-    <input type=\"text\" id=\"contact-name\" name=\"contact_name\" class=\"form\" value=\"$contact_name\" ><br><!---contact_name-->
+    <input type=\"text\" id=\"contact-name\" name=\"contact_name\" class=\"form\" value=\"$contact_name\" ><br> <!---contact_name-->
 
 	<label id=\"contact-designation-label\">Contact Designation</label>
-	<select id=\"contact-designation-dropdown\" name=\"contact_designation\" ><!--contact designation--->
-    	<option disabled value>Select Conect Designation</option>
+	<select id=\"contact-designation-dropdown\" name=\"contact_designation\" > <!--contact designation--->
+    	<option disabled value>Select Contact Designation</option>
       	<option value='Teacher' ";
         	if ($contact_designation == "Teacher" or $contact_designation == "teacher")
             	echo "selected";
@@ -231,10 +244,13 @@ function admin_school_form($id){
             	echo "selected";
       	echo ">Other</option>
 	</select><br>
+
 	<label id=\"contact-phone-label\">Contact Phone</label>
     <input type=\"tel\" id=\"contact-phone\" name=\"contact_phone\" class=\"form\" value=\"$contact_phone\" required><br><!---contact_phone-->
+
     <label id=\"contact-email-label\">Contact Email</label>
     <input type=\"email\" id=\"contact-email\" name=\"contact_email\" class=\"form\" value=\"$contact_email\" ><br><!---contact_email-->
+
 	<label id=\"status-label\">Status</label><br>
 	<select id=\"status-dropdown\" name=\"status\" ><!--status--->
     	<option disabled value>Select School Status</option>
@@ -255,8 +271,10 @@ function admin_school_form($id){
             	echo "selected";
       	echo ">Completed</option>
 	</select><br>
+	
 	<label id\"referenced-by-label\">Referenced By </label>
 	<input type=\"text\" id=\"reference-by\" name=\"referenced_by\" class=\"form\" value=\"$referenced_by\"><br>
+
 	<label id=\"supported-by-label\">Supported By</label>
 	<select id=\"supported-by-dropdown\" name=\"supported_by\" required>
 		<option disable value>Select Supported By</option>
@@ -272,7 +290,7 @@ function admin_school_form($id){
 			if ($supported_by == "PGNF" or $supported_by == "pgnf")
 				echo "selected";
 		echo ">PGNF</option>
-		
+	</select><br>
 	
 	<label id=\"notes-label\">Notes</label><br>
     <input type=\"text\" id=\"notes\" name=\"notes\" class=\"form\" value=\"$notes\"><br></div><!---notes-->";
@@ -289,14 +307,22 @@ function admin_class_form($Class_Id){
 
   $class_name = $row["Class_Name"];
   $description = $row["Description"];
+  $status = $row["Status"];  //Added to pull in Status column value
 
-  echo "<div id= \"container_2\">
+  // Updated form to include course status read in from database.  Gives admin option to change.
+  // Changed "Course Description" field for input type="text" to text area; allowing customer to resize field.
+  echo "<div id= \"container\">
   <form id=\"survey-form\" action=\"form-submit_class.php\" method = \"post\" onSubmit=\"window.location.reload()\">
     <input type='hidden' name='Class_Id' value=$Class_Id>
     <label id=\"name-label\">Course Name</label>
     <input type=\"text\" id=\"class-name\" name=\"Class_Name\" class=\"form\" value=\"$class_name\" required><br><!--class_name--->
-    <label id=\"description-label\">Course Description</label>
-    <input type=\"text\" id=\"description\" name=\"Description\" class=\"form\" value=\"$description\" required><br><!---description-->
+    <label id=\"description-label\">Course Description</label><br>
+	<textarea rows=\"5\" cols=\"35\" id=\"description\" name=\"Description\" class=\"form\" required>". htmlspecialchars($description) ."</textarea><br><!---description-->
+	<select id=\"status\" name=\"Status\" class=\"form\" required>
+		<option value=\"Proposed\" ". ($status == 'Proposed' ? 'selected' : '') .">Proposed</option>
+		<option value=\"Approved\" ". ($status == 'Approved' ? 'selected' : '') .">Approved</option>
+		<option value=\"Inactive\" ". ($status == 'Inactive' ? 'selected' : '') .">Inactive</option>
+	</select><br><!---status-->    
     </div>";
   
 }

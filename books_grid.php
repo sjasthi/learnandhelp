@@ -54,9 +54,42 @@ session_start();
   <?php show_navbar(); ?>
   <header class="inverse">
     <div class="container">
-      <h1 class="accent-text">Books(Grid)</h1>
+      <h1 class="accent-text">Books</h1>
     </div>
   </header>
+
+  <!-- Add buttons for grid view and list view -->
+<div class="view-buttons">
+    <button id="grid-view-btn">Grid View</button>
+    <span style="margin-right: 10px;"></span>
+    <button id="list-view-btn">List View</button>
+</div>
+
+<style>
+
+#grid-view-btn{
+  margin-left: -1085px;
+
+}
+
+#list-view-btn {
+  margin-left: -255px; 
+}
+
+</style>
+
+
+
+
+<script>
+    document.getElementById("grid-view-btn").addEventListener("click", function() {
+        window.location.href = "books_grid.php"; 
+    });
+
+    document.getElementById("list-view-btn").addEventListener("click", function() {
+        window.location.href = "books.php";  
+    });
+</script>
 
   <!-- Search -->
   <div class="search-container">

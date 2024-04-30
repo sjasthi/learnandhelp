@@ -82,7 +82,14 @@
        		<label>
            		<textarea rows=5 cols=90 name="description" placeholder="Class Description" required></textarea>
        		</label>
-       		<br>
+       		<br><br>
+          <label for="status">Status:</label><br>
+            <select name="status" id="status" required>
+              <option value="Proposed">Proposed</option>
+              <option value="Approved">Approved</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          <br>
        		<input type="hidden" name="action" value="add">
        		<input type="submit" value="Add" style="width: 15%">
     	</form>
@@ -91,7 +98,8 @@
       Toggle column: <a class="toggle-vis" data-column="0">Class ID</a>
         - <a class="toggle-vis" data-column="1">Class Name</a>
         - <a class="toggle-vis" data-column="2">Description</a>
-        - <a class="toggle-vis" data-column="3">Options</a>
+        - <a class="toggle-vis" data-column="3">Status</a>        
+        - <a class="toggle-vis" data-column="4">Options</a>
     </div>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
       <table id="classes_table" class="display compact">
@@ -100,11 +108,13 @@
             <th>Class ID</th>
             <th>Class Name</th>
             <th>Description</th>
+            <th>Status</th>  <!-- Added Status -->
             <th>Options</th>
           </tr>
         </thead>
         <tbody>
           <!-- Populating table with data from the database-->
+          <!-- Added re-direct on hitting 'Delete' - warning user they will be deleting record from database --> 
           <?php
             require 'db_configuration.php';
             // Create connection
@@ -119,16 +129,18 @@
 
             if ($result->num_rows > 0) {
               // Create table with data from each row
+              // Added "Status"
               while($row = $result->fetch_assoc()) {
 				  echo "<tr><td>" . $row["Class_Id"]. "</td>
 					    <td>" . $row["Class_Name"] . "</td>
-					    <td>" . $row["Description"]. "</td> 
+					    <td>" . $row["Description"]. "</td>
+              <td>" . $row["Status"]. "</td>
                 <td>
                   <form action='admin_edit_class.php' method='POST'>
                     <input type='hidden' name='Class_Id' value='". $row["Class_Id"] . "'>
                     <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
                   </form>
-                  <form action='admin_delete_class.php' method='POST'>
+                  <form action='admin_delete_record_warning.php' method='POST'>
                     <input type='hidden' name='Class_Id' value='". $row["Class_Id"] . "'>
                     <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
                   </form>

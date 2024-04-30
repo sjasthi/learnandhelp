@@ -84,17 +84,31 @@
         <label for="classes">Classes</label>
       </div>
       <div class="admin_icon">
-
-        <a href="admin_upload_csv.php" id="upload_csv">
-        <img src="images/admin_icons/upload.png" alt="upload_csv"></a>
+        <a href="admin_email_distribution.php" id="Email Distribution"><img src="images/admin_icons/email.png" alt="Email Distribution"></a>
         <br>
-        <label for="upload_csv">Upload CSV</label>
+        <label for="Email Distribution">Email Distribution</label>
+      </div>
+      <div class="admin_icon">
+        <a href="instructors.php" id="instructors">
+        <img src="images/admin_icons/instructor.png" alt="instructors"></a>
+        <br>
+        <label for="instructors">Instructors</label>
     </div>
     <!-- review suggested schools -->
     <div class="admin_icon">
       <a href="admin_review_suggestions.php" id="suggested_schools"><img src="images/admin_icons/review.jpg" alt="suggested schools review logo"></a>
       <br>
       <label for="suggested_schools">Suggested Schools</label>
+    </div>
+    <div class="admin_icon">
+            <a href="admin_api.php" id="api"><img src="images/admin_icons/api.png" alt="api"></a>
+            <br>
+            <label for="api">API</label>
+    </div>
+    <div class="admin_icon">
+        <a href="admin_upload_csv.php" id="upload"><img src="images/admin_icons/upload.png" alt="upload"></a>
+        <br>
+        <label for="upload">Upload</label>
     </div>
     <br>
     <div id="icon_attribution">

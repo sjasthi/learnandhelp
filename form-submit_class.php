@@ -27,6 +27,7 @@ if($action == 'admin_edit_class'){
 	$Class_Id = $_POST['Class_Id'];
 	$Class_Name = $_POST["Class_Name"];
 	$Description = $_POST["Description"];
+	$Status = $_POST["Status"];  //Update status value from form (altered)
 } else {
 	$Class_Id = $_SESSION['Class_Id'];
     $sql = "SELECT * FROM classes WHERE Class_Id = '$Class_Id'";
@@ -36,13 +37,15 @@ if($action == 'admin_edit_class'){
 		$Class_Id = $row['Class_Id'];
 		$class_Name = $row['Class_Name'];
 		$description = $row['Description'];
+		$Status = $_POST["Status"];  //Get status value from database		
 }
 
 if($action == "admin_edit_class") {
 	$Class_Id = $_POST['Class_Id'];
 	$sql = "UPDATE classes SET
 			Class_Name = '$Class_Name',
-			Description = '$Description'
+			Description = '$Description',
+			Status = '$Status'  
 			WHERE Class_Id = '$Class_Id';";
 }
 

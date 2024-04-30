@@ -22,20 +22,21 @@ if (isset($_POST['action'])) {
 	$action = '';
 }
 
-if ($action == 'edit' or $action == 'add' or $action == 'admin_edit'){
-	$sponsor_name = $_POST['sponsers-name'];
-	$sponsor_email = $_POST['sponsers-email'];
-	$sponsor_phone = $_POST['sponsers-phone'];
-	$spouse_name = $_POST['spouses-name'];
-	$spouse_email = $_POST['spouses-email'];
-	$spouse_phone = $_POST['spouses-phone'];
-	$student_name = $_POST['students-name'];
-	$student_email = $_POST['students-email'];
-	$student_phone = $_POST['students-phone'];
-	$class_id = $_POST['role'];
-	$cause = $_POST['cause'];
-	$timestamp = date("Y-m-d");
+if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
+    // Validate and sanitize form input
+    $sponsor_name = isset($_POST['sponsors-name']) ? htmlspecialchars($_POST['sponsors-name']) : '';
+    $sponsor_email = isset($_POST['sponsors-email']) ? filter_var($_POST['sponsors-email'], FILTER_SANITIZE_EMAIL) : '';
+    $sponsor_phone = isset($_POST['sponsors-phone']) ? htmlspecialchars($_POST['sponsors-phone']) : '';
+    $spouse_name = isset($_POST['spouses-name']) ? htmlspecialchars($_POST['spouses-name']) : '';
+    $spouse_email = isset($_POST['spouses-email']) ? filter_var($_POST['spouses-email'], FILTER_SANITIZE_EMAIL) : '';
+    $spouse_phone = isset($_POST['spouses-phone']) ? htmlspecialchars($_POST['spouses-phone']) : '';
+    $student_name = isset($_POST['students-name']) ? htmlspecialchars($_POST['students-name']) : '';
+    $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
+    $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
+    $class_id = isset($_POST['role']) ? htmlspecialchars($_POST['role']) : '';
+    $cause = isset($_POST['cause']) ? htmlspecialchars($_POST['cause']) : '';
 
+    $timestamp = date("Y-m-d H:i:s");
 } else {
 		$User_Id = $_SESSION['User_Id'];
     $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations WHERE User_Id = $User_Id";

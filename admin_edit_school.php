@@ -100,8 +100,8 @@ error_reporting(E_ALL);
 		}
 	}
 ?>
-	<?php if ($id != null) {
-		echo "<h3>Edit School Details</h3>";
+	<?php if ($id != null) { 
+		echo "<h3>Edit School Details</h3>"; //If you're trying to fix anything on the school detail form it's on file admin_fill.php. Line 24 is where it starts
 	} else {
 		echo "<h3>Add School Details</h3>";
 	}
