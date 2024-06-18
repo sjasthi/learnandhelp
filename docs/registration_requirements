@@ -1,0 +1,23 @@
+To enroll in the classes, student must login first (create an account if it doesn't exist).
+
+
+[Use Case A] ============== How do students enroll in classes?
+
+
+[1] Login first
+
+[2] Enroll (in one class)  (students can register for only one class)
+
+[3] Set Communication Preferences
+-- parent 1 email and phone number
+-- parent 2 email and phone number
+
+[4] Pay the fee
+
+
+[Use Case B] ================ How do students update / fix their enrollment?
+
+
+[Use Case C] ================ How do students delete / remove their enrollment?
+
+
