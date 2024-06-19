@@ -1,4 +1,12 @@
-To enroll in the classes, student must login first (create an account if it doesn't exist).
+Rules of the game:
+
+[1] To enroll in the classes, student must login first (create an account if it doesn't exist).
+So, every student must create an account.
+
+[2] We will have a "preferences" table that will have VARIABLE - VALUE pairs. For example,  "ACTIVE_REGISTRATION"  variable will have a value of "2024-2025"
+
+[3] Classes now have a status flag. We will introduce another field called "Offered In" which will contain a academic year value.
+And students can only regisger for the classes where "Offered In"  == ACTIVE_REGISTRATION value
 
 
 [Use Case A] ============== How do students enroll in classes?
@@ -8,16 +16,29 @@ To enroll in the classes, student must login first (create an account if it does
 
 [2] Enroll (in one class)  (students can register for only one class)
 
-[3] Set Communication Preferences
--- parent 1 email and phone number
--- parent 2 email and phone number
-
-[4] Pay the fee
+[3] Pay the fee (optional)
 
 
-[Use Case B] ================ How do students update / fix their enrollment?
+[Use Case B] ================ How do students see their current registration?
+
+[Use Case C] =============== How do students see the payment status for their current registration?
+
+Assume that students are paying through venmo / zelle / paypal etc. outside of the system.
+And the "admin" will simply update the status of a student regisgtration as "paid".
+
+[Use Case D] =============== How do admins see all the registrations for the "ACTIVE_REGISTRATION"?
 
 
-[Use Case C] ================ How do students delete / remove their enrollment?
+[Use Case E] ================ How do students update / fix their enrollment?
+
+[Use Case F] ================ How do students delete / remove their enrollment?
+
+[Use Case G] ================ How do students see their registrations from prior years?
+
+[Use Case H] ================ How do students pay the fee through the web site?
+
+[Use Case I] ================ How to admins generate reports on the registration trends? Eg: Do all the students who registered last year  came back this year as well?
+
+
 
 
