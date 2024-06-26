@@ -24,16 +24,16 @@ if (isset($_POST['action'])) {
 
 if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     // Validate and sanitize form input
-    $sponsor_name = isset($_POST['sponsors-name']) ? htmlspecialchars($_POST['sponsors-name']) : '';
-    $sponsor_email = isset($_POST['sponsors-email']) ? filter_var($_POST['sponsors-email'], FILTER_SANITIZE_EMAIL) : '';
-    $sponsor_phone = isset($_POST['sponsors-phone']) ? htmlspecialchars($_POST['sponsors-phone']) : '';
+    $sponsor_name = isset($_POST['sponsers-name']) ? htmlspecialchars($_POST['sponsers-name']) : '';
+    $sponsor_email = isset($_POST['sponsers-email']) ? filter_var($_POST['sponsers-email'], FILTER_SANITIZE_EMAIL) : '';
+    $sponsor_phone = isset($_POST['sponsers-phone']) ? htmlspecialchars($_POST['sponsers-phone']) : '';
     $spouse_name = isset($_POST['spouses-name']) ? htmlspecialchars($_POST['spouses-name']) : '';
     $spouse_email = isset($_POST['spouses-email']) ? filter_var($_POST['spouses-email'], FILTER_SANITIZE_EMAIL) : '';
     $spouse_phone = isset($_POST['spouses-phone']) ? htmlspecialchars($_POST['spouses-phone']) : '';
     $student_name = isset($_POST['students-name']) ? htmlspecialchars($_POST['students-name']) : '';
     $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
     $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
-    $class_id = isset($_POST['role']) ? htmlspecialchars($_POST['role']) : '';
+    $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
     $cause = isset($_POST['cause']) ? htmlspecialchars($_POST['cause']) : '';
 
     $timestamp = date("Y-m-d H:i:s");
@@ -61,7 +61,7 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 // FIXME: Hardcoded in relation to database
 // Correct method should pull the available classes from the database,
 // Allow the user to select one using the interface, and then POST from there.
-
+/*
 switch ($class_id){
 	case 2:
 		$class = "Python 101";
@@ -75,6 +75,17 @@ switch ($class_id){
 	case 3:
 		$class = "Java 201";
 }
+*/
+
+//Find name of registered class from Class_Id
+$classname_query = "SELECT Class_Name FROM classes where Class_Id = $class_id";
+$classname_result = $connection->query($classname_query);
+$classname_row = $classname_result->fetch_assoc();
+$class = $classname_row["Class_Name"];
+
+//WIP: Add/update user phone number. (Possible TODO: do the same for other information?)
+$update_phone_query = "UPDATE users SET Phone = '$student_phone' WHERE User_Id = '$User_Id';";
+$update_phone_result = $connection->query($update_phone_query);
 
 switch ($cause){ // FIXME: Hardcoded in.
 	case "lib":
@@ -176,7 +187,7 @@ echo "<!DOCTYPE html>
         <label id=\"name-label\"><b>Sponsor's Name:</b> $sponsor_name</label><br>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
         <label id=\"sponsers-email-label\"> <b>Sponsor's Email:</b> $sponsor_email</label><br>
-		<label id=\"sponsors-number-label\"><b>Sponsor's Phone Number:</b> $sponsor_phone</label><br>
+		<label id=\"sponsers-number-label\"><b>Sponsor's Phone Number:</b> $sponsor_phone</label><br>
         <input type=\"hidden\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
 		<input type=\"hidden\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\"><br><!---email-->
         <input type=\"hidden\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\">

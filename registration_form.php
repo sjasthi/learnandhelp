@@ -21,6 +21,23 @@ if (isset($_SESSION['User_Id'])) {
   if ($result->num_rows > 0) {
     header("Location: form-submit.php");
   }
+  
+  //Find user's information to populate.
+  $sql = 'SELECT * FROM users WHERE User_Id = ' . $User_Id . ';';
+  $result = $connection->query($sql);
+  $row = $result -> fetch_assoc();
+  $fname = $row["First_Name"];
+  $lname = $row["Last_Name"];
+  $email = $row["Email"];
+  $phone = $row["Phone"];
+  $fullname = $fname . " " . $lname;
+  
+  //Keeping for now, just in case $phone will need to be used in a way where it cannot be null.
+  /*if(is_null($phone)){
+	  $phone = "";
+  }*/
+  
+  
 } else {
   header("Location: login.php");
 }
@@ -44,14 +61,15 @@ echo      "<header class=\"inverse\">
           </header>
       <h3> Registration Form</h3>
       <p><i>* Required Fields</i></p>
+	  <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
       <div id= \"container_2\">
         <!---Student Section -->
         <label id=\"students-name-label\">*Student's Name: </label>
-        <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required placeholder=\"Enter Student's name\"><br>
+        <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required placeholder=\"Enter Student's name\" value=\"$fullname\"><br>
         <label id=\"students-email-label\"> *Student's Email: </label>
-        <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required placeholder=\"Enter Student's email\"><br>
+        <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required placeholder=\"Enter Student's email\" value=\"$email\"><br>
         <label id=\"students-number-label\">*Student's Phone Number: </label>
-        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
+        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" value=\"$phone\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
         <br>
         <br>
         <label id=\"class\">*Select Class: </label>
@@ -67,9 +85,30 @@ if ((isset($_SESSION['email'])) &&  $_SESSION['role'] == 'admin') {
 
 //Non-Admin's and users not logged in can only see "Approved" Classes
 else {
-  $class_query = "SELECT Class_Id, Class_Name, Description, Status
-              FROM classes
-              WHERE Status = 'Approved';";
+	$active_reg_query = "SELECT value FROM preferences WHERE name = 'ACTIVE_REGISTRATION';";
+	$active_reg_result = $connection->query($active_reg_query);
+	$active_reg_array = $active_reg_result->fetch_assoc();
+	$active_reg = $active_reg_array["value"];
+	
+	$offerings_query = "SELECT Class_Id FROM offerings WHERE batch = '$active_reg';";
+	$offerings_result = $connection->query($offerings_query);
+	
+	$class_id_list = "";
+	if($offerings_result->num_rows > 0)
+	{
+		$i = 0;
+		while($offerings_row = $offerings_result->fetch_assoc())
+		{
+			$class_id_list .= strval($offerings_row["Class_Id"]);
+			$i++;
+			if($i < $offerings_result->num_rows){
+				$class_id_list .= ", ";
+			}
+		}
+	}
+	
+	$class_query = "SELECT Class_Id, Class_Name, Description, Status FROM classes WHERE Class_Id IN ($class_id_list)";
+	echo $class_query;
 }
 
 
@@ -96,13 +135,13 @@ echo      "</select>
     </div>
 
     <div id=\"right\">
-      <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
+      
         <!---Sponsors Section -->
         <label id=\"name-label\">Sponsor's Name: </label>
         <input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" placeholder=\"Enter Sponsor's name\"><br><!--name--->
         <label id=\"sponsers-email-label\"> Sponsor's Email: </label>
         <input type=\"email\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" placeholder=\"Enter Sponsor's email\"><br><!---email-->
-        <label id=\"sponsors-number-label\">Sponsor's Phone Number: </label>
+        <label id=\"sponsers-number-label\">Sponsor's Phone Number: </label>
         <input type=\"tel\" id=\"sponsers-phone\" name=\"sponsers-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\">
         <br>
         <br>
