@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2024 at 07:37 PM
+-- Generation Time: Jun 29, 2024 at 07:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -3675,8 +3675,12 @@ CREATE TABLE `offerings` (
 --
 
 INSERT INTO `offerings` (`batch`, `Class_Id`) VALUES
+('2023-2024', 7),
+('2023-2024', 10),
 ('2024-2025', 2),
 ('2024-2025', 4),
+('Summer 2023', 8),
+('Summer 2023', 9),
 ('Summer 2024', 1),
 ('Summer 2024', 3);
 
