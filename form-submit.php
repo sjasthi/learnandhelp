@@ -76,6 +76,7 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 // 		$class = "Java 201";
 // }
 
+// Pull the available classes from the database
 $class_query = "SELECT Class_Id, Class_Name FROM classes";
 $class_result = mysqli_query($connection, $class_query);
 
@@ -229,6 +230,29 @@ echo "<!DOCTYPE html>
 		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
 		<br><br>
 	</div>
+	";
+	if (TRUE){ //make bool to determine if registarions exist
+		echo "
+			<h3> Past Registration Details </h3>
+			<div id=\"container_3\"> 
+			<button class=\"accordion\">Section 1</button>
+				<div class=\"panel\">
+					<p>Lorem ipsum...</p>
+				</div>
+
+			<button class=\"accordion\">Section 2</button>
+				<div class=\"panel\">
+					<p>Lorem ipsum...</p>
+				</div>
+
+			<button class=\"accordion\">Section 3</button>
+				<div class=\"panel\">
+					<p>Lorem ipsum...</p>
+				</div>
+			</div>
+			<br><br>";
+	}
+echo "		
   </body>
 </html>
 ";
