@@ -91,9 +91,12 @@ echo "<header class=\"inverse\">
 	</div>
 	</header>
 	<h2><strong>Registration Details</strong></h2>";
+
 //get list of current and prior class registrations for user, if they exist
 $user_reg_query = "SELECT Class_Id, batch FROM registrations WHERE Student_Name = '". $fullname. "' AND batch = '$active_reg'";
 $user_reg_result = $connection->query($user_reg_query);
+
+//If user is registered for a class this term, show information for that registration.
 if($user_reg_result->num_rows > 0){
 	$user_reg_array = $user_reg_result->fetch_assoc();
 	$class_id = $user_reg_array['Class_Id'];
@@ -112,7 +115,6 @@ if($user_reg_result->num_rows > 0){
 		
 }
 //if user isn't registered for a class this term, show registration form
-//TODO need to add functionality for displaying any past registrations
 else{
 	echo "<button class='accordion'>$active_reg</button>
 		<div class='panel'>
@@ -216,12 +218,13 @@ else{
 	</form><!---survey-form--->
 	</div>";
 }
-//TODO
-//else display current registration, and past registration if exists
-//also link to registration_edit.php somehow
+//TODO link to registration_edit.php somehow
 
+//Get list of previous registrations.
 $past_reg_query = "SELECT Class_Id, batch FROM registrations LEFT JOIN batch on registrations.batch=batch.batch_name WHERE Student_Name = '". $fullname. "' AND NOT batch = '$active_reg' ORDER BY start_date DESC";
 $past_reg_result = $connection->query($past_reg_query);
+
+//If registered for past semesters, display the information for each registration by semester in reverse chronological order. If not, only display the accordion for the current semester.
 if($past_reg_result->num_rows > 0){
 	while($past_reg_row = $past_reg_result->fetch_assoc()){
 		$class_id = $past_reg_row['Class_Id'];
