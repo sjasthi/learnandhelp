@@ -1,7 +1,6 @@
 <?php
 require 'db_configuration.php';
 
-
 $status = session_status();
 if ($status == PHP_SESSION_NONE) {
   session_start();
@@ -12,7 +11,6 @@ if (!(isset($_SESSION['email']))) {
 }
 
 include 'show-navbar.php';
-include 'show_registration_history.php';
 $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
 if ($connection === false) {
@@ -59,6 +57,24 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 		$cause = $row['Cause'];
 
 }
+
+// FIXME: Hardcoded in relation to database
+// Correct method should pull the available classes from the database,
+// Allow the user to select one using the interface, and then POST from there.
+
+// switch ($class_id){
+// 	case 2:
+// 		$class = "Python 101";
+// 		break;
+// 	case 4:
+// 		$class = "Python 201";
+// 		break;
+// 	case 1:
+// 		$class = "Java 101";
+// 		break;
+// 	case 3:
+// 		$class = "Java 201";
+// }
 
 // Pull the available classes from the database
 $class_query = "SELECT Class_Id, Class_Name FROM classes";
@@ -151,6 +167,7 @@ if ($action == 'add') {
 		echo("Error description: " . mysqli_error($connection));
 	 }
 }
+mysqli_close($connection);
 
 echo "<!DOCTYPE html>
 <!DOCTYPE html>
@@ -212,7 +229,56 @@ echo "<!DOCTYPE html>
 			<input type='hidden' name='action' value='edit'>
 			<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
 		</form>
+		<br><br>
 	</div>";
-fetchRegistrationDetails($connection, $User_Id);
-mysqli_close($connection);
+	if (TRUE){ //make bool to determine if past registarions exist
+		echo "
+			<h3> Past Registration Details </h3>
+			<div id=\"container_3\">";
+			if (True) { //if next row exists for student in registration table for previous years
+				echo " 
+					<div id='accordion-container'>
+					<button class='accordion' >Section 1</button>
+					<div class='panel' >
+						<p>Content for section 1...</p>
+					</div>
+					<br>
+
+					<button class='accordion'>Section 2</button>
+					<div class='panel'>
+						<p>Content for section 2...</p>
+					</div>
+					<br>
+
+					<button class='accordion'>Section 3</button>
+					<div class='panel'>
+						<p>Content for section 3...</p>
+					</div>
+					</div>
+					<br>
+					";
+			}
+			echo "
+				<script>
+				var acc = document.getElementsByClassName('accordion');
+				for (var i = 0; i < acc.length; i++) {
+					acc[i].addEventListener('click', function() {
+						this.classList.toggle('active');
+						var panel = this.nextElementSibling;
+						if (panel.style.display === 'block') {
+							panel.style.display = 'none';
+						} else {
+							panel.style.display = 'block';
+						}
+					});
+				}
+			</script>
+			</div>
+			<br><br>";
+	}
+
+echo "		
+  </body>
+</html>
+";
 ?>
