@@ -146,7 +146,11 @@ if (!mysqli_query($connection, $sql)) {
 if ($action == 'add') {
 	$Reg_Id = mysqli_insert_id($connection);
 	$User_Id = $_SESSION['User_Id'];
-	$sql = 'INSERT INTO user_registrations VALUES (' . $User_Id . ', ' . $Reg_Id .');';
+	// $sql = 'INSERT INTO user_registrations VALUES (' . $User_Id . ', ' . $Reg_Id .');';
+	$sql = "INSERT INTO user_registrations (User_Id, Reg_Id, batch)
+			SELECT $User_Id, $Reg_Id, value 
+			FROM preferences 
+			WHERE variable = 'Active Registration';";
 	if (!mysqli_query($connection, $sql)) {
 		echo("Error description: " . mysqli_error($connection));
 	 }
@@ -213,6 +217,6 @@ echo "<!DOCTYPE html>
 			<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
 		</form>
 	</div>";
-fetchRegistrationDetails($connection, $User_Id);
+fetchRegistrationDetails($connection, $_SESSION['User_Id']);
 mysqli_close($connection);
 ?>
