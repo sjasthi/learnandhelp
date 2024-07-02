@@ -92,16 +92,28 @@ echo "<header class=\"inverse\">
 	</header>
 	<h2><strong>Registration Details</strong></h2>";
 //get list of current and prior class registrations for user, if they exist
-$user_reg_query = "SELECT Class_Id FROM registrations WHERE Student_Name = '". $fullname. "'";
+$user_reg_query = "SELECT Class_Id, batch FROM registrations WHERE Student_Name = '". $fullname. "' AND batch = '$active_reg'";
 $user_reg_result = $connection->query($user_reg_query);
-$is_registered = false;
-if($user_reg_result->num_rows > 0) {
+if($user_reg_result->num_rows > 0){
 	$user_reg_array = $user_reg_result->fetch_assoc();
-	$is_registered = true;
+	$class_id = $user_reg_array['Class_Id'];
+	$class_name_query = "SELECT Class_Name FROM classes WHERE Class_Id = '$class_id';";
+	$class_name_result = $connection->query($class_name_query);
+	$class_name_array = $class_name_result->fetch_assoc();
+	mysqli_free_result($class_name_result);
+	$class_name = $class_name_array['Class_Name'];
+	
+	echo "<button class='accordion'>$active_reg</button>
+		<div class='panel'>
+		<p><strong>Registration details for $active_reg.</strong></p>
+		<p>$class_name</p><br>
+		
+		</div>";
+		
 }
 //if user isn't registered for a class this term, show registration form
 //TODO need to add functionality for displaying any past registrations
-if (!$is_registered) {
+else{
 	echo "<button class='accordion'>$active_reg</button>
 		<div class='panel'>
 		<p>You are not currently registered for this academic year.</p>
@@ -200,10 +212,35 @@ if (!$is_registered) {
 	<br>
 	<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Submit\">
 	<input type=\"hidden\" id=\"action\" name=\"action\" value=\"add\">
+	<input type=\"hidden\" id=\"batch\" name=\"batch\" value=\"$active_reg\">
 	</form><!---survey-form--->
-	</div>
+	</div>";
+}
+//TODO
+//else display current registration, and past registration if exists
+//also link to registration_edit.php somehow
 
-	<script>
+$past_reg_query = "SELECT Class_Id, batch FROM registrations WHERE Student_Name = '". $fullname. "' AND NOT batch = '$active_reg'";
+$past_reg_result = $connection->query($past_reg_query);
+if($past_reg_result->num_rows > 0){
+	while($past_reg_row = $past_reg_result->fetch_assoc()){
+		$class_id = $past_reg_row['Class_Id'];
+		$class_name_query = "SELECT Class_Name FROM classes WHERE Class_Id = '$class_id';";
+		$class_name_result = $connection->query($class_name_query);
+		$class_name_array = $class_name_result->fetch_assoc();
+		mysqli_free_result($class_name_result);
+		$class_name = $class_name_array['Class_Name'];
+		$past_batch = $past_reg_row["batch"];
+	
+		echo "<button class='accordion'>$past_batch</button>
+		<div class='panel'>
+		<p><strong>Registration details for $past_batch</strong></p>
+		<p>$class_name</p><br>
+		</div>";
+	}
+}
+	
+echo "<script>
 	var acc = document.getElementsByClassName('accordion');
 	var i;
 	for (i = 0; i < acc.length; i++) {
@@ -218,50 +255,7 @@ if (!$is_registered) {
 	  });
 	}
 	</script>";
-}
-//TODO
-//else display current registration, and past registration if exists
-//also link to registration_edit.php somehow
-else {
-	$class_id = $user_reg_array['Class_Id'];
-	$class_name_query = "SELECT Class_Name FROM classes WHERE Class_Id = '$class_id';";
-	$class_name_result = $connection->query($class_name_query);
-	$class_name_array = $class_name_result->fetch_assoc();
-	mysqli_free_result($class_name_result);
-	$class_name = $class_name_array['Class_Name'];
-	echo "<button class='accordion'>$active_reg</button>
-		<div class='panel'>
-		<p><strong>Registration details for $active_reg.</strong></p>
-		<p>$class_name</p><br>
 		
-		</div>
-		
-		<button class='accordion'>Previous Year</button>
-		<div class='panel'>
-		<p>Enrollment for previous year if exists.</p><br>
-		</div>
-		
-		<button class='accordion'>Previous Year</button>
-		<div class='panel'>
-		<p>Enrollment for previous year if exists.</p><br>
-		</div>
-		
-		<script>
-		var acc = document.getElementsByClassName('accordion');
-		var i;
-		for (i = 0; i < acc.length; i++) {
-		  acc[i].addEventListener('click', function() {
-			this.classList.toggle('active');
-			var panel = this.nextElementSibling;
-			if (panel.style.display === 'block') {
-			  panel.style.display = 'none';
-			} else {
-			  panel.style.display = 'block';
-			}
-		  });
-		}
-		</script>";
-}
 echo "</body>
 	 </html>";
 ?>

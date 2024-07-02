@@ -34,6 +34,7 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
     $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
     $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
+	$batch = isset($_POST['batch']) ? htmlspecialchars($_POST['batch']) : '';
     $cause = isset($_POST['cause']) ? htmlspecialchars($_POST['cause']) : '';
 
     $timestamp = date("Y-m-d H:i:s");
@@ -53,6 +54,7 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 		$student_email = $row['Student_Email'];
 		$student_phone = $row['Student_Phone_Number'];
 		$class_id = $row['Class_Id'];
+		$batch = $row['batch'];
 		$cause = $row['Cause'];
 
 }
@@ -110,6 +112,7 @@ if ($action == 'add') {
 		'$student_email',
 		'$student_phone',
 		'$class_id',
+		'$batch',
 		'$cause',
 		'$timestamp',
 		'$timestamp');";
@@ -127,6 +130,7 @@ if ($action == 'add') {
 			Student_Email = '$student_email',
 			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
+			batch = '$batch',
 			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
@@ -144,6 +148,7 @@ if ($action == 'add') {
 			Student_Email = '$student_email',
 			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
+			batch = '$batch',
 			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
