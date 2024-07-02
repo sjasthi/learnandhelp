@@ -1,0 +1,73 @@
+<?php
+function fetchRegistrationDetails($connection, $userId) {
+    // SQL query
+    $sql = "SELECT b.batch, b.start_date, b.end_date, c.Class_Name
+        FROM user_registrations ur
+        JOIN registrations r ON ur.Reg_Id = r.Reg_Id
+        JOIN classes c ON c.Class_Id = r.Class_Id
+        JOIN batch b ON ur.batch = b.batch
+        JOIN preferences p ON 1=1
+        WHERE ur.User_Id = $userId
+        AND b.batch != p.value
+        AND p.variable = 'Active Registration'
+        ORDER BY b.end_date DESC;
+    ";
+    
+    // Execute the query
+    $result = mysqli_query($connection, $sql);
+    
+    // Check for errors in the query execution
+    if (!$result) {
+        echo "Error description: " . mysqli_error($connection);
+        return;
+    }
+    
+    // Check if there are results
+    if (mysqli_num_rows($result) > 0) {
+        echo "<h3>Past Registration Details</h3>";
+        echo "<div id='container_3'>";
+        echo "<div id='accordion-container'>";
+    
+        // Loop through the result and populate the HTML
+        while ($row = mysqli_fetch_assoc($result)) {
+            $batch = htmlspecialchars($row['batch']);
+            $class_name = htmlspecialchars($row['Class_Name']);
+            $start_date = htmlspecialchars($row['start_date']);
+            $end_date = htmlspecialchars($row['end_date']);
+            
+            echo "
+                <button class='accordion'>$batch</button>
+                <div class='panel' style='display: none'>
+                    <p><strong>Class:</strong> $class_name </p>
+                    <p><strong>Start Date:</strong> $start_date </p>
+                    <p><strong>End Date:</strong> $end_date </p>
+                </div>
+                <br>
+            ";
+        }
+    
+        echo "</div>"; // Close accordion-container
+        echo "</div>"; // Close container_3
+    
+        // Add the accordion JavaScript
+        echo "
+            <script>
+            var acc = document.getElementsByClassName('accordion');
+            for (var i = 0; i < acc.length; i++) {
+                acc[i].addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === 'block') {
+                        panel.style.display = 'none';
+                    } else {
+                        panel.style.display = 'block';
+                    }
+                });
+            }
+            </script>
+        ";
+    } else {
+        echo "No past registrations found.";
+    }
+}
+?>
