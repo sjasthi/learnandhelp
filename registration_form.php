@@ -1,5 +1,6 @@
 <?php
 require 'db_configuration.php';
+include 'show_registration_history.php';
 $status = session_status();
 if ($status == PHP_SESSION_NONE) {
   session_start();
@@ -9,7 +10,18 @@ if ($status == PHP_SESSION_NONE) {
 // Check to see if the logged in user has a registration on file
 if (isset($_SESSION['User_Id'])) {
   $User_Id = $_SESSION['User_Id'];
-  $sql = 'SELECT * FROM user_registrations WHERE User_Id = ' . $User_Id . ';';
+  // $sql = 'SELECT * FROM user_registrations WHERE User_Id = ' . $User_Id . ';';
+  $sql = "SELECT *
+          FROM user_registrations ur
+          JOIN registrations r ON ur.Reg_Id = r.Reg_Id
+          JOIN classes c ON c.Class_Id = r.Class_Id
+          JOIN batch b ON ur.batch = b.batch
+          JOIN preferences p ON 1=1
+          WHERE ur.User_Id = 44
+          AND b.batch = p.value
+          AND p.variable = 'Active Registration'
+          ORDER BY b.end_date DESC;
+          ";
   $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
   if ($connection === false) {
@@ -170,7 +182,11 @@ echo "</select>
 <br>
     <input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Submit\">
     <input type=\"hidden\" id=\"action\" name=\"action\" value=\"add\">
-    </form><!---survey-form--->
+    </form><!---survey-form--->";
+    fetchRegistrationDetails($connection, $User_Id);
+    mysqli_close($connection);
 
+echo "  
   </body>
 </html>";
+?>
