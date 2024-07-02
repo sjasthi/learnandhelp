@@ -105,14 +105,30 @@ if($user_reg_result->num_rows > 0){
 	$class_name_array = $class_name_result->fetch_assoc();
 	mysqli_free_result($class_name_result);
 	$class_name = $class_name_array['Class_Name'];
-	
+	//FIXME these variables are set to empty for now, need them populated for registration edit form
+	$Reg_Id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $student_email = $student_phone = $class = $cause = "";
 	echo "<button class='accordion'>$active_reg</button>
 		<div class='panel'>
 		<p><strong>Registration details for $active_reg.</strong></p>
-		<p>$class_name</p><br>
-		
-		</div>";
-		
+		<p>$class_name</p>
+		<form action=\"registration_edit.php\" method = \"post\">
+		<input type='hidden' name='Reg_Id' value=$Reg_Id>
+        <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
+		<input type=\"hidden\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
+		<input type=\"hidden\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\"><!---email-->
+        <input type=\"hidden\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\"><br>
+		<input type=\"hidden\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" value=\"$spouse_name\"><!--name--->
+		<input type=\"hidden\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\"><!---email-->
+        <input type=\"hidden\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\">
+		<input type=\"hidden\" id=\"students-name\" name=\"students-name\" class=\"form\" value=\"$student_name\"><!--name--->
+		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$student_email\"><br><!---email-->
+        <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\">
+		<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
+		<input type=\"hidden\" id=\"cause\" name=\"cause\" value=\"$cause\">
+		<input type='hidden' name='action' value='edit'>
+		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\">
+		</form>
+		</div>";	
 }
 //if user isn't registered for a class this term, show registration form
 else{
