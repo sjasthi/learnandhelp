@@ -220,7 +220,7 @@ else{
 //else display current registration, and past registration if exists
 //also link to registration_edit.php somehow
 
-$past_reg_query = "SELECT Class_Id, batch FROM registrations WHERE Student_Name = '". $fullname. "' AND NOT batch = '$active_reg'";
+$past_reg_query = "SELECT Class_Id, batch FROM registrations LEFT JOIN batch on registrations.batch=batch.batch_name WHERE Student_Name = '". $fullname. "' AND NOT batch = '$active_reg' ORDER BY start_date DESC";
 $past_reg_result = $connection->query($past_reg_query);
 if($past_reg_result->num_rows > 0){
 	while($past_reg_row = $past_reg_result->fetch_assoc()){
