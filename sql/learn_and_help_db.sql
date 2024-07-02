@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2024 at 12:40 AM
+-- Generation Time: Jul 02, 2024 at 08:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `learn_and_help_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `batch`
+--
+
+CREATE TABLE `batch` (
+  `batch` varchar(50) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `batch`
+--
+
+INSERT INTO `batch` (`batch`, `start_date`, `end_date`) VALUES
+('2024-2025', '2024-09-01', '2025-05-01'),
+('Summer 2024', '2024-06-01', '2024-08-31'),
+('2023-2024', '2023-09-01', '2024-05-01'),
+('Summer 2023', '2023-06-01', '2023-08-31');
 
 -- --------------------------------------------------------
 
@@ -3703,7 +3725,8 @@ CREATE TABLE `registrations` (
 --
 
 INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Cause`, `Modified_Time`, `Created_Time`) VALUES
-(17, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'Jeremy Daly', 'jeremy.daly@my.metrostate.edu', '123-456-7890', 1, 'Digital Classroom', '2024-06-25', '2024-06-25');
+(20, 'John', 'john@john.com', '123-456-7890', 'mary', 'mary@mary.com', '123-456-7890', 'Jeremy Daly', 'jeremy.daly@my.metrostate.edu', '123-456-7890', 3, 'Digital Classroom', '2024-07-02', '2024-06-26'),
+(21, 'John', 'john@john.com', '123-456-7890', 'mary', 'mary@mary.com', '123-456-7890', 'Jeremy Daly', 'jeremy.daly@my.metrostate.edu', '123-456-7890', 4, 'Digital Classroom', '2024-06-26', '2024-06-26');
 
 -- --------------------------------------------------------
 
@@ -3889,15 +3912,17 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 
 CREATE TABLE `user_registrations` (
   `User_Id` int(11) NOT NULL,
-  `Reg_Id` int(11) NOT NULL
+  `Reg_Id` int(11) NOT NULL,
+  `batch` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_registrations`
 --
 
-INSERT INTO `user_registrations` (`User_Id`, `Reg_Id`) VALUES
-(44, 17);
+INSERT INTO `user_registrations` (`User_Id`, `Reg_Id`, `batch`) VALUES
+(44, 20, '2023-2024'),
+(44, 21, 'Summer 2023');
 
 --
 -- Indexes for dumped tables
@@ -4017,7 +4042,7 @@ ALTER TABLE `instructor`
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `schools`
