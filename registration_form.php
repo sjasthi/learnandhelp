@@ -32,6 +32,8 @@ if (isset($_SESSION['User_Id'])) {
   $phone = $row["Phone"];
   $fullname = $fname . " " . $lname;
   
+  $Reg_Id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $student_email = $student_phone = $class = $cause = "";
+  
   //Keeping for now, just in case $phone will need to be used in a way where it cannot be null.
   /*if(is_null($phone)){
 	  $phone = "";
@@ -93,7 +95,7 @@ echo "<header class=\"inverse\">
 	<h2><strong>Registration Details</strong></h2>";
 
 //get list of current and prior class registrations for user, if they exist
-$user_reg_query = "SELECT Class_Id, batch FROM registrations WHERE Student_Name = '". $fullname. "' AND batch = '$active_reg'";
+$user_reg_query = "SELECT * FROM registrations WHERE Student_Name = '". $fullname. "' AND batch = '$active_reg'";
 $user_reg_result = $connection->query($user_reg_query);
 
 //If user is registered for a class this term, show information for that registration.
@@ -105,12 +107,24 @@ if($user_reg_result->num_rows > 0){
 	$class_name_array = $class_name_result->fetch_assoc();
 	mysqli_free_result($class_name_result);
 	$class_name = $class_name_array['Class_Name'];
-	//FIXME these variables are set to empty for now, need them populated for registration edit form
-	$Reg_Id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $student_email = $student_phone = $class = $cause = "";
+	
+	$sponsor_name = $user_reg_array['Sponsor_Name'];
+	$sponsor_email = $user_reg_array['Sponsor_Email'];
+	$sponsor_phone = $user_reg_array['Sponsor_Phone_Number'];
+	$spouse_name = $user_reg_array['Spouse_Name'];
+	$spouse_email = $user_reg_array['Spouse_Email'];
+	$spouse_phone = $user_reg_array['Spouse_Phone_Number'];
+	$student_name = $user_reg_array['Student_Name'];
+	$student_email = $user_reg_array['Student_Email'];
+	$student_phone = $user_reg_array['Student_Phone_Number'];
+	$class = $user_reg_array['Class_Id'];
+	$cause = $user_reg_array['Cause'];
+	
+	
 	echo "<button class='accordion'>$active_reg</button>
 		<div class='panel'>
 		<p><strong>Registration details for $active_reg.</strong></p>
-		<p>$class_name</p>
+		<p>$class_name</p><br>
 		<form action=\"registration_edit.php\" method = \"post\">
 		<input type='hidden' name='Reg_Id' value=$Reg_Id>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
@@ -128,7 +142,8 @@ if($user_reg_result->num_rows > 0){
 		<input type='hidden' name='action' value='edit'>
 		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\">
 		</form>
-		</div>";	
+		</div>";
+		
 }
 //if user isn't registered for a class this term, show registration form
 else{
