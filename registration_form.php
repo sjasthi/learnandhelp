@@ -124,7 +124,7 @@ if($user_reg_result->num_rows > 0){
 	echo "<button class='accordion'>$active_reg</button>
 		<div class='panel'>
 		<p><strong>Registration details for $active_reg.</strong></p>
-		<p>$class_name</p><br>
+		<p>$class_name</p>
 		<form action=\"registration_edit.php\" method = \"post\">
 		<input type='hidden' name='Reg_Id' value=$Reg_Id>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
