@@ -67,7 +67,7 @@ echo "<!DOCTYPE html>
 show_navbar();
 echo      "<header class=\"inverse\">
           <div class=\"container\">
-              <h1><span class=\"accent-text\">Register Now</span></h1>
+              <h1><span class=\"accent-text\">Enroll Now</span></h1>
           </div>
           </header>
       <h3> Registration Form</h3>

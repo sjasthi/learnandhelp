@@ -9,7 +9,6 @@ function show_navbar() {
       <a href="classes.php">Classes</a>
       <a href="books.php">Books</a>
       <a href="books_grid.php">Books(Grid)</a>
-      <a href="causes.php">Causes</a>
       <a href="blog.php">Blog</a>
       <a href="meet_our_instructors.php">Instructors</a>
       <a href="suggest_school.php">Suggest a School</a>
@@ -24,9 +23,9 @@ function show_navbar() {
         if ($_SESSION['role'] == 'admin') {
           echo '<a href="administration.php">Administration</a>';
         }
-        echo '<a href="registration_form.php" id="register">Register Now</a>';
+        echo '<a href="registration_form.php" id="register">Enroll Now</a>';
       }elseif(isset($_SESSION['email']) == false){
-        echo '<a href="login.php" id="register">Register Now</a>';
+        echo '<a href="login.php" id="register">Enroll Now</a>';
       }
        echo '</div>';
 
