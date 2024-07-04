@@ -24,6 +24,24 @@ if (isset($_POST['action'])) {
 	$action = '';
 }
 
+// Get active batch
+$query = <<< SQL
+			SELECT value 
+			FROM preferences 
+			WHERE Preference_Name = 'Active Registration';
+			SQL;
+$result = mysqli_query($connection, $query);
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $active_batch = $row['value'];
+} else {
+    $active_batch = null;
+    echo "Error: " . mysqli_error($connection);
+}
+
+
+
+
 if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     // Validate and sanitize form input
     $sponsor1_name = isset($_POST['sponsor1-name']) ? htmlspecialchars($_POST['sponsor1-name']) : '';
@@ -36,7 +54,6 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
     $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
     $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
-    // $cause = isset($_POST['cause']) ? htmlspecialchars($_POST['cause']) : '';
 
     $timestamp = date("Y-m-d H:i:s");
 } else {
@@ -107,7 +124,7 @@ if ($action == 'add') {
 				'$class_id',
 				'$timestamp',
 				'$timestamp',
-				$batch_name_query,
+				$active_batch,
 				'".$_SESSION['User_Id']."'
 			);";
 } elseif($action == "edit") {
@@ -174,6 +191,7 @@ echo "<!DOCTYPE html>
 		<form action=\"registration_edit.php\" method = \"post\">
   			<!---Registration Label--->
 			<label id=\"registration_id-label\"><b>Registration ID:</b> $Reg_Id</label><br>
+			<label id=\"registration_id-label\"><b>Batch Name:</b> $active_batch</label><br>
 			<input type='hidden' name='Reg_Id' value=$Reg_Id>
 			<br>
 			<!---sponsor1 Section -->
