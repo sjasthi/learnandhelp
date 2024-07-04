@@ -39,10 +39,9 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     $cause = isset($_POST['cause']) ? htmlspecialchars($_POST['cause']) : '';
 
     $timestamp = date("Y-m-d H:i:s");
-} elseif ($action != '') {
-	// Create new?
+} else {
 	$User_Id = $_SESSION['User_Id'];
-    $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations WHERE User_Id = $User_Id;";
+    $sql = "SELECT * FROM registrations NATURAL JOIN classes WHERE User_Id = $User_Id;";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
@@ -57,8 +56,7 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 		$student_email = $row['Student_Email'];
 		$student_phone = $row['Student_Phone_Number'];
 		$class_id = $row['Class_Id'];
-		$cause = $row['Cause'];
-
+		$batch_id - $row['Batch_Id']; 
 }
 
 // Pull the available classes from the database
@@ -77,33 +75,69 @@ while ($class_row = mysqli_fetch_assoc($class_result)) {
 // Get the class name using the class_id
 $class = isset($classes[$class_id]) ? $classes[$class_id] : 'Unknown Class';
 
-switch ($cause){ // FIXME: Hardcoded in.
-	case "lib":
-		$cause = "Library";
-		break;
-	case "Dig_class":
-		$cause = "Digital Classroom";
-		break;
-	case "Other":
-		$cause = "No Preference";
-}
+// switch ($cause){ // FIXME: Hardcoded in.
+// 	case "lib":
+// 		$cause = "Library";
+// 		break;
+// 	case "Dig_class":
+// 		$cause = "Digital Classroom";
+// 		break;
+// 	case "Other":
+// 		$cause = "No Preference";
+// }
 
 if ($action == 'add') {
-	$sql = "INSERT INTO registrations VALUES (
-		NULL,
-		'$sponsor1_name',
-		'$sponsor1_email',
-		'$sponsor1_phone',
-		'$sponsor2_name',
-		'$sponsor2_email',
-		'$sponsor2_phone',
-		'$student_name',
-		'$student_email',
-		'$student_phone',
-		'$class_id',
-		'$cause',
-		'$timestamp',
-		'$timestamp');";
+	$batch_id_query = "(SELECT value FROM preferences WHERE Preference_Name = 'Active Registration')";
+
+	$sql = "INSERT INTO registrations 
+				(Sponsor1_Name, 
+				Sponsor1_Email, 
+				Sponsor1_Phone_Number,
+				Sponsor2_Name, 
+				Sponsor2_Email, 
+				Sponsor2_Phone_Number,
+				Student_Name, 
+				Student_Email, 
+				Student_Phone_Number, 
+				Class_Id, 
+				Cause, 
+				Modified_Time, 
+				Created_Time, 
+				Batch_Id,
+				User_Id) 
+			VALUES (
+				'$sponsor1_name',
+				'$sponsor1_email',
+				'$sponsor1_phone',
+				'$sponsor2_name',
+				'$sponsor2_email',
+				'$sponsor2_phone',
+				'$student_name',
+				'$student_email',
+				'$student_phone',
+				'$class_id',
+				'$cause',
+				'$timestamp',
+				'$timestamp',
+				$batch_id_query,
+				'".$_SESSION['User_Id']."'
+			);";
+		// $sql = "INSERT INTO registrations VALUES (
+		// 	NULL,
+		// 	'$sponsor1_name',
+		// 	'$sponsor1_email',
+		// 	'$sponsor1_phone',
+		// 	'$sponsor2_name',
+		// 	'$sponsor2_email',
+		// 	'$sponsor2_phone',
+		// 	'$student_name',
+		// 	'$student_email',
+		// 	'$student_phone',
+		// 	'$class_id',
+		// 	'$cause',
+		// 	'$timestamp',
+		// 	'$timestamp',
+		// 	'$batch_id');"; 
 
 } elseif($action == "edit") {
 	$Reg_Id = $_POST['Reg_Id'];
@@ -144,17 +178,19 @@ if ($action == 'add') {
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
-if ($action == 'add') {
-	$Reg_Id = mysqli_insert_id($connection);
-	$User_Id = $_SESSION['User_Id'];
-	$sql = "INSERT INTO user_registrations (User_Id, Reg_Id, batch)
-			SELECT $User_Id, $Reg_Id, value 
-			FROM preferences 
-			WHERE variable = 'Active Registration';";
-	if (!mysqli_query($connection, $sql)) {
-		echo("Error description: " . mysqli_error($connection));
-	 }
-}
+
+
+// if ($action == 'add') {
+// 	$Reg_Id = mysqli_insert_id($connection);
+// 	$User_Id = $_SESSION['User_Id'];
+// 	$sql = "INSERT INTO user_registrations (User_Id, Reg_Id, batch)
+// 			SELECT $User_Id, $Reg_Id, value 
+// 			FROM preferences 
+// 			WHERE variable = 'Active Registration';";
+// 	if (!mysqli_query($connection, $sql)) {
+// 		echo("Error description: " . mysqli_error($connection));
+// 	 }
+// }
 
 echo "<!DOCTYPE html>
 <!DOCTYPE html>
@@ -174,7 +210,7 @@ echo "<!DOCTYPE html>
 		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
-				<input type='hidden' name='Reg_Id' value=$Reg_Id>
+			<input type='hidden' name='Reg_Id' value=$Reg_Id>
 			<!---sponsor1 Section -->
 			<label id=\"name-label\"><b>Sponsor 1's Name:</b> $sponsor1_name</label><br>
 			<input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
@@ -207,14 +243,7 @@ echo "<!DOCTYPE html>
 			<input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\">
 
 			<br>
-			<label id=\"class\"><b>Selected Class:</b> $class</label><br>
-			<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
-			<!--dropdown--->
-			<p><b>Cause:</b> $cause</p><br>
-			<input type=\"hidden\" id=\"cause\" name=\"cause\" value=\"$cause\">
-			<br>
-			<input type='hidden' name='action' value='edit'>
-			<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
+
 		</form>
 	</div>";
 fetchRegistrationDetails($connection, $_SESSION['User_Id']);

@@ -12,15 +12,25 @@ if (isset($_SESSION['User_Id'])) {
   $User_Id = $_SESSION['User_Id'];
   // $sql = 'SELECT * FROM user_registrations WHERE User_Id = ' . $User_Id . ';';
   //SQL statement to determine if user has active registration
+  // $sql = <<< SQL
+  //         SELECT * FROM user_registrations ur
+  //         JOIN registrations r ON ur.Reg_Id = r.Reg_Id
+  //         JOIN classes c ON c.Class_Id = r.Class_Id
+  //         JOIN batch b ON ur.batch_id = b.batch_id
+  //         JOIN preferences p ON 1=1
+  //         WHERE ur.User_Id = $User_Id
+  //         AND b.batch_id = p.value
+  //         AND p.Preference_Name = 'Active Registration'
+  //         ORDER BY b.end_date DESC;
+  //         SQL;
   $sql = <<< SQL
-          SELECT * FROM user_registrations ur
-          JOIN registrations r ON ur.Reg_Id = r.Reg_Id
+          SELECT * FROM registrations r
           JOIN classes c ON c.Class_Id = r.Class_Id
-          JOIN batch b ON ur.batch_id = b.batch_id
+          JOIN batch b ON r.batch_id = b.batch_id
           JOIN preferences p ON 1=1
-          WHERE ur.User_Id = $User_Id
+          WHERE r.User_Id = $User_Id
           AND b.batch_id = p.value
-          AND p.variable = 'Active Registration'
+          AND p.Preference_Name = 'Active Registration'
           ORDER BY b.end_date DESC;
           SQL;
         
@@ -110,7 +120,7 @@ else {
                   FROM classes c
                   JOIN offerings o ON c.Class_Id = o.class_id
                   JOIN preferences p ON o.batch = p.value
-                  WHERE p.variable = 'Active Registration' AND c.Status = 'Approved';";
+                  WHERE p.Preference_Name = 'Active Registration' AND c.Status = 'Approved';";
 }
 
 // Fetch classes from the database

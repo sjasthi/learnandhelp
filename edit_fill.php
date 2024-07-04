@@ -94,7 +94,7 @@ function fill_form() {
                   FROM classes c
                   JOIN offerings o ON c.Class_Id = o.class_id
                   JOIN preferences p ON o.batch = p.value
-                  WHERE p.variable = 'Active Registration' AND c.Status = 'Approved';";
+                  WHERE p.Preference_Name = 'Active Registration' AND c.Status = 'Approved';";
           $class_result = mysqli_query($connection, $class_query);
           
           while ($class_row = mysqli_fetch_assoc($class_result)) {

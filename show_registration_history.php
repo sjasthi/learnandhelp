@@ -10,7 +10,7 @@ function fetchRegistrationDetails($connection, $userId) {
         JOIN preferences p ON 1=1
         WHERE ur.User_Id = $userId
         AND b.batch_id != p.value
-        AND p.variable = 'Active Registration'
+        AND p.Preference_Name = 'Active Registration'
         ORDER BY b.end_date DESC;
     SQL;
     
