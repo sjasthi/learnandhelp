@@ -39,7 +39,8 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     $cause = isset($_POST['cause']) ? htmlspecialchars($_POST['cause']) : '';
 
     $timestamp = date("Y-m-d H:i:s");
-} else {
+} elseif ($action != '') {
+	// Create new?
 	$User_Id = $_SESSION['User_Id'];
     $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations WHERE User_Id = $User_Id;";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
@@ -146,7 +147,6 @@ if (!mysqli_query($connection, $sql)) {
 if ($action == 'add') {
 	$Reg_Id = mysqli_insert_id($connection);
 	$User_Id = $_SESSION['User_Id'];
-	// $sql = 'INSERT INTO user_registrations VALUES (' . $User_Id . ', ' . $Reg_Id .');';
 	$sql = "INSERT INTO user_registrations (User_Id, Reg_Id, batch)
 			SELECT $User_Id, $Reg_Id, value 
 			FROM preferences 
