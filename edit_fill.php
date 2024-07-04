@@ -31,7 +31,6 @@ function fill_form() {
     $student_email = $row['Student_Email'];
     $student_phone = $row['Student_Phone_Number'];
     $class_id = $row['Class_Id'];
-    $cause = $row['Cause'];
 
   } else {
     $Reg_Id = $_POST['Reg_Id'];
@@ -45,7 +44,6 @@ function fill_form() {
     $student_name = $_POST['students-name'];
     $student_phone = $_POST['students-phone'];
     $class_id = $_POST['class'];
-    $cause = $_POST['cause'];
   }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
@@ -94,7 +92,7 @@ function fill_form() {
                   FROM classes c
                   JOIN offerings o ON c.Class_Id = o.class_id
                   JOIN preferences p ON o.batch = p.value
-                  WHERE p.variable = 'Active Registration' AND c.Status = 'Approved';";
+                  WHERE p.Preference_Name = 'Active Registration' AND c.Status = 'Approved';";
           $class_result = mysqli_query($connection, $class_query);
           
           while ($class_row = mysqli_fetch_assoc($class_result)) {
@@ -104,29 +102,6 @@ function fill_form() {
               echo "<option value=\"$class_id_option\" $selected>$class_name_option</option>";
           }
           
-        echo "</select>
-		<!--dropdown--->
-		<p><strong>Cause</strong></p>
-		<label>
-		  <input type=\"radio\" name=\"cause\" value=\"lib\" ";
-          if ($cause == "Library")
-              echo "checked=\"checked\"";
-        echo ">Library
-		</label>
-		<br>
-		<label>
-		  <input type=\"radio\" name=\"cause\" value=\"Dig_class\" ";
-          if ($cause == "Digital Classroom")
-              echo "checked=\"checked\"";
-        echo ">Digital Classroom</label>
-		<label>
-		  <br>
-		  <input type=\"radio\" name=\"cause\" value=\"Other\" ";
-          if ($cause == "No Preference")
-              echo "checked=\"checked\"";
-        echo "> No Preference
-		</label><!---radioButtons--->
-    </div>
-    ";
+
 }
 ?>
