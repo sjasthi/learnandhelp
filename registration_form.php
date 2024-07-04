@@ -51,7 +51,9 @@ if (isset($_SESSION['User_Id'])) {
     $StudentFullName = $student_row['First_Name'] . ' ' . $student_row['Last_Name'];
     $StudentEmail = $student_row['Email'];
     $StudentPhone = $student_row['Phone'];
-}
+  }
+
+
 
 include 'show-navbar.php';
 
@@ -67,7 +69,7 @@ echo "<!DOCTYPE html>
 show_navbar();
 echo      "<header class=\"inverse\">
           <div class=\"container\">
-              <h1><span class=\"accent-text\">Register Now</span></h1>
+              <h1><span class=\"accent-text\">Enroll Now</span></h1>
           </div>
           </header>
       <h3> Registration Form</h3>
@@ -86,7 +88,25 @@ echo      "<header class=\"inverse\">
           }else{
             echo "<input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$StudentPhone\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required><br>";
           }
+            // Get active Batch
+          $query = <<< SQL
+                      SELECT value 
+                      FROM preferences 
+                      WHERE Preference_Name = 'Active Registration';
+                      SQL;
+          $result = mysqli_query($connection, $query);
+          if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $active_batch = $row['value'];
+          } else {
+            $active_batch = null;
+            echo "Error: " . mysqli_error($connection);
+          }
+
           echo "
+          <br>
+          <br>
+          <label id=\"batch-label\"><b>Batch Name:</b> $active_batch</label>
           <br>
           <br>
           <label id=\"class\">*Select Class: </label>
@@ -106,8 +126,8 @@ if (isset($_SESSION['email']) && $_SESSION['role'] == 'admin') {
 else {
   $class_query = "SELECT c.Class_Id, c.Class_Name, c.Description, c.Status
                   FROM classes c
-                  JOIN offerings o ON c.Class_Id = o.class_id
-                  JOIN preferences p ON o.batch = p.value
+                  JOIN offerings o ON c.Class_Id = o.Class_Id
+                  JOIN preferences p ON o.Batch_Name = p.value
                   WHERE p.Preference_Name = 'Active Registration' AND c.Status = 'Approved';";
 }
 
@@ -189,9 +209,9 @@ echo "
     <input type=\"hidden\" id=\"action\" name=\"action\" value=\"add\">
     </form><!---survey-form--->";
     fetchRegistrationDetails($connection, $User_Id);
-    mysqli_close($connection);
 
 echo "  
   </body>
 </html>";
+mysqli_close($connection);
 ?>

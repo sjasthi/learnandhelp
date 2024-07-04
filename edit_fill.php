@@ -75,7 +75,34 @@ function fill_form() {
         <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br>
         <label id=\"students-number-label\">Student's Phone Number</label>
         <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required>
+        <br>";
+        // Get active Batch
+        $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
+        if ($connection === false) {
+          $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+          if ($connection === false) {
+            die("Failed to connect to database: " . mysqli_connect_error());
+          }
+        }
+        $sql = <<< SQL
+                  SELECT value 
+                  FROM preferences 
+                  WHERE Preference_Name = 'Active Registration';
+                  SQL;
+        $result = mysqli_query($connection, $sql);
+        if ($result) {
+          $row = mysqli_fetch_assoc($result);
+          $active_batch = $row['value'];
+        } else {
+          $active_batch = null;
+          echo "Error: " . mysqli_error($connection);
+        }
+
+        echo "
+        <br>
+        <label id=\"batch-label\"><b>Batch Name:</b> $active_batch</label>
+        <br>
         <br>
         <label id=\"class\">Select Class</label>
         <select id=\"dropdown\" name=\"class\" required>
@@ -91,7 +118,7 @@ function fill_form() {
           $class_query = "SELECT c.Class_Id, c.Class_Name, c.Description, c.Status
                   FROM classes c
                   JOIN offerings o ON c.Class_Id = o.class_id
-                  JOIN preferences p ON o.batch = p.value
+                  JOIN preferences p ON o.batch_name = p.value
                   WHERE p.Preference_Name = 'Active Registration' AND c.Status = 'Approved';";
           $class_result = mysqli_query($connection, $class_query);
           
