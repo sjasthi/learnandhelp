@@ -1,17 +1,18 @@
 <?php
 function fetchRegistrationDetails($connection, $userId) {
-    // SQL query
-    $sql = "SELECT b.batch, b.start_date, b.end_date, c.Class_Name
+    // SQL query to see registration history
+    $sql = <<<SQL
+        SELECT r.reg_id, b.batch_id, b.start_date, b.end_date, c.Class_Name
         FROM user_registrations ur
         JOIN registrations r ON ur.Reg_Id = r.Reg_Id
         JOIN classes c ON c.Class_Id = r.Class_Id
-        JOIN batch b ON ur.batch = b.batch
+        JOIN batch b ON ur.batch_id = b.batch_id
         JOIN preferences p ON 1=1
         WHERE ur.User_Id = $userId
-        AND b.batch != p.value
+        AND b.batch_id != p.value
         AND p.variable = 'Active Registration'
         ORDER BY b.end_date DESC;
-    ";
+    SQL;
     
     // Execute the query
     $result = mysqli_query($connection, $sql);
@@ -30,14 +31,16 @@ function fetchRegistrationDetails($connection, $userId) {
     
         // Loop through the result and populate the HTML
         while ($row = mysqli_fetch_assoc($result)) {
-            $batch = htmlspecialchars($row['batch']);
+            $batch = htmlspecialchars($row['batch_id']);
+            $reg_id = htmlspecialchars($row['reg_id']);
             $class_name = htmlspecialchars($row['Class_Name']);
             $start_date = htmlspecialchars($row['start_date']);
             $end_date = htmlspecialchars($row['end_date']);
             
             echo "
                 <button class='accordion'>$batch</button>
-                <div class='panel' style='display: none'>
+                <div class='panel' >
+                    <p><strong>Registration ID:</strong> $reg_id </p>
                     <p><strong>Class:</strong> $class_name </p>
                     <p><strong>Start Date:</strong> $start_date </p>
                     <p><strong>End Date:</strong> $end_date </p>
@@ -48,8 +51,9 @@ function fetchRegistrationDetails($connection, $userId) {
     
         echo "</div>"; // Close accordion-container
         echo "</div>"; // Close container_3
-    
-        // Add the accordion JavaScript
+        
+        
+        // Accordion menu functionality
         echo "
             <script>
             var acc = document.getElementsByClassName('accordion');
@@ -67,7 +71,9 @@ function fetchRegistrationDetails($connection, $userId) {
             </script>
         ";
     } else {
-        echo "No past registrations found.";
+        echo "<div id='container_3'>
+            <p style='display: none'>No past registrations found.</p>
+            </div>";
     }
 }
 ?>
