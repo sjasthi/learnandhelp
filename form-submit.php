@@ -75,16 +75,6 @@ while ($class_row = mysqli_fetch_assoc($class_result)) {
 // Get the class name using the class_id
 $class = isset($classes[$class_id]) ? $classes[$class_id] : 'Unknown Class';
 
-// switch ($cause){ // FIXME: Hardcoded in.
-// 	case "lib":
-// 		$cause = "Library";
-// 		break;
-// 	case "Dig_class":
-// 		$cause = "Digital Classroom";
-// 		break;
-// 	case "Other":
-// 		$cause = "No Preference";
-// }
 
 if ($action == 'add') {
 	$batch_name_query = "(SELECT value FROM preferences WHERE Preference_Name = 'Active Registration')";
@@ -162,14 +152,6 @@ if (!mysqli_query($connection, $sql)) {
 if ($action == 'add') {
 	$Reg_Id = mysqli_insert_id($connection);
 	echo "";
-// 	$User_Id = $_SESSION['User_Id'];
-// 	$sql = "INSERT INTO user_registrations (User_Id, Reg_Id, batch)
-// 			SELECT $User_Id, $Reg_Id, value 
-// 			FROM preferences 
-// 			WHERE variable = 'Active Registration';";
-	// if (!mysqli_query($connection, $sql)) {
-	// 	echo("Error description: " . mysqli_error($connection));
-	//  }
 }
 
 echo "<!DOCTYPE html>

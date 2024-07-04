@@ -102,29 +102,6 @@ function fill_form() {
               echo "<option value=\"$class_id_option\" $selected>$class_name_option</option>";
           }
           
-    //     echo "</select>
-		// <!--dropdown--->
-		// <p><strong>Cause</strong></p>
-		// <label>
-		//   <input type=\"radio\" name=\"cause\" value=\"lib\" ";
-    //       if ($cause == "Library")
-    //           echo "checked=\"checked\"";
-    //     echo ">Library
-		// </label>
-		// <br>
-		// <label>
-		//   <input type=\"radio\" name=\"cause\" value=\"Dig_class\" ";
-    //       if ($cause == "Digital Classroom")
-    //           echo "checked=\"checked\"";
-    //     echo ">Digital Classroom</label>
-		// <label>
-		//   <br>
-		//   <input type=\"radio\" name=\"cause\" value=\"Other\" ";
-    //       if ($cause == "No Preference")
-    //           echo "checked=\"checked\"";
-    //     echo "> No Preference
-		// </label><!---radioButtons--->
-    // </div>
-    // ";
+
 }
 ?>
