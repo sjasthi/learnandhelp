@@ -2,14 +2,13 @@
 function fetchRegistrationDetails($connection, $userId) {
     // SQL query to see registration history
     $sql = <<<SQL
-        SELECT r.reg_id, b.batch_id, b.start_date, b.end_date, c.Class_Name
-        FROM user_registrations ur
-        JOIN registrations r ON ur.Reg_Id = r.Reg_Id
+        SELECT r.reg_id, b.batch_name, b.start_date, b.end_date, c.Class_Name
+        FROM registrations r
         JOIN classes c ON c.Class_Id = r.Class_Id
-        JOIN batch b ON ur.batch_id = b.batch_id
+        JOIN batch b ON r.batch_name = b.batch_name
         JOIN preferences p ON 1=1
-        WHERE ur.User_Id = $userId
-        AND b.batch_id != p.value
+        WHERE r.User_Id = $userId
+        AND b.batch_name != p.value
         AND p.Preference_Name = 'Active Registration'
         ORDER BY b.end_date DESC;
     SQL;
@@ -31,7 +30,7 @@ function fetchRegistrationDetails($connection, $userId) {
     
         // Loop through the result and populate the HTML
         while ($row = mysqli_fetch_assoc($result)) {
-            $batch = htmlspecialchars($row['batch_id']);
+            $batch = htmlspecialchars($row['batch_name']);
             $reg_id = htmlspecialchars($row['reg_id']);
             $class_name = htmlspecialchars($row['Class_Name']);
             $start_date = htmlspecialchars($row['start_date']);

@@ -26,10 +26,10 @@ if (isset($_SESSION['User_Id'])) {
   $sql = <<< SQL
           SELECT * FROM registrations r
           JOIN classes c ON c.Class_Id = r.Class_Id
-          JOIN batch b ON r.batch_id = b.batch_id
+          JOIN batch b ON r.batch_name = b.batch_name
           JOIN preferences p ON 1=1
           WHERE r.User_Id = $User_Id
-          AND b.batch_id = p.value
+          AND b.batch_name = p.value
           AND p.Preference_Name = 'Active Registration'
           ORDER BY b.end_date DESC;
           SQL;
