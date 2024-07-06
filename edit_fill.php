@@ -31,7 +31,7 @@ function fill_form() {
     $student_email = $row['Student_Email'];
     $student_phone = $row['Student_Phone_Number'];
     $class = $row['Class_Name'];
-    $cause = $row['Cause'];
+	$class = $_POST['class'];
 
   } else {
     $db_id = $_POST['Reg_Id'];
@@ -46,7 +46,6 @@ function fill_form() {
 
     $student_phone = $_POST['students-phone'];
     $class = $_POST['class'];
-    $cause = $_POST['cause'];
   }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
@@ -111,26 +110,6 @@ function fill_form() {
 		  </option>
 		</select>
 		<!--dropdown--->
-		<p><strong>Cause</strong></p>
-		<label>
-		  <input type=\"radio\" name=\"cause\" value=\"lib\" ";
-          if ($cause == "Library")
-              echo "checked=\"checked\"";
-        echo ">Library
-		</label>
-		<br>
-		<label>
-		  <input type=\"radio\" name=\"cause\" value=\"Dig_class\" ";
-          if ($cause == "Digital Classroom")
-              echo "checked=\"checked\"";
-        echo ">Digital Classroom</label>
-		<label>
-		  <br>
-		  <input type=\"radio\" name=\"cause\" value=\"Other\" ";
-          if ($cause == "No Preference")
-              echo "checked=\"checked\"";
-        echo "> No Preference
-		</label><!---radioButtons--->
     </div>
     ";
 }

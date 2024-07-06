@@ -35,7 +35,6 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
     $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
 	$batch = isset($_POST['batch']) ? htmlspecialchars($_POST['batch']) : '';
-    $cause = isset($_POST['cause']) ? htmlspecialchars($_POST['cause']) : '';
 
     $timestamp = date("Y-m-d H:i:s");
 } else {
@@ -55,28 +54,8 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 		$student_phone = $row['Student_Phone_Number'];
 		$class_id = $row['Class_Id'];
 		$batch = $row['batch'];
-		$cause = $row['Cause'];
 
 }
-
-// FIXME: Hardcoded in relation to database
-// Correct method should pull the available classes from the database,
-// Allow the user to select one using the interface, and then POST from there.
-/*
-switch ($class_id){
-	case 2:
-		$class = "Python 101";
-		break;
-	case 4:
-		$class = "Python 201";
-		break;
-	case 1:
-		$class = "Java 101";
-		break;
-	case 3:
-		$class = "Java 201";
-}
-*/
 
 //Find name of registered class from Class_Id
 $classname_query = "SELECT Class_Name FROM classes where Class_Id = $class_id";
@@ -87,17 +66,6 @@ $class = $classname_row["Class_Name"];
 //WIP: Add/update user phone number. (Possible TODO: do the same for other information?)
 $update_phone_query = "UPDATE users SET Phone = '$student_phone' WHERE User_Id = '$User_Id';";
 $update_phone_result = $connection->query($update_phone_query);
-
-switch ($cause){ // FIXME: Hardcoded in.
-	case "lib":
-		$cause = "Library";
-		break;
-	case "Dig_class":
-		$cause = "Digital Classroom";
-		break;
-	case "Other":
-		$cause = "No Preference";
-}
 
 if ($action == 'add') {
 	$sql = "INSERT INTO registrations VALUES (
@@ -113,7 +81,6 @@ if ($action == 'add') {
 		'$student_phone',
 		'$class_id',
 		'$batch',
-		'$cause',
 		'$timestamp',
 		'$timestamp');";
 
@@ -131,7 +98,6 @@ if ($action == 'add') {
 			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
 			batch = '$batch',
-			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
 
@@ -149,7 +115,6 @@ if ($action == 'add') {
 			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
 			batch = '$batch',
-			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
 
@@ -220,14 +185,9 @@ echo "<!DOCTYPE html>
 		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$student_email\"><br><!---email-->
         <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\">
 
-        <label id=\"class\"><b>Selected Class:</b> $class</label><br>
+        <label id=\"class\"><b>Selected Class:</b> $class</label><br><br>
 		<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
-		<!--dropdown--->";
-	if (!empty($cause)) {
-		echo "<p><b>Cause:</b> $cause</p>";
-	}
-	echo "<input type=\"hidden\" id=\"cause\" name=\"cause\" value=\"$cause\">
-		<br>
+		<!--dropdown--->
 		<input type='hidden' name='action' value='edit'>
 		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
 		<br><br>

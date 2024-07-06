@@ -32,7 +32,7 @@ if (isset($_SESSION['User_Id'])) {
   $phone = $row["Phone"];
   $fullname = $fname . " " . $lname;
   
-  $Reg_Id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $student_email = $student_phone = $class = $cause = "";
+  $Reg_Id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $student_email = $student_phone = $class = "";
   
   //Keeping for now, just in case $phone will need to be used in a way where it cannot be null.
   /*if(is_null($phone)){
@@ -89,13 +89,13 @@ echo "<!DOCTYPE html>
 show_navbar();
 echo "<header class=\"inverse\">
 	<div class=\"container\">
-	<h1><span class=\"accent-text\">Register Now</span></h1>
+	<h1><span class=\"accent-text\">Enroll Now</span></h1>
 	</div>
 	</header>
 	<h2><strong>Registration Details</strong></h2>";
 
 //get list of current and prior class registrations for user, if they exist
-$user_reg_query = "SELECT * FROM registrations WHERE Student_Name = '". $fullname. "' AND batch = '$active_reg'";
+$user_reg_query = "SELECT * FROM registrations WHERE Student_Name = '". $fullname. "' AND Batch_Id = '$active_reg'";
 $user_reg_result = $connection->query($user_reg_query);
 
 //If user is registered for a class this term, show information for that registration.
@@ -118,7 +118,6 @@ if($user_reg_result->num_rows > 0){
 	$student_email = $user_reg_array['Student_Email'];
 	$student_phone = $user_reg_array['Student_Phone_Number'];
 	$class = $user_reg_array['Class_Id'];
-	$cause = $user_reg_array['Cause'];
 	
 	
 	echo "<button class='accordion'>$active_reg</button>
@@ -138,7 +137,6 @@ if($user_reg_result->num_rows > 0){
 		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$student_email\"><br><!---email-->
         <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\">
 		<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
-		<input type=\"hidden\" id=\"cause\" name=\"cause\" value=\"$cause\">
 		<input type='hidden' name='action' value='edit'>
 		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\">
 		</form>
@@ -178,7 +176,7 @@ else{
 		$active_reg_array = $active_reg_result->fetch_assoc();
 		$active_reg = $active_reg_array["value"];
 		
-		$offerings_query = "SELECT Class_Id FROM offerings WHERE batch = '$active_reg';";
+		$offerings_query = "SELECT Class_Id FROM offerings WHERE Batch_Id = '$active_reg';";
 		$offerings_result = $connection->query($offerings_query);
 		
 		$class_id_list = "";
@@ -252,7 +250,7 @@ else{
 //TODO link to registration_edit.php somehow
 
 //Get list of previous registrations.
-$past_reg_query = "SELECT Class_Id, batch FROM registrations LEFT JOIN batch on registrations.batch=batch.batch_name WHERE Student_Name = '". $fullname. "' AND NOT batch = '$active_reg' ORDER BY start_date DESC";
+$past_reg_query = "SELECT Class_Id, Batch_Id FROM registrations NATURAL JOIN batch WHERE Student_Name = '". $fullname. "' AND NOT Batch_Id = '$active_reg' ORDER BY Start_Date DESC";
 $past_reg_result = $connection->query($past_reg_query);
 
 //If registered for past semesters, display the information for each registration by semester in reverse chronological order. If not, only display the accordion for the current semester.
@@ -264,7 +262,7 @@ if($past_reg_result->num_rows > 0){
 		$class_name_array = $class_name_result->fetch_assoc();
 		mysqli_free_result($class_name_result);
 		$class_name = $class_name_array['Class_Name'];
-		$past_batch = $past_reg_row["batch"];
+		$past_batch = $past_reg_row["Batch_Id"];
 	
 		echo "<button class='accordion'>$past_batch</button>
 		<div class='panel'>
@@ -273,7 +271,6 @@ if($past_reg_result->num_rows > 0){
 		</div>";
 	}
 }
-	
 echo "<script>
 	var acc = document.getElementsByClassName('accordion');
 	var i;
@@ -288,8 +285,7 @@ echo "<script>
 		}
 	  });
 	}
-	</script>";
-		
-echo "</body>
-	 </html>";
+	</script>
+	</body>
+	</html>";
 ?>
