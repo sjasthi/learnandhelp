@@ -27,6 +27,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `batch`
 --
 
+CREATE DATABASE IF NOT EXISTS learn_and_help_db;
+USE learn_and_help_db;
+
+
 CREATE TABLE `batch` (
   `Batch_Id` varchar(11) NOT NULL,
   `Start_Date` date NOT NULL,
@@ -3710,6 +3714,7 @@ INSERT INTO `preferences` (`name`, `value`) VALUES
 
 CREATE TABLE `registrations` (
   `Reg_Id` int(11) NOT NULL,
+  `User_Id` int(11) NOT NULL,
   `Sponsor_Name` varchar(50) DEFAULT NULL,
   `Sponsor_Email` varchar(50) DEFAULT NULL,
   `Sponsor_Phone_Number` varchar(15) DEFAULT NULL,
@@ -3717,8 +3722,6 @@ CREATE TABLE `registrations` (
   `Spouse_Email` varchar(50) DEFAULT NULL,
   `Spouse_Phone_Number` varchar(15) DEFAULT NULL,
   `Student_Name` varchar(50) DEFAULT NULL,
-  `Student_Email` varchar(50) DEFAULT NULL,
-  `Student_Phone_Number` varchar(15) DEFAULT NULL,
   `Class_Id` int(11) DEFAULT NULL,
   `Batch_Id` varchar(11) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
@@ -3729,11 +3732,11 @@ CREATE TABLE `registrations` (
 -- Dumping data for table `registrations`
 --
 
-INSERT INTO `registrations` (`Reg_Id`, `Sponsor_Name`, `Sponsor_Email`, `Sponsor_Phone_Number`, `Spouse_Name`, `Spouse_Email`, `Spouse_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Batch_Id`, `Modified_Time`, `Created_Time`) VALUES
-(12, NULL, NULL, NULL, NULL, NULL, NULL, 'Brandon Roback', NULL, NULL, 8, 'Summer 2023', NULL, NULL),
-(14, NULL, NULL, NULL, NULL, NULL, NULL, 'Brandon Roback', NULL, NULL, 7, '2023-2024', NULL, NULL),
-(28, '', '', '', '', '', '', 'other student', 'other.student@email.com', '612-555-0123', 1, 'Summer 2024', '2024-07-06', '2024-07-06'),
-(31, 'Sponsor', 'sponsor@email.com', '612-555-1234', '', '', '', 'Brandon Roback', 'Brandon.Roback@my.metrostate.edu', '612-555-9876', 3, 'Summer 2024', '2024-07-06', '2024-07-06');
+INSERT INTO `registrations` (`Reg_Id`, `User_Id`, `Sponsor_Name`, `Sponsor_Email`, `Sponsor_Phone_Number`, `Spouse_Name`, `Spouse_Email`, `Spouse_Phone_Number`, `Student_Name`,`Class_Id`, `Batch_Id`, `Modified_Time`, `Created_Time`) VALUES
+(12, 43, NULL, NULL, NULL, NULL, NULL, NULL, 'Brandon Roback', 8, 'Summer 2023', NULL, NULL),
+(14, 43, NULL, NULL, NULL, NULL, NULL, NULL, 'Brandon Roback', 7, '2023-2024', NULL, NULL),
+(28, 45, '', '', '', '', '', '', 'other student', 1, 'Summer 2024', '2024-07-06', '2024-07-06'),
+(31, 43, 'Sponsor', 'sponsor@email.com', '612-555-1234', '', '', '', 'Brandon Roback', 3, 'Summer 2024', '2024-07-06', '2024-07-06');
 
 -- --------------------------------------------------------
 
@@ -3910,7 +3913,9 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 (43, 'Brandon', 'Roback', 'Brandon.Roback@my.metrostate.edu', '612-555-9876', '4737de3b8262e66aa8c5e07e0ea81fed5953d989', 'yes', 'student', '2024-06-11', '2024-06-11', '654c36395c7e45eddf72ff67487eac7afefdf515', '2024-06-24 23:33:47'),
 (44, 'Brandon', 'Roback', 'brandon.admin@my.metrostate.edu', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'admin', '2024-06-22', '2024-06-22', NULL, NULL),
 (45, 'other', 'student', 'other.student@email.com', '612-555-0123', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-06-22', '2024-06-22', NULL, NULL),
-(46, 'a', 'b', 'ab@c.com', '612-555-5555', '3c363836cf4e16666669a25da280a1865c2d2874', 'yes', 'student', '2024-07-06', '2024-07-06', NULL, NULL);
+(46, 'a', 'b', 'ab@c.com', '612-555-5555', '3c363836cf4e16666669a25da280a1865c2d2874', 'yes', 'student', '2024-07-06', '2024-07-06', NULL, NULL),
+(47, 'AdminScott', 'Sebesta', 'ssebesta1@gmail.com', NULL, '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'admin', '2024-07-08', '2024-07-08', NULL, NULL),
+(48, 'Scott', 'Sebesta', 'scott.sebesta@my.metrostate.edu', '651-867-5309', '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'student', '2024-07-08', '2024-07-08', NULL, NULL);
 
 -- --------------------------------------------------------
 

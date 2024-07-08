@@ -32,7 +32,7 @@ if (isset($_SESSION['User_Id'])) {
   $phone = $row["Phone"];
   $fullname = $fname . " " . $lname;
   
-  $Reg_Id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $student_email = $student_phone = $class = "";
+  $Reg_Id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $class = "";
   
   //Keeping for now, just in case $phone will need to be used in a way where it cannot be null.
   /*if(is_null($phone)){
@@ -115,8 +115,6 @@ if($user_reg_result->num_rows > 0){
 	$spouse_email = $user_reg_array['Spouse_Email'];
 	$spouse_phone = $user_reg_array['Spouse_Phone_Number'];
 	$student_name = $user_reg_array['Student_Name'];
-	$student_email = $user_reg_array['Student_Email'];
-	$student_phone = $user_reg_array['Student_Phone_Number'];
 	$class = $user_reg_array['Class_Id'];
 	
 	
@@ -134,8 +132,8 @@ if($user_reg_result->num_rows > 0){
 		<input type=\"hidden\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\"><!---email-->
         <input type=\"hidden\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\">
 		<input type=\"hidden\" id=\"students-name\" name=\"students-name\" class=\"form\" value=\"$student_name\"><!--name--->
-		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$student_email\"><br><!---email-->
-        <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\">
+		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$email\"><br><!---email-->
+        <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$phone\">
 		<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
 		<input type='hidden' name='action' value='edit'>
 		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\">

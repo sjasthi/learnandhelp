@@ -38,7 +38,7 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 
     $timestamp = date("Y-m-d H:i:s");
 } else {
-    $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations WHERE User_Id = $User_Id";
+    $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations NATURAL JOIN users WHERE User_Id = $User_Id";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
@@ -70,6 +70,7 @@ $update_phone_result = $connection->query($update_phone_query);
 if ($action == 'add') {
 	$sql = "INSERT INTO registrations VALUES (
 		NULL,
+		'$User_Id',
 		'$sponsor_name',
 		'$sponsor_email',
 		'$sponsor_phone',
@@ -77,8 +78,6 @@ if ($action == 'add') {
 		'$spouse_email',
 		'$spouse_phone',
 		'$student_name',
-		'$student_email',
-		'$student_phone',
 		'$class_id',
 		'$batch',
 		'$timestamp',
@@ -94,8 +93,6 @@ if ($action == 'add') {
 			Spouse_Email = '$spouse_email',
 			Spouse_Phone_Number = '$spouse_phone',
 			Student_Name = '$student_name',
-			Student_Email = '$student_email',
-			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
 			batch = '$batch',
 			Modified_Time = '$timestamp'
@@ -111,8 +108,6 @@ if ($action == 'add') {
 			Spouse_Email = '$spouse_email',
 			Spouse_Phone_Number = '$spouse_phone',
 			Student_Name = '$student_name',
-			Student_Email = '$student_email',
-			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
 			batch = '$batch',
 			Modified_Time = '$timestamp'
