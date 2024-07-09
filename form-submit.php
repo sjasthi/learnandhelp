@@ -182,7 +182,8 @@ echo "<!DOCTYPE html>
 
         <label id=\"class\"><b>Selected Class:</b> $class</label><br><br>
 		<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
-		<!--dropdown--->
+		<label id=\"batch\"><b>Selected Batch:</b> $batch</label><br><br>
+		<input type=\"hidden\" id=\"batch\" name=\"batch\" value=\"$batch\">
 		<input type='hidden' name='action' value='edit'>
 		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
 		<br><br>

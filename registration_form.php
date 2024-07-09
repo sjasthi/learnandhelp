@@ -93,14 +93,18 @@ echo "<header class=\"inverse\">
 	</div>
 	</header>
 	<h2><strong>Registration Details</strong></h2>";
+	
+//Get list of previous registrations, if exists
+$past_reg_query = "SELECT Class_Id, Batch_Id, Sponsor_Name, Sponsor_Email, Sponsor_Phone_Number FROM registrations NATURAL JOIN batch WHERE Student_Name = '". $fullname. "' AND NOT Batch_Id = '$active_reg' ORDER BY Start_Date DESC";
+$past_reg_result = $connection->query($past_reg_query);
 
-//get list of current and prior class registrations for user, if they exist
-$user_reg_query = "SELECT * FROM registrations WHERE Student_Name = '". $fullname. "' AND Batch_Id = '$active_reg'";
-$user_reg_result = $connection->query($user_reg_query);
+//Find current registration, if exists
+$current_reg_query = "SELECT * FROM registrations WHERE Student_Name = '". $fullname. "' AND Batch_Id = '$active_reg'";
+$current_reg_result = $connection->query($current_reg_query);
 
 //If user is registered for a class this term, show information for that registration.
-if($user_reg_result->num_rows > 0){
-	$user_reg_array = $user_reg_result->fetch_assoc();
+if($current_reg_result->num_rows > 0){
+	$user_reg_array = $current_reg_result->fetch_assoc();
 	$class_id = $user_reg_array['Class_Id'];
 	$class_name_query = "SELECT Class_Name FROM classes WHERE Class_Id = '$class_id';";
 	$class_name_result = $connection->query($class_name_query);
@@ -135,6 +139,7 @@ if($user_reg_result->num_rows > 0){
 		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$email\"><br><!---email-->
         <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$phone\">
 		<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
+		<input type=\"hidden\" id=\"batch\" name=\"batch\" value=\"$active_reg\">
 		<input type='hidden' name='action' value='edit'>
 		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\">
 		</form>
@@ -142,7 +147,7 @@ if($user_reg_result->num_rows > 0){
 		
 }
 //if user isn't registered for a class this term, show registration form
-else{
+else {
 	echo "<button class='accordion'>$active_reg</button>
 		<div class='panel'>
 		<p>You are not currently registered for this academic year.</p>
@@ -157,8 +162,9 @@ else{
 		<label id=\"students-email-label\"> *Student's Email: </label>
 		<input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required placeholder=\"Enter Student's email\" value=\"$email\"><br>
 		<label id=\"students-number-label\">*Student's Phone Number: </label>
-		<input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" value=\"$phone\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
-		<br>
+		<input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" value=\"$phone\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required><br>
+		<label id=\"batch-name-label\">*Batch Name</label>
+		<input type=\"text\" id=\"batch-name\" name=\"batch\" value=\"$active_reg\" readonly>
 		<br>
 		<label id=\"class\">*Select Class: </label>
 		<select id=\"dropdown\" name=\"class\" required>";
@@ -211,6 +217,15 @@ else{
 	  }
 	}
 	mysqli_free_result($class_result);
+	//most current past registration used to auto populate sponsor info
+	$sponsor_name = $sponsor_email = $sponsor_phone = "";
+	if($past_reg_result->num_rows > 0){
+		$past_reg_row = $past_reg_result->fetch_assoc();
+		$sponsor_name = $past_reg_row['Sponsor_Name'];
+		$sponsor_email = $past_reg_row['Sponsor_Email'];
+		$sponsor_phone = $past_reg_row['Sponsor_Phone_Number'];
+		reset($past_reg_result);
+	}
 	echo "</select>
 	<!--dropdown--->
 	
@@ -221,12 +236,12 @@ else{
 	<div id=\"right\">
   
 	<!---Sponsors Section -->
-	<label id=\"name-label\">Sponsor's Name: </label>
-	<input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" placeholder=\"Enter Sponsor's name\"><br><!--name--->
-	<label id=\"sponsers-email-label\"> Sponsor's Email: </label>
-	<input type=\"email\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" placeholder=\"Enter Sponsor's email\"><br><!---email-->
-	<label id=\"sponsers-number-label\">Sponsor's Phone Number: </label>
-	<input type=\"tel\" id=\"sponsers-phone\" name=\"sponsers-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\">
+	<label id=\"name-label\">*Sponsor's Name: </label>
+	<input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" placeholder=\"Enter Sponsor's name\" value=\"$sponsor_name\" required><br><!--name--->
+	<label id=\"sponsers-email-label\">*Sponsor's Email: </label>
+	<input type=\"email\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" placeholder=\"Enter Sponsor's email\" value=\"$sponsor_email\" required><br><!---email-->
+	<label id=\"sponsers-number-label\">*Sponsor's Phone Number: </label>
+	<input type=\"tel\" id=\"sponsers-phone\" name=\"sponsers-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" value=\"$sponsor_phone\" required>
 	<br>
 	<br>
 	<!---Spouse Section -->
@@ -245,15 +260,11 @@ else{
 	</form><!---survey-form--->
 	</div>";
 }
-//TODO link to registration_edit.php somehow
-
-//Get list of previous registrations.
-$past_reg_query = "SELECT Class_Id, Batch_Id FROM registrations NATURAL JOIN batch WHERE Student_Name = '". $fullname. "' AND NOT Batch_Id = '$active_reg' ORDER BY Start_Date DESC";
-$past_reg_result = $connection->query($past_reg_query);
 
 //If registered for past semesters, display the information for each registration by semester in reverse chronological order. If not, only display the accordion for the current semester.
 if($past_reg_result->num_rows > 0){
-	while($past_reg_row = $past_reg_result->fetch_assoc()){
+	//do while used to account for fetched row used to auto populate sponsor info, if change that logic switch this back to a regular while loop
+	do {
 		$class_id = $past_reg_row['Class_Id'];
 		$class_name_query = "SELECT Class_Name FROM classes WHERE Class_Id = '$class_id';";
 		$class_name_result = $connection->query($class_name_query);
@@ -267,7 +278,7 @@ if($past_reg_result->num_rows > 0){
 		<p><strong>Registration details for $past_batch</strong></p>
 		<p>$class_name</p><br>
 		</div>";
-	}
+	} while($past_reg_row = $past_reg_result->fetch_assoc());
 }
 echo "<script>
 	var acc = document.getElementsByClassName('accordion');

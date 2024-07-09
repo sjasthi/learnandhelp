@@ -32,6 +32,7 @@ function fill_form() {
     $student_phone = $row['Student_Phone_Number'];
     $class = $row['Class_Name'];
 	$class = $_POST['class'];
+	$batch = $_POST['batch'];
 
   } else {
     $db_id = $_POST['Reg_Id'];
@@ -43,7 +44,7 @@ function fill_form() {
     $spouse_email = $_POST['spouses-email'];
     $spouse_phone = $_POST['spouses-phone'];
     $student_name = $_POST['students-name'];
-
+	$batch = $_POST['batch'];
     $student_phone = $_POST['students-phone'];
     $class = $_POST['class'];
   }
@@ -61,11 +62,11 @@ function fill_form() {
         <br>
         <!---Spouse Section -->
         <label id=\"spouses-name-label\">Spouse's Name</label>
-        <input type=\"text\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" value=\"$spouse_name\" required><br>
+        <input type=\"text\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" value=\"$spouse_name\"><br>
         <label id=\"spouses-email-label\"> Spouse's Email</label>
-        <input type=\"email\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\" required ><br>
+        <input type=\"email\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\"><br>
         <label id=\"spouses-number-label\">Spouse's Phone Number</label>
-        <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\" required>
+        <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\">
 
         <br>
         </div>
@@ -74,9 +75,11 @@ function fill_form() {
         <label id=\"students-name-label\">Student's Name</label>
         <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required value=\"$student_name\"><br>
         <label id=\"students-email-label\"> Student's Email</label>
-        <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br
+        <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br>
         <label id=\"students-number-label\">Student's Phone Number</label>
-        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required>
+        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required><br>
+		<label id=\"batch-name-label\">Batch Name</label>
+		<input type=\"text\" id=\"batch-name\" name=\"batch\" value=\"$batch\" readonly>
 
         <br>
         <label id=\"class\">Select Class</label>
@@ -96,18 +99,6 @@ function fill_form() {
         echo ">
             Java 101
           </option>
-          <option value=4 ";
-          if ($class == "Python 201")
-              echo "selected";
-        echo ">
-            Python 201
-          </option>
-		  <option value=3 ";
-          if ($class == "Java 201")
-              echo "selected";
-        echo ">
-			Java 201
-		  </option>
 		</select>
 		<!--dropdown--->
     </div>
