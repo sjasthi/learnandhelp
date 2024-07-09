@@ -8,10 +8,10 @@ if ($status == PHP_SESSION_NONE) {
 
 
 function fill_form() {
-
+	$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
   if (isset($_COOKIE['email']) and !isset($_POST['action'])){
     $student_email = $_COOKIE['email'];
-    $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+    
 
     if ($connection === false) {
   	  die("Failed to connect to database: " . mysqli_connect_error());
@@ -30,7 +30,7 @@ function fill_form() {
     $student_name = $row['Student_Name'];
     $student_email = $row['Student_Email'];
     $student_phone = $row['Student_Phone_Number'];
-    $class = $row['Class_Name'];
+    $class_name = $row['Class_Name'];
 	$class = $_POST['class'];
 	$batch = $_POST['batch'];
 
@@ -86,20 +86,52 @@ function fill_form() {
         <select id=\"dropdown\" name=\"role\" required>
           <option disabled value>
             Select your class
-          </option>
-          <option value=2";
-            if ($class == "Python 101")
-                echo "selected";
-        echo  ">
-            Python 101
-          </option>
-          <option value=1 ";
-          if ($class == "Java 101")
-              echo "selected";
-        echo ">
-            Java 101
-          </option>
-		</select>
+          </option>";
+		  
+		  	// Select view of available classes for users from accessing the page 
+	// Admin's can see all classes regardless of status
+	if ((isset($_SESSION['email'])) &&  $_SESSION['role'] == 'admin') {
+	  $class_query = "SELECT Class_Id, Class_Name, Description, Status FROM classes;";
+	}
+	//Non-Admin's and users not logged in can only see "Approved" Classes
+	else {		
+		$offerings_query = "SELECT Class_Id FROM offerings WHERE Batch_Id = '$batch';";
+		$offerings_result = $connection->query($offerings_query);
+		
+		$class_id_list = "";
+		if($offerings_result->num_rows > 0)
+		{
+			$i = 0;
+			while($offerings_row = $offerings_result->fetch_assoc())
+			{
+				$class_id_list .= strval($offerings_row["Class_Id"]);
+				$i++;
+				if($i < $offerings_result->num_rows){
+					$class_id_list .= ", ";
+				}
+			}
+		}
+		
+		$class_query = "SELECT Class_Id, Class_Name, Description, Status FROM classes WHERE Class_Id IN ($class_id_list)";
+	}
+
+	// Fetch classes from the database
+	//$class_query = "SELECT * FROM classes";
+	$class_result = $connection->query($class_query);
+	if (!$class_result) {
+	  echo "Error: " . $connection->error;
+	} 
+	else {
+	  if ($class_result->num_rows > 0) {
+		while ($row = $class_result->fetch_assoc())
+			echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] . "</option>";
+	  } 
+	  else {
+			echo "<option disabled selected value>No classes found</option>";
+	  }
+	}
+	mysqli_free_result($class_result);
+	echo "</select>
 		<!--dropdown--->
     </div>
     ";
