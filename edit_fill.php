@@ -83,7 +83,7 @@ function fill_form() {
 
         <br>
         <label id=\"class\">Select Class</label>
-        <select id=\"dropdown\" name=\"role\" required>
+        <select id=\"dropdown\" name=\"class\" required>
           <option disabled value>
             Select your class
           </option>";

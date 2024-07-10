@@ -94,7 +94,7 @@ if ($action == 'add') {
 			Spouse_Phone_Number = '$spouse_phone',
 			Student_Name = '$student_name',
 			Class_Id = '$class_id',
-			batch = '$batch',
+			Batch_Id = '$batch',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
 
@@ -109,7 +109,7 @@ if ($action == 'add') {
 			Spouse_Phone_Number = '$spouse_phone',
 			Student_Name = '$student_name',
 			Class_Id = '$class_id',
-			batch = '$batch',
+			Batch_Id = '$batch',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
 
