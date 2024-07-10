@@ -263,6 +263,7 @@ else {
 
 //If registered for past semesters, display the information for each registration by semester in reverse chronological order. If not, only display the accordion for the current semester.
 if($past_reg_result->num_rows > 0){
+	$past_reg_row = $past_reg_result->fetch_assoc();
 	//do while used to account for fetched row used to auto populate sponsor info, if change that logic switch this back to a regular while loop
 	do {
 		$class_id = $past_reg_row['Class_Id'];
