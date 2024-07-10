@@ -262,10 +262,9 @@ else {
 }
 
 //If registered for past semesters, display the information for each registration by semester in reverse chronological order. If not, only display the accordion for the current semester.
+$past_reg_result = $connection->query($past_reg_query);
 if($past_reg_result->num_rows > 0){
-	$past_reg_row = $past_reg_result->fetch_assoc();
-	//do while used to account for fetched row used to auto populate sponsor info, if change that logic switch this back to a regular while loop
-	do {
+	while($past_reg_row = $past_reg_result->fetch_assoc()){
 		$class_id = $past_reg_row['Class_Id'];
 		$class_name_query = "SELECT Class_Name FROM classes WHERE Class_Id = '$class_id';";
 		$class_name_result = $connection->query($class_name_query);
@@ -279,7 +278,7 @@ if($past_reg_result->num_rows > 0){
 		<p><strong>Registration details for $past_batch</strong></p>
 		<p>$class_name</p><br>
 		</div>";
-	} while($past_reg_row = $past_reg_result->fetch_assoc());
+	}
 }
 echo "<script>
 	var acc = document.getElementsByClassName('accordion');
