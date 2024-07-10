@@ -85,10 +85,9 @@ if (isset($_SESSION['role'])) {
     <a class="toggle-vis" data-column="8">Student Email</a> -
     <a class="toggle-vis" data-column="9">Student Phone Number</a> -
     <a class="toggle-vis" data-column="10">Class</a> -
-    <a class="toggle-vis" data-column="11">Cause</a> -
-    <a class="toggle-vis" data-column="12">Date Modified</a> -
-    <a class="toggle-vis" data-column="13">Date Created</a> -
-    <a class="toggle-vis" data-column="14">Options</a>
+    <a class="toggle-vis" data-column="11">Date Modified</a> -
+    <a class="toggle-vis" data-column="12">Date Created</a> -
+    <a class="toggle-vis" data-column="13">Options</a>
 </div>
 <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
     <table id="registration_table" class="display compact">
@@ -105,7 +104,6 @@ if (isset($_SESSION['role'])) {
             <th>Student Email</th>
             <th>Student Phone Number</th>
             <th>Class</th>
-            <th>Cause</th>
             <th>Date Modified</th>
             <th>Date Created</th>
             <th>Options</th>
@@ -135,7 +133,7 @@ if (isset($_SESSION['role'])) {
                     $row["Sponsor2_Phone_Number"] . "</td><td>" . $row["Student_Name"] .
                     "</td><td>" . $row["Student_Email"] . "</td><td>" .
                     $row["Student_Phone_Number"] . "</td><td>" . $row["Class_Name"] .
-                    "</td><td>" . $row["Cause"] . "</td><td>" .
+                    "</td><td>" . 
                     $row["Modified_Time"] . "</td><td>" . $row["Created_Time"] .
                     "</td>
                 <td>
