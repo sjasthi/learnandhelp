@@ -61,17 +61,17 @@ if ($status == PHP_SESSION_NONE) {
 	
 	$sql = "SELECT count(*) as num_schools FROM `schools`";
 	$result = $conn->query($sql);
-    $total_array = $result->fetch_assoc();
+	$total_array = $result->fetch_assoc();
 	$num_schools = $total_array['num_schools'];
 	
 	$sql = "SELECT count(*) as num_books FROM `books`";
 	$result = $conn->query($sql);
-    $total_array = $result->fetch_assoc();
+	$total_array = $result->fetch_assoc();
 	$num_books = $total_array['num_books'];
 	
 	$sql = "SELECT count(DISTINCT(User_Id)) as num_students FROM `registrations`";
 	$result = $conn->query($sql);
-    $total_array = $result->fetch_assoc();
+	$total_array = $result->fetch_assoc();
 	$num_students = $total_array['num_students'];
 	
 	$result->free();
