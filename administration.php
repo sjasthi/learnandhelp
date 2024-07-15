@@ -33,6 +33,12 @@
     </header>
     <div id="admin_icons" style="width: 80%; margin: auto;">
       <div class="admin_icon">
+          <a href="admin_preferences_CRUD.php" id="instructors">
+          <img src="images/admin_icons/reports_icon.png" alt="preferences"></a>
+          <br>
+          <label for="preferences">Edit Preferences</label>
+      </div>
+      <div class="admin_icon">
         <a href="admin_registrations.php" id="registrations"><img src="images/admin_icons/registrations_icon.png" alt="registration"></a>
         <br>
         <label for="registrations">Registrations</label>
@@ -94,6 +100,7 @@
         <br>
         <label for="instructors">Instructors</label>
     </div>
+    
     <!-- review suggested schools -->
     <div class="admin_icon">
       <a href="admin_review_suggestions.php" id="suggested_schools"><img src="images/admin_icons/review.jpg" alt="suggested schools review logo"></a>
