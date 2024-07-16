@@ -99,7 +99,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : '';
 <?php show_navbar(); ?>
 <header class="inverse">
     <div class="container">
-        <h1><span class="accent-text">Registrations</span></h1>
+        <h1><span class="accent-text">Preferences</span></h1>
     </div>
 </header>
 <!-- Jquery Data Table -->
