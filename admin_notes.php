@@ -50,3 +50,17 @@ function get_admin_notes(){
           <input type="submit" value="Save" style="padding: 10px 20px; font-size: 16px;">
       </form>
     </div>
+    <script>
+      $(document).ready(function(){
+        var originalContent = $('#admin_notes').val();
+
+        $('form').submit(function(e){
+          if ($('#admin_notes').val() === originalContent){
+            e.preventDefault();
+            alert('No changes were made. Please close or edit then update.');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
