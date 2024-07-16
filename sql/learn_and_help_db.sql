@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2024 at 04:49 AM
+-- Generation Time: Jul 17, 2024 at 01:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,8 +40,8 @@ CREATE TABLE `batch` (
 INSERT INTO `batch` (`Batch_Name`, `start_date`, `end_date`) VALUES
 ('2023-2024', '2023-09-01', '2024-05-01'),
 ('2024-2025', '2024-09-01', '2025-05-01'),
-('Summer 2023', '2023-06-01', '2023-08-31'),
-('Summer 2024', '2024-06-01', '2024-08-31');
+('Fall 2024', '2024-08-01', '2024-12-31'),
+('Summer 2023', '2023-06-01', '2023-08-31');
 
 -- --------------------------------------------------------
 
@@ -3662,14 +3662,14 @@ INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 
 CREATE TABLE `preferences` (
   `Preference_Name` varchar(50) NOT NULL,
-  `value` varchar(50) NOT NULL
+  `Value` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `preferences`
 --
 
-INSERT INTO `preferences` (`Preference_Name`, `value`) VALUES
+INSERT INTO `preferences` (`Preference_Name`, `Value`) VALUES
 ('Active Registration', '2024-2025'),
 ('Course Fee', '500');
 
