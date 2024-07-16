@@ -1,10 +1,3 @@
-<?php
-$status = session_status();
-if ($status == PHP_SESSION_NONE) {
-  session_start();
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,45 +71,32 @@ if ($status == PHP_SESSION_NONE) {
 	$conn->close();
 	echo "<h2><b>Learn and Help Program Summarized</b></h2>
 		<p class=\"stats slidein1\"><span class=\"value\" data-value=\"$num_schools\">0</span> Schools Supported</p>
-		<p class=\"stats slidein2\"><span class=\"book_value\" data-value=\"$num_books\">0</span> Books Shipped</p>
+		<p class=\"stats slidein2\"><span class=\"value\" data-value=\"$num_books\">0</span> Books Shipped</p>
 		<p class=\"stats slidein3\"><span class=\"value\" data-value=\"$num_students\">0</span> Students Enrolled</p>
 	</div>
 	</body>
 		<script>
-		  // Dynamically increment school and student values
+		  // Dynamically increment values
 		  let allValues = document.querySelectorAll(\".value\");
 		  allValues.forEach((singleValue) => {
 		    let startValue = 0;
 		    let endValue = parseInt(singleValue.getAttribute(\"data-value\"));
-		    let duration = Math.floor(2000 / endValue);
+		    let duration = Math.floor(1500 / endValue);
 		    let counter = setInterval(function () {
-		      startValue += 1;
+			  startValue += 1;
+		      // Adjust this to count larger numbers faster
+			  if (endValue > 1000) {
+			    startValue += 12;
+		      }
 		      singleValue.textContent = startValue;
 		      if (startValue == endValue) {
 		        clearInterval(counter);
 		      }
+		      else if (startValue > endValue) {
+		        singleValue.textContent = endValue;
+		      }	
 		    }, duration);
 		  });
-		  // Faster counter for larger book total
-		  let startNum = 0,
-		  endNum = $num_books,
-		  nSecond = 2,
-		  resolutionMS = 33,
-		  deltaNum = (endNum - startNum) / (900 / resolutionMS) / nSecond;
-		  function countIni() {
-		    var handle = setInterval(() => {
-		      var x = startNum.toLocaleString(undefined, {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-              });
-              document.querySelector('.book_value').innerHTML = x.toString();
-		      // if already updated the endNum, stop
-		      if (startNum >= endNum) clearInterval(handle);
-		        startNum += deltaNum;
-		      startNum = Math.min(startNum, endNum);
-		    }, resolutionMS);
-		  }
-		  countIni();
 		</script>
 	</html>";
 ?>
