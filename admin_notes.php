@@ -1,4 +1,12 @@
 <?php
+function get_admin_notes(){
+  $filename = 'admin_notes.txt';
+  if(file_exists($filename)){
+    return file_get_contents($filename);
+  } else {
+    return '';
+  }
+}
  $status = session_status();
  if ($status == PHP_SESSION_NONE) {
    session_start();
@@ -35,4 +43,10 @@
       </div>
     </header>
     <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
-      <table id="batch_table" class="class_id">
+      <form method="post" action="save_admin_notes.php">
+        <textarea name="admin_notes" id="admin_notes" style="width: 80%; height: 400px; padding: 10px; font-size: 16px;">
+          <?php echo htmlspecialchars(get_admin_notes()); ?></textarea>
+          <br><br>
+          <input type="submit" value="Save" style="padding: 10px 20px; font-size: 16px;">
+      </form>
+    </div>
