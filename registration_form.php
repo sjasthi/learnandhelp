@@ -1,5 +1,6 @@
 <?php
 require 'db_configuration.php';
+include 'show_registration_history.php';
 $status = session_status();
 if ($status == PHP_SESSION_NONE) {
   session_start();
@@ -9,7 +10,18 @@ if ($status == PHP_SESSION_NONE) {
 // Check to see if the logged in user has a registration on file
 if (isset($_SESSION['User_Id'])) {
   $User_Id = $_SESSION['User_Id'];
-  $sql = 'SELECT * FROM user_registrations WHERE User_Id = ' . $User_Id . ';';
+
+  $sql = <<< SQL
+          SELECT * FROM registrations r
+          JOIN classes c ON c.Class_Id = r.Class_Id
+          JOIN batch b ON r.batch_name = b.batch_name
+          JOIN preferences p ON 1=1
+          WHERE r.User_Id = $User_Id
+          AND b.batch_name = p.value
+          AND p.Preference_Name = 'Active Registration'
+          ORDER BY b.end_date DESC;
+          SQL;
+        
   $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
   if ($connection === false) {
@@ -21,9 +33,27 @@ if (isset($_SESSION['User_Id'])) {
   if ($result->num_rows > 0) {
     header("Location: form-submit.php");
   }
-} else {
-  header("Location: login.php");
-}
+  } else {
+    header("Location: login.php");
+  }
+
+
+// Query to populate student info
+  $student_info_query = "SELECT First_Name, Last_Name, Email, Phone FROM users WHERE User_ID = $User_Id;";
+  $student_info_result = mysqli_query($connection, $student_info_query );
+
+  if (!$student_info_result) {
+      die("Query failed: " . mysqli_error($connection));
+  }
+
+  $student_info = [];
+  while ($student_row = mysqli_fetch_assoc($student_info_result)) {
+    $StudentFullName = $student_row['First_Name'] . ' ' . $student_row['Last_Name'];
+    $StudentEmail = $student_row['Email'];
+    $StudentPhone = $student_row['Phone'];
+  }
+
+
 
 include 'show-navbar.php';
 
@@ -39,42 +69,69 @@ echo "<!DOCTYPE html>
 show_navbar();
 echo      "<header class=\"inverse\">
           <div class=\"container\">
-              <h1><span class=\"accent-text\">Register Now</span></h1>
+              <h1><span class=\"accent-text\">Enroll Now</span></h1>
           </div>
           </header>
       <h3> Registration Form</h3>
       <p><i>* Required Fields</i></p>
       <div id= \"container_2\">
-        <!---Student Section -->
-        <label id=\"students-name-label\">*Student's Name: </label>
-        <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required placeholder=\"Enter Student's name\"><br>
-        <label id=\"students-email-label\"> *Student's Email: </label>
-        <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required placeholder=\"Enter Student's email\"><br>
-        <label id=\"students-number-label\">*Student's Phone Number: </label>
-        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>
-        <br>
-        <br>
-        <label id=\"class\">*Select Class: </label>
-        <select id=\"dropdown\" name=\"class\" required>"; // changed name to class
+        <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
+          <!---Student Section -->
+          <label id=\"students-name-label\">*Student's Name: </label>
+          <input type=\"text\" id=\"students-name\" name=\"students-name\" class=\"form\" required value=\"$StudentFullName\"><br>
+          <label id=\"students-email-label\">*Student's Email: </label>
+          <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$StudentEmail\"><br>
+          <label id=\"students-number-label\">*Student's Phone Number: </label>";
+          // if student phone not set yet
+          if (!$StudentPhone){  
+            echo " <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required>";
+          }else{
+            echo "<input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$StudentPhone\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" required><br>";
+          }
+            // Get active Batch
+          $query = <<< SQL
+                      SELECT value 
+                      FROM preferences 
+                      WHERE Preference_Name = 'Active Registration';
+                      SQL;
+          $result = mysqli_query($connection, $query);
+          if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $active_batch = $row['value'];
+          } else {
+            $active_batch = null;
+            echo "Error: " . mysqli_error($connection);
+          }
+
+          echo "
+          <br>
+          <br>
+          <label id=\"batch-label\"><b>Batch Name:</b> $active_batch</label>
+          <br>
+          <br>
+          <label id=\"class\">*Select Class: </label>
+          <select id=\"dropdown\" name=\"class\" required>"; // changed name to class
+
+
+
 
 
 // Select view of available classes for users from accessing the page 
 // Admin's can see all classes regardless of status
-if ((isset($_SESSION['email'])) &&  $_SESSION['role'] == 'admin') {
+if (isset($_SESSION['email']) && $_SESSION['role'] == 'admin') {
   $class_query = "SELECT Class_Id, Class_Name, Description, Status
-              FROM classes;";
-}
-
-//Non-Admin's and users not logged in can only see "Approved" Classes
+                  FROM classes;";
+} 
+// Non-Admin's and users not logged in can only see "Approved" Classes
 else {
-  $class_query = "SELECT Class_Id, Class_Name, Description, Status
-              FROM classes
-              WHERE Status = 'Approved';";
+  $class_query = "SELECT c.Class_Id, c.Class_Name, c.Description, c.Status
+                  FROM classes c
+                  JOIN offerings o ON c.Class_Id = o.Class_Id
+                  JOIN preferences p ON o.Batch_Name = p.value
+                  WHERE p.Preference_Name = 'Active Registration' AND c.Status = 'Approved';";
 }
-
 
 // Fetch classes from the database
-//$class_query = "SELECT * FROM classes";
 $class_result = $connection->query($class_query);
 if (!$class_result) {
   echo "Error: " . $connection->error;
@@ -88,37 +145,73 @@ if (!$class_result) {
   }
 }
 
-echo      "</select>
+
+
+echo "</select>
 		<!--dropdown--->
 		
 		</label><!---radioButtons--->
 		<br>
-    </div>
+    </div>";
+   // Query to populate sponsor info
+    $sql = <<<SQL
+      SELECT r.Sponsor1_Name, r.Sponsor1_Email, r.Sponsor1_Phone_Number, r.Sponsor2_Name, r.Sponsor2_Email, r.Sponsor2_Phone_Number
+      FROM registrations r
+      JOIN users u ON CONCAT(u.First_Name, ' ', u.Last_Name) = r.student_name
+      WHERE u.User_ID = $User_Id
+      LIMIT 1;
+    SQL;
+  $sponsor_info_result = mysqli_query($connection, $sql );
 
+  if (!$sponsor_info_result) {
+      die("Query failed: " . mysqli_error($connection));
+  }
+
+  if($sponsor_row = mysqli_fetch_assoc($sponsor_info_result)){
+    $sponsor1_name = $sponsor_row["Sponsor1_Name"];
+    $sponsor1_email = $sponsor_row["Sponsor1_Email"];
+    $sponsor1_phone = $sponsor_row["Sponsor1_Phone_Number"];
+    $sponsor2_name = $sponsor_row["Sponsor2_Name"];
+    $sponsor2_email = $sponsor_row["Sponsor2_Email"];
+    $sponosr2_phone = $sponsor_row["Sponsor2_Phone_Number"];
+  } else{
+    $sponsor1_name = null;
+    $sponsor1_email = null;
+    $sponsor1_phone = null;
+    $sponsor2_name = null;
+    $sponsor2_email = null;
+    $sponosr2_phone = null;
+  }
+
+echo "
     <div id=\"right\">
-      <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
-        <!---Sponsors Section -->
-        <label id=\"name-label\">Sponsor's Name: </label>
-        <input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" placeholder=\"Enter Sponsor's name\"><br><!--name--->
-        <label id=\"sponsers-email-label\"> Sponsor's Email: </label>
-        <input type=\"email\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" placeholder=\"Enter Sponsor's email\"><br><!---email-->
-        <label id=\"sponsors-number-label\">Sponsor's Phone Number: </label>
-        <input type=\"tel\" id=\"sponsers-phone\" name=\"sponsers-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\">
+      
+        <!---Sponsor 1's Section -->
+        <label id=\"name-label\">Sponsor 1's Name: </label>
+        <input type=\"text\" id=\"sponsor1-name\" name=\"sponsor1-name\" class=\"form\" value=\"$sponsor1_name\" placeholder=\"Enter Sponsor 1's name\"><br><!--name--->
+        <label id=\"sponsor1-email-label\"> Sponsor 1's Email: </label>
+        <input type=\"email\" id=\"sponsor1-email\" name=\"sponsor1-email\" class=\"form\" value=\"$sponsor1_email\" placeholder=\"Enter Sponsor 1's email\"><br><!---email-->
+        <label id=\"sponsor1-number-label\">Sponsor 1's Phone Number: </label>
+        <input type=\"tel\" id=\"sponsor1-phone\" name=\"sponsor1-phone\" value=\"$sponsor1_phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\">
         <br>
         <br>
-        <!---Spouse Section -->
-        <label id=\"spouses-name-label\">Spouse's Name: </label>
-        <input type=\"text\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" placeholder=\"Enter Spouse's name\"><br>
-        <label id=\"spouses-email-label\"> Spouse's Email: </label>
-        <input type=\"email\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" placeholder=\"Enter Spouse's email\"><br>
-        <label id=\"spouses-number-label\">Spouse's Phone Number: </label>
-        <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\">
+        <!---Sponsor 2 Section -->
+        <label id=\"sponsor2-name-label\">Sponsor 2's Name: </label>
+        <input type=\"text\" id=\"sponsor2-name\" name=\"sponsor2-name\" class=\"form\" value=\"$sponsor2_name\" placeholder=\"Enter Sponsor 2's name\"><br>
+        <label id=\"sponsor2-email-label\"> Sponsor 2's Email: </label>
+        <input type=\"email\" id=\"sponsor2-email\" name=\"sponsor2-email\" class=\"form\" value=\"$sponsor2_email\" placeholder=\"Enter Sponsor 2's email\"><br>
+        <label id=\"sponsor2-number-label\">Sponsor 2's Phone Number: </label>
+        <input type=\"tel\" id=\"sponsor2-phone\" name=\"sponsor2-phone\" value=\"$sponosr2_phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\">
 
       </div>
 <br>
     <input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Submit\">
     <input type=\"hidden\" id=\"action\" name=\"action\" value=\"add\">
-    </form><!---survey-form--->
+    </form><!---survey-form--->";
+    fetchRegistrationDetails($connection, $User_Id);
 
+echo "  
   </body>
 </html>";
+mysqli_close($connection);
+?>

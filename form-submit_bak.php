@@ -1,7 +1,6 @@
 <?php
 require 'db_configuration.php';
 
-
 $status = session_status();
 if ($status == PHP_SESSION_NONE) {
   session_start();
@@ -12,7 +11,6 @@ if (!(isset($_SESSION['email']))) {
 }
 
 include 'show-navbar.php';
-include 'show_registration_history.php';
 $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
 if ($connection === false) {
@@ -23,24 +21,6 @@ if (isset($_POST['action'])) {
 } else {
 	$action = '';
 }
-
-// Get active batch
-$query = <<< SQL
-			SELECT value 
-			FROM preferences 
-			WHERE Preference_Name = 'Active Registration';
-			SQL;
-$result = mysqli_query($connection, $query);
-if ($result) {
-    $row = mysqli_fetch_assoc($result);
-    $active_batch = $row['value'];
-} else {
-    $active_batch = null;
-    echo "Error: " . mysqli_error($connection);
-}
-
-
-
 
 if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     // Validate and sanitize form input
@@ -54,11 +34,12 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
     $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
     $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
+    $cause = isset($_POST['cause']) ? htmlspecialchars($_POST['cause']) : '';
 
     $timestamp = date("Y-m-d H:i:s");
 } else {
 	$User_Id = $_SESSION['User_Id'];
-    $sql = "SELECT * FROM registrations NATURAL JOIN classes WHERE User_Id = $User_Id;";
+    $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations WHERE User_Id = $User_Id;";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
@@ -73,8 +54,27 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 		$student_email = $row['Student_Email'];
 		$student_phone = $row['Student_Phone_Number'];
 		$class_id = $row['Class_Id'];
-		$batch_name = $row['Batch_Name']; 
+		$cause = $row['Cause'];
+
 }
+
+// FIXME: Hardcoded in relation to database
+// Correct method should pull the available classes from the database,
+// Allow the user to select one using the interface, and then POST from there.
+
+// switch ($class_id){
+// 	case 2:
+// 		$class = "Python 101";
+// 		break;
+// 	case 4:
+// 		$class = "Python 201";
+// 		break;
+// 	case 1:
+// 		$class = "Java 101";
+// 		break;
+// 	case 3:
+// 		$class = "Java 201";
+// }
 
 // Pull the available classes from the database
 $class_query = "SELECT Class_Id, Class_Name FROM classes";
@@ -92,41 +92,34 @@ while ($class_row = mysqli_fetch_assoc($class_result)) {
 // Get the class name using the class_id
 $class = isset($classes[$class_id]) ? $classes[$class_id] : 'Unknown Class';
 
+switch ($cause){ // FIXME: Hardcoded in.
+	case "lib":
+		$cause = "Library";
+		break;
+	case "Dig_class":
+		$cause = "Digital Classroom";
+		break;
+	case "Other":
+		$cause = "No Preference";
+}
 
 if ($action == 'add') {
-	$batch_name_query = "(SELECT value FROM preferences WHERE Preference_Name = 'Active Registration')";
+	$sql = "INSERT INTO registrations VALUES (
+		NULL,
+		'$sponsor1_name',
+		'$sponsor1_email',
+		'$sponsor1_phone',
+		'$sponsor2_name',
+		'$sponsor2_email',
+		'$sponsor2_phone',
+		'$student_name',
+		'$student_email',
+		'$student_phone',
+		'$class_id',
+		'$cause',
+		'$timestamp',
+		'$timestamp');";
 
-	$sql = "INSERT INTO registrations 
-				(Sponsor1_Name, 
-				Sponsor1_Email, 
-				Sponsor1_Phone_Number,
-				Sponsor2_Name, 
-				Sponsor2_Email, 
-				Sponsor2_Phone_Number,
-				Student_Name, 
-				Student_Email, 
-				Student_Phone_Number, 
-				Class_Id,  
-				Modified_Time, 
-				Created_Time, 
-				Batch_Name,
-				User_Id) 
-			VALUES (
-				'$sponsor1_name',
-				'$sponsor1_email',
-				'$sponsor1_phone',
-				'$sponsor2_name',
-				'$sponsor2_email',
-				'$sponsor2_phone',
-				'$student_name',
-				'$student_email',
-				'$student_phone',
-				'$class_id',
-				'$timestamp',
-				'$timestamp',
-				$active_batch,
-				'".$_SESSION['User_Id']."'
-			);";
 } elseif($action == "edit") {
 	$Reg_Id = $_POST['Reg_Id'];
 	$sql = "UPDATE registrations SET
@@ -140,6 +133,7 @@ if ($action == 'add') {
 			Student_Email = '$student_email',
 			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
+			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
 
@@ -156,6 +150,7 @@ if ($action == 'add') {
 			Student_Email = '$student_email',
 			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
+			Cause = '$cause',
 			Modified_Time = '$timestamp'
 			WHERE Reg_Id = '$Reg_Id';";
 
@@ -164,12 +159,15 @@ if ($action == 'add') {
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
-
-
 if ($action == 'add') {
 	$Reg_Id = mysqli_insert_id($connection);
-	echo "";
+	$User_Id = $_SESSION['User_Id'];
+	$sql = 'INSERT INTO user_registrations VALUES (' . $User_Id . ', ' . $Reg_Id .');';
+	if (!mysqli_query($connection, $sql)) {
+		echo("Error description: " . mysqli_error($connection));
+	 }
 }
+mysqli_close($connection);
 
 echo "<!DOCTYPE html>
 <!DOCTYPE html>
@@ -189,11 +187,7 @@ echo "<!DOCTYPE html>
 		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
-  			<!---Registration Label--->
-			<label id=\"registration_id-label\"><b>Registration ID:</b> $Reg_Id</label><br>
-			<label id=\"registration_id-label\"><b>Batch Name:</b> $active_batch</label><br>
-			<input type='hidden' name='Reg_Id' value=$Reg_Id>
-			<br>
+				<input type='hidden' name='Reg_Id' value=$Reg_Id>
 			<!---sponsor1 Section -->
 			<label id=\"name-label\"><b>Sponsor 1's Name:</b> $sponsor1_name</label><br>
 			<input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
@@ -228,12 +222,63 @@ echo "<!DOCTYPE html>
 			<br>
 			<label id=\"class\"><b>Selected Class:</b> $class</label><br>
 			<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
+			<!--dropdown--->
+			<p><b>Cause:</b> $cause</p><br>
+			<input type=\"hidden\" id=\"cause\" name=\"cause\" value=\"$cause\">
 			<br>
 			<input type='hidden' name='action' value='edit'>
 			<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
-			<br><br>
 		</form>
+		<br><br>
 	</div>";
-fetchRegistrationDetails($connection, $_SESSION['User_Id']);
-mysqli_close($connection);
+	if (TRUE){ //make bool to determine if past registarions exist
+		echo "
+			<h3> Past Registration Details </h3>
+			<div id=\"container_3\">";
+			if (True) { //if next row exists for student in registration table for previous years
+				echo " 
+					<div id='accordion-container'>
+					<button class='accordion' >Section 1</button>
+					<div class='panel' >
+						<p>Content for section 1...</p>
+					</div>
+					<br>
+
+					<button class='accordion'>Section 2</button>
+					<div class='panel'>
+						<p>Content for section 2...</p>
+					</div>
+					<br>
+
+					<button class='accordion'>Section 3</button>
+					<div class='panel'>
+						<p>Content for section 3...</p>
+					</div>
+					</div>
+					<br>
+					";
+			}
+			echo "
+				<script>
+				var acc = document.getElementsByClassName('accordion');
+				for (var i = 0; i < acc.length; i++) {
+					acc[i].addEventListener('click', function() {
+						this.classList.toggle('active');
+						var panel = this.nextElementSibling;
+						if (panel.style.display === 'block') {
+							panel.style.display = 'none';
+						} else {
+							panel.style.display = 'block';
+						}
+					});
+				}
+			</script>
+			</div>
+			<br><br>";
+	}
+
+echo "		
+  </body>
+</html>
+";
 ?>

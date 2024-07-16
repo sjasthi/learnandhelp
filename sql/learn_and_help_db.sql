@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 19, 2023 at 09:52 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Host: 127.0.0.1
+-- Generation Time: Jul 10, 2024 at 04:49 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `learn_and_help_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `batch`
+--
+
+CREATE TABLE `batch` (
+  `Batch_Name` varchar(50) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `batch`
+--
+
+INSERT INTO `batch` (`Batch_Name`, `start_date`, `end_date`) VALUES
+('2023-2024', '2023-09-01', '2024-05-01'),
+('2024-2025', '2024-09-01', '2025-05-01'),
+('Summer 2023', '2023-06-01', '2023-08-31'),
+('Summer 2024', '2024-06-01', '2024-08-31');
 
 -- --------------------------------------------------------
 
@@ -42,7 +64,7 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`Blog_Id`, `Title`, `Author`, `Description`, `Video_Link`, `Modified_Time`, `Created_Time`) VALUES
-(1, 'asd', 'asdf', 'asdf', '', '2023-07-16 20:25:14', '2023-07-16 20:25:14');
+(3, 'Launch of Learn and Web Site', 'Siva Jasthi', 'Had a great meeting with Ms.Manga Rani and Dr. C.A.Prasad.Watch this space for the updated school information.', '', '2024-04-15 05:36:11', '2024-04-12 09:26:16');
 
 -- --------------------------------------------------------
 
@@ -55,6 +77,13 @@ CREATE TABLE `blog_pictures` (
   `Blog_Id` int(11) DEFAULT NULL,
   `Location` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `blog_pictures`
+--
+
+INSERT INTO `blog_pictures` (`Picture_Id`, `Blog_Id`, `Location`) VALUES
+(2, 3, 'images/blog_pictures/661d112b9fe4c.jpeg');
 
 -- --------------------------------------------------------
 
@@ -83,9 +112,9 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `callNumber`, `title`, `author`, `publisher`, `publishYear`, `numPages`, `price`, `image`, `grade_level`, `available`, `date_created`, `date_modified`) VALUES
-(1377, '1', 'సమ్మీకి నేస్తం దొరికింది', 'రూపమ్ క్యారొల్', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/book1377.jpg', 'High School', 1, '2023-06-30 19:38:47', '2023-11-07 01:55:27'),
+(1377, '1', 'సమ్మీకి నేస్తం దొరికింది', 'రూపమ్ క్యారొల్', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/book1377.jpg', 'Primary School Lower, Other', 1, '2023-06-30 19:38:47', '2024-04-15 23:42:22'),
 (1378, '2', 'తుంపా మరియు పిచ్చుకలు', 'స్వప్నమయి చక్రవర్తి', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/book1378.JPG', 'Primary School', 1, '2023-06-30 19:38:47', '2023-07-04 03:29:42'),
-(1379, '3', 'ఏద ఇస్తామో దానిని పొందుతాము', 'శుద్ద సత్వబసు', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/book1379.JPG', 'High School', 1, '2023-06-30 19:38:47', '2023-07-04 03:31:28'),
+(1379, '3', 'ఏద ఇస్తామో దానిని పొందుతాము', 'శుద్ద సత్వబసు', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '30', 'images/books/book1379.JPG', 'Primary School Lower', 1, '2023-06-30 19:38:47', '2024-04-15 23:44:13'),
 (1380, '4', 'నోనా మరియు వాన', 'ప్రియా నాగరాజన్', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '35', 'images/books/book1380.JPG', 'Upper Primary School', 1, '2023-06-30 19:38:47', '2023-07-04 03:32:24'),
 (1381, '5', 'ఎందుకు?', 'మీనాక్షీ స్వామి', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '35', 'images/books/book1381.JPG', 'High School', 1, '2023-06-30 19:38:47', '2023-07-04 03:31:28'),
 (1382, '6', 'మంగు బొంగరం', 'కామాక్షి బాల సుబ్రహ్మణ్యం', 'నేషనల్ బుక్ ట్రస్ట్', ' ', 0, '19', 'images/books/book1382.JPG', 'Primary School', 1, '2023-06-30 19:38:47', '2023-07-04 03:29:42'),
@@ -3554,45 +3583,95 @@ INSERT INTO `books` (`id`, `callNumber`, `title`, `author`, `publisher`, `publis
 -- --------------------------------------------------------
 
 --
--- Table structure for table `causes`
---
-
-CREATE TABLE `causes` (
-  `Cause_Id` int(11) NOT NULL,
-  `Cause_name` varchar(100) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `URL` varchar(150) DEFAULT NULL,
-  `Contact_name` varchar(50) DEFAULT NULL,
-  `Contact_email` varchar(50) DEFAULT NULL,
-  `Contact_phone` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `causes`
---
-
-INSERT INTO `causes` (`Cause_Id`, `Cause_name`, `description`, `URL`, `Contact_name`, `Contact_email`, `Contact_phone`) VALUES
-(1, 'Cause1', 'Description1', 'www.cause2.com', 'Con Tactname', 'con@cause1.com', '123-456-7890');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `classes`
 --
 
 CREATE TABLE `classes` (
   `Class_Id` int(11) NOT NULL,
   `Class_Name` varchar(30) DEFAULT NULL,
-  `Description` text DEFAULT NULL
+  `Description` text DEFAULT NULL,
+  `Status` enum('Proposed','Approved','Inactive') NOT NULL DEFAULT 'Proposed'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `classes`
 --
 
-INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`) VALUES
-(2, '444', 'python intro course'),
-(4, 'Python 201', 'placeholder description');
+INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`, `Status`) VALUES
+(1, 'Python 101', 'Introduction to Python - first course in programming.\r\n\r\nMaps to PCEP - Certified Entry-Level Python Programmer\r\n\r\nhttps://pythoninstitute.org/pcep', 'Approved'),
+(2, 'Python 102', 'Advanced Python.\r\nMaps to PCAP : Certified Associate in Python Programming\r\n\r\nhttps://pythoninstitute.org/pcap', 'Approved'),
+(3, 'Java 101', 'Introduction to Java and Object Oriented Programming.\r\n\r\nMaps to \"Computer Science AP CS A\".\r\n\r\nhttps://apstudents.collegeboard.org/courses/ap-computer-science-a', 'Approved'),
+(4, 'Snap 101', 'Interesting in learning programming through gaming?\r\n\r\nSnap! (developed by University of California, Berkeley) is a free block-based educational graphical programming language and online community.', 'Approved'),
+(5, 'Python DS', 'Python for Data Science.\r\n\r\nWe will explore advanced topics of Python in this course\r\n- numpy\r\n- pandas\r\n- matplotlib\r\n', 'Approved'),
+(6, 'Python ML', 'Python for Machine Learning.\r\n\r\nWe will explore several Machine Learning algorithms in this course using\r\n- numpy\r\n- pandas\r\n- matplotlib\r\n- scikit-learn\r\n\r\nWe will learn about several\r\n- Classification algorithms\r\n- Regression algorithms\r\n- Clustering algorithms\r\n\r\n\r\n', 'Approved'),
+(7, 'SQL 101', 'SQL for beginners.\r\n\r\nIn this course, we will learn about SQL.\r\n\r\nWe will explore several tools to explore the database concepts.\r\n\r\nWe will also build a Python or Java application which extracts the data from MySQL data.', 'Approved'),
+(8, 'HTML/CSS 101', 'HTML (content) and CSS (display) are the core technologies of the Web. Coupled with JavaScript (for behavior), these technologies run 99% of the WebSites.\r\n\r\nIn this course, we will learn about HTML and CSS.\r\n\r\nStudents will build a website to showcase their profile.', 'Approved'),
+(9, 'JavaScript 101', 'JavaScript, often abbreviated as JS, is a programming language and core technology of the Web, alongside HTML and CSS. 99% of websites use JavaScript on the client side for webpage behavior.\r\n\r\nIn this course, we will learn about JavaScript.\r\n\r\nMaps to JSE – Certified Entry-Level JavaScript Programmer (Exam JSE-40-0x)\r\n\r\nhttps://edube.org/study/jse1', 'Approved'),
+(10, 'PHP 101', 'PHP is a server scripting language, and a powerful tool for making dynamic and interactive Web pages.\r\n\r\nIn this course, we will learn about PHP.\r\n\r\nStudents will build an interactive web-site involving HTML, CSS, JavaScript, PHP and MySQL databases.', 'Approved'),
+(11, 'AWS CLP', 'Amazon Cloud Practitioner Certification', 'Proposed');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `instructor`
+--
+
+CREATE TABLE `instructor` (
+  `instructor_ID` int(11) NOT NULL,
+  `First_name` varchar(255) NOT NULL,
+  `Last_name` varchar(255) NOT NULL,
+  `Bio_data` varchar(1500) NOT NULL,
+  `Image` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `instructor`
+--
+
+INSERT INTO `instructor` (`instructor_ID`, `First_name`, `Last_name`, `Bio_data`, `Image`) VALUES
+(1, 'Dr. Siva ', 'Jasthi', 'Educator, Mentor, Author, Trainer, Auditor, Software Consultant with over 25 years of experience in the software industry.\r\n20 years of experience in teaching CS classes at Metropolitan State University, MN, USA. 5 years of volunteering at the School of India for Languages and Culture (SILC) as “Digital Literacy\" program designer and coordinator.', 'images/siva.png'),
+(2, 'Ishana ', 'Didwania', 'Ishana Didwania is a senior at Mahtomedi High School. She has completed the 5-year Computer Science program at the School of India for Languages and Culture (SILC) where she studied HTML/CSS, Javascript, PHP, MySQL, Python, and Java. She served as the primary HTML and CSS teacher for 3 years, dedicating over 75 hours per year to teaching 6th grade students. Ishana is also a software engineer and the head of strategy for DiaBuddies, her Technovation team app. She programmed the health tracker feature of the app and authored the business plan which highlighted market research, advertising, and financial planning for the company. Her team was chosen as a US Bank challenge team and given the opportuntity to pitch the app to the US Bank Executive Board. DiaBuddies is one of four Technovation award winning apps from Minnesota. Ishana is an Aspirations in Computer 2023 State Honorable Mention winner and a 2023-24 Target Women in Science and Technology award winner. She is a Minnesota All-State Band flute player and the president of her school band. Ishana is passionate about STEM and challenges herself with AP math and science courses. She works as a math instructor at Mathnasium. In fall of 2024, she will attend Purdue University to major in Computer Science.', 'images/Ishana.png'),
+(3, 'Sumedh ', 'Ghatti ', 'Sumedh Ghatti is a 9th grader at Independence High School, dedicated to nurturing academic growth and inspiring young minds. His journey is distinguished by the prestigious Presidential Award, accompanied by his exceptional performance as the top player on the Junior Varsity Tennis team. With extensive expertise as an app, game developer, and website developer, a passion ignited during his early years at the School of India for Languages and Culture (SILC),\" Sumedh\'s commitment to technology is evident. He earned his Python Entry Level Certified Programmer certification in April 2023, and is working to get his second certification done soon. He has also been selected to join the Deep-Dive AI workshop hosted by the University of Texas at Dallas. Beyond his academic and athletic pursuits, he expresses himself artistically through playing the tabla. In his role as an educator, Sumedh strives to ignite curiosity, foster a pursuit of excellence, and guide students in discovering their passion for coding, mirroring his own journey.', 'images/sumedh.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offerings`
+--
+
+CREATE TABLE `offerings` (
+  `Batch_Name` varchar(50) NOT NULL,
+  `Class_Id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `offerings`
+--
+
+INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
+('2024-2025', '1'),
+('2024-2025', '3'),
+('2025-2026', '1'),
+('2025-2026', '3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preferences`
+--
+
+CREATE TABLE `preferences` (
+  `Preference_Name` varchar(50) NOT NULL,
+  `value` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `preferences`
+--
+
+INSERT INTO `preferences` (`Preference_Name`, `value`) VALUES
+('Active Registration', '2024-2025'),
+('Course Fee', '500');
 
 -- --------------------------------------------------------
 
@@ -3602,27 +3681,31 @@ INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`) VALUES
 
 CREATE TABLE `registrations` (
   `Reg_Id` int(11) NOT NULL,
-  `Sponsor_Name` varchar(50) DEFAULT NULL,
-  `Sponsor_Email` varchar(50) DEFAULT NULL,
-  `Sponsor_Phone_Number` varchar(15) DEFAULT NULL,
-  `Spouse_Name` varchar(50) DEFAULT NULL,
-  `Spouse_Email` varchar(50) DEFAULT NULL,
-  `Spouse_Phone_Number` varchar(15) DEFAULT NULL,
+  `Sponsor1_Name` varchar(50) DEFAULT NULL,
+  `Sponsor1_Email` varchar(50) DEFAULT NULL,
+  `Sponsor1_Phone_Number` varchar(15) DEFAULT NULL,
+  `Sponsor2_Name` varchar(50) DEFAULT NULL,
+  `Sponsor2_Email` varchar(50) DEFAULT NULL,
+  `Sponsor2_Phone_Number` varchar(15) DEFAULT NULL,
   `Student_Name` varchar(50) DEFAULT NULL,
   `Student_Email` varchar(50) DEFAULT NULL,
   `Student_Phone_Number` varchar(15) DEFAULT NULL,
   `Class_Id` int(11) DEFAULT NULL,
-  `Cause` varchar(20) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
-  `Created_Time` date DEFAULT NULL
+  `Created_Time` date DEFAULT NULL,
+  `Batch_Name` varchar(20) NOT NULL,
+  `User_Id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `registrations`
 --
 
-INSERT INTO `registrations` (`Reg_Id`, `Sponsor_Name`, `Sponsor_Email`, `Sponsor_Phone_Number`, `Spouse_Name`, `Spouse_Email`, `Spouse_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Cause`, `Modified_Time`, `Created_Time`) VALUES
-(3, 'Yuri', 'Nator', '123-456-7890', 'Moe', 'Ron', '234-567-8901', 'c', 'c@c.c', '222-222-2222', 2, 'Library', '2023-05-20', '2023-05-20');
+INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`) VALUES
+(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-04', '2024-07-04', 'Summer 2023', 44),
+(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44),
+(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44),
+(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '-1', 51);
 
 -- --------------------------------------------------------
 
@@ -3657,70 +3740,85 @@ CREATE TABLE `schools` (
 --
 
 INSERT INTO `schools` (`id`, `name`, `type`, `category`, `grade_level_start`, `grade_level_end`, `current_enrollment`, `address_text`, `state_name`, `state_code`, `pin_code`, `contact_name`, `contact_designation`, `contact_phone`, `contact_email`, `status`, `notes`, `referenced_by`, `supported_by`) VALUES
-(1, 'Z P H  School G  - 4 .', NULL, '1', 12, NULL, NULL, 'Nakshatra  Enclave . Police Raj road - Near - Sri Chaithanya Techno School Payaka Rao Pet - Anakapalli Dist AP', NULL, NULL, NULL, 'Smt. Vijaya Bhanu Kote', NULL, '9502247679 / 8247769052', NULL, NULL, NULL, NULL, 'PGNF'),
-(2, 'Chethana School', 'Primary School', 'Private', 1, 1, 0, 'Chowdavaram Village Guntur (District) AP - 522019', '', '', '', 'Ms. Marudwathi', 'Teacher', '9848132435', '', 'Proposed', '', '', 'Learn and Help'),
-(3, 'Librarian Z P H. School.', 'Primary School', 'Private', 1, 1, 0, 'Unnava (Village) Edlapadu (Mandal) Guntur (District) AP - 522233', '', '', '', 'Kakumanu Hima Bindu', 'Teacher', '9505550075', '', 'Proposed', '', '', 'NRIVA'),
-(4, 'Abhyasa vidyalaya', NULL, NULL, NULL, NULL, NULL, 'Near Water tank Gangireddula dibba Gunadala Vijayawada - 520010', NULL, NULL, NULL, 'Krishna', NULL, '9440579922', NULL, NULL, NULL, NULL, 'PGNF'),
-(5, 'C E O H E A L Paradise', NULL, NULL, NULL, NULL, NULL, 'Thotapalli post - Agiripalli mandal - Krishna (Dt.) AP - 521211', NULL, NULL, NULL, 'Sri Ajay Kumar', NULL, '7032885515', NULL, NULL, NULL, NULL, 'PGNF'),
-(6, 'Principal Pragathi Vidya Nikethan  ( P V N )', NULL, NULL, NULL, NULL, NULL, 'Opp : sub station Prashanthi Hills Phase - 1 - Road .', NULL, NULL, NULL, 'Smt  Madhavi', NULL, '9490233878', NULL, NULL, NULL, NULL, 'PGNF'),
-(7, 'Head Master Govt A G H School', NULL, NULL, NULL, NULL, NULL, 'Chintoor - vill/ PO / & mandal .', NULL, NULL, NULL, 'Smt. Krishna Kumari', NULL, '7673947896', NULL, NULL, NULL, NULL, 'PGNF'),
-(8, 'Aravinda model school.', NULL, NULL, NULL, NULL, NULL, 'Mangalagiri Guntur (Dt.) AP - 522501', NULL, NULL, NULL, 'Smt. Indrani', NULL, '703249666', NULL, NULL, NULL, NULL, 'PGNF'),
-(9, 'Head Master Z P H  School', NULL, NULL, NULL, NULL, NULL, 'Boggaram - village & post Eepuru (Mandal) Palnadu (District) AP - 522658', NULL, NULL, NULL, 'Sri Ch.Veerappayya', NULL, '9949931545', NULL, NULL, NULL, NULL, 'PGNF'),
-(10, 'VIVA the School', NULL, NULL, NULL, NULL, NULL, 'V V I T campus Nambur village Peda kakani (Mandal) Guntur (District) AP - 522508', NULL, NULL, NULL, 'Modugula Ravi Krishna', NULL, '9440320580', NULL, NULL, NULL, NULL, 'PGNF'),
-(11, 'ZP High School', NULL, NULL, NULL, NULL, NULL, 'Cheruvu Jammula Palem Bapatla (Dt.) AP 522113', NULL, NULL, NULL, 'Subhani', NULL, '7995872899', NULL, NULL, NULL, NULL, 'PGNF'),
-(12, 'Head Master Govt. High School', NULL, NULL, NULL, NULL, NULL, '(Main Road) Yellandu (p.o) Bhadradri Kothagudem Telangana - 507123 Dist. Co-Education School. 6th to 10th class. Both Media TM & EM Total Strength. 200.', NULL, NULL, NULL, 'Swamy', NULL, '970 144 5736', NULL, NULL, NULL, NULL, 'PGNF'),
-(13, 'Mary Swarna Latha (HM)', NULL, NULL, NULL, NULL, NULL, ' Cheerlavancha', NULL, NULL, NULL, '9441974422', NULL, 'ZP High School', NULL, NULL, NULL, NULL, 'PGNF'),
-(14, 'T.S.R. Prasad', NULL, NULL, NULL, NULL, NULL, ' Telangana', NULL, NULL, NULL, '984 903 1630', NULL, 'Krushi Home for Street Children Hyderabad', NULL, NULL, NULL, NULL, 'PGNF'),
-(15, 'H M : Nagamuni Reddy', NULL, NULL, NULL, NULL, NULL, ' Rayachoti -Galiveedu Rd', NULL, NULL, NULL, '9441124310', NULL, 'ZPHS Madhavaram', NULL, NULL, NULL, NULL, 'PGNF'),
-(16, 'Dr. M. Harikishan', NULL, NULL, NULL, NULL, NULL, ' AP', NULL, NULL, NULL, '94410 32212', NULL, 'ZPH School Amadaguntla Kodumur Mandal Kurnool (Dt.)', NULL, NULL, NULL, NULL, 'PGNF'),
-(17, 'Sri Venkata Subba Reddy', NULL, NULL, NULL, NULL, NULL, 'Srikanth Tirumala', NULL, NULL, NULL, '8106050045', NULL, 'Z P H School ( Boys) Badvel Kadapa Dist', NULL, NULL, NULL, NULL, 'PGNF'),
-(18, 'SJRRMMC High school .', NULL, NULL, NULL, NULL, NULL, ' Opp: Bhaskar Deluxe Theatre Kotha pet Guntur', NULL, NULL, NULL, '9491672311', NULL, 'Ms. Sudha Rani .', NULL, NULL, NULL, NULL, 'PGNF'),
-(19, 'Venkata Kotaiah Balijepalli', NULL, NULL, NULL, NULL, NULL, ' AP', NULL, NULL, NULL, '91777 14380', NULL, 'ZP High School Adusumalli (Village) Bapatla (Dt.)', NULL, NULL, NULL, NULL, 'PGNF'),
-(20, 'shyamala nagar school', NULL, NULL, NULL, NULL, NULL, ' Guntur', NULL, NULL, NULL, 'Sri Venkateswara Bala Kuteer 3rd Line', NULL, ' Syamala Nagar', NULL, NULL, NULL, NULL, 'PGNF'),
-(21, 'Cheerlavancha Elementary School - 1', NULL, NULL, NULL, NULL, NULL, 'Siva Jasthi', NULL, NULL, NULL, NULL, NULL, 'Babu Dundrapelly', NULL, NULL, NULL, NULL, 'PGNF'),
-(22, 'Cheerlavancha Elementary School - 2', NULL, NULL, NULL, NULL, NULL, 'Siva Jasthi', NULL, NULL, NULL, NULL, NULL, 'Babu Dundrapelly', NULL, NULL, NULL, NULL, 'PGNF'),
-(23, 'Sri Nagaraja Special Muncipal Corporation Elementary School', NULL, NULL, NULL, NULL, NULL, 'Rajamahendravaram East Godavari (Dt.)', NULL, NULL, NULL, 'Vivek Kommireddy (Plymouth', NULL, ' MN)', NULL, NULL, NULL, NULL, 'PGNF'),
-(24, 'The Indo-English School', NULL, NULL, NULL, NULL, NULL, 'Chundurivari Veedhi', NULL, NULL, NULL, '6281 459 914', NULL, 'Jyothi (Admin)', NULL, NULL, NULL, NULL, 'PGNF'),
-(25, 'MPPS', NULL, NULL, NULL, NULL, NULL, 'Belupalli (Village)', NULL, NULL, NULL, 'P. Subramanyam (Telugu Teacher)', NULL, '9502407323', NULL, NULL, NULL, NULL, 'PGNF'),
-(26, 'MPPS Machireddy Pally', NULL, NULL, NULL, NULL, NULL, 'Nagaram (Mandal)', NULL, NULL, NULL, 'KLN Rao', NULL, '9848105200', NULL, NULL, NULL, NULL, 'PGNF'),
-(27, 'MPP School', NULL, NULL, NULL, NULL, NULL, 'Venkatagiri', NULL, NULL, NULL, NULL, NULL, 'Manoja Namuburi', NULL, NULL, NULL, NULL, 'PGNF'),
-(28, 'Vunnava MPPS (Surya Nagar Elementary School)', NULL, NULL, NULL, NULL, NULL, 'Gopichand Jasthi', NULL, NULL, NULL, NULL, NULL, 'Himabindu Kakumanu', NULL, NULL, NULL, NULL, 'PGNF'),
-(29, 'Vunnava MPPS (Udayapuri Elementary School)', NULL, NULL, NULL, NULL, NULL, 'Gopichand Jasthi', NULL, NULL, NULL, NULL, NULL, 'Himabindu Kakumanu', NULL, NULL, NULL, NULL, 'PGNF'),
-(30, 'Vunnava MPPS (Yanadi Mastari School / HE School)', NULL, NULL, NULL, NULL, NULL, 'Gopichand Jasthi', NULL, NULL, NULL, NULL, NULL, 'Himabindu Kakumanu', NULL, NULL, NULL, NULL, 'PGNF'),
-(31, 'Vunnava MPPS (Main Elementary School)', NULL, NULL, NULL, NULL, NULL, 'Gopichand Jasthi', NULL, NULL, NULL, NULL, NULL, 'Himabindu Kakumanu', NULL, NULL, NULL, NULL, 'PGNF'),
-(32, 'M P U P School', NULL, NULL, NULL, NULL, NULL, 'Inkollu mandal Bapatla District Pin. 523190', NULL, NULL, NULL, NULL, NULL, 'Veera Reddy - teacher', NULL, NULL, NULL, NULL, 'PGNF'),
-(33, 'M P U P School .', NULL, NULL, NULL, NULL, NULL, 'Near Rajamandry - E G Dist .', NULL, NULL, NULL, NULL, NULL, 'Smt Madhavi varigonda', NULL, NULL, NULL, NULL, 'PGNF'),
-(34, 'M P U P School .', NULL, NULL, NULL, NULL, NULL, 'Medak Dist - 502316 .', NULL, NULL, NULL, '9010902056', NULL, 'Ravi Raju - H M', NULL, NULL, NULL, NULL, 'PGNF'),
-(35, 'M P U P School .', NULL, NULL, NULL, NULL, NULL, 'Vijayanagaram Dist - Pin 535273', NULL, NULL, NULL, '9704487533', NULL, 'Rajesh Koluri (Cell 9704487533)', NULL, NULL, NULL, NULL, 'PGNF'),
-(36, 'Farm Hill learning .', NULL, NULL, NULL, NULL, NULL, 'Shoolagiri Krishna giri Dist - 635117 Tamilnadu .', NULL, NULL, NULL, '8431032239', NULL, 'Venu  &  Chitra', NULL, NULL, NULL, NULL, 'PGNF'),
-(37, 'Amma Social Welfare Association', NULL, NULL, NULL, NULL, NULL, 'Shadnagar Ranga Reddy Dist', NULL, NULL, NULL, NULL, NULL, 'Haritha:  +91 99497 89229', NULL, NULL, NULL, NULL, 'PGNF'),
-(38, 'LR Primary /  Elementary School', NULL, NULL, NULL, NULL, NULL, 'Alokam Peddabbai (School Committee President)', NULL, NULL, NULL, '98667 27707', NULL, 'Rayappa', NULL, NULL, NULL, NULL, 'PGNF'),
-(39, 'Nagalakshmi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '+91 94908 87025', NULL, NULL, NULL, NULL, 'PGNF'),
-(40, 'S. Chalapathi', NULL, NULL, NULL, NULL, NULL, 'S. R . Nagar .', NULL, NULL, NULL, '9989520053', NULL, NULL, NULL, NULL, NULL, NULL, 'PGNF'),
-(41, 'ZPHS', NULL, NULL, NULL, NULL, NULL, 'ZPH School Chinna Hothur Aspari Mandal Kurnool (Dt.)', NULL, NULL, NULL, '94914 07655', NULL, 'K. Chandra Moulini', NULL, NULL, NULL, NULL, 'PGNF'),
-(42, 'ZPHS', NULL, NULL, NULL, NULL, NULL, 'ZPH SCHOOL PYDIBHEAVARAM RANASTHALAM Md SRIKAKULAM Dt', NULL, NULL, NULL, '9441259972', NULL, 'Dr. S. YELLAYYA', NULL, NULL, NULL, NULL, 'PGNF'),
-(43, 'ZPHS', NULL, NULL, NULL, NULL, NULL, 'Balaji Paripati (Dallas', NULL, NULL, NULL, NULL, NULL, 'Belupalli Baireddy (ZPHS)', NULL, NULL, NULL, NULL, 'PGNF'),
-(44, 'AP Residential High School (Tadikonda)', NULL, NULL, NULL, NULL, NULL, 'A P Residential School  .', NULL, NULL, NULL, '9618817161', NULL, 'Smt  Bala Sri', NULL, NULL, NULL, NULL, 'PGNF'),
-(45, 'Intel High School (perecherla', NULL, NULL, NULL, NULL, NULL, 'Dr. Jayakumar', NULL, NULL, NULL, ' guntur)', NULL, NULL, NULL, NULL, NULL, NULL, 'PGNF'),
-(46, 'Abbinenigunta vari palem', NULL, NULL, NULL, NULL, NULL, 'Abbineniguntapalem', NULL, NULL, NULL, NULL, NULL, 'Mrs Leela Rani garu', NULL, NULL, NULL, NULL, 'PGNF'),
-(47, 'ZILLA PARISHAD HIGH SCHOOL;', NULL, NULL, NULL, NULL, NULL, 'LINGARAOPALEM; EDALAPADU MANDAL; GUNTUR Dt.', NULL, NULL, NULL, ' \"91 91540 39037', NULL, 'P. Srinivasa Rao', NULL, NULL, NULL, NULL, 'PGNF'),
-(48, 'Sri Mavuleti Soma Raju zilla praja parishad high school', NULL, NULL, NULL, NULL, NULL, 'G.Kanaka Durga Suneetha', NULL, NULL, NULL, NULL, NULL, 'D.Durga Prasad (Library Assistant)', NULL, NULL, NULL, NULL, 'PGNF'),
-(49, 'Z P H School .', NULL, NULL, NULL, NULL, NULL, 'Kondapuram  (Mandal) Nellore district - 524228', NULL, NULL, NULL, NULL, NULL, 'V Naresh .', NULL, NULL, NULL, NULL, 'PGNF'),
-(50, 'K R Z P H School .', NULL, NULL, NULL, NULL, NULL, 'Rajanna Sirisilla Dist Telangana state', NULL, NULL, NULL, '9848377734', NULL, 'P . Shankar', NULL, NULL, NULL, NULL, 'PGNF'),
-(51, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'TARLUPADU MANDAL Prakasam Dist Pin Code: 523371', NULL, NULL, NULL, NULL, NULL, 'K Sudha Rani .', NULL, NULL, NULL, NULL, 'PGNF'),
-(52, 'Lalitha Budarapu', NULL, NULL, NULL, NULL, NULL, 'Ramagiri mandal', NULL, NULL, NULL, '6300989173', NULL, 'Lalitha Budarapu', NULL, NULL, NULL, NULL, 'PGNF'),
-(53, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Vizianagaram district', NULL, NULL, NULL, NULL, NULL, 'Vaddi Usha Rani .', NULL, NULL, NULL, NULL, 'PGNF'),
-(54, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Nellore District', NULL, NULL, NULL, NULL, NULL, 'T.LakshmiBhavani.', NULL, NULL, NULL, NULL, 'PGNF'),
-(55, 'M P P School .', NULL, NULL, NULL, NULL, NULL, 'Chittore Dist PIN 517408', NULL, NULL, NULL, '9492551451', NULL, 'Vadla Hari Prasad .', NULL, NULL, NULL, NULL, 'PGNF'),
-(56, 'GDET Municipal Corporation Elementary School .', NULL, NULL, NULL, NULL, NULL, 'NTR District', NULL, NULL, NULL, '7702916617', NULL, 'N Kusuma ( SGT )', NULL, NULL, NULL, NULL, 'PGNF'),
-(57, 'M P P School .', NULL, NULL, NULL, NULL, NULL, 'Prakasam Dist PIN:523274', NULL, NULL, NULL, '9848883025', NULL, 'M. Rajani .', NULL, NULL, NULL, NULL, 'PGNF'),
-(58, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Srikakulam (Dist)', NULL, NULL, NULL, '9989827116', NULL, 'P Krishnaveni - SGT .', NULL, NULL, NULL, NULL, 'PGNF'),
-(59, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Bapatla Dist -  523184', NULL, NULL, NULL, '7702208643', NULL, 'P Gayathri ( SGT )', NULL, NULL, NULL, NULL, 'PGNF'),
-(60, 'M P P school .', NULL, NULL, NULL, NULL, NULL, 'Prakasam dt - 523274', NULL, NULL, NULL, '9440107592', NULL, 'K Rama Devi - SGT .', NULL, NULL, NULL, NULL, 'PGNF'),
-(61, 'aa', NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, 'bb', NULL, '123', NULL, NULL, NULL, NULL, NULL),
-(62, 'sds', NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, 'aa', NULL, '23213', NULL, NULL, NULL, NULL, NULL),
-(63, 'aa', NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, 'bb', NULL, '123', NULL, NULL, NULL, NULL, NULL),
-(64, 'Metro', NULL, NULL, NULL, NULL, 0, '', NULL, NULL, NULL, 'Jasthi', NULL, '1341421', NULL, NULL, NULL, NULL, NULL);
+(1, 'Z P H  School (Payakaraopeta, Andhra)', 'High School', 'Public', 1, 10, 210, 'Z P H  School (Payakaraopeta)', 'Andhra Pradesh', 'AP', '531126', 'Smt. Vijaya Bhanu Kote', 'Teacher', '9502247679 / 8247769052', '', 'Completed', 'what is this?', '', 'PGNF'),
+(2, 'Chethana (Chowdavaram)', 'Primary School', 'Private', 1, 10, 475, 'Chowdavaram Village Guntur (District) AP - 522019', 'Andhra Pradesh', 'AP', '522019', 'Ms. Marudwathi', 'Teacher', '9848132435', 'chetana_svbk@yahoo.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(3, 'Z P H School (Vunnava)', 'High School', 'Public', 1, 10, 0, 'Unnava (Village) Edlapadu (Mandal) Guntur (District) AP - 522233', 'Andhra Pradesh', 'AP', ' 522233', 'Kakumanu Hima Bindu', 'Teacher', '9505550075', '', 'Completed', '', '', 'PGNF'),
+(4, 'Abhyasa vidyalaya', 'Primary School', 'Private', 1, 5, 0, 'Near Water tank Gangireddula dibba Gunadala Vijayawada - 520010', 'Andhra pradesh', 'AP', '520010', 'Krishna', 'Teacher', '9440579922', '', 'Completed', '', 'CA PRASAD', 'NRIVA'),
+(5, 'H E A L Paradise (Thotapalli)', 'Primary School', 'Other', 1, 5, 0, 'Thotapalli post - Agiripalli mandal - Krishna (Dt.) AP - 521211', 'Andhra Pradesh', 'AP', '521211', 'Sri Ajay Kumar', 'Teacher', '7032885515', '', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(6, 'Pragathi Vidya Nikethan  ( P V N )', 'High School', 'Private', 1, 10, 1500, 'plot 191/d ,Opp : sub station Prashanthi Hills Phase - 1 - Road ., backside of pcs', 'Telangana', 'TS', '500090', 'Smt  Madhavi', 'Teacher', '9490233878', '', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(7, 'Govt A G H School (Chintoor)', 'High School', 'Public', 1, 10, 0, 'Chintur - vill/ PO / & mandal .', 'Andhra pradesh', 'AP', '533347', 'Smt. Krishna Kumari', 'Teacher', '7673947896', '', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(8, 'Aravinda model school.(Mangalagiri)', 'Primary School', 'Private', 1, 5, 0, 'Mangalagiri Guntur (Dt.) AP - 522501', 'Andhra pradesh', 'AP', '522501', 'Smt. Indrani', 'Teacher', '703249666', '', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(9, 'Z P H  School (Boggaram)', 'Primary School', 'Public', 3, 10, 260, 'Boggaram - village & post Eepuru (Mandal) Palnadu (District) AP - 522658', 'Andhra pradesh', 'AP', '522658', 'Sri Ch.Veerappaiah', 'Teacher', '9949931545', 'chillakantiveerappaiah@gmail.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(10, 'VIVA the School (Namburu)', 'Other', 'Private', 1, 10, 800, 'V V I T campus Nambur village Peda kakani (Mandal) Guntur (District) AP - 522508', 'Andhra pradesh', 'AP', '522508', 'Modugula Ravi Krishna', 'Teacher', '9440320580', 'ravimodugula@gmail.com', 'Completed', '', 'Modugula Ravi Krishna', 'PGNF'),
+(11, 'ZP High School (Cheruvu Jammula Palem)', 'Primary School', 'Private', 1, 10, 260, 'Cheruvu Jammula Palem Bapatla (Dt.) AP 522113', 'Andhra Pradesh', 'AP', '522113', 'Subhani', 'Teacher', '7995872899', 'zphscjpalem@gmail.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(12, 'Govt. High School (Yellandu)', 'High School', 'Public', 1, 10, 170, '(Main Road) Yellandu (p.o) Bhadradri Kothagudem Telangana - 507123 Dist. Co-Education School. 6th to 10th class. Both Media TM & EM Total Strength. 200.', 'Telangana', 'TS', ' 507123', 'TVRN Swamy', 'Teacher', '970 144 5736', 'tvrnswamy@gmail.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(13, 'Z P High School (Cheerlavancha)', 'High School', 'Private', 6, 10, 240, ' Cheerlavancha, Rand  R colony, vemulavada mandal, sirisilla district', 'Telangana', 'TS', '505402', 'Y. Mary Swarnalatha', 'Teacher', '9441974422', '', 'Completed', '', 'Babu Dundrupally', 'PGNF'),
+(14, 'Krushi Home for Street Children (Hyderabad)', 'Other', 'Private', 1, 10, 0, ' 4-120/2, Saikorian Junction Gowdavelly Village, Medchal Mandal Medchal District,', 'Telangana', 'TG', '501403', 'T.S.R. Prasad', 'Teacher', '984 903 1630', '', 'Completed', '', '', 'PGNF'),
+(15, 'Z P High School (Rayachoti)', 'High School', 'Public', 3, 9, 393, ' Rayachoti -Galiveedu Rd', 'Andhra Pradesh', 'AP', '516269', 'H M : Nagamuni Reddy', 'Teacher', '9441124310', 'hmzphskramapuram@gmail.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(16, 'Z P H School (Amadaguntla)', 'High School', 'Public', 6, 10, 450, 'Kodumur mandal  Kurnool district', 'Andhra Pradesh', 'AP', '518467', 'Dr. M. Harikishan , ', 'Teacher', '94410 32212 ', '', 'Completed', '', 'SIVA  JASTHI', 'PGNF'),
+(17, 'Z P H School ( Boys) Badvel ', 'High School', 'Public', 6, 10, 1665, 'Z P H School ( Boys),  Badvel , pin 516227', 'Andhra Pradesh', 'AP', '516227', 'Sri Venkata Subba Reddy', 'Teacher', '8106050045', 'gvenkatasubbareddy1965@gmail.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(18, 'SJRRMMC High school  (Guntur)', 'High School', 'Public', 7, 10, 800, ' Opp: Bhaskar Deluxe Theatre Kotha pet Guntur', 'Andhra Pradesh', 'AP', '522001', 'Ananthalakshmi.', 'Teacher', '9491672311', 'sjrrmmchs@gmail.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(19, 'ZP High School (Adusumalli)', 'High School', 'Public', 6, 10, 91, 'ZP High School (Adusumalli), Bapatla District, AP, pin 523169', 'Andhra Pradesh', 'AP', '523169', 'Venkata Kotaiah Balijepalli', 'Teacher', '91777 14380', '', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(20, 'Sri Venkateswara Bala Kuteer (Shyamala Nagar)', 'Primary School', 'Private', 1, 5, 0, ' Sri Venkateswara Bala Kuteer (Shyamala Nagar) Guntur', 'Andhra Pradesh', 'AP', '52200', 'Sri Venkateswara Bala Kuteer 3rd Line', 'Teacher', ' Syamala Nagar', '', 'Completed', '', 'Siva Jasthi', 'PGNF'),
+(21, 'Elementary School - 1 (Cheerlavancha )', 'Primary School', 'Private', 1, 5, 0, 'Siva Jasthi', 'Telangana', 'TS', '505402', 'Babu Dundrapelly', 'Teacher', '7893086531', '', 'Completed', '', 'Babu Dundrapelly', 'PGNF'),
+(22, 'Elementary School - 2 (Cheerlavancha )', NULL, NULL, NULL, NULL, NULL, 'Siva Jasthi', 'Telangana', 'TG', '505402', NULL, NULL, 'Babu Dundrapelly', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(23, 'Sri Nagaraja spl Mpl Primary School, Rajahmundry', 'Primary School', 'Public', 1, 5, 210, 'Rajamahendravaram,  East Godavari (Dt.)', 'Andhra Pradesh', 'AP', '533101', 'MOTURI MANGARANI', 'Teacher', '9701388686', 'mangaranim@gmail.com', 'Completed', '', 'Siva Jasthi', 'PGNF'),
+(24, 'The Indo-English School (Eluru)', 'Primary School', 'Private', 1, 5, 0, 'Chundurivari Veedhi, Eluru, 534001', 'Andhra Pradesh', 'AP', '534001', 'Varma Alluri', 'Teacher', '6281 459 914', '', 'Completed', '', 'Varma Alluri', 'PGNF'),
+(25, 'MPP School (Belupalli)', 'Other', 'Public', 1, 5, 117, 'Belupalli (Village)Chittoor (Dt.), ', 'Andhra Pradesh', 'AP', '517432', 'P. Subramanyam (Telugu Teacher)', 'Teacher', '9502407323', 'subbusubramanyam110@gmail.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
+(26, 'MPPS (Machireddy Pally)', 'Primary School', 'Public', 1, 5, 0, 'MPPS (Machireddy Pally), Nagaram (Mandal), pin 508279', 'Telangana', 'TG', '508279 ', 'KLN Rao', 'Teacher', '9848105200', '', 'Completed', '', '', 'PGNF'),
+(27, 'MPP School (Venkatagiri)', 'Primary School', 'Private', 1, 1, 0, 'Venkatagiri', 'Andhra Pradesh', 'AP', '524132', 'Manoja Namuburi', 'Teacher', '94917 33100', '', 'Completed', '', '', 'PGNF'),
+(28, 'Vunnava MPPS (Surya Nagar)', 'Primary School', 'Private', 1, 1, 0, 'Vunnava', 'Andhra Pradesh', 'AP', '522233', '', 'Teacher', 'Himabindu Kakumanu', '', 'Completed', '', '', 'PGNF'),
+(29, 'Vunnava MPPS (Udayapuri)', 'Primary School', 'Private', 1, 1, 0, 'Gopichand Jasthi', 'Andhra Pradesh', 'AP', '522233', '', 'Teacher', 'Himabindu Kakumanu', '', 'Completed', '', '', 'PGNF'),
+(30, 'Hindu Elementary School (Vunnava)', 'Primary School', 'Private', 1, 1, 0, 'Gopichand Jasthi', 'Andhra Pradesh', 'AP', '522233', '', 'Teacher', 'Himabindu Kakumanu', '', 'Completed', '', '', 'PGNF'),
+(31, 'Main Elementary School (Vunnava)', 'Primary School', 'Private', 1, 1, 0, 'Vunnava (village), Edlapadu (Mandal), Palnadu (Dt.)', 'Andhra Pradesh', 'AP', '522233', '', 'Teacher', 'Himabindu Kakumanu', '', 'Completed', '', '', 'PGNF'),
+(32, 'M P U P School (Nagandla)', 'Primary School', 'Private', 1, 1, 0, 'Inkollu mandal Bapatla District', 'Andhra Pradesh', 'AP', '523190', '', 'Teacher', 'Veera Reddy - teacher', '', 'Completed', '', '', 'PGNF'),
+(33, 'M P U P School (Pidimgoyyi Venkatagiri)', 'Primary School', 'Private', 1, 1, 0, 'Near Rajamandry - E G Dist .', 'Andhra Pradesh', 'AP', '533107 ', 'Madhavi Varigonda', 'Teacher', '98497 44456', '', 'Completed', '', '', 'PGNF'),
+(34, 'M P U P School .(PURE, Ahmad Nagar)', 'Primary School', 'Private', 1, 1, 0, 'Medak Dist.', 'Telangana', 'TG', '502316', '9010902056', 'Teacher', 'Ravi Raju - H M', '', 'Completed', '', '', 'PGNF'),
+(35, 'M P U P School (Vijayanagaram)', 'Primary School', 'Private', 1, 1, 0, 'Vijayanagaram Dist', 'Andhra Pradesh', 'AP', '535273', '9704487533', 'Teacher', 'Rajesh Koluri (Cell 9704487533)', '', 'Completed', '', '', 'PGNF'),
+(36, 'Farm Hill learning (Madepalli, TN) .', 'Primary School', 'Private', 1, 1, 0, 'Shoolagiri Krishna giri Dist -  .', 'Tamilnadu', 'TN', '635117 ', 'Venu  &  Chitra ', 'Teacher', '8431032239', '', 'Completed', '', '', 'PGNF'),
+(37, 'Amma Social Welfare Association (Shadnagar)', 'Primary School', 'Private', 1, 1, 0, 'Shadnagar Ranga Reddy Dist', 'Telangana', 'TG', '509216 ', 'Haritha', 'Teacher', '99497 89229', '', 'Completed', '', 'C A Prasad', 'PGNF'),
+(38, 'M P Primary School (Lingarao Palem)', NULL, NULL, NULL, NULL, NULL, 'Alokam Peddabbai (School Committee President)\r\nLingarao Palem\r\nNadendla (Mandal)\r\nGuntur (Dt.)', 'Andhra Pradesh', 'AP', '522234', 'Rayappa  (Head Master)', NULL, '98667 27707 ', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(39, 'Municipal English Medium school (Narasapuram)', NULL, NULL, NULL, NULL, NULL, NULL, 'Andhra Pradesh', 'AP', '534275', NULL, NULL, '+91 94908 87025', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(40, 'MP Primary School (Kajuluru)', NULL, NULL, NULL, NULL, NULL, 'S. R . Nagar .', 'Andhra Pradesh', 'AP', '533468 ', '', NULL, '9989520053', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(41, 'Z P H School (Chinna Hothur)', 'Primary School', 'Private', 1, 1, 0, 'ZPH School Chinna Hothur Aspari Mandal Kurnool (Dt.)', 'Andhra Pradesh', 'AP', '518395 ', 'K. Chandra Moulini\r\n', 'Teacher', '94914 07655', '', 'Completed', '', '', 'PGNF'),
+(42, 'ZPHS (Pydi Bhimavaram)', 'Primary School', 'Private', 1, 1, 0, 'ZPH SCHOOL PYDIBHEAVARAM RANASTHALAM Md SRIKAKULAM Dt', 'Andhra Pradesh', 'AP', '532409', 'Dr. S. YELLAYYA\r\n', 'Teacher', '9441259972', '', 'Completed', '', '', 'PGNF'),
+(43, 'ZPH School (Belupalli)', NULL, NULL, NULL, NULL, NULL, 'Chittoor Dt.', 'Andhra Pradesh', 'AP', '517432', NULL, NULL, 'Belupalli Baireddy (ZPHS)', NULL, 'Completed', NULL, 'Balaji Paripati', 'PGNF'),
+(44, 'AP Residential High School (Tadikonda)', 'public', 'public', NULL, NULL, NULL, 'A P Residential School  .\r\nTadikonda\r\nGuntur (Dt.)', 'Andhra Pradesh', 'AP', '522236', 'Smt  Bala Sri', NULL, '9618817161', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(45, 'Intel High School (perecherla)', NULL, NULL, NULL, NULL, NULL, '', 'Andhra Pradesh', 'AP', '522005', 'Dr. Jayakumar', NULL, NULL, NULL, 'Completed', NULL, NULL, 'PGNF'),
+(46, 'Z P H School (Abbinenigunta Palem)', 'Primary School', 'Private', 1, 1, 0, 'Abbineniguntapalem,Guntur (Dt.)', 'Andhra Pradesh', 'AP', '522015', 'Mrs. Leela Rani', 'Teacher', '', '', 'Completed', '', '', 'PGNF'),
+(47, 'Z P H school (Lingarao Palem)', 'Primary School', 'Private', 1, 1, 0, 'LINGARAOPALEM; EDALAPADU MANDAL; GUNTUR Dt.', 'Andhra Pradesh', 'AP', '522234', ' ', 'Teacher', 'P. Srinivasa Rao', '', 'Completed', '', '', 'PGNF'),
+(48, 'Sri Mavuleti Soma Raju Z P High school (Gundugolanu)', NULL, NULL, NULL, NULL, NULL, '', 'Andhra Pradesh', 'AP', '522234', 'G.Kanaka Durga Suneetha\r\nD.Durga Prasad (Library Assistant)', NULL, '', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(49, 'Z P H School (Gottigundala)', 'Primary School', 'Private', 1, 1, 0, 'Kondapuram  (Mandal) Nellore district - ', 'Andhra Pradesh', 'AP', '524228', '', 'Teacher', 'V Naresh .', '', 'Completed', '', '', 'PGNF'),
+(50, 'K R Z P H School . (Rajanna Siricilla)', 'Primary School', 'Private', 1, 1, 0, 'Rajanna Sirisilla Dist  ', 'Telangana', 'TG', '505301', 'P . Shankar', 'Teacher', '9848377734', '', 'Completed', '', '', 'PGNF'),
+(51, 'M P P school, (Jammulapalem)', 'Primary School', 'Private', 1, 1, 0, 'TARLUPADU MANDAL Prakasam Dist', 'Andhra Pradesh', 'AP', '523371', '', 'Teacher', 'K Sudha Rani .', '', 'Completed', '', '', 'PGNF'),
+(52, 'M P P school (Venkatapuram)', NULL, NULL, NULL, NULL, NULL, 'Ramagiri mandal\r\nAnantapur (Dt.)', 'Andhra Pradesh', 'AP', '515672 ', 'Lalitha Budarapu', NULL, '6300989173', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(53, 'M P P School (Buchimpeta)', NULL, NULL, NULL, NULL, NULL, 'Vizianagaram district', 'Andhra Pradesh', 'AP', '535001', 'Vaddi Usha Rani', NULL, '', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(54, 'M P P school (Kodavalur Harizana Wada)', NULL, NULL, NULL, NULL, NULL, 'Nellore District', 'Andhra Pradesh', 'AP', '524316', 'T.LakshmiBhavani', NULL, '', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(55, 'M P P School (Kotha Muddepalli)', 'Primary School', 'Private', 1, 1, 0, 'Chittore Dist', 'Andhra Pradesh', 'AP', '517408', 'Vadla Hari Prasad .', 'Teacher', '9492551451', '', 'Completed', '', '', 'PGNF'),
+(56, 'GDET Municipal Corporation Elementery School (Patamata)', NULL, NULL, NULL, NULL, NULL, 'NTR District', 'Andhra Pradesh', 'AP', '520010 ', 'N Kusuma ( SGT )', NULL, '7702916617 ', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(57, 'M P P School (Mocharla vari Kandrika)', 'Primary School', 'Private', 1, 1, 0, 'Prakasam Dist', 'Andhra Pradesh', 'AP', '523274', '9848883025', 'Teacher', 'M. Rajani .', '', 'Completed', '', '', 'PGNF'),
+(58, 'M P P School (Nakkapeta)', NULL, NULL, NULL, NULL, NULL, 'Srikakulam (Dist)', 'Andhra Pradesh', 'AP', '532168 ', 'P Krishnaveni - SGT .', NULL, '9989827116 ', NULL, 'Completed', NULL, NULL, 'PGNF'),
+(59, 'M P P school (Pandillapalli)', 'Primary School', 'Private', 1, 1, 0, 'Bapatla', 'Andhra Pradesh', 'AP', '523184', '7702208643', 'Teacher', 'P Gayathri ( SGT )', '', 'Completed', '', '', 'PGNF'),
+(60, 'M P P School (Turlapadu)', 'Primary School', 'Private', 1, 1, 0, 'TBD', 'Andhra Pradesh', 'AP', '523274', '9440107592', 'Teacher', 'K Rama Devi - SGT .', '', 'Completed', '', '', 'PGNF'),
+(61, 'M.P.P.SCHOOL, DEVANGA NAGAR, KANIGIRI', 'Primary School', 'Public', 1, 5, 0, 'DEVANGA NAGAR, KANIGIRI MANDAL, PRAKASHAM DISTRICT', 'Andhra Pradesh', 'AP', '523230', 'V.KALPANA', 'Teacher', '9908263149', 'KALPANAVANTIPENTA@GMAIL.COM', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(62, 'M.P.P.SCHOOL, NORTH RAJU PALEM', 'Primary School', 'Public', 1, 5, 105, 'NARTH RAJU PALEM, KODAVALURU MANDAL, SPSR NELLORE DISTRICT', 'Andhra Pradesh', 'AP', '524366', 'A.SANDHYA', 'Teacher', '9951073657', 'SANJU.ALLAMPATI@GMAIL.COM', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(63, 'M.P.P.SCHOOL, KURICHEDU (MAIN)', 'Primary School', 'Public', 1, 2, 30, 'KURICHEDU MAIN, BAC K SIDE ZP GIRLS HIGH SCHOOL, DARSI ROAD , KURICHEDU, ', 'Andhra Pradesh', 'AP', '523304', 'KATUKURI MANI', 'Teacher', '7989075888', 'MANIMOSES96@GMAIL.COM', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(64, 'M.P.P.SCHOOL, GUDURUPALLI', 'Primary School', 'Public', 1, 5, 100, 'GUDURUPALLI, MARRIMAKULAPALLI, PUNGANURU MANDAL, CHITTOR DISTRICT', 'Andhra Pradesh', 'AP', '517247', 'Y.SUSHELAMMA', 'Teacher', '8331833964', 'SUSEELA1729@GMAIL.COM', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(65, 'G.V.M.C.ELEMENTARY SCHOOL, SIVAJI PALEM', 'Primary School', 'Private', 1, 5, 180, 'G.V.M.C.ELEMENTARY SCHOOL, SIVAJI PALEM, VISAKHAPATNAM', 'Andhra Pradesh', 'AP', '530017', 'M.UMA GANDHI', 'Teacher', '9494373586', 'UMAGANDHIABHI@GMAIL', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(66, 'M.P.P.SCHOOL, VANKIREDDYGARI PALEM', 'Primary School', 'Public', 1, 5, 0, 'M.P.P.SCHOOL, VANKIREDDYGARI PALEM. MOTUMALLELA ROPINCHERLA MANDAL, CHITTOOR DISTRICT', 'Andhra Pradesh', 'AP', '517192', 'P.MANOHAR NAIDU', 'Teacher', '9704271816', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(67, 'M.P.P.SCHOOL, CHINAMALLU PETA', 'Primary School', 'Public', 1, 5, 0, 'M.P.P.SCHOOL, CHINAMALLU PETA, RAMATHERDHAM, NELLIMARLA MANADAL, VIJAYANAGARAM DISTRICT', 'Andhra Pradesh', 'AP', '535218', 'K.RAJESH', 'Teacher', '9704487533', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(68, 'M.P.P.SCHOOL, R.V.KANDRIGA', 'Primary School', 'Public', 1, 5, 0, 'M.P.P.SCHOOL, R.V.KANDRIGA, SPSR NELLORE DISTRICT', 'Andhra Pradesh', 'AP', '524311', 'N.NARAYANA', 'Teacher', '8639693785', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(69, 'Z.P.H.SCHOOL, NORTH RAJUPALEM', 'High School', 'Public', 6, 10, 0, 'Z.P.H.SCHOOL, NORTH RAJUPALEM, KODAVALLUR MANDAL, SPSR NELLORE DISTRICT', 'Andhra Pradesh', 'AP', '533101', 'BABU NAIDU', 'Teacher', '9441371098', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(70, 'NETAJI MUNICIPAL CORPORATION PRIMARY SCHOOL, KAKINADA', 'Primary School', 'Public', 1, 5, 0, 'NETAJI MUNICIPAL CORPORATION PRIMARY SCHOOL, NETAJI PARK AREA,  JAGANAIKPUR KAKINADA', 'Andhra Pradesh', 'AP', '533002', 'M.MAHALA', 'Teacher', '8639146794', '', 'Completed', '', 'CA PRASAD', 'NRIVA'),
+(71, 'M.P.P.SCHOOL, STOVE BEADI COLONY', 'Primary School', 'Public', 1, 5, 0, 'M.P.P.SCHOOL, STOVE BEADI COLONY, KOVVUR MANDAL, SPSR NELLORE DISTRICT', 'Andhra Pradesh', 'AP', '524137', 'G. KODANDARAMAIAH', 'Teacher', '9848665822', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(72, 'SANKARAN THATHA ATALABADI , ACCHAYYA PETA', 'Primary School', 'Public', 1, 5, 0, 'SANKARAN THATHA ATALABADI , ACCHAYYA PETA VIL;LAGE, KASIMKOTA , VETAJANGALA PALEM, ANAKAPALLI MANDAL, ANAKAPALLI DISTRICT, ', 'Andhra Pradesh', 'AP', '531031', 'P.RAMALAKSHMI', 'Teacher', '8886446982', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(73, 'M.P.P.SCHOOL, VENKATARAO THOTA', 'Primary School', 'Public', 1, 5, 0, 'M.P.P.SCHOOL, VENKATARAO THOTA, NARASAPURAM MANDAL, WEST GODAVARI DISTRICT', 'Andhra Pradesh', 'AP', '534275', 'LEELA PRAPURNA', 'Teacher', '9849214694', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(74, 'HAMARI MITTI VIDYALAYA, KRISHNAJIWADI', 'Primary School', 'Public', 1, 5, 0, 'HAMARI MITTI VIDYALAYA, KRISHNAJIWADI, TADAVAI MANDAL, KAMAREDDY DISTRICT, TELANGANA STATE', 'TELANGANA', 'TS', '503120', 'ASHOK', 'Teacher', '9985626525', '', 'Completed', 'TELANGANA', 'CA PRASAD', 'NRIVA'),
+(75, 'COMMON SCHOOL ASSOSCIATION, VENKATARAO PETA', 'Primary School', 'Public', 1, 5, 0, 'DNO-16-67/13, VENKATARAO PETA, LOTHKUNTA, ALWAL, SECUNDARABAD', 'TELANGANA', 'TS', '500015', 'RENUKADEVI', 'Teacher', '9494244090', '', 'Completed', 'TELANGANA', 'CA PRASAD', 'NRIVA'),
+(76, 'DHARANI SOCIAL WELFARE SOCIETY, PENDURTHY', 'Primary School', 'Public', 1, 5, 0, 'DHARANI SOCIAL WELFARE SOCIETY, D.NO 6-36,NAD COLONY, KRISHNARAYAPURAM, SUJATANAGAR POST, PENDURTHY, VISAKHAPATNAM', 'Andhra Pradesh', 'AP', '530051', 'HARI VENKAT', 'Teacher', '9866084124', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(77, 'M.P.U.P.SCHOOL, SYDADUPALLI VILLAGE', 'Primary School', 'Public', 1, 5, 0, 'M.P.U.P.SCHOOL, SYDADUPALLI VILLAGE, RAPUR MANDAL, SPSR NELLORE DISTRICT', 'Andhra Pradesh', 'AP', '524414', 'MANJULA', 'Teacher', '9493578589', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(78, 'ASAYA YOUTH FOUNDATION AND ASAYA RURAL LIBRARY, CHEEPURUPALL', 'Primary School', 'Public', 1, 5, 0, 'ASAYA YOUTH FOUNDATION AND ASAYA RURAL LIBRARY,  G.AGRAHARAM, NEAR WATERTANK LINE, CHEEPURUPALLI, VIZAYANAGARM DISTRICT', 'Andhra Pradesh', 'AP', '535128', 'REDDI RAMANA ', 'Teacher', '9440937200', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA'),
+(79, 'S.V.M.E. SCHOOL, BOBBILI', 'Primary School', 'Private', 1, 5, 0, 'S.V.M.E. SCHOOL, GOLLAPALLI, BOBBILI, VIZAYANAGARAM', 'Andhra Pradesh', 'AP', '535558', 'CH.USHARANI', 'Teacher', '9491176734', '', 'Completed', 'Andhra Pradesh', 'CA PRASAD', 'NRIVA');
 
 -- --------------------------------------------------------
 
@@ -3743,7 +3841,9 @@ CREATE TABLE `schools_suggested` (
 --
 
 INSERT INTO `schools_suggested` (`id`, `school_name`, `contact_name`, `contact_mobile`, `commitment_statement`, `suggested_at`, `supported`) VALUES
-(2, 'aa', 'bb', '123', 'wevafvaseb dsvsvwec sfeff', '2023-11-19 16:00:25', 0);
+(8, 'Ya School ', 'Professor Mia', 'abc-123-5533', 'This is a great school', '2024-02-20 01:54:56', 0),
+(9, 'Metro State University', 'Dr. Jasthi', '222.333.4444', 'This is a commitment statement', '2024-04-16 00:34:33', 0),
+(10, 'Metro State University 2', 'Dr. Jasthi', '222.333.4444', 'This is a statment', '2024-04-16 01:21:43', 0);
 
 -- --------------------------------------------------------
 
@@ -3761,37 +3861,43 @@ CREATE TABLE `users` (
   `Active` varchar(10) DEFAULT NULL,
   `Role` varchar(20) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
-  `Created_Time` date DEFAULT NULL
+  `Created_Time` date DEFAULT NULL,
+  `reset_token_hash` varchar(64) DEFAULT NULL,
+  `reset_token_expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Hash`, `Active`, `Role`, `Modified_Time`, `Created_Time`) VALUES
-(1, 'Sivaaaaa', 'Jasthi', 'siva@silcmn.com', '123-456-7890', '3d4f2bf07dc1be38b20cd6e46949a1071f9d0e3d', 'Yes', 'admin', '2023-10-02', '2023-05-20'),
-(2, 'Ishana', 'Didwania', 'ishana@silcmn.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'admin', '2023-05-20', '2023-05-20'),
-(3, 'Mike', 'Rotch', 'mikerotch@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', '2023-05-20', '2023-05-20'),
-(4, 'Anita', 'Bath', 'anitabath@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', '2023-05-20', '2023-05-20'),
-(5, 'Pierre', 'Pants', 'pierrepants@school.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'student', '2023-05-20', '2023-05-20'),
-(6, 'Seth', 'Arndt', 'a@b.c', NULL, '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'yes', 'admin', '2023-05-22', '2023-05-22'),
-(7, 'Abdulkader', 'Abdi', 'aa@gmail.com', '333', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 'Yes', 'admin', '2023-10-02', '2023-09-25'),
-(16, 'aa', 'bb', 'aa@gmail.com', '12344', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 'Yes', 'admin', '2023-10-02', '2023-10-01');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_registrations`
---
-
-CREATE TABLE `user_registrations` (
-  `User_Id` int(11) NOT NULL,
-  `Reg_Id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Hash`, `Active`, `Role`, `Modified_Time`, `Created_Time`, `reset_token_hash`, `reset_token_expires_at`) VALUES
+(2, 'Ishana', 'Didwania', 'ishana@silcmn.com', '123-456-7890', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'yes', 'admin', '2023-05-20', '2023-05-20', NULL, NULL),
+(22, 'Admin', 'Kolles', 'adminkolles@gmail.com', '222-333-4444', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', 'student', '2024-04-01', '2024-03-06', NULL, NULL),
+(33, 'Daniel', 'K', 'schoolkolles@gmail.com', '111.222.3333', '70c57548db776b5ddfdd75fb45a95363f447d8b2', '', 'student', '2024-04-22', '2024-03-24', 'd15adb84bd8c2fa78d1089c6d74149ca8dfa8bc4', '2024-04-29 18:34:02'),
+(36, 'Siva', 'Jasthi', 'siva.jasthi@gmail.com', NULL, 'b405fbddf84dcc48b6e8b1fe36296aa5ef6b6b40', 'yes', 'admin', '2024-04-12', '2024-04-12', 'b9cda0a449fec3e392b075f40a61c5bee3a3a71d', '2024-04-12 10:16:37'),
+(37, 'Mangarani', 'Moturi', 'rani.vasusuravarapu@gmail.com', NULL, '57ca8576773fc2454ec937ca15c035722c6cf350', 'yes', 'admin', '2024-04-12', '2024-04-12', NULL, NULL),
+(40, 'Pallavi', 'Sriram', 'pallavivem@yahoo.com', NULL, '45c4192dd17f6782e18fe102bb024cdb0304ae5d', 'yes', 'admin', '2024-04-15', '2024-04-15', NULL, NULL),
+(41, 'Siva', 'Jasthi', 'siva.jasthi@metrostate.edu', NULL, 'b405fbddf84dcc48b6e8b1fe36296aa5ef6b6b40', 'yes', 'student', '2024-04-22', '2024-04-22', NULL, NULL),
+(42, 'Wisdom', 'Azonwu', 'je2241vn@go.minnstate.edu', NULL, '7e2d4bf5d52f31cf8ce55a1a8bb90fb30bbe550c', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL),
+(43, 'Brandon', 'Roback', 'Brandon.Roback@my.metrostate.edu', NULL, '4737de3b8262e66aa8c5e07e0ea81fed5953d989', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL),
+(44, 'John', 'Doe', 'johndoe@user.com', '123-456-7890', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-06-18', '2024-06-18', NULL, NULL),
+(45, 'first_name', 'last_name', 'admin@admin.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'admin', '2024-06-18', '2024-06-18', NULL, NULL),
+(46, 'Jane', 'Doe', 'janedoe@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
+(47, 'John', 'Smith', 'johnsmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
+(48, 'Jane', 'Smith', 'janesmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
+(49, 'bojo', 'johnson', 'bojo@bojo.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
+(50, 'Test', 'User', 'testuser@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
+(51, 'johnny', 'doe', 'johnnydoe@john.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-09', '2024-07-09', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `batch`
+--
+ALTER TABLE `batch`
+  ADD PRIMARY KEY (`Batch_Name`);
 
 --
 -- Indexes for table `blogs`
@@ -3813,16 +3919,16 @@ ALTER TABLE `books`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `causes`
---
-ALTER TABLE `causes`
-  ADD PRIMARY KEY (`Cause_Id`);
-
---
 -- Indexes for table `classes`
 --
 ALTER TABLE `classes`
   ADD PRIMARY KEY (`Class_Id`);
+
+--
+-- Indexes for table `instructor`
+--
+ALTER TABLE `instructor`
+  ADD PRIMARY KEY (`instructor_ID`);
 
 --
 -- Indexes for table `registrations`
@@ -3847,14 +3953,8 @@ ALTER TABLE `schools_suggested`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`User_Id`);
-
---
--- Indexes for table `user_registrations`
---
-ALTER TABLE `user_registrations`
-  ADD PRIMARY KEY (`User_Id`,`Reg_Id`),
-  ADD KEY `Reg_Id` (`Reg_Id`);
+  ADD PRIMARY KEY (`User_Id`),
+  ADD UNIQUE KEY `reset_token_hash` (`reset_token_hash`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -3864,13 +3964,13 @@ ALTER TABLE `user_registrations`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `Blog_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Blog_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `blog_pictures`
 --
 ALTER TABLE `blog_pictures`
-  MODIFY `Picture_Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Picture_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `books`
@@ -3879,40 +3979,40 @@ ALTER TABLE `books`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4933;
 
 --
--- AUTO_INCREMENT for table `causes`
---
-ALTER TABLE `causes`
-  MODIFY `Cause_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `Class_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Class_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `instructor`
+--
+ALTER TABLE `instructor`
+  MODIFY `instructor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `schools`
 --
 ALTER TABLE `schools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'school id', AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'school id', AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `schools_suggested`
 --
 ALTER TABLE `schools_suggested`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables
@@ -3929,13 +4029,6 @@ ALTER TABLE `blog_pictures`
 --
 ALTER TABLE `registrations`
   ADD CONSTRAINT `registrations_ibfk_1` FOREIGN KEY (`Class_Id`) REFERENCES `classes` (`Class_Id`) ON DELETE CASCADE;
-
---
--- Constraints for table `user_registrations`
---
-ALTER TABLE `user_registrations`
-  ADD CONSTRAINT `user_registrations_ibfk_1` FOREIGN KEY (`User_Id`) REFERENCES `users` (`User_Id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_registrations_ibfk_2` FOREIGN KEY (`Reg_Id`) REFERENCES `registrations` (`Reg_Id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
