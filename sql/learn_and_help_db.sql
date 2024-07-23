@@ -3704,7 +3704,9 @@ CREATE TABLE `preferences` (
 --
 
 INSERT INTO `preferences` (`name`, `value`) VALUES
-('ACTIVE_REGISTRATION', 'Summer 2024');
+('ACTIVE_REGISTRATION', 'Summer 2024'),
+('OPENAI_API_KEY', ''),
+('KEYWORDS', 'schools, books, libraries, reading');
 
 -- --------------------------------------------------------
 
