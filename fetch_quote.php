@@ -1,17 +1,32 @@
 <?php
-$api_key = 'aba4023a2e8289976cca95235b0d1557'; // Your FavQs API key
-$keywords = isset($_GET['keywords']) ? $_GET['keywords'] : 'books,libraries,joy,reading';
+$api_url = 'https://favqs.com/api/qotd';
 
+// Initialize cURL session
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://favqs.com/api/");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $api_key"));
+curl_setopt($ch, CURLOPT_URL, $api_url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
+// Execute cURL request
 $response = curl_exec($ch);
+
+// Check for cURL errors
+if (curl_errno($ch)) {
+    echo 'cURL Error:' . curl_error($ch);
+    exit;
+}
+
+// Close cURL session
 curl_close($ch);
 
+// Decode JSON response
 $data = json_decode($response, true);
-$quote = isset($data['quotes'][0]['quote']) ? $data['quotes'][0]['quote'] : 'No quote found.';
 
-echo $quote;
+// Check if quote is available
+if (isset($data['quote']['body']) && isset($data['quote']['author'])) {
+    $quote = $data['quote']['body'];
+    $author = $data['quote']['author'];
+    echo "$quote - $author";
+} else {
+    echo 'No quote found. Response: ' . $response;
+}
 ?>
