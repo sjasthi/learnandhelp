@@ -331,7 +331,11 @@
       <br>
       <label for="offerings">Admin Notes</label>
     </div>
-    <br>
+    <div class="admin_icon">
+      <a href="whats_app.php" id="whatsapp"><img src="images/admin_icons/whats_app.png" alt="whatsapp"></a>
+      <br>
+      <label for="whatsapp">WhatsApp</label>
+    </div>
     <div id="icon_attribution">
       <a href="https://www.flaticon.com/authors/freepik" title="freepik icons" id="icon_attribution">Icons created by Freepik - Flaticon</a>
     </div>
