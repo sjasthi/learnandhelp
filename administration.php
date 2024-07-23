@@ -61,11 +61,6 @@
         <label for="users">Users</label>
       </div>
       <div class="admin_icon">
-        <a href="admin_causes.php" id="causes"><img src="images/admin_icons/causes_icon.png" alt="causes"></a>
-        <br>
-        <label for="causes">Causes</label>
-      </div>
-      <div class="admin_icon">
         <a href="admin_schools.php" id="schools"><img src="images/admin_icons/school.png" alt="schools"></a>
         <br>
         <label for="schools">Schools</label>
