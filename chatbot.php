@@ -206,6 +206,7 @@
 		
 		//TODO: add key to preferences table, grab key from there and set as API_KEY
 		const API_KEY = "<?php echo $api_key; ?>";
+		const API_KEY_STR = "Bearer " + API_KEY;
 		
 		//TODO: add keywords to preferences table, set as keywords, send keywords to API
 		//const keywords = "schools, books, libraries, reading";
@@ -228,7 +229,7 @@
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": `Bearer ${API_KEY}`
+				"Authorization": API_KEY_STR
 			},
 			body: JSON.stringify({
 				"model": "gpt-3.5-turbo",
