@@ -64,7 +64,7 @@
         <label for="blogs">Blogs</label>
       </div>
       <div class="admin_icon">
-        <a href="#" id="reports"><img src="images/admin_icons/reports_icon.png" alt="reports"></a>
+        <a href="admin_reports.php" id="reports"><img src="images/admin_icons/reports_icon.png" alt="reports"></a>
         <br>
         <label for="reports">Reports</label>
       </div>
