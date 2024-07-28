@@ -35,8 +35,10 @@ function fill_form() {
 	$batch = $_POST['batch'];
 
   } else {
-    $db_id = $_POST['Reg_Id'];
-    $student_email = $_POST['students-email'];
+	$student_email = $_POST['students-email'];
+	$sql = "SELECT Reg_Id FROM registrations WHERE Student_Email = '$student_email'";
+    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+    $db_id = $row['Reg_Id'];
     $sponsor_name = $_POST['sponsers-name'];
     $sponsor_email = $_POST['sponsers-email'];
     $sponsor_phone = $_POST['sponsers-phone'];
@@ -50,7 +52,7 @@ function fill_form() {
   }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
-        <input type='hidden' name='Reg_Id' value=$db_id>
+        <input type=\"hidden\" name=\"reg_id\" value=\"$db_id\">
         <!---Sponsors Section -->
         <label id=\"name-label\">Sponsor's Name</label>
         <input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\" required><br><!--name--->
@@ -95,7 +97,7 @@ function fill_form() {
 	}
 	//Non-Admin's and users not logged in can only see "Approved" Classes
 	else {		
-		$offerings_query = "SELECT Class_Id FROM offerings WHERE Batch_Id = '$batch';";
+		$offerings_query = "SELECT Class_Id FROM offerings WHERE Batch_Name = '$batch';";
 		$offerings_result = $connection->query($offerings_query);
 		
 		$class_id_list = "";
@@ -131,6 +133,7 @@ function fill_form() {
 	  }
 	}
 	mysqli_free_result($class_result);
+	mysqli_close($connection);
 	echo "</select>
 		<!--dropdown--->
     </div>

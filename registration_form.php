@@ -9,19 +9,12 @@ if ($status == PHP_SESSION_NONE) {
 // Check to see if the logged in user has a registration on file
 if (isset($_SESSION['User_Id'])) {
   $User_Id = $_SESSION['User_Id'];
-  $sql = 'SELECT * FROM user_registrations WHERE User_Id = ' . $User_Id . ';';
   $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
   if ($connection === false) {
     die("Failed to connect to database: " . mysqli_connect_error());
   }
 
-  $result = $connection->query($sql);
-
-//  if ($result->num_rows > 0) {
-//   header("Location: form-submit.php");
-//  }
-  
   //Find user's information to populate.
   $sql = 'SELECT * FROM users WHERE User_Id = ' . $User_Id . ';';
   $result = $connection->query($sql);
@@ -32,23 +25,21 @@ if (isset($_SESSION['User_Id'])) {
   $phone = $row["Phone"];
   $fullname = $fname . " " . $lname;
   
-  $Reg_Id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $class = "";
+  $reg_id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $class = "";
   
   //Keeping for now, just in case $phone will need to be used in a way where it cannot be null.
   /*if(is_null($phone)){
 	  $phone = "";
-  }*/
-  
-  
+  }*/ 
 } else {
   header("Location: login.php");
 }
 
 //get active registration year
-$active_reg_query = "SELECT value FROM preferences WHERE name = 'ACTIVE_REGISTRATION';";
+$active_reg_query = "SELECT Value FROM preferences WHERE Preference_Name = 'Active Registration'";
 $active_reg_result = $connection->query($active_reg_query);
 $active_reg_array = $active_reg_result->fetch_assoc();
-$active_reg = $active_reg_array["value"];
+$active_reg = $active_reg_array["Value"];
 
 include 'show-navbar.php';
 
@@ -95,11 +86,11 @@ echo "<header class=\"inverse\">
 	<h2><strong>Registration Details</strong></h2>";
 	
 //Get list of previous registrations, if exists
-$past_reg_query = "SELECT Class_Id, Batch_Id, Sponsor_Name, Sponsor_Email, Sponsor_Phone_Number FROM registrations NATURAL JOIN batch WHERE Student_Name = '". $fullname. "' AND NOT Batch_Id = '$active_reg' ORDER BY Start_Date DESC";
+$past_reg_query = "SELECT Class_Id, Batch_Name, Sponsor1_Name, Sponsor1_Email, Sponsor1_Phone_Number FROM registrations NATURAL JOIN batch WHERE Student_Name = '". $fullname. "' AND NOT Batch_Name = '$active_reg' ORDER BY Start_Date DESC";
 $past_reg_result = $connection->query($past_reg_query);
 
 //Find current registration, if exists
-$current_reg_query = "SELECT * FROM registrations WHERE Student_Name = '". $fullname. "' AND Batch_Id = '$active_reg'";
+$current_reg_query = "SELECT * FROM registrations WHERE Student_Name = '". $fullname. "' AND Batch_Name = '$active_reg'";
 $current_reg_result = $connection->query($current_reg_query);
 
 //If user is registered for a class this term, show information for that registration.
@@ -112,12 +103,12 @@ if($current_reg_result->num_rows > 0){
 	mysqli_free_result($class_name_result);
 	$class_name = $class_name_array['Class_Name'];
 	
-	$sponsor_name = $user_reg_array['Sponsor_Name'];
-	$sponsor_email = $user_reg_array['Sponsor_Email'];
-	$sponsor_phone = $user_reg_array['Sponsor_Phone_Number'];
-	$spouse_name = $user_reg_array['Spouse_Name'];
-	$spouse_email = $user_reg_array['Spouse_Email'];
-	$spouse_phone = $user_reg_array['Spouse_Phone_Number'];
+	$sponsor_name = $user_reg_array['Sponsor1_Name'];
+	$sponsor_email = $user_reg_array['Sponsor1_Email'];
+	$sponsor_phone = $user_reg_array['Sponsor1_Phone_Number'];
+	$spouse_name = $user_reg_array['Sponsor2_Name'];
+	$spouse_email = $user_reg_array['Sponsor2_Email'];
+	$spouse_phone = $user_reg_array['Sponsor2_Phone_Number'];
 	$student_name = $user_reg_array['Student_Name'];
 	$class = $user_reg_array['Class_Id'];
 	
@@ -127,7 +118,7 @@ if($current_reg_result->num_rows > 0){
 		<p><strong>Registration details for $active_reg.</strong></p>
 		<p>$class_name</p>
 		<form action=\"registration_edit.php\" method = \"post\">
-		<input type='hidden' name='Reg_Id' value=$Reg_Id>
+		<input type='hidden' name='reg_id' value=$reg_id>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
 		<input type=\"hidden\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
 		<input type=\"hidden\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\"><!---email-->
@@ -175,12 +166,12 @@ else {
 	}
 	//Non-Admin's and users not logged in can only see "Approved" Classes
 	else {
-		$active_reg_query = "SELECT value FROM preferences WHERE name = 'ACTIVE_REGISTRATION';";
+		$active_reg_query = "SELECT Value FROM preferences WHERE Preference_Name = 'Active Registration'";
 		$active_reg_result = $connection->query($active_reg_query);
 		$active_reg_array = $active_reg_result->fetch_assoc();
-		$active_reg = $active_reg_array["value"];
+		$active_reg = $active_reg_array["Value"];
 		
-		$offerings_query = "SELECT Class_Id FROM offerings WHERE Batch_Id = '$active_reg';";
+		$offerings_query = "SELECT Class_Id FROM offerings WHERE Batch_Name = '$active_reg'";
 		$offerings_result = $connection->query($offerings_query);
 		
 		$class_id_list = "";
@@ -221,10 +212,9 @@ else {
 	$sponsor_name = $sponsor_email = $sponsor_phone = "";
 	if($past_reg_result->num_rows > 0){
 		$past_reg_row = $past_reg_result->fetch_assoc();
-		$sponsor_name = $past_reg_row['Sponsor_Name'];
-		$sponsor_email = $past_reg_row['Sponsor_Email'];
-		$sponsor_phone = $past_reg_row['Sponsor_Phone_Number'];
-		reset($past_reg_result);
+		$sponsor_name = $past_reg_row['Sponsor1_Name'];
+		$sponsor_email = $past_reg_row['Sponsor1_Email'];
+		$sponsor_phone = $past_reg_row['Sponsor1_Phone_Number'];
 	}
 	echo "</select>
 	<!--dropdown--->
@@ -262,17 +252,18 @@ else {
 }
 
 //If registered for past semesters, display the information for each registration by semester in reverse chronological order. If not, only display the accordion for the current semester.
+$past_reg_query = "SELECT Class_Id, Batch_Name FROM registrations NATURAL JOIN batch WHERE Student_Name = '". $fullname. "' AND NOT Batch_Name = '$active_reg' ORDER BY Start_Date DESC";
 $past_reg_result = $connection->query($past_reg_query);
-if($past_reg_result->num_rows > 0){
-	while($past_reg_row = $past_reg_result->fetch_assoc()){
+if(($past_reg_result->num_rows > 0)){
+	while ($past_reg_row = $past_reg_result->fetch_assoc()) {
 		$class_id = $past_reg_row['Class_Id'];
 		$class_name_query = "SELECT Class_Name FROM classes WHERE Class_Id = '$class_id';";
 		$class_name_result = $connection->query($class_name_query);
 		$class_name_array = $class_name_result->fetch_assoc();
 		mysqli_free_result($class_name_result);
 		$class_name = $class_name_array['Class_Name'];
-		$past_batch = $past_reg_row["Batch_Id"];
-	
+		$past_batch = $past_reg_row["Batch_Name"];
+		
 		echo "<button class='accordion'>$past_batch</button>
 		<div class='panel'>
 		<p><strong>Registration details for $past_batch</strong></p>

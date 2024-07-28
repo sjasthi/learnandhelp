@@ -22,40 +22,22 @@ if (isset($_POST['action'])) {
 	$action = '';
 }
 $User_Id = $_SESSION['User_Id'];
-if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
-    // Validate and sanitize form input
-    $sponsor_name = isset($_POST['sponsers-name']) ? htmlspecialchars($_POST['sponsers-name']) : '';
-    $sponsor_email = isset($_POST['sponsers-email']) ? filter_var($_POST['sponsers-email'], FILTER_SANITIZE_EMAIL) : '';
-    $sponsor_phone = isset($_POST['sponsers-phone']) ? htmlspecialchars($_POST['sponsers-phone']) : '';
-    $spouse_name = isset($_POST['spouses-name']) ? htmlspecialchars($_POST['spouses-name']) : '';
-    $spouse_email = isset($_POST['spouses-email']) ? filter_var($_POST['spouses-email'], FILTER_SANITIZE_EMAIL) : '';
-    $spouse_phone = isset($_POST['spouses-phone']) ? htmlspecialchars($_POST['spouses-phone']) : '';
-    $student_name = isset($_POST['students-name']) ? htmlspecialchars($_POST['students-name']) : '';
-    $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
-    $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
-    $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
-	$batch = isset($_POST['batch']) ? htmlspecialchars($_POST['batch']) : '';
 
-    $timestamp = date("Y-m-d H:i:s");
-} else {
-    $sql = "SELECT * FROM registrations NATURAL JOIN classes NATURAL JOIN user_registrations NATURAL JOIN users WHERE User_Id = $User_Id";
-    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+// Validate and sanitize form input
+$sponsor_name = isset($_POST['sponsers-name']) ? htmlspecialchars($_POST['sponsers-name']) : '';
+$sponsor_email = isset($_POST['sponsers-email']) ? filter_var($_POST['sponsers-email'], FILTER_SANITIZE_EMAIL) : '';
+$sponsor_phone = isset($_POST['sponsers-phone']) ? htmlspecialchars($_POST['sponsers-phone']) : '';
+$spouse_name = isset($_POST['spouses-name']) ? htmlspecialchars($_POST['spouses-name']) : '';
+$spouse_email = isset($_POST['spouses-email']) ? filter_var($_POST['spouses-email'], FILTER_SANITIZE_EMAIL) : '';
+$spouse_phone = isset($_POST['spouses-phone']) ? htmlspecialchars($_POST['spouses-phone']) : '';
+$student_name = isset($_POST['students-name']) ? htmlspecialchars($_POST['students-name']) : '';
+$student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
+$student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
+$class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
+$batch = isset($_POST['batch']) ? htmlspecialchars($_POST['batch']) : '';
+$reg_id = isset($_POST['reg_id']) ? htmlspecialchars($_POST['reg_id']) : '';
+$timestamp = date("Y-m-d H:i:s");
 
-		$action = '';
-    $Reg_Id = $row['Reg_Id'];
-		$sponsor_name = $row['Sponsor_Name'];
-		$sponsor_email = $row['Sponsor_Email'];
-		$sponsor_phone = $row['Sponsor_Phone_Number'];
-		$spouse_name = $row['Spouse_Name'];
-		$spouse_email = $row['Spouse_Email'];
-		$spouse_phone = $row['Spouse_Phone_Number'];
-		$student_name = $row['Student_Name'];
-		$student_email = $row['Student_Email'];
-		$student_phone = $row['Student_Phone_Number'];
-		$class_id = $row['Class_Id'];
-		$batch = $row['batch'];
-
-}
 
 //Find name of registered class from Class_Id
 $classname_query = "SELECT Class_Name FROM classes where Class_Id = $class_id";
@@ -68,64 +50,43 @@ $update_phone_query = "UPDATE users SET Phone = '$student_phone' WHERE User_Id =
 $update_phone_result = $connection->query($update_phone_query);
 
 if ($action == 'add') {
+	$User_Id = $_SESSION['User_Id'];
 	$sql = "INSERT INTO registrations VALUES (
-		NULL,
-		'$User_Id',
-		'$sponsor_name',
-		'$sponsor_email',
-		'$sponsor_phone',
-		'$spouse_name',
-		'$spouse_email',
-		'$spouse_phone',
-		'$student_name',
-		'$class_id',
-		'$batch',
-		'$timestamp',
-		'$timestamp');";
-
-} elseif($action == "edit") {
-	$Reg_Id = $_POST['Reg_Id'];
+			NULL,
+			'$sponsor_name',
+			'$sponsor_email',
+			'$sponsor_phone',
+			'$spouse_name',
+			'$spouse_email',
+			'$spouse_phone',
+			'$student_name',
+			'$student_email',
+			'$student_phone',
+			'$class_id',
+			'$timestamp',
+			'$timestamp',
+			'$batch',
+			'$User_Id');";
+}
+elseif ($action == "edit" || "admin_edit") {
 	$sql = "UPDATE registrations SET
-			Sponsor_Name = '$sponsor_name',
-			Sponsor_Email = '$sponsor_email',
-			Sponsor_Phone_Number = '$sponsor_phone',
-			Spouse_Name = '$spouse_name',
-			Spouse_Email = '$spouse_email',
-			Spouse_Phone_Number = '$spouse_phone',
+			Sponsor1_Name = '$sponsor_name',
+			Sponsor1_Email = '$sponsor_email',
+			Sponsor1_Phone_Number = '$sponsor_phone',
+			Sponsor2_Name = '$spouse_name',
+			Sponsor2_Email = '$spouse_email',
+			Sponsor2_Phone_Number = '$spouse_phone',
 			Student_Name = '$student_name',
 			Class_Id = '$class_id',
-			Batch_Id = '$batch',
+			Batch_Name = '$batch',
 			Modified_Time = '$timestamp'
-			WHERE Reg_Id = '$Reg_Id';";
-
-} elseif($action == "admin_edit") {
-	$Reg_Id = $_POST['Reg_Id'];
-	$sql = "UPDATE registrations SET
-			Sponsor_Name = '$sponsor_name',
-			Sponsor_Email = '$sponsor_email',
-			Sponsor_Phone_Number = '$sponsor_phone',
-			Spouse_Name = '$spouse_name',
-			Spouse_Email = '$spouse_email',
-			Spouse_Phone_Number = '$spouse_phone',
-			Student_Name = '$student_name',
-			Class_Id = '$class_id',
-			Batch_Id = '$batch',
-			Modified_Time = '$timestamp'
-			WHERE Reg_Id = '$Reg_Id';";
-
+			WHERE Reg_Id = '$reg_id'";
 }
 
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
-if ($action == 'add') {
-	$Reg_Id = mysqli_insert_id($connection);
-	$User_Id = $_SESSION['User_Id'];
-	$sql = 'INSERT INTO user_registrations VALUES (' . $User_Id . ', ' . $Reg_Id .');';
-	if (!mysqli_query($connection, $sql)) {
-		echo("Error description: " . mysqli_error($connection));
-	 }
-}
+
 mysqli_close($connection);
 
 echo "<!DOCTYPE html>
@@ -146,7 +107,7 @@ echo "<!DOCTYPE html>
 		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
-				<input type='hidden' name='Reg_Id' value=$Reg_Id>";
+		<input type=\"hidden\" name=\"reg_id\" value=\"$reg_id\">";
 
 	if (!empty($sponsor_name)) {
         echo "<!---Sponsors Section -->
