@@ -14,7 +14,7 @@ function show_navbar() {
       <a href="meet_our_instructors.php">Instructors</a>
       <a href="suggest_school.php">Suggest a School</a>
       <a href="contact_us.php">Contact Us</a>
-      <a href="quote.php">Quote</a>';
+      <a href="quote_of_the_day.php">Quote</a>';
 
     if (isset($_SESSION['email'])) {
         if ($_SESSION['role'] == 'admin') {
