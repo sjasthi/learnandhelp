@@ -24,12 +24,12 @@ if (isset($_POST['action'])) {
 $User_Id = $_SESSION['User_Id'];
 
 // Validate and sanitize form input
-$sponsor_name = isset($_POST['sponsers-name']) ? htmlspecialchars($_POST['sponsers-name']) : '';
-$sponsor_email = isset($_POST['sponsers-email']) ? filter_var($_POST['sponsers-email'], FILTER_SANITIZE_EMAIL) : '';
-$sponsor_phone = isset($_POST['sponsers-phone']) ? htmlspecialchars($_POST['sponsers-phone']) : '';
-$spouse_name = isset($_POST['spouses-name']) ? htmlspecialchars($_POST['spouses-name']) : '';
-$spouse_email = isset($_POST['spouses-email']) ? filter_var($_POST['spouses-email'], FILTER_SANITIZE_EMAIL) : '';
-$spouse_phone = isset($_POST['spouses-phone']) ? htmlspecialchars($_POST['spouses-phone']) : '';
+$sponsor_name = isset($_POST['sponsor1s-name']) ? htmlspecialchars($_POST['sponsor1s-name']) : '';
+$sponsor_email = isset($_POST['sponsor1s-email']) ? filter_var($_POST['sponsor1s-email'], FILTER_SANITIZE_EMAIL) : '';
+$sponsor_phone = isset($_POST['sponsor1s-phone']) ? htmlspecialchars($_POST['sponsor1s-phone']) : '';
+$sponsor2_name = isset($_POST['sponsor2s-name']) ? htmlspecialchars($_POST['sponsor2s-name']) : '';
+$sponsor2_email = isset($_POST['sponsor2s-email']) ? filter_var($_POST['sponsor2s-email'], FILTER_SANITIZE_EMAIL) : '';
+$sponsor2_phone = isset($_POST['sponsor2s-phone']) ? htmlspecialchars($_POST['sponsor2s-phone']) : '';
 $student_name = isset($_POST['students-name']) ? htmlspecialchars($_POST['students-name']) : '';
 $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
 $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
@@ -56,9 +56,9 @@ if ($action == 'add') {
 			'$sponsor_name',
 			'$sponsor_email',
 			'$sponsor_phone',
-			'$spouse_name',
-			'$spouse_email',
-			'$spouse_phone',
+			'$sponsor2_name',
+			'$sponsor2_email',
+			'$sponsor2_phone',
 			'$student_name',
 			'$student_email',
 			'$student_phone',
@@ -73,9 +73,9 @@ elseif ($action == "edit" || "admin_edit") {
 			Sponsor1_Name = '$sponsor_name',
 			Sponsor1_Email = '$sponsor_email',
 			Sponsor1_Phone_Number = '$sponsor_phone',
-			Sponsor2_Name = '$spouse_name',
-			Sponsor2_Email = '$spouse_email',
-			Sponsor2_Phone_Number = '$spouse_phone',
+			Sponsor2_Name = '$sponsor2_name',
+			Sponsor2_Email = '$sponsor2_email',
+			Sponsor2_Phone_Number = '$sponsor2_phone',
 			Student_Name = '$student_name',
 			Class_Id = '$class_id',
 			Batch_Name = '$batch',
@@ -111,26 +111,26 @@ echo "<!DOCTYPE html>
 
 	if (!empty($sponsor_name)) {
         echo "<!---Sponsors Section -->
-        <label id=\"name-label\"><b>Sponsor's Name:</b> $sponsor_name</label><br>
+        <label id=\"name-label\"><b>Sponsor 1's Name:</b> $sponsor_name</label><br>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
-        <label id=\"sponsers-email-label\"> <b>Sponsor's Email:</b> $sponsor_email</label><br>
-		<label id=\"sponsors-number-label\"><b>Sponsor's Phone Number:</b> $sponsor_phone</label><br>";
+        <label id=\"sponsor1s-email-label\"> <b>Sponsor 1's Email:</b> $sponsor_email</label><br>
+		<label id=\"sponsors-number-label\"><b>Sponsor 1's Phone Number:</b> $sponsor_phone</label><br>";
 	}
-     echo "<input type=\"hidden\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
-		<input type=\"hidden\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\"><!---email-->
-        <input type=\"hidden\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\"><br>";
+     echo "<input type=\"hidden\" id=\"sponsor1s-name\" name=\"sponsor1s-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
+		<input type=\"hidden\" id=\"sponsor1s-email\" name=\"sponsor1s-email\" class=\"form\" value=\"$sponsor_email\"><!---email-->
+        <input type=\"hidden\" id=\"sponsor1s-phone\" name=\"sponsor1s-phone\" value=\"$sponsor_phone\"><br>";
 		
-	if (!empty($spouse_name)) {
-        echo "<!---Spouse Section -->
-        <label id=\"spouses-name-label\"><b>Spouse's Name:</b> $spouse_name</label><br>
+	if (!empty($sponsor2_name)) {
+        echo "<!---sponsor2 Section -->
+        <label id=\"sponsor2s-name-label\"><b>Sponsor 2's Name:</b> $sponsor2_name</label><br>
 
-        <label id=\"spouses-email-label\"> <b>Spouse's Email:</b> $spouse_email</label><br>
+        <label id=\"sponsor2s-email-label\"> <b>Sponsor 2's Email:</b> $sponsor2_email</label><br>
 
-        <label id=\"spouses-number-label\"><b>Spouse's Phone Number:</b> $spouse_phone</label><br><br>";
+        <label id=\"sponsor2s-number-label\"><b>Sponsor 2's Phone Number:</b> $sponsor2_phone</label><br><br>";
 	}
-	echo "<input type=\"hidden\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" value=\"$spouse_name\"><!--name--->
-		<input type=\"hidden\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\"><!---email-->
-        <input type=\"hidden\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\">
+	echo "<input type=\"hidden\" id=\"sponsor2s-name\" name=\"sponsor2s-name\" class=\"form\" value=\"$sponsor2_name\"><!--name--->
+		<input type=\"hidden\" id=\"sponsor2s-email\" name=\"sponsor2s-email\" class=\"form\" value=\"$sponsor2_email\"><!---email-->
+        <input type=\"hidden\" id=\"sponsor2s-phone\" name=\"sponsor2s-phone\" value=\"$sponsor2_phone\">
 	    <!---Student Section -->
         <label id=\"students-name-label\"><b>Student's Name:</b> $student_name</label><br>
 

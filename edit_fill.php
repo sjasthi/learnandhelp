@@ -9,42 +9,42 @@ if ($status == PHP_SESSION_NONE) {
 
 function fill_form() {
 	$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
-  if (isset($_COOKIE['email']) and !isset($_POST['action'])){
-    $student_email = $_COOKIE['email'];
+  if (isset($_SESSION['User_Id']) and !isset($_POST['action'])){
+    $user_id = $_SESSION['User_Id'];
     
 
     if ($connection === false) {
   	  die("Failed to connect to database: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT * FROM registrations Natural Join classes WHERE Student_Email = '$student_email'";
+    $sql = "SELECT * FROM registrations Natural Join classes WHERE User_Id = '$user_id'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
     $db_id = $row['Reg_Id'];
-    $sponsor_name = $row['Sponsor_Name'];
-    $sponsor_email = $row['Sponsor_Email'];
-    $sponsor_phone = $row['Sponsor_Phone_Number'];
-    $spouse_name = $row['Spouse_Name'];
-    $spouse_email = $row['Spouse_Email'];
-    $spouse_phone = $row['Spouse_Phone_Number'];
+    $sponsor1_name = $row['Sponsor1_Name'];
+    $sponsor1_email = $row['Sponsor1_Email'];
+    $sponsor1_phone = $row['Sponsor1_Phone_Number'];
+    $sponsor2_name = $row['Sponsor2_Name'];
+    $sponsor2_email = $row['Sponsor2_Email'];
+    $sponsor2_phone = $row['Sponsor2_Phone_Number'];
     $student_name = $row['Student_Name'];
     $student_email = $row['Student_Email'];
     $student_phone = $row['Student_Phone_Number'];
     $class_name = $row['Class_Name'];
-	$class = $_POST['class'];
-	$batch = $_POST['batch'];
+	$class = $row['Class_Id'];
+	$batch = $row['Batch_Name'];
 
   } else {
 	$student_email = $_POST['students-email'];
 	$sql = "SELECT Reg_Id FROM registrations WHERE Student_Email = '$student_email'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
     $db_id = $row['Reg_Id'];
-    $sponsor_name = $_POST['sponsers-name'];
-    $sponsor_email = $_POST['sponsers-email'];
-    $sponsor_phone = $_POST['sponsers-phone'];
-    $spouse_name = $_POST['spouses-name'];
-    $spouse_email = $_POST['spouses-email'];
-    $spouse_phone = $_POST['spouses-phone'];
+    $sponsor1_name = $_POST['sponsor1s-name'];
+    $sponsor1_email = $_POST['sponsor1s-email'];
+    $sponsor1_phone = $_POST['sponsor1s-phone'];
+    $sponsor2_name = $_POST['sponsor2s-name'];
+    $sponsor2_email = $_POST['sponsor2s-email'];
+    $sponsor2_phone = $_POST['sponsor2s-phone'];
     $student_name = $_POST['students-name'];
 	$batch = $_POST['batch'];
     $student_phone = $_POST['students-phone'];
@@ -54,21 +54,21 @@ function fill_form() {
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
         <input type=\"hidden\" name=\"reg_id\" value=\"$db_id\">
         <!---Sponsors Section -->
-        <label id=\"name-label\">Sponsor's Name</label>
-        <input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\" required><br><!--name--->
-        <label id=\"sponsers-email-label\"> Sponsor's Email</label>
-        <input type=\"email\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\" required><br><!---email-->
-        <label id=\"sponsors-number-label\">Sponsor's Phone Number</label>
-        <input type=\"tel\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\" required>
+        <label id=\"name-label\">Sponsor 1's Name</label>
+        <input type=\"text\" id=\"sponsor1s-name\" name=\"sponsor1s-name\" class=\"form\" value=\"$sponsor1_name\" required><br><!--name--->
+        <label id=\"sponsor1-email-label\"> Sponsor 1's Email</label>
+        <input type=\"email\" id=\"sponsor1s-email\" name=\"sponsor1s-email\" class=\"form\" value=\"$sponsor1_email\" required><br><!---email-->
+        <label id=\"sponsors-number-label\">Sponsor 1's Phone Number</label>
+        <input type=\"tel\" id=\"sponsor1s-phone\" name=\"sponsor1s-phone\" value=\"$sponsor1_phone\" required>
 
         <br>
-        <!---Spouse Section -->
-        <label id=\"spouses-name-label\">Spouse's Name</label>
-        <input type=\"text\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" value=\"$spouse_name\"><br>
-        <label id=\"spouses-email-label\"> Spouse's Email</label>
-        <input type=\"email\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\"><br>
-        <label id=\"spouses-number-label\">Spouse's Phone Number</label>
-        <input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\">
+        <!---sponsor2 Section -->
+        <label id=\"sponsor2s-name-label\">Sponsor 2's Name</label>
+        <input type=\"text\" id=\"sponsor2s-name\" name=\"sponsor2s-name\" class=\"form\" value=\"$sponsor2_name\"><br>
+        <label id=\"sponsor2s-email-label\"> Sponsor 2's Email</label>
+        <input type=\"email\" id=\"sponsor2s-email\" name=\"sponsor2s-email\" class=\"form\" value=\"$sponsor2_email\"><br>
+        <label id=\"sponsor2s-number-label\">Sponsor 2's Phone Number</label>
+        <input type=\"tel\" id=\"sponsor2s-phone\" name=\"sponsor2s-phone\" value=\"$sponsor2_phone\">
 
         <br>
         </div>

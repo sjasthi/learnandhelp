@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2024 at 08:16 PM
+-- Generation Time: Jul 17, 2024 at 01:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,24 +30,23 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS learn_and_help_db;
 USE learn_and_help_db;
 
-
 CREATE TABLE `batch` (
-  `Batch_Id` varchar(11) NOT NULL,
-  `Start_Date` date NOT NULL,
-  `End_Date` date NOT NULL
+  `Batch_Name` varchar(50) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `batch`
 --
 
-INSERT INTO `batch` (`Batch_Id`, `Start_Date`, `End_Date`) VALUES
-('2022-2023', '2022-09-01', '2023-05-01'),
+
+INSERT INTO `batch` (`Batch_Name`, `start_date`, `end_date`) VALUES
 ('2023-2024', '2023-09-01', '2024-05-01'),
 ('2024-2025', '2024-09-01', '2025-05-01'),
-('Summer 2023', '2023-06-01', '2023-08-31'),
-('Summer 2024', '2024-06-01', '2024-08-31'),
-('Summer 2025', '2025-06-01', '2025-08-31');
+('Fall 2024', '2024-08-01', '2024-12-31'),
+('Summer 2023', '2023-06-01', '2023-08-31');
+
 
 -- --------------------------------------------------------
 
@@ -3589,30 +3588,6 @@ INSERT INTO `books` (`id`, `callNumber`, `title`, `author`, `publisher`, `publis
 -- --------------------------------------------------------
 
 --
--- Table structure for table `causes`
---
-
-CREATE TABLE `causes` (
-  `Cause_Id` int(11) NOT NULL,
-  `Cause_name` varchar(100) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `URL` varchar(150) DEFAULT NULL,
-  `Contact_name` varchar(50) DEFAULT NULL,
-  `Contact_email` varchar(50) DEFAULT NULL,
-  `Contact_phone` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `causes`
---
-
-INSERT INTO `causes` (`Cause_Id`, `Cause_name`, `description`, `URL`, `Contact_name`, `Contact_email`, `Contact_phone`) VALUES
-(1, 'School Libraries', 'Establishing the school libraries in Elementary, Middle and High Schools (India).', 'http://learnandhelp.jasthi.com', 'Siva Jasthi', 'siva.jasthi@gmail.com', '651.276.4671'),
-(9, 'Scholarships', 'Providing scholarships to academically brilliant and/or economically poor students.', 'http://learnandhelp.jasthi.com', 'Siva Jasthi', 'siva.jasthi@gmail.com', '6512764671');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `classes`
 --
 
@@ -3670,23 +3645,20 @@ INSERT INTO `instructor` (`instructor_ID`, `First_name`, `Last_name`, `Bio_data`
 --
 
 CREATE TABLE `offerings` (
-  `Batch_Id` varchar(11) NOT NULL,
-  `Class_Id` int(11) NOT NULL
+  `Batch_Name` varchar(50) NOT NULL,
+  `Class_Id` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `offerings`
 --
 
-INSERT INTO `offerings` (`Batch_Id`, `Class_Id`) VALUES
-('2023-2024', 7),
-('2023-2024', 10),
-('2024-2025', 2),
-('2024-2025', 4),
-('Summer 2023', 8),
-('Summer 2023', 9),
-('Summer 2024', 1),
-('Summer 2024', 3);
+
+INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
+('2024-2025', '1'),
+('2024-2025', '3'),
+('2025-2026', '1'),
+('2025-2026', '3');
 
 -- --------------------------------------------------------
 
@@ -3695,16 +3667,17 @@ INSERT INTO `offerings` (`Batch_Id`, `Class_Id`) VALUES
 --
 
 CREATE TABLE `preferences` (
-  `name` varchar(100) NOT NULL,
-  `value` varchar(100) NOT NULL
+  `Preference_Name` varchar(50) NOT NULL,
+  `Value` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `preferences`
 --
 
-INSERT INTO `preferences` (`name`, `value`) VALUES
-('ACTIVE_REGISTRATION', 'Summer 2024'),
+INSERT INTO `preferences` (`Preference_Name`, `Value`) VALUES
+('Active Registration', '2024-2025'),
+('Course Fee', '500'),
 ('OPENAI_API_KEY', ''),
 ('KEYWORDS', 'schools, books, libraries, reading');
 
@@ -3716,29 +3689,33 @@ INSERT INTO `preferences` (`name`, `value`) VALUES
 
 CREATE TABLE `registrations` (
   `Reg_Id` int(11) NOT NULL,
-  `User_Id` int(11) NOT NULL,
-  `Sponsor_Name` varchar(50) DEFAULT NULL,
-  `Sponsor_Email` varchar(50) DEFAULT NULL,
-  `Sponsor_Phone_Number` varchar(15) DEFAULT NULL,
-  `Spouse_Name` varchar(50) DEFAULT NULL,
-  `Spouse_Email` varchar(50) DEFAULT NULL,
-  `Spouse_Phone_Number` varchar(15) DEFAULT NULL,
+  `Sponsor1_Name` varchar(50) DEFAULT NULL,
+  `Sponsor1_Email` varchar(50) DEFAULT NULL,
+  `Sponsor1_Phone_Number` varchar(15) DEFAULT NULL,
+  `Sponsor2_Name` varchar(50) DEFAULT NULL,
+  `Sponsor2_Email` varchar(50) DEFAULT NULL,
+  `Sponsor2_Phone_Number` varchar(15) DEFAULT NULL,
   `Student_Name` varchar(50) DEFAULT NULL,
+  `Student_Email` varchar(50) DEFAULT NULL,
+  `Student_Phone_Number` varchar(50) DEFAULT NULL,
   `Class_Id` int(11) DEFAULT NULL,
-  `Batch_Id` varchar(11) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
-  `Created_Time` date DEFAULT NULL
+  `Created_Time` date DEFAULT NULL,
+  `Batch_Name` varchar(20) NOT NULL,
+  `User_Id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `registrations`
 --
 
-INSERT INTO `registrations` (`Reg_Id`, `User_Id`, `Sponsor_Name`, `Sponsor_Email`, `Sponsor_Phone_Number`, `Spouse_Name`, `Spouse_Email`, `Spouse_Phone_Number`, `Student_Name`,`Class_Id`, `Batch_Id`, `Modified_Time`, `Created_Time`) VALUES
-(12, 43, NULL, NULL, NULL, NULL, NULL, NULL, 'Brandon Roback', 8, 'Summer 2023', NULL, NULL),
-(14, 43, NULL, NULL, NULL, NULL, NULL, NULL, 'Brandon Roback', 7, '2023-2024', NULL, NULL),
-(28, 45, '', '', '', '', '', '', 'other student', 1, 'Summer 2024', '2024-07-06', '2024-07-06'),
-(31, 43, 'Sponsor', 'sponsor@email.com', '612-555-1234', '', '', '', 'Brandon Roback', 3, 'Summer 2024', '2024-07-06', '2024-07-06');
+
+INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`) VALUES
+(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-04', '2024-07-04', 'Summer 2023', 44),
+(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44),
+(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44),
+(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '-1', 51);
+
 
 -- --------------------------------------------------------
 
@@ -3912,31 +3889,17 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 (40, 'Pallavi', 'Sriram', 'pallavivem@yahoo.com', NULL, '45c4192dd17f6782e18fe102bb024cdb0304ae5d', 'yes', 'admin', '2024-04-15', '2024-04-15', NULL, NULL),
 (41, 'Siva', 'Jasthi', 'siva.jasthi@metrostate.edu', NULL, 'b405fbddf84dcc48b6e8b1fe36296aa5ef6b6b40', 'yes', 'student', '2024-04-22', '2024-04-22', NULL, NULL),
 (42, 'Wisdom', 'Azonwu', 'je2241vn@go.minnstate.edu', NULL, '7e2d4bf5d52f31cf8ce55a1a8bb90fb30bbe550c', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL),
-(43, 'Brandon', 'Roback', 'Brandon.Roback@my.metrostate.edu', '612-555-9876', '4737de3b8262e66aa8c5e07e0ea81fed5953d989', 'yes', 'student', '2024-06-11', '2024-06-11', '654c36395c7e45eddf72ff67487eac7afefdf515', '2024-06-24 23:33:47'),
-(44, 'Brandon', 'Roback', 'brandon.admin@my.metrostate.edu', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'admin', '2024-06-22', '2024-06-22', NULL, NULL),
-(45, 'other', 'student', 'other.student@email.com', '612-555-0123', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-06-22', '2024-06-22', NULL, NULL),
-(46, 'a', 'b', 'ab@c.com', '612-555-5555', '3c363836cf4e16666669a25da280a1865c2d2874', 'yes', 'student', '2024-07-06', '2024-07-06', NULL, NULL),
-(47, 'AdminScott', 'Sebesta', 'ssebesta1@gmail.com', NULL, '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'admin', '2024-07-08', '2024-07-08', NULL, NULL),
-(48, 'Scott', 'Sebesta', 'scott.sebesta@my.metrostate.edu', '651-867-5309', '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'student', '2024-07-08', '2024-07-08', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_registrations`
---
-
-CREATE TABLE `user_registrations` (
-  `User_Id` int(11) NOT NULL,
-  `Reg_Id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_registrations`
---
-
-INSERT INTO `user_registrations` (`User_Id`, `Reg_Id`) VALUES
-(43, 31),
-(45, 28);
+(43, 'Brandon', 'Roback', 'Brandon.Roback@my.metrostate.edu', NULL, '4737de3b8262e66aa8c5e07e0ea81fed5953d989', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL),
+(44, 'John', 'Doe', 'johndoe@user.com', '123-456-7890', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-06-18', '2024-06-18', NULL, NULL),
+(45, 'first_name', 'last_name', 'admin@admin.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'admin', '2024-06-18', '2024-06-18', NULL, NULL),
+(46, 'Jane', 'Doe', 'janedoe@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
+(47, 'John', 'Smith', 'johnsmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
+(48, 'Jane', 'Smith', 'janesmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
+(49, 'bojo', 'johnson', 'bojo@bojo.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
+(50, 'Test', 'User', 'testuser@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
+(51, 'johnny', 'doe', 'johnnydoe@john.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-09', '2024-07-09', NULL, NULL),
+(52, 'AdminScott', 'Sebesta', 'ssebesta1@gmail.com', NULL, '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'admin', '2024-07-08', '2024-07-08', NULL, NULL),
+(53, 'Scott', 'Sebesta', 'scott.sebesta@my.metrostate.edu', '651-867-5309', '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'student', '2024-07-08', '2024-07-08', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -3946,7 +3909,8 @@ INSERT INTO `user_registrations` (`User_Id`, `Reg_Id`) VALUES
 -- Indexes for table `batch`
 --
 ALTER TABLE `batch`
-  ADD PRIMARY KEY (`Batch_Id`);
+  ADD PRIMARY KEY (`Batch_Name`);
+
 
 --
 -- Indexes for table `blogs`
@@ -3968,12 +3932,6 @@ ALTER TABLE `books`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `causes`
---
-ALTER TABLE `causes`
-  ADD PRIMARY KEY (`Cause_Id`);
-
---
 -- Indexes for table `classes`
 --
 ALTER TABLE `classes`
@@ -3986,18 +3944,11 @@ ALTER TABLE `instructor`
   ADD PRIMARY KEY (`instructor_ID`);
 
 --
--- Indexes for table `offerings`
---
-ALTER TABLE `offerings`
-  ADD PRIMARY KEY (`Batch_Id`,`Class_Id`);
-
---
 -- Indexes for table `preferences`
 --
 ALTER TABLE `preferences`
-  ADD PRIMARY KEY (`name`);
+  ADD PRIMARY KEY (`Preference_Name`);
 
---
 -- Indexes for table `registrations`
 --
 ALTER TABLE `registrations`
@@ -4024,13 +3975,6 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `reset_token_hash` (`reset_token_hash`);
 
 --
--- Indexes for table `user_registrations`
---
-ALTER TABLE `user_registrations`
-  ADD PRIMARY KEY (`User_Id`,`Reg_Id`),
-  ADD KEY `Reg_Id` (`Reg_Id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -4053,12 +3997,6 @@ ALTER TABLE `books`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4933;
 
 --
--- AUTO_INCREMENT for table `causes`
---
-ALTER TABLE `causes`
-  MODIFY `Cause_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
@@ -4074,7 +4012,8 @@ ALTER TABLE `instructor`
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
 
 --
 -- AUTO_INCREMENT for table `schools`
@@ -4092,7 +4031,8 @@ ALTER TABLE `schools_suggested`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
 
 --
 -- Constraints for dumped tables
@@ -4109,13 +4049,6 @@ ALTER TABLE `blog_pictures`
 --
 ALTER TABLE `registrations`
   ADD CONSTRAINT `registrations_ibfk_1` FOREIGN KEY (`Class_Id`) REFERENCES `classes` (`Class_Id`) ON DELETE CASCADE;
-
---
--- Constraints for table `user_registrations`
---
-ALTER TABLE `user_registrations`
-  ADD CONSTRAINT `user_registrations_ibfk_1` FOREIGN KEY (`User_Id`) REFERENCES `users` (`User_Id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_registrations_ibfk_2` FOREIGN KEY (`Reg_Id`) REFERENCES `registrations` (`Reg_Id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

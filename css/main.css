@@ -230,6 +230,7 @@ button {
   cursor: pointer;
 }
 
+
 #form_show_button {
   margin-top: 20px;
 }
@@ -563,4 +564,43 @@ label {
 
 #book_image {
   max-height: 150px;
+}
+
+div .container_3 {
+  border-radius: 50px;
+  padding: 20px;
+  margin-left: auto;
+  display: inline-block;
+}
+
+.accordion {
+  background-color: #99d930;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  /* display: block;  */
+}
+
+.accordion.active, .accordion:hover {
+  background-color: #45a049;
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  margin-top: 8px;
+  border-radius: 4px;
+  width: 100%; 
+  box-sizing: border-box;
 }

@@ -25,7 +25,7 @@ if (isset($_SESSION['User_Id'])) {
   $phone = $row["Phone"];
   $fullname = $fname . " " . $lname;
   
-  $reg_id = $sponsor_name = $sponsor_email = $sponsor_phone = $spouse_name = $spouse_email = $spouse_phone = $student_name = $class = "";
+  $reg_id = $sponsor_name = $sponsor_email = $sponsor_phone = $sponsor2_name = $sponsor2_email = $sponsor2_phone = $student_name = $class = "";
   
   //Keeping for now, just in case $phone will need to be used in a way where it cannot be null.
   /*if(is_null($phone)){
@@ -106,9 +106,9 @@ if($current_reg_result->num_rows > 0){
 	$sponsor_name = $user_reg_array['Sponsor1_Name'];
 	$sponsor_email = $user_reg_array['Sponsor1_Email'];
 	$sponsor_phone = $user_reg_array['Sponsor1_Phone_Number'];
-	$spouse_name = $user_reg_array['Sponsor2_Name'];
-	$spouse_email = $user_reg_array['Sponsor2_Email'];
-	$spouse_phone = $user_reg_array['Sponsor2_Phone_Number'];
+	$sponsor2_name = $user_reg_array['Sponsor2_Name'];
+	$sponsor2_email = $user_reg_array['Sponsor2_Email'];
+	$sponsor2_phone = $user_reg_array['Sponsor2_Phone_Number'];
 	$student_name = $user_reg_array['Student_Name'];
 	$class = $user_reg_array['Class_Id'];
 	
@@ -120,12 +120,12 @@ if($current_reg_result->num_rows > 0){
 		<form action=\"registration_edit.php\" method = \"post\">
 		<input type='hidden' name='reg_id' value=$reg_id>
         <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
-		<input type=\"hidden\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
-		<input type=\"hidden\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" value=\"$sponsor_email\"><!---email-->
-        <input type=\"hidden\" id=\"sponsers-phone\" name=\"sponsers-phone\" value=\"$sponsor_phone\"><br>
-		<input type=\"hidden\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" value=\"$spouse_name\"><!--name--->
-		<input type=\"hidden\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" value=\"$spouse_email\"><!---email-->
-        <input type=\"hidden\" id=\"spouses-phone\" name=\"spouses-phone\" value=\"$spouse_phone\">
+		<input type=\"hidden\" id=\"sponsor1s-name\" name=\"sponsor1s-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
+		<input type=\"hidden\" id=\"sponsor1s-email\" name=\"sponsor1s-email\" class=\"form\" value=\"$sponsor_email\"><!---email-->
+        <input type=\"hidden\" id=\"sponsor1s-phone\" name=\"sponsor1s-phone\" value=\"$sponsor_phone\"><br>
+		<input type=\"hidden\" id=\"sponsor2s-name\" name=\"sponsor2s-name\" class=\"form\" value=\"$sponsor2_name\"><!--name--->
+		<input type=\"hidden\" id=\"sponsor2s-email\" name=\"sponsor2s-email\" class=\"form\" value=\"$sponsor2_email\"><!---email-->
+        <input type=\"hidden\" id=\"sponsor2s-phone\" name=\"sponsor2s-phone\" value=\"$sponsor2_phone\">
 		<input type=\"hidden\" id=\"students-name\" name=\"students-name\" class=\"form\" value=\"$student_name\"><!--name--->
 		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$email\"><br><!---email-->
         <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$phone\">
@@ -226,21 +226,21 @@ else {
 	<div id=\"right\">
   
 	<!---Sponsors Section -->
-	<label id=\"name-label\">*Sponsor's Name: </label>
-	<input type=\"text\" id=\"sponsers-name\" name=\"sponsers-name\" class=\"form\" placeholder=\"Enter Sponsor's name\" value=\"$sponsor_name\" required><br><!--name--->
-	<label id=\"sponsers-email-label\">*Sponsor's Email: </label>
-	<input type=\"email\" id=\"sponsers-email\" name=\"sponsers-email\" class=\"form\" placeholder=\"Enter Sponsor's email\" value=\"$sponsor_email\" required><br><!---email-->
-	<label id=\"sponsers-number-label\">*Sponsor's Phone Number: </label>
-	<input type=\"tel\" id=\"sponsers-phone\" name=\"sponsers-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" value=\"$sponsor_phone\" required>
+	<label id=\"name-label\">*Sponsor 1's Name: </label>
+	<input type=\"text\" id=\"sponsor1s-name\" name=\"sponsor1s-name\" class=\"form\" placeholder=\"Enter Sponsor 1's name\" value=\"$sponsor_name\" required><br><!--name--->
+	<label id=\"sponsor1s-email-label\">*Sponsor 1's Email: </label>
+	<input type=\"email\" id=\"sponsor1s-email\" name=\"sponsor1s-email\" class=\"form\" placeholder=\"Enter Sponsor 1's email\" value=\"$sponsor_email\" required><br><!---email-->
+	<label id=\"sponsor1s-number-label\">*Sponsor 1's Phone Number: </label>
+	<input type=\"tel\" id=\"sponsor1s-phone\" name=\"sponsor1s-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\" value=\"$sponsor_phone\" required>
 	<br>
 	<br>
-	<!---Spouse Section -->
-	<label id=\"spouses-name-label\">Spouse's Name: </label>
-	<input type=\"text\" id=\"spouses-name\" name=\"spouses-name\" class=\"form\" placeholder=\"Enter Spouse's name\"><br>
-	<label id=\"spouses-email-label\"> Spouse's Email: </label>
-	<input type=\"email\" id=\"spouses-email\" name=\"spouses-email\" class=\"form\" placeholder=\"Enter Spouse's email\"><br>
-	<label id=\"spouses-number-label\">Spouse's Phone Number: </label>
-	<input type=\"tel\" id=\"spouses-phone\" name=\"spouses-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\">
+	<!---sponsor2 Section -->
+	<label id=\"sponsor2s-name-label\">Sponsor 2's Name: </label>
+	<input type=\"text\" id=\"sponsor2s-name\" name=\"sponsor2s-name\" class=\"form\" placeholder=\"Enter Sponsor 2's name\"><br>
+	<label id=\"sponsor2s-email-label\"> Sponsor 2's Email: </label>
+	<input type=\"email\" id=\"sponsor2s-email\" name=\"sponsor2s-email\" class=\"form\" placeholder=\"Enter Sponsor 2's email\"><br>
+	<label id=\"sponsor2s-number-label\">Sponsor 2's Phone Number: </label>
+	<input type=\"tel\" id=\"sponsor2s-phone\" name=\"sponsor2s-phone\" placeholder=\"123-456-7899\" pattern=\"[0-9]{3}-[0-9]{3}-[0-9]{4}\">
 
 	 </div>
 	<br>
