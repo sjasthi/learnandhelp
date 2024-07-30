@@ -8,19 +8,19 @@ if ($status == PHP_SESSION_NONE) {
 
 
 function fill_form() {
-
-  if (isset($_COOKIE['email']) and !isset($_POST['action'])){
-    $student_email = $_COOKIE['email'];
-    $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+	$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+  if (isset($_SESSION['User_Id']) and !isset($_POST['action'])){
+    $user_id = $_SESSION['User_Id'];
+    
 
     if ($connection === false) {
   	  die("Failed to connect to database: " . mysqli_connect_error());
     }
 
-    $sql = "SELECT * FROM registrations Natural Join classes WHERE Student_Email = '$student_email'";
+    $sql = "SELECT * FROM registrations Natural Join classes WHERE User_Id = '$user_id'";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
-    $Reg_Id = $row['Reg_Id'];
+    $db_id = $row['Reg_Id'];
     $sponsor1_name = $row['Sponsor1_Name'];
     $sponsor1_email = $row['Sponsor1_Email'];
     $sponsor1_phone = $row['Sponsor1_Phone_Number'];
@@ -30,40 +30,45 @@ function fill_form() {
     $student_name = $row['Student_Name'];
     $student_email = $row['Student_Email'];
     $student_phone = $row['Student_Phone_Number'];
-    $class_id = $row['Class_Id'];
+    $class_name = $row['Class_Name'];
+	$class = $row['Class_Id'];
+	$batch = $row['Batch_Name'];
 
   } else {
-    $Reg_Id = $_POST['Reg_Id'];
-    $student_email = $_POST['students-email'];
-    $sponsor1_name = $_POST['sponsor1-name'];
-    $sponsor1_email = $_POST['sponsor1-email'];
-    $sponsor1_phone = $_POST['sponsor1-phone'];
-    $sponsor2_name = $_POST['sponsor2-name'];
-    $sponsor2_email = $_POST['sponsor2-email'];
-    $sponsor2_phone = $_POST['sponsor2-phone'];
+	$student_email = $_POST['students-email'];
+	$sql = "SELECT Reg_Id FROM registrations WHERE Student_Email = '$student_email'";
+    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+    $db_id = $row['Reg_Id'];
+    $sponsor1_name = $_POST['sponsor1s-name'];
+    $sponsor1_email = $_POST['sponsor1s-email'];
+    $sponsor1_phone = $_POST['sponsor1s-phone'];
+    $sponsor2_name = $_POST['sponsor2s-name'];
+    $sponsor2_email = $_POST['sponsor2s-email'];
+    $sponsor2_phone = $_POST['sponsor2s-phone'];
     $student_name = $_POST['students-name'];
+	$batch = $_POST['batch'];
     $student_phone = $_POST['students-phone'];
-    $class_id = $_POST['class'];
+    $class = $_POST['class'];
   }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
-        <input type='hidden' name='Reg_Id' value=\"$Reg_Id\">
-        <!---Sponsor1s Section -->
+        <input type=\"hidden\" name=\"reg_id\" value=\"$db_id\">
+        <!---Sponsors Section -->
         <label id=\"name-label\">Sponsor 1's Name</label>
-        <input type=\"text\" id=\"sponsor1-name\" name=\"sponsor1-name\" class=\"form\" value=\"$sponsor1_name\" required><br><!--name--->
+        <input type=\"text\" id=\"sponsor1s-name\" name=\"sponsor1s-name\" class=\"form\" value=\"$sponsor1_name\" required><br><!--name--->
         <label id=\"sponsor1-email-label\"> Sponsor 1's Email</label>
-        <input type=\"email\" id=\"sponsor1-email\" name=\"sponsor1-email\" class=\"form\" value=\"$sponsor1_email\" required><br><!---email-->
-        <label id=\"sponsor1-number-label\">Sponsor 1's Phone Number</label>
-        <input type=\"tel\" id=\"sponsor1-phone\" name=\"sponsor1-phone\" value=\"$sponsor1_phone\" required>
+        <input type=\"email\" id=\"sponsor1s-email\" name=\"sponsor1s-email\" class=\"form\" value=\"$sponsor1_email\" required><br><!---email-->
+        <label id=\"sponsors-number-label\">Sponsor 1's Phone Number</label>
+        <input type=\"tel\" id=\"sponsor1s-phone\" name=\"sponsor1s-phone\" value=\"$sponsor1_phone\" required>
 
         <br>
-        <!---Sponsor 2 Section -->
-        <label id=\"sponsor2-name-label\">Sponsor 2's Name</label>
-        <input type=\"text\" id=\"sponsor2-name\" name=\"sponsor2-name\" class=\"form\" value=\"$sponsor2_name\" required><br>
-        <label id=\"sponsor2-email-label\"> Sponsor 2's Email</label>
-        <input type=\"email\" id=\"sponsor2-email\" name=\"sponsor2-email\" class=\"form\" value=\"$sponsor2_email\" required ><br>
-        <label id=\"sponsor2-number-label\">Sponsor 2's Phone Number</label>
-        <input type=\"tel\" id=\"sponsor2-phone\" name=\"sponsor2-phone\" value=\"$sponsor2_phone\" required>
+        <!---sponsor2 Section -->
+        <label id=\"sponsor2s-name-label\">Sponsor 2's Name</label>
+        <input type=\"text\" id=\"sponsor2s-name\" name=\"sponsor2s-name\" class=\"form\" value=\"$sponsor2_name\"><br>
+        <label id=\"sponsor2s-email-label\"> Sponsor 2's Email</label>
+        <input type=\"email\" id=\"sponsor2s-email\" name=\"sponsor2s-email\" class=\"form\" value=\"$sponsor2_email\"><br>
+        <label id=\"sponsor2s-number-label\">Sponsor 2's Phone Number</label>
+        <input type=\"tel\" id=\"sponsor2s-phone\" name=\"sponsor2s-phone\" value=\"$sponsor2_phone\">
 
         <br>
         </div>
@@ -74,61 +79,64 @@ function fill_form() {
         <label id=\"students-email-label\"> Student's Email</label>
         <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br>
         <label id=\"students-number-label\">Student's Phone Number</label>
-        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required>
-        <br>";
-        // Get active Batch
-        $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required><br>
+		<label id=\"batch-name-label\">Batch Name</label>
+		<input type=\"text\" id=\"batch-name\" name=\"batch\" value=\"$batch\" readonly>
 
-        if ($connection === false) {
-          $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
-          if ($connection === false) {
-            die("Failed to connect to database: " . mysqli_connect_error());
-          }
-        }
-        $sql = <<< SQL
-                  SELECT value 
-                  FROM preferences 
-                  WHERE Preference_Name = 'Active Registration';
-                  SQL;
-        $result = mysqli_query($connection, $sql);
-        if ($result) {
-          $row = mysqli_fetch_assoc($result);
-          $active_batch = $row['value'];
-        } else {
-          $active_batch = null;
-          echo "Error: " . mysqli_error($connection);
-        }
-
-        echo "
-        <br>
-        <label id=\"batch-label\"><b>Batch Name:</b> $active_batch</label>
-        <br>
         <br>
         <label id=\"class\">Select Class</label>
         <select id=\"dropdown\" name=\"class\" required>
           <option disabled value>
             Select your class
           </option>";
-          $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+		  
+		  	// Select view of available classes for users from accessing the page 
+	// Admin's can see all classes regardless of status
+	if ((isset($_SESSION['email'])) &&  $_SESSION['role'] == 'admin') {
+	  $class_query = "SELECT Class_Id, Class_Name, Description, Status FROM classes;";
+	}
+	//Non-Admin's and users not logged in can only see "Approved" Classes
+	else {		
+		$offerings_query = "SELECT Class_Id FROM offerings WHERE Batch_Name = '$batch';";
+		$offerings_result = $connection->query($offerings_query);
+		
+		$class_id_list = "";
+		if($offerings_result->num_rows > 0)
+		{
+			$i = 0;
+			while($offerings_row = $offerings_result->fetch_assoc())
+			{
+				$class_id_list .= strval($offerings_row["Class_Id"]);
+				$i++;
+				if($i < $offerings_result->num_rows){
+					$class_id_list .= ", ";
+				}
+			}
+		}
+		
+		$class_query = "SELECT Class_Id, Class_Name, Description, Status FROM classes WHERE Class_Id IN ($class_id_list)";
+	}
 
-          if ($connection === false) {
-            die("Failed to connect to database: " . mysqli_connect_error());
-          }
-          
-          $class_query = "SELECT c.Class_Id, c.Class_Name, c.Description, c.Status
-                  FROM classes c
-                  JOIN offerings o ON c.Class_Id = o.class_id
-                  JOIN preferences p ON o.batch_name = p.value
-                  WHERE p.Preference_Name = 'Active Registration' AND c.Status = 'Approved';";
-          $class_result = mysqli_query($connection, $class_query);
-          
-          while ($class_row = mysqli_fetch_assoc($class_result)) {
-              $class_id_option = $class_row['Class_Id'];
-              $class_name_option = $class_row['Class_Name'];
-              $selected = ($class_id == $class_id_option) ? "selected" : "";
-              echo "<option value=\"$class_id_option\" $selected>$class_name_option</option>";
-          }
-          
-
+	// Fetch classes from the database
+	//$class_query = "SELECT * FROM classes";
+	$class_result = $connection->query($class_query);
+	if (!$class_result) {
+	  echo "Error: " . $connection->error;
+	} 
+	else {
+	  if ($class_result->num_rows > 0) {
+		while ($row = $class_result->fetch_assoc())
+			echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] . "</option>";
+	  } 
+	  else {
+			echo "<option disabled selected value>No classes found</option>";
+	  }
+	}
+	mysqli_free_result($class_result);
+	mysqli_close($connection);
+	echo "</select>
+		<!--dropdown--->
+    </div>
+    ";
 }
 ?>

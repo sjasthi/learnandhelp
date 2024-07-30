@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2024 at 01:25 AM
+-- Generation Time: Jul 30, 2024 at 10:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -27,9 +27,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `batch`
 --
 
-CREATE DATABASE IF NOT EXISTS learn_and_help_db;
-USE learn_and_help_db;
-
 CREATE TABLE `batch` (
   `Batch_Name` varchar(50) NOT NULL,
   `start_date` date NOT NULL,
@@ -40,13 +37,11 @@ CREATE TABLE `batch` (
 -- Dumping data for table `batch`
 --
 
-
 INSERT INTO `batch` (`Batch_Name`, `start_date`, `end_date`) VALUES
 ('2023-2024', '2023-09-01', '2024-05-01'),
 ('2024-2025', '2024-09-01', '2025-05-01'),
 ('Fall 2024', '2024-08-01', '2024-12-31'),
 ('Summer 2023', '2023-06-01', '2023-08-31');
-
 
 -- --------------------------------------------------------
 
@@ -3653,12 +3648,12 @@ CREATE TABLE `offerings` (
 -- Dumping data for table `offerings`
 --
 
-
 INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 ('2024-2025', '1'),
 ('2024-2025', '3'),
 ('2025-2026', '1'),
-('2025-2026', '3');
+('2025-2026', '3'),
+('2023-2024', '7');
 
 -- --------------------------------------------------------
 
@@ -3697,7 +3692,7 @@ CREATE TABLE `registrations` (
   `Sponsor2_Phone_Number` varchar(15) DEFAULT NULL,
   `Student_Name` varchar(50) DEFAULT NULL,
   `Student_Email` varchar(50) DEFAULT NULL,
-  `Student_Phone_Number` varchar(50) DEFAULT NULL,
+  `Student_Phone_Number` varchar(15) DEFAULT NULL,
   `Class_Id` int(11) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
   `Created_Time` date DEFAULT NULL,
@@ -3709,13 +3704,11 @@ CREATE TABLE `registrations` (
 -- Dumping data for table `registrations`
 --
 
-
 INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`) VALUES
 (47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-04', '2024-07-04', 'Summer 2023', 44),
 (53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44),
 (54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44),
 (55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '-1', 51);
-
 
 -- --------------------------------------------------------
 
@@ -3750,7 +3743,7 @@ CREATE TABLE `schools` (
 --
 
 INSERT INTO `schools` (`id`, `name`, `type`, `category`, `grade_level_start`, `grade_level_end`, `current_enrollment`, `address_text`, `state_name`, `state_code`, `pin_code`, `contact_name`, `contact_designation`, `contact_phone`, `contact_email`, `status`, `notes`, `referenced_by`, `supported_by`) VALUES
-(1, 'Z P H  School (Payakaraopeta, Andhra)', 'High School', 'Public', 1, 10, 210, 'Z P H  School (Payakaraopeta)', 'Andhra Pradesh', 'AP', '531126', 'Smt. Vijaya Bhanu Kote', 'Teacher', '9502247679 / 8247769052', '', 'Completed', 'what is this?', '', 'PGNF'),
+(1, 'Z P H School (Payakaraopeta, Andhra)', 'High School', 'Public', 1, 10, 210, 'Z P H School (Payakaraopeta)', 'Andhra Pradesh', 'AP', '531126', 'Smt. Vijaya Bhanu Kote', 'Teacher', '9502247679 / 8247769052', '', 'Completed', 'what is this?', '', 'PGNF'),
 (2, 'Chethana (Chowdavaram)', 'Primary School', 'Private', 1, 10, 475, 'Chowdavaram Village Guntur (District) AP - 522019', 'Andhra Pradesh', 'AP', '522019', 'Ms. Marudwathi', 'Teacher', '9848132435', 'chetana_svbk@yahoo.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
 (3, 'Z P H School (Vunnava)', 'High School', 'Public', 1, 10, 0, 'Unnava (Village) Edlapadu (Mandal) Guntur (District) AP - 522233', 'Andhra Pradesh', 'AP', ' 522233', 'Kakumanu Hima Bindu', 'Teacher', '9505550075', '', 'Completed', '', '', 'PGNF'),
 (4, 'Abhyasa vidyalaya', 'Primary School', 'Private', 1, 5, 0, 'Near Water tank Gangireddula dibba Gunadala Vijayawada - 520010', 'Andhra pradesh', 'AP', '520010', 'Krishna', 'Teacher', '9440579922', '', 'Completed', '', 'CA PRASAD', 'NRIVA'),
@@ -3897,9 +3890,7 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 (48, 'Jane', 'Smith', 'janesmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
 (49, 'bojo', 'johnson', 'bojo@bojo.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
 (50, 'Test', 'User', 'testuser@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
-(51, 'johnny', 'doe', 'johnnydoe@john.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-09', '2024-07-09', NULL, NULL),
-(52, 'AdminScott', 'Sebesta', 'ssebesta1@gmail.com', NULL, '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'admin', '2024-07-08', '2024-07-08', NULL, NULL),
-(53, 'Scott', 'Sebesta', 'scott.sebesta@my.metrostate.edu', '651-867-5309', '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'student', '2024-07-08', '2024-07-08', NULL, NULL);
+(51, 'johnny', 'doe', 'johnnydoe@john.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-09', '2024-07-09', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -3910,7 +3901,6 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 --
 ALTER TABLE `batch`
   ADD PRIMARY KEY (`Batch_Name`);
-
 
 --
 -- Indexes for table `blogs`
@@ -3944,11 +3934,6 @@ ALTER TABLE `instructor`
   ADD PRIMARY KEY (`instructor_ID`);
 
 --
--- Indexes for table `preferences`
---
-ALTER TABLE `preferences`
-  ADD PRIMARY KEY (`Preference_Name`);
-
 -- Indexes for table `registrations`
 --
 ALTER TABLE `registrations`
@@ -4012,8 +3997,7 @@ ALTER TABLE `instructor`
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
-
+  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `schools`
@@ -4031,8 +4015,7 @@ ALTER TABLE `schools_suggested`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
+  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- Constraints for dumped tables

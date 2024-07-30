@@ -1,7 +1,6 @@
 <?php
 require 'db_configuration.php';
 
-
 $status = session_status();
 if ($status == PHP_SESSION_NONE) {
   session_start();
@@ -12,7 +11,6 @@ if (!(isset($_SESSION['email']))) {
 }
 
 include 'show-navbar.php';
-include 'show_registration_history.php';
 $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
 if ($connection === false) {
@@ -23,153 +21,73 @@ if (isset($_POST['action'])) {
 } else {
 	$action = '';
 }
+$User_Id = $_SESSION['User_Id'];
 
-// Get active batch
-$query = <<< SQL
-			SELECT value 
-			FROM preferences 
-			WHERE Preference_Name = 'Active Registration';
-			SQL;
-$result = mysqli_query($connection, $query);
-if ($result) {
-    $row = mysqli_fetch_assoc($result);
-    $active_batch = $row['value'];
-} else {
-    $active_batch = null;
-    echo "Error: " . mysqli_error($connection);
-}
+// Validate and sanitize form input
+$sponsor_name = isset($_POST['sponsor1s-name']) ? htmlspecialchars($_POST['sponsor1s-name']) : '';
+$sponsor_email = isset($_POST['sponsor1s-email']) ? filter_var($_POST['sponsor1s-email'], FILTER_SANITIZE_EMAIL) : '';
+$sponsor_phone = isset($_POST['sponsor1s-phone']) ? htmlspecialchars($_POST['sponsor1s-phone']) : '';
+$sponsor2_name = isset($_POST['sponsor2s-name']) ? htmlspecialchars($_POST['sponsor2s-name']) : '';
+$sponsor2_email = isset($_POST['sponsor2s-email']) ? filter_var($_POST['sponsor2s-email'], FILTER_SANITIZE_EMAIL) : '';
+$sponsor2_phone = isset($_POST['sponsor2s-phone']) ? htmlspecialchars($_POST['sponsor2s-phone']) : '';
+$student_name = isset($_POST['students-name']) ? htmlspecialchars($_POST['students-name']) : '';
+$student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
+$student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
+$class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
+$batch = isset($_POST['batch']) ? htmlspecialchars($_POST['batch']) : '';
+$reg_id = isset($_POST['reg_id']) ? htmlspecialchars($_POST['reg_id']) : '';
+$timestamp = date("Y-m-d H:i:s");
 
 
+//Find name of registered class from Class_Id
+$classname_query = "SELECT Class_Name FROM classes where Class_Id = $class_id";
+$classname_result = $connection->query($classname_query);
+$classname_row = $classname_result->fetch_assoc();
+$class = $classname_row["Class_Name"];
 
-
-if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
-    // Validate and sanitize form input
-    $sponsor1_name = isset($_POST['sponsor1-name']) ? htmlspecialchars($_POST['sponsor1-name']) : '';
-    $sponsor1_email = isset($_POST['sponsor1-email']) ? filter_var($_POST['sponsor1-email'], FILTER_SANITIZE_EMAIL) : '';
-    $sponsor1_phone = isset($_POST['sponsor1-phone']) ? htmlspecialchars($_POST['sponsor1-phone']) : '';
-    $sponsor2_name = isset($_POST['sponsor2-name']) ? htmlspecialchars($_POST['sponsor2-name']) : '';
-    $sponsor2_email = isset($_POST['sponsor2-email']) ? filter_var($_POST['sponsor2-email'], FILTER_SANITIZE_EMAIL) : '';
-    $sponsor2_phone = isset($_POST['sponsor2-phone']) ? htmlspecialchars($_POST['sponsor2-phone']) : '';
-    $student_name = isset($_POST['students-name']) ? htmlspecialchars($_POST['students-name']) : '';
-    $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
-    $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
-    $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
-
-    $timestamp = date("Y-m-d H:i:s");
-} else {
-	$User_Id = $_SESSION['User_Id'];
-    $sql = "SELECT * FROM registrations NATURAL JOIN classes WHERE User_Id = $User_Id;";
-    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
-
-		$action = '';
-        $Reg_Id = $row['Reg_Id'];
-		$sponsor1_name = $row['Sponsor1_Name'];
-		$sponsor1_email = $row['Sponsor1_Email'];
-		$sponsor1_phone = $row['Sponsor1_Phone_Number'];
-		$sponsor2_name = $row['Sponsor2_Name'];
-		$sponsor2_email = $row['Sponsor2_Email'];
-		$sponsor2_phone = $row['Sponsor2_Phone_Number'];
-		$student_name = $row['Student_Name'];
-		$student_email = $row['Student_Email'];
-		$student_phone = $row['Student_Phone_Number'];
-		$class_id = $row['Class_Id'];
-		$batch_name = $row['Batch_Name']; 
-}
-
-// Pull the available classes from the database
-$class_query = "SELECT Class_Id, Class_Name FROM classes";
-$class_result = mysqli_query($connection, $class_query);
-
-if (!$class_result) {
-    die("Query failed: " . mysqli_error($connection));
-}
-
-$classes = [];
-while ($class_row = mysqli_fetch_assoc($class_result)) {
-    $classes[$class_row['Class_Id']] = $class_row['Class_Name'];
-}
-
-// Get the class name using the class_id
-$class = isset($classes[$class_id]) ? $classes[$class_id] : 'Unknown Class';
-
+//WIP: Add/update user phone number. (Possible TODO: do the same for other information?)
+$update_phone_query = "UPDATE users SET Phone = '$student_phone' WHERE User_Id = '$User_Id';";
+$update_phone_result = $connection->query($update_phone_query);
 
 if ($action == 'add') {
-	$batch_name_query = "(SELECT value FROM preferences WHERE Preference_Name = 'Active Registration')";
-
-	$sql = "INSERT INTO registrations 
-				(Sponsor1_Name, 
-				Sponsor1_Email, 
-				Sponsor1_Phone_Number,
-				Sponsor2_Name, 
-				Sponsor2_Email, 
-				Sponsor2_Phone_Number,
-				Student_Name, 
-				Student_Email, 
-				Student_Phone_Number, 
-				Class_Id,  
-				Modified_Time, 
-				Created_Time, 
-				Batch_Name,
-				User_Id) 
-			VALUES (
-				'$sponsor1_name',
-				'$sponsor1_email',
-				'$sponsor1_phone',
-				'$sponsor2_name',
-				'$sponsor2_email',
-				'$sponsor2_phone',
-				'$student_name',
-				'$student_email',
-				'$student_phone',
-				'$class_id',
-				'$timestamp',
-				'$timestamp',
-				$active_batch,
-				'".$_SESSION['User_Id']."'
-			);";
-} elseif($action == "edit") {
-	$Reg_Id = $_POST['Reg_Id'];
+	$User_Id = $_SESSION['User_Id'];
+	$sql = "INSERT INTO registrations VALUES (
+			NULL,
+			'$sponsor_name',
+			'$sponsor_email',
+			'$sponsor_phone',
+			'$sponsor2_name',
+			'$sponsor2_email',
+			'$sponsor2_phone',
+			'$student_name',
+			'$student_email',
+			'$student_phone',
+			'$class_id',
+			'$timestamp',
+			'$timestamp',
+			'$batch',
+			'$User_Id');";
+}
+elseif ($action == "edit" || "admin_edit") {
 	$sql = "UPDATE registrations SET
-			Sponsor1_Name = '$sponsor1_name',
-			Sponsor1_Email = '$sponsor1_email',
-			Sponsor1_Phone_Number = '$sponsor1_phone',
+			Sponsor1_Name = '$sponsor_name',
+			Sponsor1_Email = '$sponsor_email',
+			Sponsor1_Phone_Number = '$sponsor_phone',
 			Sponsor2_Name = '$sponsor2_name',
 			Sponsor2_Email = '$sponsor2_email',
 			Sponsor2_Phone_Number = '$sponsor2_phone',
 			Student_Name = '$student_name',
-			Student_Email = '$student_email',
-			Student_Phone_Number = '$student_phone',
 			Class_Id = '$class_id',
+			Batch_Name = '$batch',
 			Modified_Time = '$timestamp'
-			WHERE Reg_Id = '$Reg_Id';";
-
-} elseif($action == "admin_edit") {
-	$Reg_Id = $_POST['Reg_Id'];
-	$sql = "UPDATE registrations SET
-			Sponsor1_Name = '$sponsor1_name',
-			Sponsor1_Email = '$sponsor1_email',
-			Sponsor1_Phone_Number = '$sponsor1_phone',
-			Sponsor2_Name = '$sponsor2_name',
-			Sponsor2_Email = '$sponsor2_email',
-			Sponsor2_Phone_Number = '$sponsor2_phone',
-			Student_Name = '$student_name',
-			Student_Email = '$student_email',
-			Student_Phone_Number = '$student_phone',
-			Class_Id = '$class_id',
-			Modified_Time = '$timestamp'
-			WHERE Reg_Id = '$Reg_Id';";
-
+			WHERE Reg_Id = '$reg_id'";
 }
 
 if (!mysqli_query($connection, $sql)) {
 	echo("Error description: " . mysqli_error($connection));
   }
 
-
-if ($action == 'add') {
-	$Reg_Id = mysqli_insert_id($connection);
-	echo "";
-}
+mysqli_close($connection);
 
 echo "<!DOCTYPE html>
 <!DOCTYPE html>
@@ -189,51 +107,49 @@ echo "<!DOCTYPE html>
 		<h3> Registration Details </h3>
     <div id=\"container_2\">
 		<form action=\"registration_edit.php\" method = \"post\">
-  			<!---Registration Label--->
-			<label id=\"registration_id-label\"><b>Registration ID:</b> $Reg_Id</label><br>
-			<label id=\"registration_id-label\"><b>Batch Name:</b> $active_batch</label><br>
-			<input type='hidden' name='Reg_Id' value=$Reg_Id>
-			<br>
-			<!---sponsor1 Section -->
-			<label id=\"name-label\"><b>Sponsor 1's Name:</b> $sponsor1_name</label><br>
-			<input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
-			<label id=\"sponsor1-email-label\"> <b>Sponsor 1's Email:</b> $sponsor1_email</label><br>
-			<label id=\"sponsor1-number-label\"><b>Sponsor 1's Phone Number:</b> $sponsor1_phone</label><br>
-			<input type=\"hidden\" id=\"sponsor1-name\" name=\"sponsor1-name\" class=\"form\" value=\"$sponsor1_name\"><!--name--->
-			<input type=\"hidden\" id=\"sponsor1-email\" name=\"sponsor1-email\" class=\"form\" value=\"$sponsor1_email\"><br><!---email-->
-			<input type=\"hidden\" id=\"sponsor1-phone\" name=\"sponsor1-phone\" value=\"$sponsor1_phone\">
+		<input type=\"hidden\" name=\"reg_id\" value=\"$reg_id\">";
 
-			<br>
-			<!---Sponsor2 Section -->
-			<label id=\"sponsor2-name-label\"><b>Sponsor 2's Name:</b> $sponsor2_name</label><br>
+	if (!empty($sponsor_name)) {
+        echo "<!---Sponsors Section -->
+        <label id=\"name-label\"><b>Sponsor 1's Name:</b> $sponsor_name</label><br>
+        <input type=\"hidden\" id=\"action\" name=\"action\" value=\"edit\">
+        <label id=\"sponsor1s-email-label\"> <b>Sponsor 1's Email:</b> $sponsor_email</label><br>
+		<label id=\"sponsors-number-label\"><b>Sponsor 1's Phone Number:</b> $sponsor_phone</label><br>";
+	}
+     echo "<input type=\"hidden\" id=\"sponsor1s-name\" name=\"sponsor1s-name\" class=\"form\" value=\"$sponsor_name\"><!--name--->
+		<input type=\"hidden\" id=\"sponsor1s-email\" name=\"sponsor1s-email\" class=\"form\" value=\"$sponsor_email\"><!---email-->
+        <input type=\"hidden\" id=\"sponsor1s-phone\" name=\"sponsor1s-phone\" value=\"$sponsor_phone\"><br>";
+		
+	if (!empty($sponsor2_name)) {
+        echo "<!---sponsor2 Section -->
+        <label id=\"sponsor2s-name-label\"><b>Sponsor 2's Name:</b> $sponsor2_name</label><br>
 
-			<label id=\"sponsor2-email-label\"> <b>Sponsor 2's Email:</b> $sponsor2_email</label><br>
+        <label id=\"sponsor2s-email-label\"> <b>Sponsor 2's Email:</b> $sponsor2_email</label><br>
 
-			<label id=\"sponsor2-number-label\"><b>Sponsor 2's Phone Number:</b> $sponsor2_phone</label><br>
-			<input type=\"hidden\" id=\"sponsor2-name\" name=\"sponsor2-name\" class=\"form\" value=\"$sponsor2_name\"><!--name--->
-			<input type=\"hidden\" id=\"sponsor2-email\" name=\"sponsor2-email\" class=\"form\" value=\"$sponsor2_email\"><br><!---email-->
-			<input type=\"hidden\" id=\"sponsor2-phone\" name=\"sponsor2-phone\" value=\"$sponsor2_phone\">
+        <label id=\"sponsor2s-number-label\"><b>Sponsor 2's Phone Number:</b> $sponsor2_phone</label><br><br>";
+	}
+	echo "<input type=\"hidden\" id=\"sponsor2s-name\" name=\"sponsor2s-name\" class=\"form\" value=\"$sponsor2_name\"><!--name--->
+		<input type=\"hidden\" id=\"sponsor2s-email\" name=\"sponsor2s-email\" class=\"form\" value=\"$sponsor2_email\"><!---email-->
+        <input type=\"hidden\" id=\"sponsor2s-phone\" name=\"sponsor2s-phone\" value=\"$sponsor2_phone\">
+	    <!---Student Section -->
+        <label id=\"students-name-label\"><b>Student's Name:</b> $student_name</label><br>
 
-			<br>
-			<!---Student Section -->
-			<label id=\"students-name-label\"><b>Student's Name:</b> $student_name</label><br>
+        <label id=\"students-email-label\"><b>Student's Email:</b> $student_email</label><br>
 
-			<label id=\"students-email-label\"><b>Student's Email:</b> $student_email</label><br>
+        <label id=\"students-number-label\"><b>Student's Phone Number:</b> $student_phone</label><br>
+		<input type=\"hidden\" id=\"students-name\" name=\"students-name\" class=\"form\" value=\"$student_name\"><!--name--->
+		<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$student_email\"><br><!---email-->
+        <input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\">
 
-			<label id=\"students-number-label\"><b>Student's Phone Number:</b> $student_phone</label><br>
-			<input type=\"hidden\" id=\"students-name\" name=\"students-name\" class=\"form\" value=\"$student_name\"><!--name--->
-			<input type=\"hidden\" id=\"students-email\" name=\"students-email\" class=\"form\" value=\"$student_email\"><br><!---email-->
-			<input type=\"hidden\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\">
-
-			<br>
-			<label id=\"class\"><b>Selected Class:</b> $class</label><br>
-			<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
-			<br>
-			<input type='hidden' name='action' value='edit'>
-			<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
-			<br><br>
-		</form>
-	</div>";
-fetchRegistrationDetails($connection, $_SESSION['User_Id']);
-mysqli_close($connection);
+        <label id=\"class\"><b>Selected Class:</b> $class</label><br><br>
+		<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
+		<label id=\"batch\"><b>Selected Batch:</b> $batch</label><br><br>
+		<input type=\"hidden\" id=\"batch\" name=\"batch\" value=\"$batch\">
+		<input type='hidden' name='action' value='edit'>
+		<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
+		<br><br>
+	</div>
+  </body>
+</html>
+";
 ?>
