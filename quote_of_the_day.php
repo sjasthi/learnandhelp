@@ -16,7 +16,7 @@ if ($status == PHP_SESSION_NONE) {
 </head>
 
 <body>
-    <?php include 'show-navbar.php'; ?>
+    <?php include 'show_navbar.php'; ?>
     <?php show_navbar(); ?>
     <header class="inverse">
         <div class="container">

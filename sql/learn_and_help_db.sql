@@ -3668,7 +3668,7 @@ INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 
 CREATE TABLE `preferences` (
   `Preference_Name` varchar(50) NOT NULL,
-  `Value` varchar(50) NOT NULL
+  `Value` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

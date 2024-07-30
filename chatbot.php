@@ -15,13 +15,13 @@
 	}
 	
 
-	$api_key_query = "SELECT value FROM preferences WHERE Preference_Name = 'OPENAI_API_KEY';";
+	$api_key_query = "SELECT Value FROM preferences WHERE Preference_Name = 'OPENAI_API_KEY';";
 	$api_key_result = $connection->query($api_key_query);
 	$api_key_array = $api_key_result->fetch_assoc();
 	$api_key = $api_key_array["Value"];
 	mysqli_free_result($api_key_result);
 	
-	$keywords_query = "SELECT value FROM preferences WHERE Preference_Name = 'KEYWORDS';";
+	$keywords_query = "SELECT Value FROM preferences WHERE Preference_Name = 'KEYWORDS';";
 	$keywords_result = $connection->query($keywords_query);
 	$keywords_array = $keywords_result->fetch_assoc();
 	$keywords = $keywords_array["Value"];
