@@ -14,13 +14,13 @@
 		die("Failed to connect to database: " . mysqli_connect_error());
 	}
 	
-	$api_key_query = "SELECT value FROM preferences WHERE name = 'OPENAI_API_KEY';";
+	$api_key_query = "SELECT value FROM preferences WHERE Preference_Name = 'OPENAI_API_KEY';";
 	$api_key_result = $connection->query($api_key_query);
 	$api_key_array = $api_key_result->fetch_assoc();
 	$api_key = $api_key_array["value"];
 	mysqli_free_result($api_key_result);
 	
-	$keywords_query = "SELECT value FROM preferences WHERE name = 'KEYWORDS';";
+	$keywords_query = "SELECT value FROM preferences WHERE Preference_Name = 'KEYWORDS';";
 	$keywords_result = $connection->query($keywords_query);
 	$keywords_array = $keywords_result->fetch_assoc();
 	$keywords = $keywords_array["value"];
