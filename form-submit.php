@@ -1,6 +1,9 @@
 <?php
 require 'db_configuration.php';
+// include 'paypal_functions.php';
 
+include 'show-navbar.php';
+include 'show_registration_history.php';
 
 $status = session_status();
 if ($status == PHP_SESSION_NONE) {
@@ -11,8 +14,9 @@ if (!(isset($_SESSION['email']))) {
 	header('Location: login.php');
 }
 
-include 'show-navbar.php';
-include 'show_registration_history.php';
+
+
+
 $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
 
 if ($connection === false) {
@@ -40,8 +44,6 @@ if ($result) {
 }
 
 
-
-
 if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     // Validate and sanitize form input
     $sponsor1_name = isset($_POST['sponsor1-name']) ? htmlspecialchars($_POST['sponsor1-name']) : '';
@@ -57,8 +59,9 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 
     $timestamp = date("Y-m-d H:i:s");
 } else {
+	// retrieve registration info from db
 	$User_Id = $_SESSION['User_Id'];
-    $sql = "SELECT * FROM registrations NATURAL JOIN classes WHERE User_Id = $User_Id;";
+    $sql = "SELECT * FROM registrations r NATURAL JOIN classes c JOIN course_fees cf on cf.Class_Id = c.Class_Id WHERE User_Id = $User_Id;";
     $row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
@@ -74,6 +77,8 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 		$student_phone = $row['Student_Phone_Number'];
 		$class_id = $row['Class_Id'];
 		$batch_name = $row['Batch_Name']; 
+		$payment_id = $row['Payment_Id'];
+		$course_fee = $row['Cost'];
 }
 
 // Pull the available classes from the database
@@ -234,6 +239,33 @@ echo "<!DOCTYPE html>
 			<br><br>
 		</form>
 	</div>";
+	if ($payment_id == null){
+		echo "
+		<!---Payment Section--->
+		<h3> Payment Details </h3>
+		<br>
+			<div id= \"course_fee\">
+				<form action=\"create_course_payment.php\" method = \"post\">
+					<label id=\"cost\"><b>Amount Due: </b> $course_fee USD</label><br><br>
+					<input type='hidden' name='course_fee' value='$course_fee'>
+					 <input type='hidden' name='reg_id' value='$Reg_Id'>
+					<input type='submit' class='btn btn-primary' value='Pay with PayPal'>
+				</form>
+			</div>";
+	}else{
+		echo "
+		<!---Payment Section--->
+		<h3> Payment Details </h3>
+		<br>
+			<div id= \"course_fee\">
+				<label id=\"payment_success\"><b>Payment Success!</b></label><br><br>
+				<label id=\"payment_id\"><b>Payment ID: </b>$payment_id</label><br><br>
+				<label id=\"cost\"><b>Amount Due: </b> 0 USD</label><br>
+			</div>";
+	}
+	echo "<br><br><br>";
+
+	
 fetchRegistrationDetails($connection, $_SESSION['User_Id']);
 mysqli_close($connection);
 ?>
