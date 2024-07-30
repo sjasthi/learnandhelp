@@ -22,7 +22,18 @@ $conn = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DAT
 // Check connection
 if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
 
-$sql = "SELECT count(*) as num_registrations FROM `registrations`";
+$sql = "SELECT count(*) AS num_schools, sum(current_enrollment) AS num_beneficiaries FROM `schools`";
+$result = $conn->query($sql);
+$total_array = $result->fetch_assoc();
+$num_schools = $total_array['num_schools'];
+$num_beneficiaries = $total_array['num_beneficiaries'];
+
+$sql = "SELECT count(*) AS num_books FROM `books`";
+$result = $conn->query($sql);
+$total_array = $result->fetch_assoc();
+$num_books = $total_array['num_books'];
+
+$sql = "SELECT count(*) AS num_registrations FROM `registrations`";
 $result = $conn->query($sql);
 $total_array = $result->fetch_assoc();
 $num_registrations = $total_array['num_registrations'];
@@ -96,15 +107,15 @@ $conn->close();
   </tr>
   <tr>
     <td>Schools With Libraries</td>
-    <td>N/A</td>
+    <td><?php echo "$num_schools"; ?></td>
   </tr>
   <tr>
     <td>Student Beneficiaries</td>
-    <td>N/A</td>
+    <td><?php echo "$num_beneficiaries"; ?></td>
   </tr>
   <tr>
     <td>Books Given To Schools</td>
-    <td>N/A</td>
+    <td><?php echo "$num_books"; ?></td>
   </tr>
   <tr>
     <td>Cost / Support Provided</td>
