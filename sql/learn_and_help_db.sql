@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 30, 2024 at 08:57 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Jul 31, 2024 at 11:09 AM
+-- Server version: 5.7.23-23
+-- PHP Version: 8.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `learn_and_help_db`
+-- Database: `icsbinco_learnandhelp_db`
 --
 
 -- --------------------------------------------------------
@@ -31,15 +31,15 @@ CREATE TABLE `batch` (
   `Batch_Name` varchar(50) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `batch`
 --
 
 INSERT INTO `batch` (`Batch_Name`, `start_date`, `end_date`) VALUES
-('2023-2024', '2023-09-01', '2024-05-01'),
-('2024-2025', '2024-09-01', '2025-05-01'),
+('2023-2024', '2023-09-01', '2024-05-31'),
+('2024-2025', '2024-09-01', '2025-05-31'),
 ('Fall 2024', '2024-08-01', '2024-12-31'),
 ('Summer 2023', '2023-06-01', '2023-08-31');
 
@@ -53,11 +53,11 @@ CREATE TABLE `blogs` (
   `Blog_Id` int(11) NOT NULL,
   `Title` varchar(100) DEFAULT NULL,
   `Author` varchar(50) DEFAULT NULL,
-  `Description` text DEFAULT NULL,
+  `Description` text,
   `Video_Link` varchar(200) DEFAULT NULL,
   `Modified_Time` datetime DEFAULT NULL,
   `Created_Time` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `blogs`
@@ -76,7 +76,7 @@ CREATE TABLE `blog_pictures` (
   `Picture_Id` int(11) NOT NULL,
   `Blog_Id` int(11) DEFAULT NULL,
   `Location` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `blog_pictures`
@@ -102,10 +102,10 @@ CREATE TABLE `books` (
   `price` varchar(200) DEFAULT NULL,
   `image` varchar(500) DEFAULT NULL,
   `grade_level` varchar(30) DEFAULT 'High',
-  `available` tinyint(1) NOT NULL DEFAULT 1,
-  `date_created` timestamp NULL DEFAULT current_timestamp(),
-  `date_modified` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `available` tinyint(1) NOT NULL DEFAULT '1',
+  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `books`
@@ -3589,9 +3589,9 @@ INSERT INTO `books` (`id`, `callNumber`, `title`, `author`, `publisher`, `publis
 CREATE TABLE `classes` (
   `Class_Id` int(11) NOT NULL,
   `Class_Name` varchar(30) DEFAULT NULL,
-  `Description` text DEFAULT NULL,
+  `Description` text,
   `Status` enum('Proposed','Approved','Inactive') NOT NULL DEFAULT 'Proposed'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `classes`
@@ -3613,33 +3613,6 @@ INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`, `Status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_fees`
---
-
-CREATE TABLE `course_fees` (
-  `Class_Id` int(5) NOT NULL,
-  `Cost` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `course_fees`
---
-
-INSERT INTO `course_fees` (`Class_Id`, `Cost`) VALUES
-(1, 100.00),
-(2, 100.00),
-(3, 145.00),
-(4, 178.00),
-(5, 121.00),
-(6, 199.00),
-(7, 135.00),
-(8, 162.00),
-(9, 110.00),
-(10, 187.00);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `instructor`
 --
 
@@ -3649,7 +3622,7 @@ CREATE TABLE `instructor` (
   `Last_name` varchar(255) NOT NULL,
   `Bio_data` varchar(1500) NOT NULL,
   `Image` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `instructor`
@@ -3658,7 +3631,8 @@ CREATE TABLE `instructor` (
 INSERT INTO `instructor` (`instructor_ID`, `First_name`, `Last_name`, `Bio_data`, `Image`) VALUES
 (1, 'Dr. Siva ', 'Jasthi', 'Educator, Mentor, Author, Trainer, Auditor, Software Consultant with over 25 years of experience in the software industry.\r\n20 years of experience in teaching CS classes at Metropolitan State University, MN, USA. 5 years of volunteering at the School of India for Languages and Culture (SILC) as “Digital Literacy\" program designer and coordinator.', 'images/siva.png'),
 (2, 'Ishana ', 'Didwania', 'Ishana Didwania is a senior at Mahtomedi High School. She has completed the 5-year Computer Science program at the School of India for Languages and Culture (SILC) where she studied HTML/CSS, Javascript, PHP, MySQL, Python, and Java. She served as the primary HTML and CSS teacher for 3 years, dedicating over 75 hours per year to teaching 6th grade students. Ishana is also a software engineer and the head of strategy for DiaBuddies, her Technovation team app. She programmed the health tracker feature of the app and authored the business plan which highlighted market research, advertising, and financial planning for the company. Her team was chosen as a US Bank challenge team and given the opportuntity to pitch the app to the US Bank Executive Board. DiaBuddies is one of four Technovation award winning apps from Minnesota. Ishana is an Aspirations in Computer 2023 State Honorable Mention winner and a 2023-24 Target Women in Science and Technology award winner. She is a Minnesota All-State Band flute player and the president of her school band. Ishana is passionate about STEM and challenges herself with AP math and science courses. She works as a math instructor at Mathnasium. In fall of 2024, she will attend Purdue University to major in Computer Science.', 'images/Ishana.png'),
-(3, 'Sumedh ', 'Ghatti ', 'Sumedh Ghatti is a 9th grader at Independence High School, dedicated to nurturing academic growth and inspiring young minds. His journey is distinguished by the prestigious Presidential Award, accompanied by his exceptional performance as the top player on the Junior Varsity Tennis team. With extensive expertise as an app, game developer, and website developer, a passion ignited during his early years at the School of India for Languages and Culture (SILC),\" Sumedh\'s commitment to technology is evident. He earned his Python Entry Level Certified Programmer certification in April 2023, and is working to get his second certification done soon. He has also been selected to join the Deep-Dive AI workshop hosted by the University of Texas at Dallas. Beyond his academic and athletic pursuits, he expresses himself artistically through playing the tabla. In his role as an educator, Sumedh strives to ignite curiosity, foster a pursuit of excellence, and guide students in discovering their passion for coding, mirroring his own journey.', 'images/sumedh.png');
+(3, 'Sumedh ', 'Ghatti ', 'Sumedh Ghatti is a 9th grader at Independence High School, dedicated to nurturing academic growth and inspiring young minds. His journey is distinguished by the prestigious Presidential Award, accompanied by his exceptional performance as the top player on the Junior Varsity Tennis team. With extensive expertise as an app, game developer, and website developer, a passion ignited during his early years at the School of India for Languages and Culture (SILC),\" Sumedh\'s commitment to technology is evident. He earned his Python Entry Level Certified Programmer certification in April 2023, and is working to get his second certification done soon. He has also been selected to join the Deep-Dive AI workshop hosted by the University of Texas at Dallas. Beyond his academic and athletic pursuits, he expresses himself artistically through playing the tabla. In his role as an educator, Sumedh strives to ignite curiosity, foster a pursuit of excellence, and guide students in discovering their passion for coding, mirroring his own journey.', 'images/sumedh.png'),
+(4, 'Ahala', 'Ayyalasomayajula', 'Ahala Ayyalasomayajula, an eighth grader at Future Kids School in Hyderabad, Telangana, is an avid reader and curious learner. She began her journey by learning Telugu at Manabadi in Cary, North Carolina, USA, and authored \"Ahala MaaTa\" (2021), a 108-stanza satakam, and \"Padmavathi Priya Satakam,\" a collection of 100 poems on Lord Venkateswara. Recognized as the youngest Avadhani, she completed her first Ashta Avadhanam in sixth grade under the guidance of Brahmasri Vaddiparti Padmakar Garu. She co-authored \"SHEROES: 256 Inspiring Women From India\" in 2024. Ahala was the first student to receive the \"Python Entry Level Certified Programmer\" (PCEP) certification in the \"Learn and Help\" program and completed Python 101 and Python 102 courses with Dr. Siva Jasthi. ', 'uploads/ahala_pp.jpg');
 
 -- --------------------------------------------------------
 
@@ -3669,7 +3643,7 @@ INSERT INTO `instructor` (`instructor_ID`, `First_name`, `Last_name`, `Bio_data`
 CREATE TABLE `offerings` (
   `Batch_Name` varchar(50) NOT NULL,
   `Class_Id` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `offerings`
@@ -3681,7 +3655,8 @@ INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 ('2025-2026', '1'),
 ('2025-2026', '3'),
 ('2024-2025', '2'),
-('Summer 2025', '2');
+('Summer 2025', '2'),
+('2024-2025', '5');
 
 -- --------------------------------------------------------
 
@@ -3692,7 +3667,7 @@ INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 CREATE TABLE `preferences` (
   `Preference_Name` varchar(50) NOT NULL,
   `Value` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `preferences`
@@ -3725,7 +3700,7 @@ CREATE TABLE `registrations` (
   `Batch_Name` varchar(20) NOT NULL,
   `User_Id` int(10) NOT NULL,
   `Payment_Id` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `registrations`
@@ -3745,24 +3720,24 @@ INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Spons
 
 CREATE TABLE `schools` (
   `id` int(11) NOT NULL COMMENT 'school id',
-  `name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school name',
-  `type` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school type',
-  `category` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school category',
+  `name` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'school name',
+  `type` varchar(25) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'school type',
+  `category` varchar(10) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'school category',
   `grade_level_start` tinyint(4) DEFAULT NULL COMMENT 'starting grade level',
   `grade_level_end` tinyint(4) DEFAULT NULL COMMENT 'ending grade level',
-  `current_enrollment` smallint(6) DEFAULT 0 COMMENT 'how many students are enrolled',
-  `address_text` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'street address',
-  `state_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'state name',
-  `state_code` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'state abbreviation',
-  `pin_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'zip code, can take hyphens',
-  `contact_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'library administrator',
-  `contact_designation` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s title',
-  `contact_phone` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s phone',
-  `contact_email` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s email',
-  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school''s status',
-  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'additional notes/comments',
-  `referenced_by` varchar(60) DEFAULT NULL,
-  `supported_by` varchar(200) DEFAULT 'Learn and Help'
+  `current_enrollment` smallint(6) DEFAULT '0' COMMENT 'how many students are enrolled',
+  `address_text` varchar(300) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'street address',
+  `state_name` varchar(40) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'state name',
+  `state_code` varchar(2) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'state abbreviation',
+  `pin_code` varchar(10) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'zip code, can take hyphens',
+  `contact_name` varchar(80) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'library administrator',
+  `contact_designation` varchar(15) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'administrator''s title',
+  `contact_phone` varchar(200) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'administrator''s phone',
+  `contact_email` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'administrator''s email',
+  `status` varchar(10) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'school''s status',
+  `notes` text CHARACTER SET utf8mb4 COMMENT 'additional notes/comments',
+  `referenced_by` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supported_by` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT 'Learn and Help'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3858,12 +3833,12 @@ INSERT INTO `schools` (`id`, `name`, `type`, `category`, `grade_level_start`, `g
 
 CREATE TABLE `schools_suggested` (
   `id` int(11) NOT NULL,
-  `school_name` varchar(100) NOT NULL,
-  `contact_name` varchar(100) NOT NULL,
-  `contact_mobile` varchar(20) DEFAULT NULL,
-  `commitment_statement` text DEFAULT NULL,
-  `suggested_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `supported` tinyint(1) DEFAULT 0
+  `school_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_mobile` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `commitment_statement` text COLLATE utf8mb4_unicode_ci,
+  `suggested_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `supported` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3871,9 +3846,14 @@ CREATE TABLE `schools_suggested` (
 --
 
 INSERT INTO `schools_suggested` (`id`, `school_name`, `contact_name`, `contact_mobile`, `commitment_statement`, `suggested_at`, `supported`) VALUES
-(8, 'Ya School ', 'Professor Mia', 'abc-123-5533', 'This is a great school', '2024-02-20 01:54:56', 0),
-(9, 'Metro State University', 'Dr. Jasthi', '222.333.4444', 'This is a commitment statement', '2024-04-16 00:34:33', 0),
-(10, 'Metro State University 2', 'Dr. Jasthi', '222.333.4444', 'This is a statment', '2024-04-16 01:21:43', 0);
+(12, 'MPUP School (Lemellapadu)', 'Pasupuleti Sridhar', '98485 60727', 'హెడ్ మాస్టర్ పసుపులేటి శ్రీధర్ గారు.\r\n98485 60727\r\nమండల పరిషత్ ప్రాథమికోన్నత పాఠశాల (mpup school)\r\nలేమల్లెపాడు \r\nవట్టిచెరుకూరు మండలం\r\nగుంటూరు జిల్లా\r\n\r\nReferred by: Modugula Ravi Krishna garu', '2024-07-29 08:46:18', 0),
+(13, 'MPUP School (Pakalapadu)', 'P.S.Raju', '8897534843', 'P. SATYANARAYANA RAJU	\r\n8897534843	\r\n1980psraju@gmail.com	\r\nM. P. U. P, School, \r\nPakalapadu(village), \r\nSattenapalli(Mandal ), \r\nPalnadu(Dist)522403)        ', '2024-07-29 18:33:08', 0),
+(14, 'Viswakavi Residential Public School (Chinnaram)', 'Rajeswari Penmasta  (Ramaraju Alluri)', '6512710678', 'Viswakavi Residential Public School\r\nChinnamiram, Bhimavaram\r\nAP 534204', '2024-07-30 07:17:12', 0),
+(15, 'ZPHS (Rama Samudram)', 'Srinivas Sakhamuri', '+919441075753', 'Zphs, rama samudram, tripurantakam mandal, A.P', '2024-07-30 07:18:39', 0),
+(16, 'ZP Girls High School (Kondapalli)', 'Ms.B. Padma Latha', '9490228661', 'Balaji Paripati reference.\r\n\r\nZpgirls high school \r\nKondapalli,\r\nIbrahimpatnam Mandal\r\nKrishna Dt \r\n\r\nHM: B. PadmaLatha\r\nPh. No: 9490228661\"', '2024-07-30 07:22:57', 0),
+(17, 'ZP high school Narsingapuram', 'Mrinalini Bitla ', '9722073543', 'ZP high school Narsingapuram, \r\nchandragiri mandal, Tirupathi district, \r\nAndhra Pradesh .', '2024-07-30 07:24:17', 0),
+(18, 'Lashkar Bazar High School  (Hanamkonda)', 'Sridhar Katta', '4698787454', 'Sridhar Katta\r\nLashkar Bazar High School \r\nHanamkonda, Telangana ', '2024-07-30 07:25:40', 0),
+(19, 'JBS HIGH SCHOOL (Yellandu)', 'Naveen Anasuri', '6512080433', 'Government high school, Yellandu', '2024-07-31 06:40:45', 0);
 
 -- --------------------------------------------------------
 
@@ -3894,7 +3874,7 @@ CREATE TABLE `users` (
   `Created_Time` date DEFAULT NULL,
   `reset_token_hash` varchar(64) DEFAULT NULL,
   `reset_token_expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -3952,12 +3932,6 @@ ALTER TABLE `books`
 -- Indexes for table `classes`
 --
 ALTER TABLE `classes`
-  ADD PRIMARY KEY (`Class_Id`);
-
---
--- Indexes for table `course_fees`
---
-ALTER TABLE `course_fees`
   ADD PRIMARY KEY (`Class_Id`);
 
 --
@@ -4024,7 +3998,7 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `instructor`
 --
 ALTER TABLE `instructor`
-  MODIFY `instructor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `instructor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `registrations`
@@ -4042,7 +4016,7 @@ ALTER TABLE `schools`
 -- AUTO_INCREMENT for table `schools_suggested`
 --
 ALTER TABLE `schools_suggested`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`
