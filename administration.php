@@ -56,18 +56,6 @@
         <label for="registrations">Registrations</label>
       </div>
       <div class="admin_icon">
-          <a href="admin_payments_CRUD.php" id="payments">
-          <img src="images/admin_icons/payment-method.png" alt="payments"></a>
-          <br>
-          <label for="payments">Edit Payments</label>
-      </div>
-      <div class="admin_icon">
-          <a href="admin_course_fees_CRUD.php" id="course_fee">
-          <img src="images/admin_icons/receipt.png" alt="course_fee"></a>
-          <br>
-          <label for="course_fee">Edit Course Fees</label>
-      </div>
-      <div class="admin_icon">
         <a href="admin_usersList.php" id="users"><img src="images/admin_icons/users_icon.png" alt="users"></a>
         <br>
         <label for="users">Users</label>

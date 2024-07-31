@@ -56,13 +56,24 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
     $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
     $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
-
+	$payment_id = isset($_POST['payment_id']) ? htmlspecialchars($_POST['payment_id']) : '';
+	$course_fee =isset($_POST['course_fee']) ? htmlspecialchars($_POST['course_fee']) : '';
     $timestamp = date("Y-m-d H:i:s");
 } else {
-	// retrieve registration info from db
+	// runs when action = ""
+	// retrieve registration info from db 
 	$User_Id = $_SESSION['User_Id'];
-    $sql = "SELECT * FROM registrations r NATURAL JOIN classes c JOIN course_fees cf on cf.Class_Id = c.Class_Id WHERE User_Id = $User_Id;";
-    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+    // $sql = "SELECT * FROM registrations r NATURAL JOIN classes c JOIN course_fees cf on cf.Class_Id = c.Class_Id WHERE User_Id = $User_Id;";
+    $sql =<<< SQL
+				SELECT r.*, c.*, p.Value AS Course_Fee, ar.Value AS Active_Registration
+				FROM registrations r
+				NATURAL JOIN classes c
+				JOIN preferences p ON p.Preference_Name = 'Course Fee'
+				JOIN preferences ar ON ar.Preference_Name = 'Active Registration'
+				WHERE r.Batch_Name = ar.Value
+				AND r.User_Id = $User_Id;
+			SQL;
+	$row = mysqli_fetch_array(mysqli_query($connection, $sql));
 
 		$action = '';
         $Reg_Id = $row['Reg_Id'];
@@ -78,7 +89,7 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 		$class_id = $row['Class_Id'];
 		$batch_name = $row['Batch_Name']; 
 		$payment_id = $row['Payment_Id'];
-		$course_fee = $row['Cost'];
+		$course_fee = $row['Course_Fee'];
 }
 
 // Pull the available classes from the database
@@ -99,7 +110,7 @@ $class = isset($classes[$class_id]) ? $classes[$class_id] : 'Unknown Class';
 
 
 if ($action == 'add') {
-	$batch_name_query = "(SELECT value FROM preferences WHERE Preference_Name = 'Active Registration')";
+	// $batch_name_query = "(SELECT value FROM preferences WHERE Preference_Name = 'Active Registration')";
 
 	$sql = "INSERT INTO registrations 
 				(Sponsor1_Name, 
@@ -129,7 +140,7 @@ if ($action == 'add') {
 				'$class_id',
 				'$timestamp',
 				'$timestamp',
-				$active_batch,
+				'$active_batch',
 				'".$_SESSION['User_Id']."'
 			);";
 } elseif($action == "edit") {
