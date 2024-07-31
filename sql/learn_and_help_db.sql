@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2024 at 01:25 AM
+-- Generation Time: Jul 30, 2024 at 08:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -27,9 +27,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `batch`
 --
 
-CREATE DATABASE IF NOT EXISTS learn_and_help_db;
-USE learn_and_help_db;
-
 CREATE TABLE `batch` (
   `Batch_Name` varchar(50) NOT NULL,
   `start_date` date NOT NULL,
@@ -40,13 +37,11 @@ CREATE TABLE `batch` (
 -- Dumping data for table `batch`
 --
 
-
 INSERT INTO `batch` (`Batch_Name`, `start_date`, `end_date`) VALUES
 ('2023-2024', '2023-09-01', '2024-05-01'),
 ('2024-2025', '2024-09-01', '2025-05-01'),
 ('Fall 2024', '2024-08-01', '2024-12-31'),
 ('Summer 2023', '2023-06-01', '2023-08-31');
-
 
 -- --------------------------------------------------------
 
@@ -3618,6 +3613,33 @@ INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`, `Status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `course_fees`
+--
+
+CREATE TABLE `course_fees` (
+  `Class_Id` int(5) NOT NULL,
+  `Cost` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `course_fees`
+--
+
+INSERT INTO `course_fees` (`Class_Id`, `Cost`) VALUES
+(1, 100.00),
+(2, 100.00),
+(3, 145.00),
+(4, 178.00),
+(5, 121.00),
+(6, 199.00),
+(7, 135.00),
+(8, 162.00),
+(9, 110.00),
+(10, 187.00);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `instructor`
 --
 
@@ -3653,12 +3675,13 @@ CREATE TABLE `offerings` (
 -- Dumping data for table `offerings`
 --
 
-
 INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 ('2024-2025', '1'),
 ('2024-2025', '3'),
 ('2025-2026', '1'),
-('2025-2026', '3');
+('2025-2026', '3'),
+('2024-2025', '2'),
+('Summer 2025', '2');
 
 -- --------------------------------------------------------
 
@@ -3668,7 +3691,7 @@ INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 
 CREATE TABLE `preferences` (
   `Preference_Name` varchar(50) NOT NULL,
-  `Value` varchar(100) NOT NULL
+  `Value` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -3677,9 +3700,7 @@ CREATE TABLE `preferences` (
 
 INSERT INTO `preferences` (`Preference_Name`, `Value`) VALUES
 ('Active Registration', '2024-2025'),
-('Course Fee', '500'),
-('OPENAI_API_KEY', ''),
-('KEYWORDS', 'schools, books, libraries, reading');
+('Course Fee', '500');
 
 -- --------------------------------------------------------
 
@@ -3697,25 +3718,24 @@ CREATE TABLE `registrations` (
   `Sponsor2_Phone_Number` varchar(15) DEFAULT NULL,
   `Student_Name` varchar(50) DEFAULT NULL,
   `Student_Email` varchar(50) DEFAULT NULL,
-  `Student_Phone_Number` varchar(50) DEFAULT NULL,
+  `Student_Phone_Number` varchar(15) DEFAULT NULL,
   `Class_Id` int(11) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
   `Created_Time` date DEFAULT NULL,
   `Batch_Name` varchar(20) NOT NULL,
-  `User_Id` int(10) NOT NULL
+  `User_Id` int(10) NOT NULL,
+  `Payment_Id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `registrations`
 --
 
-
-INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`) VALUES
-(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-04', '2024-07-04', 'Summer 2023', 44),
-(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44),
-(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44),
-(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '-1', 51);
-
+INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`, `Payment_Id`) VALUES
+(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-30', '2024-07-04', 'Summer 2023', 44, 'PAYID-M2UTMWA1G359769EW6710458'),
+(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44, NULL),
+(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44, NULL),
+(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '2024-2025', 51, NULL);
 
 -- --------------------------------------------------------
 
@@ -3897,9 +3917,7 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 (48, 'Jane', 'Smith', 'janesmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
 (49, 'bojo', 'johnson', 'bojo@bojo.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
 (50, 'Test', 'User', 'testuser@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
-(51, 'johnny', 'doe', 'johnnydoe@john.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-09', '2024-07-09', NULL, NULL),
-(52, 'AdminScott', 'Sebesta', 'ssebesta1@gmail.com', NULL, '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'admin', '2024-07-08', '2024-07-08', NULL, NULL),
-(53, 'Scott', 'Sebesta', 'scott.sebesta@my.metrostate.edu', '651-867-5309', '5a0f146c2e1eff6aa5e8c505bcd4707133734329', 'yes', 'student', '2024-07-08', '2024-07-08', NULL, NULL);
+(51, 'johnny', 'doe', 'johnnydoe@john.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-09', '2024-07-09', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -3910,7 +3928,6 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 --
 ALTER TABLE `batch`
   ADD PRIMARY KEY (`Batch_Name`);
-
 
 --
 -- Indexes for table `blogs`
@@ -3938,17 +3955,18 @@ ALTER TABLE `classes`
   ADD PRIMARY KEY (`Class_Id`);
 
 --
+-- Indexes for table `course_fees`
+--
+ALTER TABLE `course_fees`
+  ADD PRIMARY KEY (`Class_Id`);
+
+--
 -- Indexes for table `instructor`
 --
 ALTER TABLE `instructor`
   ADD PRIMARY KEY (`instructor_ID`);
 
 --
--- Indexes for table `preferences`
---
-ALTER TABLE `preferences`
-  ADD PRIMARY KEY (`Preference_Name`);
-
 -- Indexes for table `registrations`
 --
 ALTER TABLE `registrations`
@@ -4014,7 +4032,6 @@ ALTER TABLE `instructor`
 ALTER TABLE `registrations`
   MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
-
 --
 -- AUTO_INCREMENT for table `schools`
 --
@@ -4032,7 +4049,6 @@ ALTER TABLE `schools_suggested`
 --
 ALTER TABLE `users`
   MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
 
 --
 -- Constraints for dumped tables
