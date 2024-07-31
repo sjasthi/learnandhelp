@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2024 at 08:57 PM
+-- Generation Time: Jul 30, 2024 at 10:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -3613,33 +3613,6 @@ INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`, `Status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_fees`
---
-
-CREATE TABLE `course_fees` (
-  `Class_Id` int(5) NOT NULL,
-  `Cost` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `course_fees`
---
-
-INSERT INTO `course_fees` (`Class_Id`, `Cost`) VALUES
-(1, 100.00),
-(2, 100.00),
-(3, 145.00),
-(4, 178.00),
-(5, 121.00),
-(6, 199.00),
-(7, 135.00),
-(8, 162.00),
-(9, 110.00),
-(10, 187.00);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `instructor`
 --
 
@@ -3680,8 +3653,7 @@ INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 ('2024-2025', '3'),
 ('2025-2026', '1'),
 ('2025-2026', '3'),
-('2024-2025', '2'),
-('Summer 2025', '2');
+('2023-2024', '7');
 
 -- --------------------------------------------------------
 
@@ -3700,7 +3672,9 @@ CREATE TABLE `preferences` (
 
 INSERT INTO `preferences` (`Preference_Name`, `Value`) VALUES
 ('Active Registration', '2024-2025'),
-('Course Fee', '500');
+('Course Fee', '500'),
+('OPENAI_API_KEY', ''),
+('KEYWORDS', 'schools, books, libraries, reading');
 
 -- --------------------------------------------------------
 
@@ -3723,19 +3697,18 @@ CREATE TABLE `registrations` (
   `Modified_Time` date DEFAULT NULL,
   `Created_Time` date DEFAULT NULL,
   `Batch_Name` varchar(20) NOT NULL,
-  `User_Id` int(10) NOT NULL,
-  `Payment_Id` varchar(255) DEFAULT NULL
+  `User_Id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `registrations`
 --
 
-INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`, `Payment_Id`) VALUES
-(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-30', '2024-07-04', 'Summer 2023', 44, 'PAYID-M2UTMWA1G359769EW6710458'),
-(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44, NULL),
-(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44, NULL),
-(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '2024-2025', 51, NULL);
+INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`) VALUES
+(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-04', '2024-07-04', 'Summer 2023', 44),
+(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44),
+(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44),
+(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '-1', 51);
 
 -- --------------------------------------------------------
 
@@ -3770,7 +3743,7 @@ CREATE TABLE `schools` (
 --
 
 INSERT INTO `schools` (`id`, `name`, `type`, `category`, `grade_level_start`, `grade_level_end`, `current_enrollment`, `address_text`, `state_name`, `state_code`, `pin_code`, `contact_name`, `contact_designation`, `contact_phone`, `contact_email`, `status`, `notes`, `referenced_by`, `supported_by`) VALUES
-(1, 'Z P H  School (Payakaraopeta, Andhra)', 'High School', 'Public', 1, 10, 210, 'Z P H  School (Payakaraopeta)', 'Andhra Pradesh', 'AP', '531126', 'Smt. Vijaya Bhanu Kote', 'Teacher', '9502247679 / 8247769052', '', 'Completed', 'what is this?', '', 'PGNF'),
+(1, 'Z P H School (Payakaraopeta, Andhra)', 'High School', 'Public', 1, 10, 210, 'Z P H School (Payakaraopeta)', 'Andhra Pradesh', 'AP', '531126', 'Smt. Vijaya Bhanu Kote', 'Teacher', '9502247679 / 8247769052', '', 'Completed', 'what is this?', '', 'PGNF'),
 (2, 'Chethana (Chowdavaram)', 'Primary School', 'Private', 1, 10, 475, 'Chowdavaram Village Guntur (District) AP - 522019', 'Andhra Pradesh', 'AP', '522019', 'Ms. Marudwathi', 'Teacher', '9848132435', 'chetana_svbk@yahoo.com', 'Completed', '', 'CA PRASAD', 'PGNF'),
 (3, 'Z P H School (Vunnava)', 'High School', 'Public', 1, 10, 0, 'Unnava (Village) Edlapadu (Mandal) Guntur (District) AP - 522233', 'Andhra Pradesh', 'AP', ' 522233', 'Kakumanu Hima Bindu', 'Teacher', '9505550075', '', 'Completed', '', '', 'PGNF'),
 (4, 'Abhyasa vidyalaya', 'Primary School', 'Private', 1, 5, 0, 'Near Water tank Gangireddula dibba Gunadala Vijayawada - 520010', 'Andhra pradesh', 'AP', '520010', 'Krishna', 'Teacher', '9440579922', '', 'Completed', '', 'CA PRASAD', 'NRIVA'),
@@ -3955,12 +3928,6 @@ ALTER TABLE `classes`
   ADD PRIMARY KEY (`Class_Id`);
 
 --
--- Indexes for table `course_fees`
---
-ALTER TABLE `course_fees`
-  ADD PRIMARY KEY (`Class_Id`);
-
---
 -- Indexes for table `instructor`
 --
 ALTER TABLE `instructor`
@@ -4030,7 +3997,7 @@ ALTER TABLE `instructor`
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `schools`
@@ -4048,7 +4015,7 @@ ALTER TABLE `schools_suggested`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- Constraints for dumped tables

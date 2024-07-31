@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 30, 2024 at 08:57 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Jun 18, 2024 at 05:16 PM
+-- Server version: 5.7.23-23
+-- PHP Version: 8.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,28 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `batch`
---
-
-CREATE TABLE `batch` (
-  `Batch_Name` varchar(50) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `batch`
---
-
-INSERT INTO `batch` (`Batch_Name`, `start_date`, `end_date`) VALUES
-('2023-2024', '2023-09-01', '2024-05-01'),
-('2024-2025', '2024-09-01', '2025-05-01'),
-('Fall 2024', '2024-08-01', '2024-12-31'),
-('Summer 2023', '2023-06-01', '2023-08-31');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `blogs`
 --
 
@@ -53,11 +31,11 @@ CREATE TABLE `blogs` (
   `Blog_Id` int(11) NOT NULL,
   `Title` varchar(100) DEFAULT NULL,
   `Author` varchar(50) DEFAULT NULL,
-  `Description` text DEFAULT NULL,
+  `Description` text,
   `Video_Link` varchar(200) DEFAULT NULL,
   `Modified_Time` datetime DEFAULT NULL,
   `Created_Time` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `blogs`
@@ -76,7 +54,7 @@ CREATE TABLE `blog_pictures` (
   `Picture_Id` int(11) NOT NULL,
   `Blog_Id` int(11) DEFAULT NULL,
   `Location` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `blog_pictures`
@@ -102,10 +80,10 @@ CREATE TABLE `books` (
   `price` varchar(200) DEFAULT NULL,
   `image` varchar(500) DEFAULT NULL,
   `grade_level` varchar(30) DEFAULT 'High',
-  `available` tinyint(1) NOT NULL DEFAULT 1,
-  `date_created` timestamp NULL DEFAULT current_timestamp(),
-  `date_modified` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `available` tinyint(1) NOT NULL DEFAULT '1',
+  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `books`
@@ -3583,15 +3561,39 @@ INSERT INTO `books` (`id`, `callNumber`, `title`, `author`, `publisher`, `publis
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `causes`
+--
+
+CREATE TABLE `causes` (
+  `Cause_Id` int(11) NOT NULL,
+  `Cause_name` varchar(100) DEFAULT NULL,
+  `description` text,
+  `URL` varchar(150) DEFAULT NULL,
+  `Contact_name` varchar(50) DEFAULT NULL,
+  `Contact_email` varchar(50) DEFAULT NULL,
+  `Contact_phone` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `causes`
+--
+
+INSERT INTO `causes` (`Cause_Id`, `Cause_name`, `description`, `URL`, `Contact_name`, `Contact_email`, `Contact_phone`) VALUES
+(1, 'School Libraries', 'Establishing the school libraries in Elementary, Middle and High Schools (India).', 'http://learnandhelp.jasthi.com', 'Siva Jasthi', 'siva.jasthi@gmail.com', '651.276.4671'),
+(9, 'Scholarships', 'Providing scholarships to academically brilliant and/or economically poor students.', 'http://learnandhelp.jasthi.com', 'Siva Jasthi', 'siva.jasthi@gmail.com', '6512764671');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `classes`
 --
 
 CREATE TABLE `classes` (
   `Class_Id` int(11) NOT NULL,
   `Class_Name` varchar(30) DEFAULT NULL,
-  `Description` text DEFAULT NULL,
+  `Description` text,
   `Status` enum('Proposed','Approved','Inactive') NOT NULL DEFAULT 'Proposed'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `classes`
@@ -3613,33 +3615,6 @@ INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`, `Status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `course_fees`
---
-
-CREATE TABLE `course_fees` (
-  `Class_Id` int(5) NOT NULL,
-  `Cost` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `course_fees`
---
-
-INSERT INTO `course_fees` (`Class_Id`, `Cost`) VALUES
-(1, 100.00),
-(2, 100.00),
-(3, 145.00),
-(4, 178.00),
-(5, 121.00),
-(6, 199.00),
-(7, 135.00),
-(8, 162.00),
-(9, 110.00),
-(10, 187.00);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `instructor`
 --
 
@@ -3649,7 +3624,7 @@ CREATE TABLE `instructor` (
   `Last_name` varchar(255) NOT NULL,
   `Bio_data` varchar(1500) NOT NULL,
   `Image` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `instructor`
@@ -3663,79 +3638,25 @@ INSERT INTO `instructor` (`instructor_ID`, `First_name`, `Last_name`, `Bio_data`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `offerings`
---
-
-CREATE TABLE `offerings` (
-  `Batch_Name` varchar(50) NOT NULL,
-  `Class_Id` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `offerings`
---
-
-INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
-('2024-2025', '1'),
-('2024-2025', '3'),
-('2025-2026', '1'),
-('2025-2026', '3'),
-('2024-2025', '2'),
-('Summer 2025', '2');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `preferences`
---
-
-CREATE TABLE `preferences` (
-  `Preference_Name` varchar(50) NOT NULL,
-  `Value` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `preferences`
---
-
-INSERT INTO `preferences` (`Preference_Name`, `Value`) VALUES
-('Active Registration', '2024-2025'),
-('Course Fee', '500');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `registrations`
 --
 
 CREATE TABLE `registrations` (
   `Reg_Id` int(11) NOT NULL,
-  `Sponsor1_Name` varchar(50) DEFAULT NULL,
-  `Sponsor1_Email` varchar(50) DEFAULT NULL,
-  `Sponsor1_Phone_Number` varchar(15) DEFAULT NULL,
-  `Sponsor2_Name` varchar(50) DEFAULT NULL,
-  `Sponsor2_Email` varchar(50) DEFAULT NULL,
-  `Sponsor2_Phone_Number` varchar(15) DEFAULT NULL,
+  `Sponsor_Name` varchar(50) DEFAULT NULL,
+  `Sponsor_Email` varchar(50) DEFAULT NULL,
+  `Sponsor_Phone_Number` varchar(15) DEFAULT NULL,
+  `Spouse_Name` varchar(50) DEFAULT NULL,
+  `Spouse_Email` varchar(50) DEFAULT NULL,
+  `Spouse_Phone_Number` varchar(15) DEFAULT NULL,
   `Student_Name` varchar(50) DEFAULT NULL,
   `Student_Email` varchar(50) DEFAULT NULL,
   `Student_Phone_Number` varchar(15) DEFAULT NULL,
   `Class_Id` int(11) DEFAULT NULL,
+  `Cause` varchar(20) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
-  `Created_Time` date DEFAULT NULL,
-  `Batch_Name` varchar(20) NOT NULL,
-  `User_Id` int(10) NOT NULL,
-  `Payment_Id` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `registrations`
---
-
-INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`, `Payment_Id`) VALUES
-(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-30', '2024-07-04', 'Summer 2023', 44, 'PAYID-M2UTMWA1G359769EW6710458'),
-(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44, NULL),
-(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44, NULL),
-(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '2024-2025', 51, NULL);
+  `Created_Time` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -3745,24 +3666,24 @@ INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Spons
 
 CREATE TABLE `schools` (
   `id` int(11) NOT NULL COMMENT 'school id',
-  `name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school name',
-  `type` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school type',
-  `category` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school category',
+  `name` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'school name',
+  `type` varchar(25) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'school type',
+  `category` varchar(10) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'school category',
   `grade_level_start` tinyint(4) DEFAULT NULL COMMENT 'starting grade level',
   `grade_level_end` tinyint(4) DEFAULT NULL COMMENT 'ending grade level',
-  `current_enrollment` smallint(6) DEFAULT 0 COMMENT 'how many students are enrolled',
-  `address_text` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'street address',
-  `state_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'state name',
-  `state_code` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'state abbreviation',
-  `pin_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'zip code, can take hyphens',
-  `contact_name` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'library administrator',
-  `contact_designation` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s title',
-  `contact_phone` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s phone',
-  `contact_email` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'administrator''s email',
-  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'school''s status',
-  `notes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'additional notes/comments',
-  `referenced_by` varchar(60) DEFAULT NULL,
-  `supported_by` varchar(200) DEFAULT 'Learn and Help'
+  `current_enrollment` smallint(6) DEFAULT '0' COMMENT 'how many students are enrolled',
+  `address_text` varchar(300) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'street address',
+  `state_name` varchar(40) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'state name',
+  `state_code` varchar(2) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'state abbreviation',
+  `pin_code` varchar(10) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'zip code, can take hyphens',
+  `contact_name` varchar(80) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'library administrator',
+  `contact_designation` varchar(15) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'administrator''s title',
+  `contact_phone` varchar(200) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'administrator''s phone',
+  `contact_email` varchar(60) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'administrator''s email',
+  `status` varchar(10) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT 'school''s status',
+  `notes` text CHARACTER SET utf8mb4 COMMENT 'additional notes/comments',
+  `referenced_by` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supported_by` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT 'Learn and Help'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3858,12 +3779,12 @@ INSERT INTO `schools` (`id`, `name`, `type`, `category`, `grade_level_start`, `g
 
 CREATE TABLE `schools_suggested` (
   `id` int(11) NOT NULL,
-  `school_name` varchar(100) NOT NULL,
-  `contact_name` varchar(100) NOT NULL,
-  `contact_mobile` varchar(20) DEFAULT NULL,
-  `commitment_statement` text DEFAULT NULL,
-  `suggested_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `supported` tinyint(1) DEFAULT 0
+  `school_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_mobile` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `commitment_statement` text COLLATE utf8mb4_unicode_ci,
+  `suggested_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `supported` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3894,7 +3815,7 @@ CREATE TABLE `users` (
   `Created_Time` date DEFAULT NULL,
   `reset_token_hash` varchar(64) DEFAULT NULL,
   `reset_token_expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -3909,25 +3830,22 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 (40, 'Pallavi', 'Sriram', 'pallavivem@yahoo.com', NULL, '45c4192dd17f6782e18fe102bb024cdb0304ae5d', 'yes', 'admin', '2024-04-15', '2024-04-15', NULL, NULL),
 (41, 'Siva', 'Jasthi', 'siva.jasthi@metrostate.edu', NULL, 'b405fbddf84dcc48b6e8b1fe36296aa5ef6b6b40', 'yes', 'student', '2024-04-22', '2024-04-22', NULL, NULL),
 (42, 'Wisdom', 'Azonwu', 'je2241vn@go.minnstate.edu', NULL, '7e2d4bf5d52f31cf8ce55a1a8bb90fb30bbe550c', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL),
-(43, 'Brandon', 'Roback', 'Brandon.Roback@my.metrostate.edu', NULL, '4737de3b8262e66aa8c5e07e0ea81fed5953d989', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL),
-(44, 'John', 'Doe', 'johndoe@user.com', '123-456-7890', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-06-18', '2024-06-18', NULL, NULL),
-(45, 'first_name', 'last_name', 'admin@admin.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'admin', '2024-06-18', '2024-06-18', NULL, NULL),
-(46, 'Jane', 'Doe', 'janedoe@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
-(47, 'John', 'Smith', 'johnsmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
-(48, 'Jane', 'Smith', 'janesmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
-(49, 'bojo', 'johnson', 'bojo@bojo.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
-(50, 'Test', 'User', 'testuser@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
-(51, 'johnny', 'doe', 'johnnydoe@john.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-09', '2024-07-09', NULL, NULL);
+(43, 'Brandon', 'Roback', 'Brandon.Roback@my.metrostate.edu', NULL, '4737de3b8262e66aa8c5e07e0ea81fed5953d989', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_registrations`
+--
+
+CREATE TABLE `user_registrations` (
+  `User_Id` int(11) NOT NULL,
+  `Reg_Id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `batch`
---
-ALTER TABLE `batch`
-  ADD PRIMARY KEY (`Batch_Name`);
 
 --
 -- Indexes for table `blogs`
@@ -3949,15 +3867,15 @@ ALTER TABLE `books`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `causes`
+--
+ALTER TABLE `causes`
+  ADD PRIMARY KEY (`Cause_Id`);
+
+--
 -- Indexes for table `classes`
 --
 ALTER TABLE `classes`
-  ADD PRIMARY KEY (`Class_Id`);
-
---
--- Indexes for table `course_fees`
---
-ALTER TABLE `course_fees`
   ADD PRIMARY KEY (`Class_Id`);
 
 --
@@ -3993,6 +3911,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `reset_token_hash` (`reset_token_hash`);
 
 --
+-- Indexes for table `user_registrations`
+--
+ALTER TABLE `user_registrations`
+  ADD PRIMARY KEY (`User_Id`,`Reg_Id`),
+  ADD KEY `Reg_Id` (`Reg_Id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -4015,6 +3940,12 @@ ALTER TABLE `books`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4933;
 
 --
+-- AUTO_INCREMENT for table `causes`
+--
+ALTER TABLE `causes`
+  MODIFY `Cause_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
@@ -4030,7 +3961,7 @@ ALTER TABLE `instructor`
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `schools`
@@ -4048,7 +3979,7 @@ ALTER TABLE `schools_suggested`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables
@@ -4064,7 +3995,14 @@ ALTER TABLE `blog_pictures`
 -- Constraints for table `registrations`
 --
 ALTER TABLE `registrations`
-  ADD CONSTRAINT `registrations_ibfk_1` FOREIGN KEY (`Class_Id`) REFERENCES `classes` (`Class_Id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `registrations_ibfk_1` FOREIGN KEY (`Class_Id`) REFERENCES `classes` (`Class_Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_registrations`
+--
+ALTER TABLE `user_registrations`
+  ADD CONSTRAINT `user_registrations_ibfk_1` FOREIGN KEY (`User_Id`) REFERENCES `users` (`User_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_registrations_ibfk_2` FOREIGN KEY (`Reg_Id`) REFERENCES `registrations` (`Reg_Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
