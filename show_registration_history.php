@@ -24,7 +24,9 @@ function fetchRegistrationDetails($connection, $userId) {
     
     // Check if there are results
     if (mysqli_num_rows($result) > 0) {
-        echo "<h3>Past Registration Details</h3><br>";
+        echo "
+            <!---Registration History--->
+            <h3>Past Registration Details</h3><br>";
         echo "<div id='container_3'>";
         echo "<div id='accordion-container'>";
     

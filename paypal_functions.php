@@ -53,8 +53,6 @@ function executePayment($paymentId, $payerId, $apiContext) {
         $result = $payment->execute($execution, $apiContext);
 
         // Payment executed successfully
-        // Update the payment status in your database
-        // Your code to update payment status in the database
         $success_message = "Payment successful!";
         return array('success_message' => $success_message, 'payment_id' => $paymentId);
     } catch (Exception $ex) {

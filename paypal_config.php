@@ -18,7 +18,7 @@ $apiContext = new ApiContext(
 $apiContext->setConfig([
     'mode' => 'sandbox', // or 'live'
     'http.ConnectionTimeOut' => 30,
-    'log.LogEnabled' => true,
+    'log.LogEnabled' => false,
     'log.FileName' => 'PayPal.log',
     'log.LogLevel' => 'FINE', // Available options: 'FINE', 'INFO', 'WARN' or 'ERROR'
     'validation.level' => 'log'
