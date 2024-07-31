@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "DELETE FROM offerings WHERE Batch_Name='$batch_name'";
         $conn->query($sql);
     }
+
 }
 
 $action = isset($_GET['action']) ? $_GET['action'] : '';
@@ -152,9 +153,9 @@ $action = isset($_GET['action']) ? $_GET['action'] : '';
             <?php if ($action == 'add') { ?>
                 <h2>Add Offering</h2>
                 <form action="admin_offerings_CRUD.php" method="POST">
-                    <label for="Batch_Name">Batch Name:</label><br>
-                    <input type="text" id="Batch_Name" name="Batch_Name" required><br>
-                    <label for="Class_Id">Class Name:</label><br>
+                    <label for="Batch_Name">Batch Name: <strong>2024-2025</strong></label><br>
+                    <input type="hidden" name="Batch_Name" value="2024-2025">
+		    <label for="Class_Id">Class Name:</label><br>
                     <select id="Class_Id" name="Class_Id" required>
                         <?php
                         $class_sql = "SELECT Class_Id, Class_Name FROM classes";
@@ -170,12 +171,12 @@ $action = isset($_GET['action']) ? $_GET['action'] : '';
                     <a href="admin_offerings_CRUD.php"><button type="button">Cancel</button></a>
                 </form>
             <?php } elseif ($action == 'edit' && isset($_GET['batch_name'])) { 
-                $batch_name = $_GET['batch_name'];
+		$batch_name = $_GET['batch_name'];
                 $sql = "SELECT * FROM offerings WHERE Batch_Name='$batch_name'";
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
                 ?>
-                <h2>Edit Offering</h2>
+                <h2>Edit Offering for Batch: <strong><?php echo $batch_name; ?></strong></h2>
                 <form action="admin_offerings_CRUD.php" method="POST">
                     <input type="hidden" name="Batch_Name" value="<?php echo $batch_name; ?>">
                     <label for="Class_Id">Class Name:</label><br>

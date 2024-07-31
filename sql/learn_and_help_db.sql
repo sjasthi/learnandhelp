@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2024 at 01:25 AM
+-- Generation Time: Jul 30, 2024 at 08:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -3613,6 +3613,33 @@ INSERT INTO `classes` (`Class_Id`, `Class_Name`, `Description`, `Status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `course_fees`
+--
+
+CREATE TABLE `course_fees` (
+  `Class_Id` int(5) NOT NULL,
+  `Cost` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `course_fees`
+--
+
+INSERT INTO `course_fees` (`Class_Id`, `Cost`) VALUES
+(1, 100.00),
+(2, 100.00),
+(3, 145.00),
+(4, 178.00),
+(5, 121.00),
+(6, 199.00),
+(7, 135.00),
+(8, 162.00),
+(9, 110.00),
+(10, 187.00);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `instructor`
 --
 
@@ -3652,7 +3679,9 @@ INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 ('2024-2025', '1'),
 ('2024-2025', '3'),
 ('2025-2026', '1'),
-('2025-2026', '3');
+('2025-2026', '3'),
+('2024-2025', '2'),
+('Summer 2025', '2');
 
 -- --------------------------------------------------------
 
@@ -3694,18 +3723,19 @@ CREATE TABLE `registrations` (
   `Modified_Time` date DEFAULT NULL,
   `Created_Time` date DEFAULT NULL,
   `Batch_Name` varchar(20) NOT NULL,
-  `User_Id` int(10) NOT NULL
+  `User_Id` int(10) NOT NULL,
+  `Payment_Id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `registrations`
 --
 
-INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`) VALUES
-(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-04', '2024-07-04', 'Summer 2023', 44),
-(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44),
-(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44),
-(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '-1', 51);
+INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`, `Payment_Id`) VALUES
+(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-30', '2024-07-04', 'Summer 2023', 44, 'PAYID-M2UTMWA1G359769EW6710458'),
+(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44, NULL),
+(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44, NULL),
+(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '2024-2025', 51, NULL);
 
 -- --------------------------------------------------------
 
@@ -3922,6 +3952,12 @@ ALTER TABLE `books`
 -- Indexes for table `classes`
 --
 ALTER TABLE `classes`
+  ADD PRIMARY KEY (`Class_Id`);
+
+--
+-- Indexes for table `course_fees`
+--
+ALTER TABLE `course_fees`
   ADD PRIMARY KEY (`Class_Id`);
 
 --

@@ -102,17 +102,33 @@ echo      "<header class=\"inverse\">
             $active_batch = null;
             echo "Error: " . mysqli_error($connection);
           }
+          $query = <<< SQL
+            SELECT value 
+            FROM preferences 
+            WHERE Preference_Name = 'Course Fee';
+            SQL;
+          $result = mysqli_query($connection, $query);
+          if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $course_fee = $row['value'];
+          } else {
+            $course_fee = null;
+            echo "Error: " . mysqli_error($connection);
+          }
+          $payment_id = null;
 
           echo "
           <br>
           <br>
           <label id=\"batch-label\"><b>Batch Name:</b> $active_batch</label>
           <br>
+          <label id=\"course-fee-label\"><b>Course Fee:</b> $course_fee USD</label>
+          <input type='hidden' name='course_fee' value=$course_fee>
+          <input type='hidden' name='payment_id' value=$payment_id>
+          <br>
           <br>
           <label id=\"class\">*Select Class: </label>
           <select id=\"dropdown\" name=\"class\" required>"; // changed name to class
-
-
 
 
 
@@ -138,7 +154,7 @@ if (!$class_result) {
 } else {
   if ($class_result->num_rows > 0) {
     while ($row = $class_result->fetch_assoc()) {
-      echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] . "</option>";
+      echo "<option value=\"" . $row["Class_Id"] . "\">" . $row["Class_Name"] .  "</option>";
     }
   } else {
     echo "<option disabled selected value>No classes found</option>";
