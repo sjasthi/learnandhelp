@@ -24,6 +24,9 @@
         <h1> Welcome to <div><img id="big_logo" src="images/learn_n_help_big_logo.jpg"></div></h1>
       </div>
     </header>
+	
+	
+	<iframe src="chatbot.php" style="height:700px;width:550px;background-color:transparent;border:none;" allowtransparency="true" title="Learn and Help Chatbot"></iframe>
     <section class="about">
       <div class="container">
         <h2>Learn and Help <span class="accent-text">Highlights</span></h2>
