@@ -87,7 +87,8 @@ if (isset($_SESSION['role'])) {
     <a class="toggle-vis" data-column="10">Class</a> -
     <a class="toggle-vis" data-column="11">Date Modified</a> -
     <a class="toggle-vis" data-column="12">Date Created</a> -
-    <a class="toggle-vis" data-column="13">Options</a>
+    <a class="toggle-vis" data-column="13">Payment ID</a> -
+    <a class="toggle-vis" data-column="14">Options</a>
 </div>
 <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
     <table id="registration_table" class="display compact">
@@ -106,6 +107,7 @@ if (isset($_SESSION['role'])) {
             <th>Class</th>
             <th>Date Modified</th>
             <th>Date Created</th>
+            <th>Payment ID</th>
             <th>Options</th>
         </tr>
         </thead>
@@ -126,16 +128,21 @@ if (isset($_SESSION['role'])) {
         if ($result->num_rows > 0) {
             // Create table with data from each row
             while ($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row["Reg_Id"] . "</td><td>" . $row["Sponsor1_Name"] .
-                    "</td><td>" . $row["Sponsor1_Email"] . "</td><td>" .
-                    $row["Sponsor1_Phone_Number"] . "</td><td>" . $row["Sponsor2_Name"] .
-                    "</td><td>" . $row["Sponsor2_Email"] . "</td><td>" .
-                    $row["Sponsor2_Phone_Number"] . "</td><td>" . $row["Student_Name"] .
-                    "</td><td>" . $row["Student_Email"] . "</td><td>" .
-                    $row["Student_Phone_Number"] . "</td><td>" . $row["Class_Name"] .
-                    "</td><td>" . 
-                    $row["Modified_Time"] . "</td><td>" . $row["Created_Time"] .
-                    "</td>
+                echo "<tr>
+                        <td>" . $row["Reg_Id"] . "</td>
+                        <td>" . $row["Sponsor1_Name"] . "</td>
+                        <td>" . $row["Sponsor1_Email"] . "</td>
+                        <td>" . $row["Sponsor1_Phone_Number"] . "</td>
+                        <td>" . $row["Sponsor2_Name"] . "</td>
+                        <td>" . $row["Sponsor2_Email"] . "</td>
+                        <td>" . $row["Sponsor2_Phone_Number"] . "</td>
+                        <td>" . $row["Student_Name"] . "</td>
+                        <td>" . $row["Student_Email"] . "</td>
+                        <td>" . $row["Student_Phone_Number"] . "</td>
+                        <td>" . $row["Class_Name"] . "</td>
+                        <td>" . $row["Modified_Time"] . "</td>
+                        <td>" . $row["Created_Time"] . "</td>
+                        <td>" . $row["Payment_Id"] . "</td>
                 <td>
                   <form action='admin_edit.php' method='POST'>
                     <input type='hidden' name='Reg_Id' value='" . $row["Reg_Id"] . "'>

@@ -36,19 +36,19 @@
           <a href="admin_preferences_CRUD.php" id="preferences">
           <img src="images/admin_icons/control.png" alt="preferences"></a>
           <br>
-          <label for="preferences">Edit Preferences</label>
+          <label for="preferences">Preferences</label>
       </div>
       <div class="admin_icon">
           <a href="admin_offerings_CRUD.php" id="offerings">
           <img src="images/admin_icons/counting.png" alt="offerings"></a>
           <br>
-          <label for="preferences">Edit Offerings</label>
+          <label for="preferences">Offerings</label>
       </div>
       <div class="admin_icon">
           <a href="admin_batch_CRUD.php" id="batch">
           <img src="images/admin_icons/deadline.png" alt="batch"></a>
           <br>
-          <label for="preferences">Edit Batch</label>
+          <label for="preferences">Batch</label>
       </div>
       <div class="admin_icon">
         <a href="admin_registrations.php" id="registrations"><img src="images/admin_icons/registrations_icon.png" alt="registration"></a>
