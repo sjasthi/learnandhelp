@@ -60,10 +60,9 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 	$course_fee =isset($_POST['course_fee']) ? htmlspecialchars($_POST['course_fee']) : '';
     $timestamp = date("Y-m-d H:i:s");
 } else {
-	// runs when action = ""
+	// runs when $action = ""
 	// retrieve registration info from db 
 	$User_Id = $_SESSION['User_Id'];
-    // $sql = "SELECT * FROM registrations r NATURAL JOIN classes c JOIN course_fees cf on cf.Class_Id = c.Class_Id WHERE User_Id = $User_Id;";
     $sql =<<< SQL
 				SELECT r.*, c.*, p.Value AS Course_Fee, ar.Value AS Active_Registration
 				FROM registrations r
@@ -74,7 +73,6 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 				AND r.User_Id = $User_Id;
 			SQL;
 	$row = mysqli_fetch_array(mysqli_query($connection, $sql));
-
 		$action = '';
         $Reg_Id = $row['Reg_Id'];
 		$sponsor1_name = $row['Sponsor1_Name'];
