@@ -205,31 +205,44 @@ $summary_by_supported_by = get_summary_data($connection, 'supported_by');
     <?php include 'show-navbar.php'; ?>
     <?php show_navbar(); ?>
     <header class="inverse">
-        <div class="slideshow-container">
-            <?php
-            //Get images from that dir
-            $images_dir = "./images/banner_images/Schools/";
-            $images = glob($images_dir . "*.{jpg,png}", GLOB_BRACE);
-            //Putting the images into a individual slide
-            foreach ($images as $index => $image) {
-                $safe_image_path = htmlspecialchars($image, ENT_QUOTES, 'UTF-8');
-                echo "<div class='banner_slide'>
-<img src='{$safe_image_path}' alt='School banner image'>
-</div>";
+    <div class="slideshow-container">
+        <?php
+        //Get images from that dir
+        $images_dir = "./images/banner_images/Schools/";
+        $images = glob($images_dir . "*.{jpg,png}", GLOB_BRACE);
+
+        // If no images found in the banner_images folder, use the default image from admin_icons
+        if (empty($images)) {
+            $default_image = "./images/admin_icons/school.png";
+            if (file_exists($default_image)) {
+                $images = [$default_image];
+            } else {
+                // If the default image doesn't exist, display an error message or use a placeholder
+                $images = ["https://via.placeholder.com/800x400.png?text=No+Image+Available"];
             }
-            ?>
-        </div>
-        <h1><span class="accent-text">Schools</span></h1>
-        <div class="dots-container">
-            <?php
-            //Creating navigation dots for each image
-            foreach ($images as $index => $image) {
-                $slide_number = $index + 1;
-                echo "<span class='dot' onclick='currentSlide($slide_number)'></span>";
-            }
-            ?>
-        </div>
-    </header>
+        }
+
+        //Putting the images into individual slides
+        foreach ($images as $index => $image) {
+            $safe_image_path = htmlspecialchars($image, ENT_QUOTES, 'UTF-8');
+            echo "<div class='banner_slide'>
+                <img src='{$safe_image_path}' alt='School banner image'>
+                </div>";
+        }
+        ?>
+    </div>
+    <h1><span class="accent-text">Schools</span></h1>
+    <div class="dots-container">
+        <?php
+        //Creating navigation dots for each image
+        foreach ($images as $index => $image) {
+            $slide_number = $index + 1;
+            echo "<span class='dot' onclick='currentSlide($slide_number)'></span>";
+        }
+        ?>
+    </div>
+</header>
+
     <div class="search-container">
         <input type="search" id="search-input" class="search-input" placeholder="Search by name or ID">
         <button id="search-button" class="search-button">Search</button>
