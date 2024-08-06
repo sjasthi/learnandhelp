@@ -30,10 +30,11 @@ function fill_form() {
     $student_name = $row['Student_Name'];
     $student_email = $row['Student_Email'];
     $student_phone = $row['Student_Phone_Number'];
-    $class_name = $row['Class_Name'];
-	$class = $row['Class_Id'];
-	$batch = $row['Batch_Name'];
 
+    $payment_id = ['Payment_Id'];
+    $class_name = $row['Class_Name'];
+  	$class = $row['Class_Id'];
+	  $batch = $row['Batch_Name'];
   } else {
 	$student_email = $_POST['students-email'];
 	$sql = "SELECT Reg_Id FROM registrations WHERE Student_Email = '$student_email'";
@@ -46,9 +47,11 @@ function fill_form() {
     $sponsor2_email = $_POST['sponsor2s-email'];
     $sponsor2_phone = $_POST['sponsor2s-phone'];
     $student_name = $_POST['students-name'];
-	$batch = $_POST['batch'];
+	  $batch = $_POST['batch'];
     $student_phone = $_POST['students-phone'];
-    $class = $_POST['class'];
+
+    $class_id = $_POST['class'];
+    $payment_id = $_POST['payment_id'];
   }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
@@ -79,10 +82,38 @@ function fill_form() {
         <label id=\"students-email-label\"> Student's Email</label>
         <input type=\"email\" id=\"students-email\" name=\"students-email\" class=\"form\" required value=\"$student_email\"><br>
         <label id=\"students-number-label\">Student's Phone Number</label>
-        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required><br>
-		<label id=\"batch-name-label\">Batch Name</label>
-		<input type=\"text\" id=\"batch-name\" name=\"batch\" value=\"$batch\" readonly>
 
+        <input type=\"tel\" id=\"students-phone\" name=\"students-phone\" value=\"$student_phone\" required>
+        <br>";
+        // Get active Batch
+        $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+
+        if ($connection === false) {
+          $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+          if ($connection === false) {
+            die("Failed to connect to database: " . mysqli_connect_error());
+          }
+        }
+        $sql = <<< SQL
+                  SELECT value 
+                  FROM preferences 
+                  WHERE Preference_Name = 'Active Registration';
+                  SQL;
+        $result = mysqli_query($connection, $sql);
+        if ($result) {
+          $row = mysqli_fetch_assoc($result);
+          $active_batch = $row['value'];
+        } else {
+          $active_batch = null;
+          echo "Error: " . mysqli_error($connection);
+        }
+      
+        echo "
+        <br>
+        <label id=\"batch-label\"><b>Batch Name:</b> $active_batch</label>
+        <input type='hidden' name='active_batch' value=$active_batch>
+			  <input type='hidden' name='payment_id' value=$payment_id>
+        <br>
         <br>
         <label id=\"class\">Select Class</label>
         <select id=\"dropdown\" name=\"class\" required>

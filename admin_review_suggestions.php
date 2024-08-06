@@ -1,4 +1,16 @@
-<!-- review_suggestions.php -->
+<?php 
+// Start the session if it is not already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
+  
+  // Block unauthorized users from accessing the page
+  if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    http_response_code(403);
+    die('Forbidden');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,13 +59,13 @@
 
 <body>
     <?php
+
     // Show errors
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    // Start session
-    session_start();
+
     include 'show-navbar.php';
     show_navbar();
     ?>

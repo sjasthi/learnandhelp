@@ -28,21 +28,28 @@ if (isset($_POST['action'])) {
 	$action = '';
 }
 
-// Get active batch
+// Get active batch and course fee
 $query = <<< SQL
-			SELECT value 
-			FROM preferences 
-			WHERE Preference_Name = 'Active Registration';
-			SQL;
+            SELECT Preference_Name, value 
+            FROM preferences 
+            WHERE Preference_Name IN ('Active Registration', 'Course Fee');
+            SQL;
 $result = mysqli_query($connection, $query);
+
+$active_batch = null;
+$course_fee = null;
+
 if ($result) {
-    $row = mysqli_fetch_assoc($result);
-    $active_batch = $row['value'];
+    while ($row = mysqli_fetch_assoc($result)) {
+        if ($row['Preference_Name'] == 'Active Registration') {
+            $active_batch = $row['value'];
+        } elseif ($row['Preference_Name'] == 'Course Fee') {
+            $course_fee = $row['value'];
+        }
+    }
 } else {
-    $active_batch = null;
     echo "Error: " . mysqli_error($connection);
 }
-
 
 if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     // Validate and sanitize form input
@@ -56,14 +63,13 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
     $student_email = isset($_POST['students-email']) ? filter_var($_POST['students-email'], FILTER_SANITIZE_EMAIL) : '';
     $student_phone = isset($_POST['students-phone']) ? htmlspecialchars($_POST['students-phone']) : '';
     $class_id = isset($_POST['class']) ? htmlspecialchars($_POST['class']) : '';
-	$payment_id = isset($_POST['payment_id']) ? htmlspecialchars($_POST['payment_id']) : '';
-	$course_fee =isset($_POST['course_fee']) ? htmlspecialchars($_POST['course_fee']) : '';
+	$payment_id = isset($_POST['payment_id']) ? htmlspecialchars($_POST['payment_id']) : $payment_id;
+	$course_fee =isset($_POST['course_fee']) ? htmlspecialchars($_POST['course_fee']): $course_fee;
     $timestamp = date("Y-m-d H:i:s");
 } else {
-	// runs when action = ""
+	// runs when $action = ""
 	// retrieve registration info from db 
 	$User_Id = $_SESSION['User_Id'];
-    // $sql = "SELECT * FROM registrations r NATURAL JOIN classes c JOIN course_fees cf on cf.Class_Id = c.Class_Id WHERE User_Id = $User_Id;";
     $sql =<<< SQL
 				SELECT r.*, c.*, p.Value AS Course_Fee, ar.Value AS Active_Registration
 				FROM registrations r
@@ -74,7 +80,6 @@ if ($action == 'edit' || $action == 'add' || $action == 'admin_edit') {
 				AND r.User_Id = $User_Id;
 			SQL;
 	$row = mysqli_fetch_array(mysqli_query($connection, $sql));
-
 		$action = '';
         $Reg_Id = $row['Reg_Id'];
 		$sponsor1_name = $row['Sponsor1_Name'];
@@ -208,6 +213,8 @@ echo "<!DOCTYPE html>
   			<!---Registration Label--->
 			<label id=\"registration_id-label\"><b>Registration ID:</b> $Reg_Id</label><br>
 			<label id=\"registration_id-label\"><b>Batch Name:</b> $active_batch</label><br>
+			<input type='hidden' name='active_batch' value=$active_batch>
+			<input type='hidden' name='course_fee' value=$course_fee>
 			<input type='hidden' name='Reg_Id' value=$Reg_Id>
 			<br>
 			<!---sponsor1 Section -->
@@ -244,6 +251,7 @@ echo "<!DOCTYPE html>
 			<br>
 			<label id=\"class\"><b>Selected Class:</b> $class</label><br>
 			<input type=\"hidden\" id=\"class\" name=\"class\" value=\"$class\">
+			<input type=\"hidden\" id=\"payment_id\" name=\"payment_id\" value=\"$payment_id\">
 			<br>
 			<input type='hidden' name='action' value='edit'>
 			<input type=\"submit\" id=\"submit-registration\" name=\"submit\" value=\"Edit\"></a>
