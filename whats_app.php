@@ -34,7 +34,9 @@ try {
 require_once __DIR__ . '/vendor/autoload.php';
 use Twilio\Rest\Client;
 
-
+$sid = 'ACaab18ef8ea8e54c932f14cfc66314e10';
+$token = '34b53b5c1248212b0324fb085bcb8c24';
+$twilio_whatsapp_number = '+14155238886';
 
 // Add error checking
 if (empty($sid) || empty($token)) {
