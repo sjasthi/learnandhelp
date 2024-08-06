@@ -35,8 +35,6 @@ function get_profile_image($id)
 ?>
 
 <!DOCTYPE html>
-<script>
-</script>
 <html>
 
 <head>
@@ -44,7 +42,7 @@ function get_profile_image($id)
   <title>Admin Schools</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
   <script>
@@ -82,6 +80,23 @@ function get_profile_image($id)
         column.visible(!column.visible());
       });
     });
+  </script>
+  <script>
+  function updateValue(element,column,id){
+        var value = element.innerText;
+        $.ajax({
+            url:'admin_edit_school_in_place.php',
+            type: "POST",
+            data:{
+                value: value,
+                column: column,
+                id: id
+            },
+            success:function(php_result){
+				console.log(php_result);	
+            }
+        });
+    }
   </script>
 </head>
 
@@ -149,7 +164,6 @@ function get_profile_image($id)
           <th>Notes</th>
           <th>Referenced By</th>
           <th>Supported By</th>
-
         </tr>
       </thead>
       <tbody>
@@ -172,42 +186,28 @@ function get_profile_image($id)
           while ($row = $result->fetch_assoc()) {
             // $time = time();
             $profile_image = get_profile_image($row["id"]);
-            echo
-            "
+			$id = $row["id"];
+			echo "
             <tr>
               <td>
                 <form action='admin_edit_school.php' method='POST'>
-                    <input type='hidden' name='id' value='" . $row["id"] . "'>
+                    <input type='hidden' name='id' value='$id'>
                     <input type='submit' id='admin_buttons' name='edit' value='Edit'/>
                 </form>
                 <form action='admin_delete_school.php' method='POST'>
-                    <input type='hidden' name='id' value='" . $row["id"] . "'>
+                    <input type='hidden' name='id' value='$id'>
                     <input type='submit' id='admin_buttons' name='delete' value='Delete'/>
                 </form>
               </td>
-              <td id=\"school_icons\"class=\"school_icon\">
-                    <img src=\"$profile_image?v=$time\" alt=\"school image\">
-              </td>
-					  	<td>" . $row["id"] . "</td>
-						  <td>" . $row["name"] . "</td>
-						  <td>" . $row["type"] . "</td>
-						  <td>" . $row["category"] . "</td>
-						  <td>" . $row["grade_level_start"] . "</td>
-              <td>" . $row["grade_level_end"] . "</td>
-              <td>" . $row["current_enrollment"] . "</td>
-              <td>" . $row["address_text"] . "</td>
-              <td>" . $row["state_name"] . "</td>
-              <td>" . $row["state_code"] . "</td>
-              <td>" . $row["pin_code"] . "</td>
-              <td>" . $row["contact_name"] . "</td>
-              <td>" . $row["contact_designation"] . "</td>
-              <td>" . $row["contact_phone"] . "</td>
-              <td>" . $row["contact_email"] . "</td>
-              <td>" . $row["status"] . "</td>
-              <td>" . $row["notes"] . "</td>
-              <td>" . $row["referenced_by"] . "</td>
-              <td>" . $row["supported_by"] . "</td>           
-            </tr>";
+              <td id=\"school_icons\"class=\"school_icon\"><img src=\"$profile_image?v=$time\" alt=\"school image\"></td>
+			";
+			// Allow for "in-cell" editing of the table
+			foreach ($row as $key=>$value) {
+			  echo "
+			  <td><div contenteditable=\"true\" onBlur=\"updateValue(this,'$key','$id')\">$value</div></td>
+			  ";
+			}
+            echo "</tr>";
           }
         } else {
           echo "0 results";

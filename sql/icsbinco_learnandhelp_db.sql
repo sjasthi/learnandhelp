@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 31, 2024 at 11:09 AM
+-- Generation Time: Jun 18, 2024 at 05:16 PM
 -- Server version: 5.7.23-23
--- PHP Version: 8.1.29
+-- PHP Version: 8.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,30 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `icsbinco_learnandhelp_db`
+-- Database: `learn_and_help_db`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `batch`
---
-
-CREATE TABLE `batch` (
-  `Batch_Name` varchar(50) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `batch`
---
-
-INSERT INTO `batch` (`Batch_Name`, `start_date`, `end_date`) VALUES
-('2023-2024', '2023-09-01', '2024-05-31'),
-('2024-2025', '2024-09-01', '2025-05-31'),
-('Fall 2024', '2024-08-01', '2024-12-31'),
-('Summer 2023', '2023-06-01', '2023-08-31');
 
 -- --------------------------------------------------------
 
@@ -3583,6 +3561,30 @@ INSERT INTO `books` (`id`, `callNumber`, `title`, `author`, `publisher`, `publis
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `causes`
+--
+
+CREATE TABLE `causes` (
+  `Cause_Id` int(11) NOT NULL,
+  `Cause_name` varchar(100) DEFAULT NULL,
+  `description` text,
+  `URL` varchar(150) DEFAULT NULL,
+  `Contact_name` varchar(50) DEFAULT NULL,
+  `Contact_email` varchar(50) DEFAULT NULL,
+  `Contact_phone` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `causes`
+--
+
+INSERT INTO `causes` (`Cause_Id`, `Cause_name`, `description`, `URL`, `Contact_name`, `Contact_email`, `Contact_phone`) VALUES
+(1, 'School Libraries', 'Establishing the school libraries in Elementary, Middle and High Schools (India).', 'http://learnandhelp.jasthi.com', 'Siva Jasthi', 'siva.jasthi@gmail.com', '651.276.4671'),
+(9, 'Scholarships', 'Providing scholarships to academically brilliant and/or economically poor students.', 'http://learnandhelp.jasthi.com', 'Siva Jasthi', 'siva.jasthi@gmail.com', '6512764671');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `classes`
 --
 
@@ -3631,51 +3633,7 @@ CREATE TABLE `instructor` (
 INSERT INTO `instructor` (`instructor_ID`, `First_name`, `Last_name`, `Bio_data`, `Image`) VALUES
 (1, 'Dr. Siva ', 'Jasthi', 'Educator, Mentor, Author, Trainer, Auditor, Software Consultant with over 25 years of experience in the software industry.\r\n20 years of experience in teaching CS classes at Metropolitan State University, MN, USA. 5 years of volunteering at the School of India for Languages and Culture (SILC) as “Digital Literacy\" program designer and coordinator.', 'images/siva.png'),
 (2, 'Ishana ', 'Didwania', 'Ishana Didwania is a senior at Mahtomedi High School. She has completed the 5-year Computer Science program at the School of India for Languages and Culture (SILC) where she studied HTML/CSS, Javascript, PHP, MySQL, Python, and Java. She served as the primary HTML and CSS teacher for 3 years, dedicating over 75 hours per year to teaching 6th grade students. Ishana is also a software engineer and the head of strategy for DiaBuddies, her Technovation team app. She programmed the health tracker feature of the app and authored the business plan which highlighted market research, advertising, and financial planning for the company. Her team was chosen as a US Bank challenge team and given the opportuntity to pitch the app to the US Bank Executive Board. DiaBuddies is one of four Technovation award winning apps from Minnesota. Ishana is an Aspirations in Computer 2023 State Honorable Mention winner and a 2023-24 Target Women in Science and Technology award winner. She is a Minnesota All-State Band flute player and the president of her school band. Ishana is passionate about STEM and challenges herself with AP math and science courses. She works as a math instructor at Mathnasium. In fall of 2024, she will attend Purdue University to major in Computer Science.', 'images/Ishana.png'),
-(3, 'Sumedh ', 'Ghatti ', 'Sumedh Ghatti is a 9th grader at Independence High School, dedicated to nurturing academic growth and inspiring young minds. His journey is distinguished by the prestigious Presidential Award, accompanied by his exceptional performance as the top player on the Junior Varsity Tennis team. With extensive expertise as an app, game developer, and website developer, a passion ignited during his early years at the School of India for Languages and Culture (SILC),\" Sumedh\'s commitment to technology is evident. He earned his Python Entry Level Certified Programmer certification in April 2023, and is working to get his second certification done soon. He has also been selected to join the Deep-Dive AI workshop hosted by the University of Texas at Dallas. Beyond his academic and athletic pursuits, he expresses himself artistically through playing the tabla. In his role as an educator, Sumedh strives to ignite curiosity, foster a pursuit of excellence, and guide students in discovering their passion for coding, mirroring his own journey.', 'images/sumedh.png'),
-(4, 'Ahala', 'Ayyalasomayajula', 'Ahala Ayyalasomayajula, an eighth grader at Future Kids School in Hyderabad, Telangana, is an avid reader and curious learner. She began her journey by learning Telugu at Manabadi in Cary, North Carolina, USA, and authored \"Ahala MaaTa\" (2021), a 108-stanza satakam, and \"Padmavathi Priya Satakam,\" a collection of 100 poems on Lord Venkateswara. Recognized as the youngest Avadhani, she completed her first Ashta Avadhanam in sixth grade under the guidance of Brahmasri Vaddiparti Padmakar Garu. She co-authored \"SHEROES: 256 Inspiring Women From India\" in 2024. Ahala was the first student to receive the \"Python Entry Level Certified Programmer\" (PCEP) certification in the \"Learn and Help\" program and completed Python 101 and Python 102 courses with Dr. Siva Jasthi. ', 'uploads/ahala_pp.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `offerings`
---
-
-CREATE TABLE `offerings` (
-  `Batch_Name` varchar(50) NOT NULL,
-  `Class_Id` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `offerings`
---
-
-INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
-('2024-2025', '1'),
-('2024-2025', '3'),
-('2025-2026', '1'),
-('2025-2026', '3'),
-('2024-2025', '2'),
-('Summer 2025', '2'),
-('2024-2025', '5');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `preferences`
---
-
-CREATE TABLE `preferences` (
-  `Preference_Name` varchar(50) NOT NULL,
-  `Value` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `preferences`
---
-
-INSERT INTO `preferences` (`Preference_Name`, `Value`) VALUES
-('Active Registration', '2024-2025'),
-('Course Fee', '500');
+(3, 'Sumedh ', 'Ghatti ', 'Sumedh Ghatti is a 9th grader at Independence High School, dedicated to nurturing academic growth and inspiring young minds. His journey is distinguished by the prestigious Presidential Award, accompanied by his exceptional performance as the top player on the Junior Varsity Tennis team. With extensive expertise as an app, game developer, and website developer, a passion ignited during his early years at the School of India for Languages and Culture (SILC),\" Sumedh\'s commitment to technology is evident. He earned his Python Entry Level Certified Programmer certification in April 2023, and is working to get his second certification done soon. He has also been selected to join the Deep-Dive AI workshop hosted by the University of Texas at Dallas. Beyond his academic and athletic pursuits, he expresses himself artistically through playing the tabla. In his role as an educator, Sumedh strives to ignite curiosity, foster a pursuit of excellence, and guide students in discovering their passion for coding, mirroring his own journey.', 'images/sumedh.png');
 
 -- --------------------------------------------------------
 
@@ -3685,32 +3643,20 @@ INSERT INTO `preferences` (`Preference_Name`, `Value`) VALUES
 
 CREATE TABLE `registrations` (
   `Reg_Id` int(11) NOT NULL,
-  `Sponsor1_Name` varchar(50) DEFAULT NULL,
-  `Sponsor1_Email` varchar(50) DEFAULT NULL,
-  `Sponsor1_Phone_Number` varchar(15) DEFAULT NULL,
-  `Sponsor2_Name` varchar(50) DEFAULT NULL,
-  `Sponsor2_Email` varchar(50) DEFAULT NULL,
-  `Sponsor2_Phone_Number` varchar(15) DEFAULT NULL,
+  `Sponsor_Name` varchar(50) DEFAULT NULL,
+  `Sponsor_Email` varchar(50) DEFAULT NULL,
+  `Sponsor_Phone_Number` varchar(15) DEFAULT NULL,
+  `Spouse_Name` varchar(50) DEFAULT NULL,
+  `Spouse_Email` varchar(50) DEFAULT NULL,
+  `Spouse_Phone_Number` varchar(15) DEFAULT NULL,
   `Student_Name` varchar(50) DEFAULT NULL,
   `Student_Email` varchar(50) DEFAULT NULL,
   `Student_Phone_Number` varchar(15) DEFAULT NULL,
   `Class_Id` int(11) DEFAULT NULL,
+  `Cause` varchar(20) DEFAULT NULL,
   `Modified_Time` date DEFAULT NULL,
-  `Created_Time` date DEFAULT NULL,
-  `Batch_Name` varchar(20) NOT NULL,
-  `User_Id` int(10) NOT NULL,
-  `Payment_Id` varchar(255) DEFAULT NULL
+  `Created_Time` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `registrations`
---
-
-INSERT INTO `registrations` (`Reg_Id`, `Sponsor1_Name`, `Sponsor1_Email`, `Sponsor1_Phone_Number`, `Sponsor2_Name`, `Sponsor2_Email`, `Sponsor2_Phone_Number`, `Student_Name`, `Student_Email`, `Student_Phone_Number`, `Class_Id`, `Modified_Time`, `Created_Time`, `Batch_Name`, `User_Id`, `Payment_Id`) VALUES
-(47, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 3, '2024-07-30', '2024-07-04', 'Summer 2023', 44, 'PAYID-M2UTMWA1G359769EW6710458'),
-(53, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2023-2024', 44, NULL),
-(54, 'Jim Doe', 'jim@jim.com', '123-456-7890', 'Mary Doe', 'mary@mary.com', '123-456-7890', 'John Doe', 'johndoe@user.com', '123-456-7890', 1, '2024-07-04', '2024-07-04', '2024-2025', 44, NULL),
-(55, 'John', 'john@john.com', '123-456-7890', 'Mary', 'mary@mary.com', '123-456-7890', 'johnny doe', 'johnnydoe@john.com', '123-456-7890', 1, '2024-07-10', '2024-07-10', '2024-2025', 51, NULL);
 
 -- --------------------------------------------------------
 
@@ -3846,14 +3792,9 @@ CREATE TABLE `schools_suggested` (
 --
 
 INSERT INTO `schools_suggested` (`id`, `school_name`, `contact_name`, `contact_mobile`, `commitment_statement`, `suggested_at`, `supported`) VALUES
-(12, 'MPUP School (Lemellapadu)', 'Pasupuleti Sridhar', '98485 60727', 'హెడ్ మాస్టర్ పసుపులేటి శ్రీధర్ గారు.\r\n98485 60727\r\nమండల పరిషత్ ప్రాథమికోన్నత పాఠశాల (mpup school)\r\nలేమల్లెపాడు \r\nవట్టిచెరుకూరు మండలం\r\nగుంటూరు జిల్లా\r\n\r\nReferred by: Modugula Ravi Krishna garu', '2024-07-29 08:46:18', 0),
-(13, 'MPUP School (Pakalapadu)', 'P.S.Raju', '8897534843', 'P. SATYANARAYANA RAJU	\r\n8897534843	\r\n1980psraju@gmail.com	\r\nM. P. U. P, School, \r\nPakalapadu(village), \r\nSattenapalli(Mandal ), \r\nPalnadu(Dist)522403)        ', '2024-07-29 18:33:08', 0),
-(14, 'Viswakavi Residential Public School (Chinnaram)', 'Rajeswari Penmasta  (Ramaraju Alluri)', '6512710678', 'Viswakavi Residential Public School\r\nChinnamiram, Bhimavaram\r\nAP 534204', '2024-07-30 07:17:12', 0),
-(15, 'ZPHS (Rama Samudram)', 'Srinivas Sakhamuri', '+919441075753', 'Zphs, rama samudram, tripurantakam mandal, A.P', '2024-07-30 07:18:39', 0),
-(16, 'ZP Girls High School (Kondapalli)', 'Ms.B. Padma Latha', '9490228661', 'Balaji Paripati reference.\r\n\r\nZpgirls high school \r\nKondapalli,\r\nIbrahimpatnam Mandal\r\nKrishna Dt \r\n\r\nHM: B. PadmaLatha\r\nPh. No: 9490228661\"', '2024-07-30 07:22:57', 0),
-(17, 'ZP high school Narsingapuram', 'Mrinalini Bitla ', '9722073543', 'ZP high school Narsingapuram, \r\nchandragiri mandal, Tirupathi district, \r\nAndhra Pradesh .', '2024-07-30 07:24:17', 0),
-(18, 'Lashkar Bazar High School  (Hanamkonda)', 'Sridhar Katta', '4698787454', 'Sridhar Katta\r\nLashkar Bazar High School \r\nHanamkonda, Telangana ', '2024-07-30 07:25:40', 0),
-(19, 'JBS HIGH SCHOOL (Yellandu)', 'Naveen Anasuri', '6512080433', 'Government high school, Yellandu', '2024-07-31 06:40:45', 0);
+(8, 'Ya School ', 'Professor Mia', 'abc-123-5533', 'This is a great school', '2024-02-20 01:54:56', 0),
+(9, 'Metro State University', 'Dr. Jasthi', '222.333.4444', 'This is a commitment statement', '2024-04-16 00:34:33', 0),
+(10, 'Metro State University 2', 'Dr. Jasthi', '222.333.4444', 'This is a statment', '2024-04-16 01:21:43', 0);
 
 -- --------------------------------------------------------
 
@@ -3889,25 +3830,22 @@ INSERT INTO `users` (`User_Id`, `First_Name`, `Last_Name`, `Email`, `Phone`, `Ha
 (40, 'Pallavi', 'Sriram', 'pallavivem@yahoo.com', NULL, '45c4192dd17f6782e18fe102bb024cdb0304ae5d', 'yes', 'admin', '2024-04-15', '2024-04-15', NULL, NULL),
 (41, 'Siva', 'Jasthi', 'siva.jasthi@metrostate.edu', NULL, 'b405fbddf84dcc48b6e8b1fe36296aa5ef6b6b40', 'yes', 'student', '2024-04-22', '2024-04-22', NULL, NULL),
 (42, 'Wisdom', 'Azonwu', 'je2241vn@go.minnstate.edu', NULL, '7e2d4bf5d52f31cf8ce55a1a8bb90fb30bbe550c', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL),
-(43, 'Brandon', 'Roback', 'Brandon.Roback@my.metrostate.edu', NULL, '4737de3b8262e66aa8c5e07e0ea81fed5953d989', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL),
-(44, 'John', 'Doe', 'johndoe@user.com', '123-456-7890', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-06-18', '2024-06-18', NULL, NULL),
-(45, 'first_name', 'last_name', 'admin@admin.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'admin', '2024-06-18', '2024-06-18', NULL, NULL),
-(46, 'Jane', 'Doe', 'janedoe@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
-(47, 'John', 'Smith', 'johnsmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
-(48, 'Jane', 'Smith', 'janesmith@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-02', '2024-07-02', NULL, NULL),
-(49, 'bojo', 'johnson', 'bojo@bojo.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
-(50, 'Test', 'User', 'testuser@user.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-04', '2024-07-04', NULL, NULL),
-(51, 'johnny', 'doe', 'johnnydoe@john.com', NULL, '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'yes', 'student', '2024-07-09', '2024-07-09', NULL, NULL);
+(43, 'Brandon', 'Roback', 'Brandon.Roback@my.metrostate.edu', NULL, '4737de3b8262e66aa8c5e07e0ea81fed5953d989', 'yes', 'student', '2024-06-11', '2024-06-11', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_registrations`
+--
+
+CREATE TABLE `user_registrations` (
+  `User_Id` int(11) NOT NULL,
+  `Reg_Id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `batch`
---
-ALTER TABLE `batch`
-  ADD PRIMARY KEY (`Batch_Name`);
 
 --
 -- Indexes for table `blogs`
@@ -3927,6 +3865,12 @@ ALTER TABLE `blog_pictures`
 --
 ALTER TABLE `books`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `causes`
+--
+ALTER TABLE `causes`
+  ADD PRIMARY KEY (`Cause_Id`);
 
 --
 -- Indexes for table `classes`
@@ -3967,6 +3911,13 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `reset_token_hash` (`reset_token_hash`);
 
 --
+-- Indexes for table `user_registrations`
+--
+ALTER TABLE `user_registrations`
+  ADD PRIMARY KEY (`User_Id`,`Reg_Id`),
+  ADD KEY `Reg_Id` (`Reg_Id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -3989,6 +3940,12 @@ ALTER TABLE `books`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4933;
 
 --
+-- AUTO_INCREMENT for table `causes`
+--
+ALTER TABLE `causes`
+  MODIFY `Cause_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
@@ -3998,13 +3955,13 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `instructor`
 --
 ALTER TABLE `instructor`
-  MODIFY `instructor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `instructor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
-  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `Reg_Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `schools`
@@ -4016,13 +3973,13 @@ ALTER TABLE `schools`
 -- AUTO_INCREMENT for table `schools_suggested`
 --
 ALTER TABLE `schools_suggested`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `User_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables
@@ -4038,7 +3995,14 @@ ALTER TABLE `blog_pictures`
 -- Constraints for table `registrations`
 --
 ALTER TABLE `registrations`
-  ADD CONSTRAINT `registrations_ibfk_1` FOREIGN KEY (`Class_Id`) REFERENCES `classes` (`Class_Id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `registrations_ibfk_1` FOREIGN KEY (`Class_Id`) REFERENCES `classes` (`Class_Id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_registrations`
+--
+ALTER TABLE `user_registrations`
+  ADD CONSTRAINT `user_registrations_ibfk_1` FOREIGN KEY (`User_Id`) REFERENCES `users` (`User_Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_registrations_ibfk_2` FOREIGN KEY (`Reg_Id`) REFERENCES `registrations` (`Reg_Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
