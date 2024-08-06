@@ -31,6 +31,7 @@ function fill_form() {
     $student_email = $row['Student_Email'];
     $student_phone = $row['Student_Phone_Number'];
     $class_id = $row['Class_Id'];
+    $payment_id = ['Payment_Id'];
 
   } else {
     $Reg_Id = $_POST['Reg_Id'];
@@ -44,6 +45,7 @@ function fill_form() {
     $student_name = $_POST['students-name'];
     $student_phone = $_POST['students-phone'];
     $class_id = $_POST['class'];
+    $payment_id = $_POST['payment_id'];
   }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
@@ -98,10 +100,12 @@ function fill_form() {
           $active_batch = null;
           echo "Error: " . mysqli_error($connection);
         }
-
+      
         echo "
         <br>
         <label id=\"batch-label\"><b>Batch Name:</b> $active_batch</label>
+        <input type='hidden' name='active_batch' value=$active_batch>
+			  <input type='hidden' name='payment_id' value=$payment_id>
         <br>
         <br>
         <label id=\"class\">Select Class</label>
