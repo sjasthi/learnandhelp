@@ -28,11 +28,6 @@ $total_array = $result->fetch_assoc();
 $num_schools = $total_array['num_schools'];
 $num_beneficiaries = $total_array['num_beneficiaries'];
 
-$sql = "SELECT count(*) AS num_books FROM `books`";
-$result = $conn->query($sql);
-$total_array = $result->fetch_assoc();
-$num_books = $total_array['num_books'];
-
 $sql = "SELECT count(*) AS num_registrations FROM `registrations`";
 $result = $conn->query($sql);
 $total_array = $result->fetch_assoc();
@@ -77,14 +72,10 @@ $conn->close();
 		display: inline;
 	}
 
-	.container {
+	h2 {
 		margin-top: 4rem;
 	}
-
-	.move {
-		margin-left: 1rem;
-	}
-    </style>
+   </style>
 </head>
 <body>
 <?php 
@@ -115,7 +106,7 @@ $conn->close();
   </tr>
   <tr>
     <td>Books Given To Schools</td>
-    <td><?php echo "$num_books"; ?></td>
+    <td>N/A</td>
   </tr>
   <tr>
     <td>Cost / Support Provided</td>
