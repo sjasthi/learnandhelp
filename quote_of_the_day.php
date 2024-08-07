@@ -12,11 +12,13 @@ if ($status == PHP_SESSION_NONE) {
     <link rel="icon" href="images/icon_logo.png" type="image/icon type">
     <title>Learn and Help</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <link href="css/quote_style.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	
 </head>
 
 <body>
-    <?php include 'show_navbar.php'; ?>
+    <?php include 'show-navbar.php'; ?>
     <?php show_navbar(); ?>
     <header class="inverse">
         <div class="container">
@@ -26,7 +28,7 @@ if ($status == PHP_SESSION_NONE) {
     <section class="quote-section">
         <div class="container">
             <div class="quote-container">
-                <h1></h1>
+                <h1>Quote of the Day</h1>
                 <p id="quote">Loading...</p>
             </div>
         </div>

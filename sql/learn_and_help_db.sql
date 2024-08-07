@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `icsbinco_learnandhelp_db`
 --
-
+CREATE DATABASE IF NOT EXISTS learn_and_help_db;
+USE learn_and_help_db;
 -- --------------------------------------------------------
 
 --
@@ -3666,7 +3667,7 @@ INSERT INTO `offerings` (`Batch_Name`, `Class_Id`) VALUES
 
 CREATE TABLE `preferences` (
   `Preference_Name` varchar(50) NOT NULL,
-  `Value` varchar(50) NOT NULL
+  `Value` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -3675,6 +3676,8 @@ CREATE TABLE `preferences` (
 
 INSERT INTO `preferences` (`Preference_Name`, `Value`) VALUES
 ('Active Registration', '2024-2025'),
+('OPENAI_API_KEY', ''),
+('KEYWORDS', 'schools, books, libraries, reading'),
 ('Course Fee', '500');
 
 -- --------------------------------------------------------
@@ -4000,6 +4003,12 @@ ALTER TABLE `classes`
 ALTER TABLE `instructor`
   MODIFY `instructor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
+--
+-- Indexes for table `preferences`
+--
+ALTER TABLE `preferences`
+  ADD PRIMARY KEY (`Preference_Name`);
+  
 --
 -- AUTO_INCREMENT for table `registrations`
 --
