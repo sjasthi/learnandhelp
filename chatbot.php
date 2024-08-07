@@ -28,7 +28,7 @@
 	mysqli_free_result($keywords_result);
 	?>
 
-<!-- Prototype, modified from code from https://www.geeksforgeeks.org/create-working-chatbot-in-html-css-javascript/ -->
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -172,7 +172,6 @@
 		margin-left: 550px;
 	}
 	</style>
-    <!--<link rel="stylesheet" href="style.css">-->
 </head>
  
 <body>
@@ -205,15 +204,11 @@
 	 
 		let userMessage;
 		
-		//TODO: add key to preferences table, grab key from there and set as API_KEY
 		const API_KEY = "<?php echo $api_key; ?>";
 		const API_KEY_STR = "Bearer " + API_KEY;
 		
-		//TODO: add keywords to preferences table, set as keywords, send keywords to API
-		//const keywords = "schools, books, libraries, reading";
+
 		const keywords = "<?php echo $keywords; ?>";
-	 
-	//OpenAI Free APIKey
 	 
 		const createChatLi = (message, className) => {
 		const chatLi = document.createElement("li");
@@ -247,7 +242,7 @@
 			})
 		};
 	 
-		//Temporary test to showcase functionality, just in case API issue not resolved.
+		//Test to showcase functionality, in case of API problems.
 		if(API_KEY === "" || API_KEY === "test" || API_KEY === "key"){
 			messageElement.textContent = "You typed " + userMessage + ", key: " + API_KEY + ", keywords: " + keywords;
 		}
@@ -286,7 +281,7 @@
 	}
 	 
 	sendChatBtn.addEventListener("click", handleChat);
-	 
+	
 	function cancel() {
 		let chatbotcomplete = document.querySelector(".chatBot");
 		let closedheader = document.querySelector("#closedheader");
