@@ -31,7 +31,7 @@ try {
 }
 
 // Twilio configuration
-require_once __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/twilio-php-main/src/Twilio/autoload.php';
 use Twilio\Rest\Client;
 
 $sid = 'ACaab18ef8ea8e54c932f14cfc66314e10';
