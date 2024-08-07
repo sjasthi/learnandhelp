@@ -46,7 +46,7 @@ if (isset($_SESSION['role'])) {
     </div>
   </header>
   <div style="padding-top: 10px; padding-bottom: 30px; width:90%; margin:auto; overflow:auto">
-    <form method="post" action="save_admin_notes.php">
+    <form method="post" action="update_admin_notes.php">
       <textarea name="admin_notes" id="admin_notes" style="width: 80%; height: 400px; padding: 10px; font-size: 16px;">
           <?php echo htmlspecialchars(get_admin_notes()); ?></textarea>
       <br><br>
