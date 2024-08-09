@@ -31,11 +31,12 @@ try {
 }
 
 // Twilio configuration
-require_once __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/twilio-php-main/src/Twilio/autoload.php';
+
 use Twilio\Rest\Client;
 
 $sid = 'ACaab18ef8ea8e54c932f14cfc66314e10';
-$token = '34b53b5c1248212b0324fb085bcb8c24';
+$token = '32131681f96580ff2d67c3c9a8379907';
 $twilio_whatsapp_number = '+14155238886';
 
 // Add error checking
@@ -46,11 +47,17 @@ if (empty($sid) || empty($token)) {
 
 $twilio = new Client($sid, $token);
 
-// Function to send SMS message
-function sendWhatsAppMessage($to, $message) {
+// Function to send WhatsApp message
+function sendWhatsAppMessage($to, $message)
+{
     global $twilio, $twilio_whatsapp_number;
-
     try {
+        // Ensure the phone number is in the correct format
+        $to = preg_replace('/[^0-9]/', '', $to);
+        if (substr($to, 0, 1) !== '+') {
+            $to = '+' . $to;
+        }
+
         $message = $twilio->messages->create(
             "whatsapp:$to",
             [
@@ -59,12 +66,12 @@ function sendWhatsAppMessage($to, $message) {
             ]
         );
         error_log("WhatsApp message sent successfully to $to: " . $message->sid);
-        return true;
+        return ['success' => true, 'sid' => $message->sid];
     } catch (Exception $e) {
         error_log("Failed to send WhatsApp message to $to: " . $e->getMessage());
         error_log("Error code: " . $e->getCode());
         error_log("Full error details: " . print_r($e, true));
-        return false;
+        return ['success' => false, 'error' => $e->getMessage(), 'code' => $e->getCode()];
     }
 }
 
@@ -81,18 +88,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     error_log("Recipients: " . print_r($recipients, true));
 
     $results = [];
+    $success = true;
 
     if (in_array('all', $recipients)) {
         foreach ($users as $user) {
             $result = sendWhatsAppMessage($user['Phone'], $message);
-            $success = $success && $result;
-            $results[] = ['phone' => $user['Phone'], 'success' => $result];
+            $success = $success && $result['success'];
+            $results[] = ['Phone' => $user['Phone'], 'result' => $result];
         }
     } else {
         foreach ($recipients as $recipient) {
             $result = sendWhatsAppMessage($recipient, $message);
-            $success = $success && $result;
-            $results[] = ['phone' => $recipient, 'success' => $result];
+            $success = $success && $result['success'];
+            $results[] = ['Phone' => $recipient, 'result' => $result];
         }
     }
 
@@ -101,11 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 }
 
 
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en-us">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -122,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             margin-bottom: 10px;
             background-color: #e5ddd5;
         }
+
         .message {
             margin-bottom: 10px;
             padding: 8px 12px;
@@ -129,23 +138,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             max-width: 70%;
             clear: both;
         }
+
         .message.sent {
-            background-color: #dcf8c6: right;
+            background-color: #dcf8c6 right;
         }
+
         .message.received {
             background-color: #ffffff;
             float: left;
         }
+
         .message-input {
             display: flex;
             margin-top: 10px;
         }
+
         .message-input input {
             flex-grow: 1;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 20px;
         }
+
         .message-input button {
             margin-left: 10px;
             padding: 10px 20px;
@@ -155,8 +169,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             border-radius: 20px;
             cursor: pointer;
         }
+        .timestamp {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 5px;
+        }
     </style>
 </head>
+
 <body>
     <?php include 'show-navbar.php'; ?>
     <?php show_navbar(); ?>
@@ -184,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         </div>
         <div class="main">
             <div class="header">
-                <h2 id="selected-Select users to start chatting</h2>
+                <h2 id="selected-user">Select users to start chatting</h2>
             </div>
             <div class="chat-area" id="chat-area">
             </div>
@@ -199,6 +219,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
     <script>
         let selectedUsers = [];
+        let messages = [];
+        let oldestTimestamp = null;
+        let newestMessageTimestamp = null;
 
         document.getElementById('user-select').addEventListener('change', function() {
             selectedUsers = Array.from(this.selectedOptions).map(option => option.value);
@@ -220,58 +243,86 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             }
         }
 
-      document.getElementById('message-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const messageText = document.getElementById('message-text').value;
-    if (messageText.trim() !== '') {
-        if (selectedUsers.length > 0) {
-            sendWhatsAppMessage(selectedUsers, messageText);
-        } else {
-            alert('Please select at least one user to chat with.');
-        }
-    }
-});
+        document.getElementById('message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const messageText = document.getElementById('message-text').value;
+            if (messageText.trim() !== '') {
+                if (selectedUsers.length > 0) {
+                    sendWhatsAppMessage(selectedUsers, messageText);
+                } else {
+                    alert('Please select at least one user to chat with.');
+                }
+            }
+        });
 
 
 
         function addMessage(text, type) {
             const chatArea = document.getElementById('chat-area');
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', type);
-            messageElement.textContent = text;
-            chatArea.appendChild(messageElement);
-            chatArea.scrollTop = chatArea.scrollHeight;
-        }
-function sendWhatsAppMessage(recipients, message) {
-    fetch(window.location.href, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            'action': 'send_whatsapp',
-            'recipient': JSON.stringify(recipients),
-            'message': message
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            addMessage(message, 'sent');
-            document.getElementById('message-text').value = '';
-            console.log('Message sent successfully', data.results);
-        } else {
-            alert('Failed to send WhatsApp message to some recipients. Please check the console for details.');
-            console.error('Message sending results:', data.results);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Message sent successfully.');
-    });
-}
+            if (chatArea) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', type);
 
+                const textElement = document.createElement('div');
+                textElement.textContent = text;
+                messageElement.appendChild(textElement);
 
+                const timestamp = new Date();
+                const timestampElement = document.createElement('div');
+                timestampElement.classList.add('timestamp');
+                timestampElement.textContent = timestamp.toLocaleString();
+                messageElement.appendChild(timestampElement);
+
+                chatArea.appendChild(messageElement);
+                chatArea.scrollTop = chatArea.scrollHeight;
+
+                // Update message tracking
+                messages.push({text, type, timestamp});
+                updateMessageTracking();
+            } else {
+                console.error('Chat area element not found');
+            }
+        }
+
+function updateMessageTracking() {
+            if (messages.length > 0) {
+                oldestMessageTimestamp = messages[0].timestamp;
+                newestMessageTimestamp = messages[messages.length - 1].timestamp;
+
+                console.log('Oldest message:', oldestMessageTimestamp.toLocaleString());
+                console.log('Newest message:', newestMessageTimestamp.toLocaleString());
+            }
+        }
+        
+        function sendWhatsAppMessage(recipients, message) {
+            fetch(window.location.href, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        'action': 'send_whatsapp',
+                        'recipient': JSON.stringify(recipients),
+                        'message': message
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        addMessage(message, 'sent');
+                        document.getElementById('message-text').value = '';
+                        console.log('Message sent successfully', data.results);
+                    } else {
+                        alert('Failed to send WhatsApp message to some recipients. Please check the console for details.');
+                        console.error('Message sending results:', data.results);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Message sent successfully.');
+                });
+        }
     </script>
 </body>
+
 </html>
