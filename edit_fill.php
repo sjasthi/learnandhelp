@@ -8,51 +8,51 @@ if ($status == PHP_SESSION_NONE) {
 
 
 function fill_form() {
-	$connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
-  if (isset($_SESSION['User_Id']) and !isset($_POST['action'])){
-    $user_id = $_SESSION['User_Id'];
-    
+    $connection = new mysqli(DATABASE_HOST, DATABASE_USER, DATABASE_PASSWORD, DATABASE_DATABASE);
+    if (isset($_SESSION['User_Id']) && !isset($_POST['action'])) {
+        $user_id = $_SESSION['User_Id'];
 
-    if ($connection === false) {
-  	  die("Failed to connect to database: " . mysqli_connect_error());
+        if ($connection === false) {
+            die("Failed to connect to database: " . mysqli_connect_error());
+        }
+
+        $sql = "SELECT * FROM registrations Natural Join classes WHERE User_Id = '$user_id'";
+        $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+
+        $db_id = $row['Reg_Id'];
+        $sponsor1_name = $row['Sponsor1_Name'];
+        $sponsor1_email = $row['Sponsor1_Email'];
+        $sponsor1_phone = $row['Sponsor1_Phone_Number'];
+        $sponsor2_name = $row['Sponsor2_Name'];
+        $sponsor2_email = $row['Sponsor2_Email'];
+        $sponsor2_phone = $row['Sponsor2_Phone_Number'];
+        $student_name = $row['Student_Name'];
+        $student_email = $row['Student_Email'];
+        $student_phone = $row['Student_Phone_Number'];
+
+        $payment_id = $row['Payment_Id'];
+        $class_name = $row['Class_Name'];
+        $class = $row['Class_Id'];
+        $batch = $row['Batch_Name'];
+    } else {
+        $student_email = $_POST['students-email'];
+        $sql = "SELECT Reg_Id FROM registrations WHERE Student_Email = '$student_email'";
+        $row = mysqli_fetch_array(mysqli_query($connection, $sql));
+        $db_id = $row['Reg_Id'];
+
+        $sponsor1_name = isset($_POST['sponsor1s-name']) ? $_POST['sponsor1s-name'] : '';
+        $sponsor1_email = isset($_POST['sponsor1s-email']) ? $_POST['sponsor1s-email'] : '';
+        $sponsor1_phone = isset($_POST['sponsor1s-phone']) ? $_POST['sponsor1s-phone'] : '';
+        $sponsor2_name = isset($_POST['sponsor2s-name']) ? $_POST['sponsor2s-name'] : '';
+        $sponsor2_email = isset($_POST['sponsor2s-email']) ? $_POST['sponsor2s-email'] : '';
+        $sponsor2_phone = isset($_POST['sponsor2s-phone']) ? $_POST['sponsor2s-phone'] : '';
+        $student_name = isset($_POST['students-name']) ? $_POST['students-name'] : '';
+        $batch = isset($_POST['batch']) ? $_POST['batch'] : '';
+        $student_phone = isset($_POST['students-phone']) ? $_POST['students-phone'] : '';
+
+        $class_id = isset($_POST['class']) ? $_POST['class'] : '';
+        $payment_id = isset($_POST['payment_id']) ? $_POST['payment_id'] : '';
     }
-
-    $sql = "SELECT * FROM registrations Natural Join classes WHERE User_Id = '$user_id'";
-    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
-
-    $db_id = $row['Reg_Id'];
-    $sponsor1_name = $row['Sponsor1_Name'];
-    $sponsor1_email = $row['Sponsor1_Email'];
-    $sponsor1_phone = $row['Sponsor1_Phone_Number'];
-    $sponsor2_name = $row['Sponsor2_Name'];
-    $sponsor2_email = $row['Sponsor2_Email'];
-    $sponsor2_phone = $row['Sponsor2_Phone_Number'];
-    $student_name = $row['Student_Name'];
-    $student_email = $row['Student_Email'];
-    $student_phone = $row['Student_Phone_Number'];
-
-    $payment_id = ['Payment_Id'];
-    $class_name = $row['Class_Name'];
-  	$class = $row['Class_Id'];
-	  $batch = $row['Batch_Name'];
-  } else {
-	$student_email = $_POST['students-email'];
-	$sql = "SELECT Reg_Id FROM registrations WHERE Student_Email = '$student_email'";
-    $row = mysqli_fetch_array(mysqli_query($connection, $sql));
-    $db_id = $row['Reg_Id'];
-    $sponsor1_name = $_POST['sponsor1s-name'];
-    $sponsor1_email = $_POST['sponsor1s-email'];
-    $sponsor1_phone = $_POST['sponsor1s-phone'];
-    $sponsor2_name = $_POST['sponsor2s-name'];
-    $sponsor2_email = $_POST['sponsor2s-email'];
-    $sponsor2_phone = $_POST['sponsor2s-phone'];
-    $student_name = $_POST['students-name'];
-	  $batch = $_POST['batch'];
-    $student_phone = $_POST['students-phone'];
-
-    $class_id = $_POST['class'];
-    $payment_id = $_POST['payment_id'];
-  }
     echo "<div id= \"container_2\">
       <form id=\"survey-form\" action=\"form-submit.php\" method = \"post\">
         <input type=\"hidden\" name=\"reg_id\" value=\"$db_id\">
@@ -112,7 +112,7 @@ function fill_form() {
         <br>
         <label id=\"batch-label\"><b>Batch Name:</b> $active_batch</label>
         <input type='hidden' name='active_batch' value=$active_batch>
-			  <input type='hidden' name='payment_id' value=$payment_id>
+	<input type='hidden' name='payment_id' value=$payment_id>
         <br>
         <br>
         <label id=\"class\">Select Class</label>
