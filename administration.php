@@ -199,30 +199,6 @@ if (isset($_SESSION['role'])) {
 
       </div>
   </header>
-  <div id="admin_icons" style="width: 80%; margin: auto;">
-    <div class="admin_icon">
-      <a href="admin_preferences_CRUD.php" id="preferences">
-        <img src="images/admin_icons/control.png" alt="preferences"></a>
-      <br>
-      <label for="preferences">Edit Preferences</label>
-    </div>
-    <div class="admin_icon">
-      <a href="admin_offerings_CRUD.php" id="offerings">
-        <img src="images/admin_icons/counting.png" alt="offerings"></a>
-      <br>
-      <label for="preferences">Edit Offerings</label>
-    </div>
-    <div class="admin_icon">
-      <a href="admin_batch_CRUD.php" id="batch">
-        <img src="images/admin_icons/deadline.png" alt="batch"></a>
-      <br>
-      <label for="preferences">Edit Batch</label>
-    </div>
-    <div class="admin_icon">
-      <a href="admin_registrations.php" id="registrations"><img src="images/admin_icons/registrations_icon.png" alt="registration"></a>
-      <br>
-      <label for="registrations">Registrations</label>
-    </div>
     <div class="admin_icon">
       <a href="admin_usersList.php" id="users"><img src="images/admin_icons/users_icon.png" alt="users"></a>
       <br>
